@@ -1,9 +1,9 @@
 package com.kotall.rms.web.controller.sys;
 
-import com.kotall.rms.common.annotation.SysLog;
-import com.kotall.rms.common.cloud.OSSFactory;
+import com.kotall.rms.core.annotation.SysLog;
+import com.kotall.rms.core.cloud.OSSFactory;
 import com.kotall.rms.common.entity.sys.SysOssEntity;
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.core.service.sys.SysOssService;

@@ -1,5 +1,5 @@
 
-package com.kotall.rms.common.validate;
+package com.kotall.rms.core.cloud.validator;
 
 /**
  * @author zpwang

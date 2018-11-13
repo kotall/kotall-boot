@@ -1,4 +1,4 @@
-package com.kotall.rms.common.annotation;
+package com.kotall.rms.core.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -14,8 +14,8 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@Documented
-public @interface SysLog {
 
+	@Documented
+	public @interface SysLog {
 	String value() default "";
 }

@@ -2,7 +2,7 @@ package com.kotall.rms.core.service.sys.impl;
 
 import com.kotall.rms.common.utils.IdKit;
 import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.entity.sys.SysMenuEntity;
 import com.kotall.rms.common.manager.sys.SysMenuManager;
 import com.kotall.rms.core.service.sys.SysMenuService;

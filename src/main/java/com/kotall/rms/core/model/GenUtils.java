@@ -12,7 +12,7 @@ import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.utils.DateUtils;
 import com.kotall.rms.common.entity.sys.SysGenColumnEntity;
 import com.kotall.rms.common.entity.sys.SysGenTableEntity;

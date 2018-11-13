@@ -2,7 +2,7 @@ package com.kotall.rms.core.service.sys.impl;
 
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.utils.MD5Utils;
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.common.entity.sys.SysUserTokenEntity;

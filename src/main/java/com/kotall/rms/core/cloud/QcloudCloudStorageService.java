@@ -1,8 +1,8 @@
 
-package com.kotall.rms.common.cloud;
+package com.kotall.rms.core.cloud;
 
 
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.request.UploadFileRequest;

@@ -1,5 +1,5 @@
 
-package com.kotall.rms.common.cloud;
+package com.kotall.rms.core.cloud;
 
 import com.kotall.rms.common.utils.DateUtils;
 import org.apache.commons.lang.StringUtils;

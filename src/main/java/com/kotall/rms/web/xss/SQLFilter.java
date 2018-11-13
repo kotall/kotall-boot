@@ -1,6 +1,6 @@
 package com.kotall.rms.web.xss;
 
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 import org.apache.commons.lang.StringUtils;
 
 /**

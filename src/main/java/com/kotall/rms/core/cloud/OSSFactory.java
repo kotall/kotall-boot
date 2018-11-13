@@ -1,9 +1,9 @@
 
-package com.kotall.rms.common.cloud;
+package com.kotall.rms.core.cloud;
 
 
-import com.kotall.rms.common.utils.ConfigConstant;
-import com.kotall.rms.common.utils.Constant;
+import com.kotall.rms.core.constants.ConfigConstant;
+import com.kotall.rms.core.constants.Constant;
 import com.kotall.rms.common.utils.SpringContextUtils;
 import com.kotall.rms.core.service.sys.SysConfigService;
 

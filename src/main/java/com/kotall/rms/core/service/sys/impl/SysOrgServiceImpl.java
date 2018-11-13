@@ -1,6 +1,6 @@
 package com.kotall.rms.core.service.sys.impl;
 
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.entity.sys.SysOrgEntity;
 import com.kotall.rms.common.manager.sys.SysOrgManager;
 import com.kotall.rms.core.service.sys.SysOrgService;

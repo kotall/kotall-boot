@@ -1,8 +1,8 @@
 
-package com.kotall.rms.common.cloud;
+package com.kotall.rms.core.cloud;
 
 import com.aliyun.oss.OSSClient;
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

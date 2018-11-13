@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kotall.rms.common.annotation.SysLog;
+import com.kotall.rms.core.annotation.SysLog;
 import com.kotall.rms.common.utils.MD5Utils;
 import com.kotall.rms.web.util.ShiroUtils;
 import com.kotall.rms.core.service.sys.SysUserService;

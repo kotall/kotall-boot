@@ -1,4 +1,4 @@
-package com.kotall.rms.common.exception;
+package com.kotall.rms.core;
 
 /**
  * 自定义异常

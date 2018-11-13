@@ -1,7 +1,7 @@
 package com.kotall.rms.core.model.quartz;
 
 import com.kotall.rms.core.enums.ScheduleStatus;
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.utils.JSONUtils;
 import com.kotall.rms.common.utils.SpringContextUtils;
 import com.kotall.rms.common.entity.sys.SysJobEntity;

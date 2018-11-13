@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kotall.rms.common.annotation.SysLog;
+import com.kotall.rms.core.annotation.SysLog;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.entity.sys.SysLogEntity;
 import com.kotall.rms.core.service.sys.SysLogService;

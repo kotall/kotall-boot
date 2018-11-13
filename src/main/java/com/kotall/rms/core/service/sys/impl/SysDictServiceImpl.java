@@ -2,7 +2,7 @@ package com.kotall.rms.core.service.sys.impl;
 
 import com.kotall.rms.core.enums.DictType;
 import com.kotall.rms.core.enums.StatusType;
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.entity.sys.SysDictEntity;
 import com.kotall.rms.common.manager.sys.SysDictManager;
 import com.kotall.rms.core.service.sys.SysDictService;

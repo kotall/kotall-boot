@@ -2,7 +2,7 @@ package com.kotall.rms.core.model.quartz;
 
 import java.lang.reflect.Method;
 
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.utils.SpringContextUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.ReflectionUtils;

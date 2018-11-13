@@ -1,7 +1,7 @@
 package com.kotall.rms.web.handler;
 
 import com.kotall.rms.common.utils.Result;
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;

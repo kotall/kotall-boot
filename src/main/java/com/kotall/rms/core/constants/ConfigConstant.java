@@ -1,5 +1,5 @@
 
-package com.kotall.rms.common.utils;
+package com.kotall.rms.core.constants;
 
 /**
  * 系统参数相关key

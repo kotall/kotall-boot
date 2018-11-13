@@ -3,7 +3,7 @@ package com.kotall.rms.web.auth;
 import java.security.MessageDigest;
 import java.util.UUID;
 
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 
 /**
  * 生成token

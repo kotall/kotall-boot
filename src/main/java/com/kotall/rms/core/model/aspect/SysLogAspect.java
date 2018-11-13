@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 
-import com.kotall.rms.common.annotation.SysLog;
+import com.kotall.rms.core.annotation.SysLog;
 import com.kotall.rms.common.entity.sys.SysLogEntity;
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.common.manager.sys.SysLogManager;
@@ -36,7 +36,7 @@ public class SysLogAspect {
 	@Autowired
 	private SysLogManager sysLogManager;
 	
-	@Pointcut("@annotation(com.kotall.rms.common.annotation.SysLog)")
+	@Pointcut("@annotation(com.kotall.rms.core.annotation.SysLog)")
 	public void logPointCut() { 
 		
 	}

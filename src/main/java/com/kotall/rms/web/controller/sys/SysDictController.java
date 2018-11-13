@@ -3,14 +3,14 @@ package com.kotall.rms.web.controller.sys;
 import java.util.List;
 
 import com.kotall.rms.common.utils.Result;
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 import com.kotall.rms.web.util.ResultKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kotall.rms.common.annotation.SysLog;
+import com.kotall.rms.core.annotation.SysLog;
 import com.kotall.rms.common.entity.sys.SysDictEntity;
 import com.kotall.rms.core.service.sys.SysDictService;
 

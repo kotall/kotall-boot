@@ -1,6 +1,6 @@
 package com.kotall.rms.core.service.sys.impl;
 
-import com.kotall.rms.common.cloud.CloudStorageConfig;
+import com.kotall.rms.core.cloud.CloudStorageConfig;
 import com.kotall.rms.common.entity.sys.SysConfigEntity;
 import com.kotall.rms.common.manager.sys.SysConfigManager;
 import com.kotall.rms.common.manager.sys.SysConfigRedis;

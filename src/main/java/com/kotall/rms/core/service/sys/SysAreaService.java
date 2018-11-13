@@ -1,6 +1,6 @@
 package com.kotall.rms.core.service.sys;
 
-import com.kotall.rms.common.exception.RmsException;
+import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.entity.sys.SysAreaEntity;
 
 import java.util.List;
