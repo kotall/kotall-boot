@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include/header_css::header('订单商品表')"></head>
+<body>
+	<div id="dpLTE" class="container-fluid" v-cloak>
+		<table class="form" id="form">
+			<tr>
+	            <td class="formTitle">订单表的订单ID<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="订单表的订单ID" v-model="liteMallOrderGoods.orderId" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">商品表的商品ID<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="商品表的商品ID" v-model="liteMallOrderGoods.goodsId" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">商品名称<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="商品名称" v-model="liteMallOrderGoods.goodsName" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">商品编号<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="商品编号" v-model="liteMallOrderGoods.goodsSn" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">商品货品表的货品ID<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="商品货品表的货品ID" v-model="liteMallOrderGoods.productId" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">商品货品的购买数量<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="商品货品的购买数量" v-model="liteMallOrderGoods.number" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">商品货品的售价<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="商品货品的售价" v-model="liteMallOrderGoods.price" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">商品货品的规格列表<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="商品货品的规格列表" v-model="liteMallOrderGoods.specifications" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">商品货品图片或者商品图片<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="商品货品图片或者商品图片" v-model="liteMallOrderGoods.picUrl" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">订单商品评论，如果是-1，则超期不能评价；如果是0，则可以评价；如果其他值，则是comment表里面的评论ID。<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="订单商品评论，如果是-1，则超期不能评价；如果是0，则可以评价；如果其他值，则是comment表里面的评论ID。" v-model="liteMallOrderGoods.comment" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+		</table>
+	</div>
+	<div th:include="include/footer_js::footer"></div>
+	<script th:src="@{/js/mall/goods/add.js}"></script>
+</body>
+</html>
