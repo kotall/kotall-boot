@@ -1,5 +1,5 @@
 
-package com.kotall.rms.core.cloud;
+package com.kotall.rms.core;
 
 
 import lombok.Data;

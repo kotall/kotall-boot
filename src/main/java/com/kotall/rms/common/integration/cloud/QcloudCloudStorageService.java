@@ -1,7 +1,8 @@
 
-package com.kotall.rms.core.cloud;
+package com.kotall.rms.common.integration.cloud;
 
 
+import com.kotall.rms.core.CloudStorageConfig;
 import com.kotall.rms.core.RmsException;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;

@@ -1,6 +1,5 @@
 package com.kotall.rms.core.service.sys;
 
-import com.kotall.rms.core.cloud.CloudStorageConfig;
 import com.kotall.rms.common.entity.sys.SysConfigEntity;
 import com.kotall.rms.common.utils.Page;
 
@@ -32,6 +31,5 @@ public interface SysConfigService {
      */
     String getValue(String key);
 
-    CloudStorageConfig getConfigObject(String cloudStorageConfigKey, Class<CloudStorageConfig> cloudStorageConfigClass);
 
 }
