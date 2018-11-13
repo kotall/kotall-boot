@@ -20,7 +20,9 @@ public interface SysUserService {
 	int saveUser(SysUserEntity user);
 
 	SysUserEntity getUserById(Long userId);
-	
+
+	SysUserTokenEntity getUserTokenInfoByToken(String token);
+
 	int updateUser(SysUserEntity user);
 	
 	int batchRemove(Long[] id);
@@ -40,5 +42,6 @@ public interface SysUserService {
 	int updateUserToken(Long userId);
 	
 	SysUserEntity getByUserName(String username);
-	
+
+	Set<String> listUserRoles(Long userId);
 }

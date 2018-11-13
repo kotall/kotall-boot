@@ -48,6 +48,11 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
+	public SysUserTokenEntity getUserTokenInfoByToken(String token) {
+		return this.sysUserManager.getByToken(token);
+	}
+
+	@Override
 	public int updateUser(SysUserEntity user) {
 		int count = sysUserManager.updateUser(user);
 		return count;
@@ -126,4 +131,8 @@ public class SysUserServiceImpl implements SysUserService {
 		return sysUserManager.getByUserName(username);
 	}
 
+	@Override
+	public Set<String> listUserRoles(Long userId) {
+		return this.sysUserManager.listUserRoles(userId);
+	}
 }
