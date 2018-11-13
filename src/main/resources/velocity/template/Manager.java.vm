@@ -1,0 +1,28 @@
+package ${package}.common.manager.${module};
+
+import java.util.List;
+
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.common.utils.Query;
+import ${package}.common.entity.${module}.${className}Entity;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ * @since 1.0.0
+ */
+public interface ${className}Manager {
+
+	List<${className}Entity> list${className}(Page<${className}Entity> page, Query search);
+	
+	int save${className}(${className}Entity ${objName});
+	
+	${className}Entity get${className}ById(Long id);
+	
+	int update${className}(${className}Entity ${objName});
+	
+	int batchRemove(Long[] id);
+	
+}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kotall.rms.common.dao.sys.SysConfigMapper">
+	
+	<select id="listForPage" resultType="com.kotall.rms.common.entity.sys.SysConfigEntity">
+		SELECT
+			`id`, 
+			`param_key`, 
+			`param_value`, 
+			`status`, 
+			`remark`
+		FROM
+			sys_config
+		ORDER BY
+			id DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO sys_config (
+			`param_key`, 
+			`param_value`, 
+			`status`, 
+			`remark`
+		)
+		VALUES (
+			#{paramKey}, 
+			#{paramValue}, 
+			#{status}, 
+			#{remark}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="com.kotall.rms.common.entity.sys.SysConfigEntity">
+		SELECT
+			`id`, 
+			`param_key`, 
+			`param_value`, 
+			`status`, 
+			`remark`
+		FROM
+			sys_config
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE sys_config
+	 	<set>
+			<if test="paramKey != null">`param_key` = #{paramKey}, </if>
+			<if test="paramValue != null">`param_value` = #{paramValue}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="remark != null">`remark` = #{remark}</if>
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			sys_config
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="getByKey" resultType="com.kotall.rms.common.entity.sys.SysConfigEntity">
+		SELECT
+		`id`,
+		`param_key`,
+		`param_value`,
+		`status`,
+		`remark`
+		FROM
+		sys_config
+		WHERE
+		key = #{key}
+	</select>
+</mapper>

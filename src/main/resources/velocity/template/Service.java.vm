@@ -1,0 +1,28 @@
+package ${package}.core.service.${module};
+
+import java.util.Map;
+
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.common.utils.Result;
+import ${package}.common.entity.${module}.${className}Entity;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ * @since 1.0.0
+ */
+public interface ${className}Service {
+
+	Page<${className}Entity> list${className}(Map<String, Object> params);
+
+    int save${className}(${className}Entity ${objName});
+
+    ${className}Entity get${className}ById(Long id);
+
+    int update${className}(${className}Entity ${objName});
+
+    int batchRemove(Long[] id);
+	
+}

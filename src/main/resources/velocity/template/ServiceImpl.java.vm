@@ -1,0 +1,61 @@
+package ${package}.core.service.${module}.impl;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.kotall.rms.common.utils.Query;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.common.utils.Result;
+import com.kotall.rms.web.util.ResultKit;
+import ${package}.common.entity.${module}.${className}Entity;
+import ${package}.common.manager.${module}.${className}Manager;
+import ${package}.common.service.${module}.${className}Service;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ * @since 1.0.0
+ */
+@Service("${objName}Service")
+public class ${className}ServiceImpl implements ${className}Service {
+
+	@Autowired
+	private ${className}Manager ${objName}Manager;
+
+	@Override
+	public Page<${className}Entity> list${className}(Map<String, Object> params) {
+		Query query = new Query(params);
+		Page<${className}Entity> page = new Page<>(query);
+		${objName}Manager.list${className}(page, query);
+		return page;
+	}
+
+	@Override
+	public int save${className}(${className}Entity role) {
+		int count = ${objName}Manager.save${className}(role);
+		return count;
+	}
+
+	@Override
+	public ${className} get${className}ById(Long id) {
+		${className}Entity ${objName} = ${objName}Manager.get${className}ById(id);
+		return ${objName};
+	}
+
+	@Override
+	public int update${className}(${className}Entity ${objName}) {
+		int count = ${objName}Manager.update${className}(${objName});
+		return count;
+	}
+
+	@Override
+	public int batchRemove(Long[] id) {
+		int count = ${objName}Manager.batchRemove(id);
+		return count;
+	}
+
+}

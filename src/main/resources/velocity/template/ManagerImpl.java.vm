@@ -1,0 +1,54 @@
+package ${package}.common.manager.${module}.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.common.utils.Query;
+import ${package}.common.dao.${module}.${className}Mapper;
+import ${package}.common.entity.${module}.${className}Entity;
+import ${package}.common.manager.${module}.${className}Manager;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ * @since 1.0.0
+ */
+@Component("${objName}Manager")
+public class ${className}ManagerImpl implements ${className}Manager {
+
+	@Autowired
+	private ${className}Mapper ${objName}Mapper;
+	
+
+	@Override
+	public List<${className}Entity> list${className}(Page<${className}Entity> page, Query search) {
+		return ${objName}Mapper.listForPage(page, search);
+	}
+
+	@Override
+	public int save${className}(${className}Entity ${objName}) {
+		return ${objName}Mapper.save(${objName});
+	}
+
+	@Override
+	public ${className}Entity get${className}ById(Long id) {
+		${className}Entity ${objName} = ${objName}Mapper.getObjectById(id);
+		return ${objName};
+	}
+
+	@Override
+	public int update${className}(${className}Entity ${objName}) {
+		return ${objName}Mapper.update(${objName});
+	}
+
+	@Override
+	public int batchRemove(Long[] id) {
+		int count = ${objName}Mapper.batchRemove(id);
+		return count;
+	}
+	
+}
