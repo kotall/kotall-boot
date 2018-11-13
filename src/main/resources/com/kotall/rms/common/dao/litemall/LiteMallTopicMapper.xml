@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallTopicMapper">
+	
+	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallTopicEntity">
+		SELECT
+			`id`, 
+			`title`, 
+			`subtitle`, 
+			`content`, 
+			`price`, 
+			`read_count`, 
+			`pic_url`, 
+			`sort_order`, 
+			`goods`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_topic
+		ORDER BY
+			id DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO lite_mall_topic (
+			`title`, 
+			`subtitle`, 
+			`content`, 
+			`price`, 
+			`read_count`, 
+			`pic_url`, 
+			`sort_order`, 
+			`goods`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		)
+		VALUES (
+			#{title}, 
+			#{subtitle}, 
+			#{content}, 
+			#{price}, 
+			#{readCount}, 
+			#{picUrl}, 
+			#{sortOrder}, 
+			#{goods}, 
+			#{addTime}, 
+			#{updateTime}, 
+			#{deleted}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallTopicEntity">
+		SELECT
+			`id`, 
+			`title`, 
+			`subtitle`, 
+			`content`, 
+			`price`, 
+			`read_count`, 
+			`pic_url`, 
+			`sort_order`, 
+			`goods`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_topic
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE lite_mall_topic
+	 	<set>
+			<if test="title != null">`title` = #{title}, </if>
+			<if test="subtitle != null">`subtitle` = #{subtitle}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="price != null">`price` = #{price}, </if>
+			<if test="readCount != null">`read_count` = #{readCount}, </if>
+			<if test="picUrl != null">`pic_url` = #{picUrl}, </if>
+			<if test="sortOrder != null">`sort_order` = #{sortOrder}, </if>
+			<if test="goods != null">`goods` = #{goods}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="deleted != null">`deleted` = #{deleted}</if>
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			lite_mall_topic
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallAdMapper">
+	
+	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallAdEntity">
+		SELECT
+			`id`, 
+			`name`, 
+			`link`, 
+			`url`, 
+			`position`, 
+			`content`, 
+			`start_time`, 
+			`end_time`, 
+			`enabled`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_ad
+		ORDER BY
+			id DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO lite_mall_ad (
+			`name`, 
+			`link`, 
+			`url`, 
+			`position`, 
+			`content`, 
+			`start_time`, 
+			`end_time`, 
+			`enabled`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		)
+		VALUES (
+			#{name}, 
+			#{link}, 
+			#{url}, 
+			#{position}, 
+			#{content}, 
+			#{startTime}, 
+			#{endTime}, 
+			#{enabled}, 
+			#{addTime}, 
+			#{updateTime}, 
+			#{deleted}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallAdEntity">
+		SELECT
+			`id`, 
+			`name`, 
+			`link`, 
+			`url`, 
+			`position`, 
+			`content`, 
+			`start_time`, 
+			`end_time`, 
+			`enabled`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_ad
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE lite_mall_ad
+	 	<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="link != null">`link` = #{link}, </if>
+			<if test="url != null">`url` = #{url}, </if>
+			<if test="position != null">`position` = #{position}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="startTime != null">`start_time` = #{startTime}, </if>
+			<if test="endTime != null">`end_time` = #{endTime}, </if>
+			<if test="enabled != null">`enabled` = #{enabled}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="deleted != null">`deleted` = #{deleted}</if>
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			lite_mall_ad
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

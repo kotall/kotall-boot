@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallGrouponMapper">
+	
+	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity">
+		SELECT
+			`id`, 
+			`order_id`, 
+			`groupon_id`, 
+			`rules_id`, 
+			`user_id`, 
+			`creator_user_id`, 
+			`add_time`, 
+			`update_time`, 
+			`share_url`, 
+			`payed`, 
+			`deleted`
+		FROM
+			lite_mall_groupon
+		ORDER BY
+			id DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO lite_mall_groupon (
+			`order_id`, 
+			`groupon_id`, 
+			`rules_id`, 
+			`user_id`, 
+			`creator_user_id`, 
+			`add_time`, 
+			`update_time`, 
+			`share_url`, 
+			`payed`, 
+			`deleted`
+		)
+		VALUES (
+			#{orderId}, 
+			#{grouponId}, 
+			#{rulesId}, 
+			#{userId}, 
+			#{creatorUserId}, 
+			#{addTime}, 
+			#{updateTime}, 
+			#{shareUrl}, 
+			#{payed}, 
+			#{deleted}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity">
+		SELECT
+			`id`, 
+			`order_id`, 
+			`groupon_id`, 
+			`rules_id`, 
+			`user_id`, 
+			`creator_user_id`, 
+			`add_time`, 
+			`update_time`, 
+			`share_url`, 
+			`payed`, 
+			`deleted`
+		FROM
+			lite_mall_groupon
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE lite_mall_groupon
+	 	<set>
+			<if test="orderId != null">`order_id` = #{orderId}, </if>
+			<if test="grouponId != null">`groupon_id` = #{grouponId}, </if>
+			<if test="rulesId != null">`rules_id` = #{rulesId}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="creatorUserId != null">`creator_user_id` = #{creatorUserId}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="shareUrl != null">`share_url` = #{shareUrl}, </if>
+			<if test="payed != null">`payed` = #{payed}, </if>
+			<if test="deleted != null">`deleted` = #{deleted}</if>
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			lite_mall_groupon
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
