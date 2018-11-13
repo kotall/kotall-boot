@@ -114,8 +114,8 @@ public class GenUtils {
 		map.put("url", config.getString("url"));
 		map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_CHN_PATTERN));
 
-		map.put("parentCode", params.getFunctionCode());
-		map.put("code", params.getModule() + "/" + params.getFunctionCode());
+		map.put("parentCode", "/" + params.getFunctionCode());
+		map.put("code", "/" + params.getModule() + "/" + params.getFunctionCode());
 		VelocityContext context = new VelocityContext(map);
 
 		// 获取模板列表

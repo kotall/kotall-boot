@@ -1,5 +1,5 @@
 /**
- * 小商城
+ * 微信小商城
  * @author zpwang
  * @version 1.0.0
  */

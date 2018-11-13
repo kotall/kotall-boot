@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.kotall.rms.common.dao.litemall.LitemallUserMapper">
+<mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallUserMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LitemallUserEntity">
+	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserEntity">
 		SELECT
 			`id`, 
 			`username`, 
@@ -22,13 +22,13 @@
 			`update_time`, 
 			`deleted`
 		FROM
-			litemall_user
+			lite_mall_user
 		ORDER BY
 			id DESC
 	</select>
 	
 	<insert id="save">
-		INSERT INTO litemall_user (
+		INSERT INTO lite_mall_user (
 			`username`, 
 			`password`, 
 			`gender`, 
@@ -64,7 +64,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LitemallUserEntity">
+	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserEntity">
 		SELECT
 			`id`, 
 			`username`, 
@@ -83,13 +83,13 @@
 			`update_time`, 
 			`deleted`
 		FROM
-			litemall_user
+			lite_mall_user
 		WHERE
 			id = #{id}
 	</select>
 	
 	<update id="update">
-		UPDATE litemall_user
+		UPDATE lite_mall_user
 	 	<set>
 			<if test="username != null">`username` = #{username}, </if>
 			<if test="password != null">`password` = #{password}, </if>
@@ -114,7 +114,7 @@
 	<delete id="batchRemove">
 		DELETE
 		FROM
-			litemall_user
+			lite_mall_user
 		WHERE
 			id IN
 		<foreach item="id" collection="array" open="(" separator="," close=")">

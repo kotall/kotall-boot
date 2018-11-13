@@ -10,9 +10,9 @@ import java.util.Date;
  *
  * @author kotall
  * @email kotall@admin.com
- * @date 2018年11月13日 上午9:47:19
+ * @date 2018年11月13日 上午10:18:32
  */
-public class LitemallUserEntity implements Serializable {
+public class LiteMallUserEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -97,7 +97,7 @@ public class LitemallUserEntity implements Serializable {
 	private Integer deleted;
 	
 
-	public LitemallUserEntity() {
+	public LiteMallUserEntity() {
 		super();
 	}
 

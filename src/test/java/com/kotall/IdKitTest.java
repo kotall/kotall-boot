@@ -13,7 +13,7 @@ import java.io.FileReader;
 public class IdKitTest {
 
     public static void main(String[] args) throws Exception {
-        System.out.println(IdKit.getId("sys/config/remove"));
+        System.out.println(IdKit.getId("/litemall"));
 //        FileReader fr = new FileReader(new File("E:\\gitrepos\\rms-boot\\src\\test\\resources\\tmp.txt"));
 //
 //        BufferedReader br = new BufferedReader(fr);
