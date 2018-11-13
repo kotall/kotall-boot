@@ -141,7 +141,7 @@ INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VAL
 
 
 -- 菜单SQL
-INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_PROMOTION'), '', 'LITE_MALL_PROMOTION_GROUPON_RULES','mall/grouponrules/list.html', NULL, '1', 'fa fa-th-list', 1);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_PROMOTION'), '团购规则', 'LITE_MALL_PROMOTION_GROUPON_RULES','mall/grouponrules/list.html', NULL, '1', 'fa fa-th-list', 1);
 -- 菜单对应按钮SQL
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_PROMOTION_GROUPON_RULES'), '刷新', 'LITE_MALL_PROMOTION_GROUPON_RULES_LIST', 'litemall:grouponrules:list', '2', NULL);
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_PROMOTION_GROUPON_RULES'), '新增', 'LITE_MALL_PROMOTION_GROUPON_RULES_SAVE', 'litemall:grouponrules:save', '2', NULL);
@@ -150,7 +150,7 @@ INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VAL
 
 
 -- 菜单SQL
-INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_PROMOTION'), '', 'LITE_MALL_PROMOTION_GROUPON_ACTIVITY','mall/grouponactivity/list.html', NULL, '1', 'fa fa-th-list', 1);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_PROMOTION'), '团购活动', 'LITE_MALL_PROMOTION_GROUPON_ACTIVITY','mall/grouponactivity/list.html', NULL, '1', 'fa fa-th-list', 1);
 -- 菜单对应按钮SQL
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_PROMOTION_GROUPON_ACTIVITY'), '刷新', 'LITE_MALL_PROMOTION_GROUPON_ACTIVITY_LIST', 'litemall:grouponactivity:list', '2', NULL);
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_PROMOTION_GROUPON_ACTIVITY'), '新增', 'LITE_MALL_PROMOTION_GROUPON_ACTIVITY_SAVE', 'litemall:grouponactivity:save', '2', NULL);
