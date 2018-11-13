@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallCommentMapper">
+	
+	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallCommentEntity">
+		SELECT
+			`id`, 
+			`value_id`, 
+			`type`, 
+			`content`, 
+			`user_id`, 
+			`has_picture`, 
+			`pic_urls`, 
+			`star`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_comment
+		ORDER BY
+			id DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO lite_mall_comment (
+			`value_id`, 
+			`type`, 
+			`content`, 
+			`user_id`, 
+			`has_picture`, 
+			`pic_urls`, 
+			`star`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		)
+		VALUES (
+			#{valueId}, 
+			#{type}, 
+			#{content}, 
+			#{userId}, 
+			#{hasPicture}, 
+			#{picUrls}, 
+			#{star}, 
+			#{addTime}, 
+			#{updateTime}, 
+			#{deleted}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallCommentEntity">
+		SELECT
+			`id`, 
+			`value_id`, 
+			`type`, 
+			`content`, 
+			`user_id`, 
+			`has_picture`, 
+			`pic_urls`, 
+			`star`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_comment
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE lite_mall_comment
+	 	<set>
+			<if test="valueId != null">`value_id` = #{valueId}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="hasPicture != null">`has_picture` = #{hasPicture}, </if>
+			<if test="picUrls != null">`pic_urls` = #{picUrls}, </if>
+			<if test="star != null">`star` = #{star}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="deleted != null">`deleted` = #{deleted}</if>
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			lite_mall_comment
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

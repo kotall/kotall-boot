@@ -109,3 +109,15 @@ INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VAL
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='SYS_GOODS_LIST'), '新增', 'SYS_GOODS_LIST_SAVE', 'litemall:goods:save', '2', NULL);
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='SYS_GOODS_LIST'), '修改', 'SYS_GOODS_LIST_EDIT', 'litemall:goods:edit', '2', NULL);
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='SYS_GOODS_LIST'), '删除', 'SYS_GOODS_LIST_REMOVE', 'litemall:goods:remove', '2', NULL);
+
+
+-- 菜单SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='SYS_GOODS'), '商品评论', 'SYS_GOODS_COMMENT','mall/comment/list.html', NULL, '1', 'fa fa-th-list', 1);
+-- 菜单对应按钮SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='SYS_GOODS_COMMENT'), '刷新', 'SYS_GOODS_COMMENT_LIST', 'litemall:comment:list', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='SYS_GOODS_COMMENT'), '新增', 'SYS_GOODS_COMMENT_SAVE', 'litemall:comment:save', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='SYS_GOODS_COMMENT'), '修改', 'SYS_GOODS_COMMENT_EDIT', 'litemall:comment:edit', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='SYS_GOODS_COMMENT'), '删除', 'SYS_GOODS_COMMENT_REMOVE', 'litemall:comment:remove', '2', NULL);
+
+
+
