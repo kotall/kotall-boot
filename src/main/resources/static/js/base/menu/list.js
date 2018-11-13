@@ -93,10 +93,10 @@ var TreeGrid = {
 TreeGrid.initColumn = function () {
     var columns = [
         {field: 'selectItem', radio: true},
-        {title: '编号', field: 'menuId', visible: false, align: 'center', valign: 'middle', width: '120px'},
+        {title: '编号', field: 'menuId', visible: false, align: 'center', valign: 'middle', width: '60px'},
         {title: '名称', field: 'name', align: 'center', valign: 'middle', width: '180px'},
-        {title: '编码', field: 'code', align: 'center', valign: 'middle', width: '180px'},
-        {title: '上级菜单', field: 'parentName', align: 'center', valign: 'middle', width: '100px'},
+        {title: '编码', field: 'code', align: 'center', valign: 'middle', width: '350px'},
+        {title: '上级菜单', field: 'parentName', align: 'center', valign: 'middle', width: '120px'},
         {title: '图标', field: 'icon', align: 'center', valign: 'middle', width: '50px', formatter: function(item, index){
             return item.icon == null ? '' : '<i class="'+item.icon+' fa-lg"></i>';
         }},
@@ -112,7 +112,7 @@ TreeGrid.initColumn = function () {
             }
         }},
         {title: '排序', field: 'orderNum', align: 'center', valign: 'middle', width: '50px'},
-        {title: '菜单URL', field: 'url', align: 'center', valign: 'middle', width: '200px'},
+        {title: '菜单URL', field: 'url', align: 'center', valign: 'middle', width: '250px'},
         {title: '授权标识', field: 'perms', align: 'center', valign: 'middle'}]
     return columns;
 };

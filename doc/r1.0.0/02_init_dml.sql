@@ -103,7 +103,7 @@ INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VAL
 -- 目录SQL
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES (0, '商品管理', 'LITE_MALL_GOODS',NULL, NULL, '0', 'fa fa-coffee', 4);
 -- 菜单SQL
-INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_GOODS_LIST'), '商品列表', 'SYS_GOODS_LIST','mall/goods/list.html', NULL, '1', 'fa fa-th-list', 1);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_GOODS'), '商品列表', 'LITE_MALL_GOODS_LIST','mall/goods/list.html', NULL, '1', 'fa fa-th-list', 1);
 -- 菜单对应按钮SQL
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_GOODS_LIST'), '刷新', 'LITE_MALL_GOODS_LIST_LIST', 'litemall:goods:list', '2', NULL);
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_GOODS_LIST'), '新增', 'LITE_MALL_GOODS_LIST_SAVE', 'litemall:goods:save', '2', NULL);
