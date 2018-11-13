@@ -92,7 +92,7 @@ INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VAL
 
 
 -- 菜单SQL
-INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE'), '关键字表', 'LITE_MALL_STORE_KEYWORD','mall/keyword/list.html', NULL, '1', 'fa fa-th-list', 5);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE'), '关键字管理', 'LITE_MALL_STORE_KEYWORD','mall/keyword/list.html', NULL, '1', 'fa fa-th-list', 5);
 -- 菜单对应按钮SQL
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_KEYWORD'), '刷新', 'LITE_MALL_STORE_KEYWORD_LIST', 'litemall:keyword:list', '2', NULL);
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_KEYWORD'), '新增', 'LITE_MALL_STORE_KEYWORD_SAVE', 'litemall:keyword:save', '2', NULL);
