@@ -80,7 +80,7 @@ CREATE TABLE `quartz_job_log` (
 DROP TABLE IF EXISTS `sys_menu`;
 
 CREATE TABLE `sys_menu` (
-  `menu_id` bigint(20) NOT NULL COMMENT '菜单id',
+  `menu_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '菜单id',
   `parent_id` bigint(20) DEFAULT NULL COMMENT '父菜单ID，一级菜单为0',
   `name` varchar(50) DEFAULT NULL COMMENT '菜单名称',
   `code` varchar(50) DEFAULT NULL COMMENT '菜单编码',

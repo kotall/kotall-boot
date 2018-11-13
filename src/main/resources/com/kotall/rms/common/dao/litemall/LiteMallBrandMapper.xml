@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallBrandMapper">
+	
+	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallBrandEntity">
+		SELECT
+			`id`, 
+			`name`, 
+			`desc`, 
+			`pic_url`, 
+			`sort_order`, 
+			`floor_price`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_brand
+		ORDER BY
+			id DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO lite_mall_brand (
+			`name`, 
+			`desc`, 
+			`pic_url`, 
+			`sort_order`, 
+			`floor_price`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		)
+		VALUES (
+			#{name}, 
+			#{desc}, 
+			#{picUrl}, 
+			#{sortOrder}, 
+			#{floorPrice}, 
+			#{addTime}, 
+			#{updateTime}, 
+			#{deleted}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallBrandEntity">
+		SELECT
+			`id`, 
+			`name`, 
+			`desc`, 
+			`pic_url`, 
+			`sort_order`, 
+			`floor_price`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_brand
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE lite_mall_brand
+	 	<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="desc != null">`desc` = #{desc}, </if>
+			<if test="picUrl != null">`pic_url` = #{picUrl}, </if>
+			<if test="sortOrder != null">`sort_order` = #{sortOrder}, </if>
+			<if test="floorPrice != null">`floor_price` = #{floorPrice}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="deleted != null">`deleted` = #{deleted}</if>
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			lite_mall_brand
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
