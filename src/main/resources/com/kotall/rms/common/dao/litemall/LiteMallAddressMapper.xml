@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallAddressMapper">
+	
+	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallAddressEntity">
+		SELECT
+			`id`, 
+			`name`, 
+			`user_id`, 
+			`province_id`, 
+			`city_id`, 
+			`area_id`, 
+			`address`, 
+			`mobile`, 
+			`is_default`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_address
+		ORDER BY
+			id DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO lite_mall_address (
+			`name`, 
+			`user_id`, 
+			`province_id`, 
+			`city_id`, 
+			`area_id`, 
+			`address`, 
+			`mobile`, 
+			`is_default`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		)
+		VALUES (
+			#{name}, 
+			#{userId}, 
+			#{provinceId}, 
+			#{cityId}, 
+			#{areaId}, 
+			#{address}, 
+			#{mobile}, 
+			#{isDefault}, 
+			#{addTime}, 
+			#{updateTime}, 
+			#{deleted}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallAddressEntity">
+		SELECT
+			`id`, 
+			`name`, 
+			`user_id`, 
+			`province_id`, 
+			`city_id`, 
+			`area_id`, 
+			`address`, 
+			`mobile`, 
+			`is_default`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_address
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE lite_mall_address
+	 	<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="provinceId != null">`province_id` = #{provinceId}, </if>
+			<if test="cityId != null">`city_id` = #{cityId}, </if>
+			<if test="areaId != null">`area_id` = #{areaId}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="isDefault != null">`is_default` = #{isDefault}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="deleted != null">`deleted` = #{deleted}</if>
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			lite_mall_address
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
