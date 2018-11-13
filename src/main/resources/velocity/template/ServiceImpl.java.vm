@@ -7,11 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
-import com.kotall.rms.web.util.ResultKit;
 import ${package}.common.entity.${module}.${className}Entity;
 import ${package}.common.manager.${module}.${className}Manager;
-import ${package}.common.service.${module}.${className}Service;
+import ${package}.core.service.${module}.${className}Service;
 
 /**
  * ${comments}
@@ -41,7 +39,7 @@ public class ${className}ServiceImpl implements ${className}Service {
 	}
 
 	@Override
-	public ${className} get${className}ById(Long id) {
+	public ${className}Entity get${className}ById(Long id) {
 		${className}Entity ${objName} = ${objName}Manager.get${className}ById(id);
 		return ${objName};
 	}
