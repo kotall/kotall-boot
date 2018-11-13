@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.entity.litemall.LiteMallUserEntity;
-import com.kotall.rms.common.manager.litemall.LiteMallUserManager;
+import com.kotall.rms.core.manager.litemall.LiteMallUserManager;
 import com.kotall.rms.core.service.litemall.LiteMallUserService;
 
 /**

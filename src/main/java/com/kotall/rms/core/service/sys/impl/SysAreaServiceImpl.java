@@ -3,7 +3,7 @@ package com.kotall.rms.core.service.sys.impl;
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.entity.sys.SysAreaEntity;
-import com.kotall.rms.common.manager.sys.SysAreaManager;
+import com.kotall.rms.core.manager.sys.SysAreaManager;
 import com.kotall.rms.core.service.sys.SysAreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

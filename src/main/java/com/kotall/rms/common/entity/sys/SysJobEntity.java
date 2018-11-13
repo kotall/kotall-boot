@@ -21,11 +21,7 @@ public class SysJobEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	/**
-	 * 任务调度参数key
-	 */
-    public static final String JOB_PARAM_KEY = "JOB_PARAM_KEY";
-	
+
 	/**
 	 * 任务id
 	 */

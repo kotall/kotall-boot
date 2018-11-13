@@ -4,7 +4,7 @@ import com.kotall.rms.core.enums.DictType;
 import com.kotall.rms.core.enums.StatusType;
 import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.entity.sys.SysDictEntity;
-import com.kotall.rms.common.manager.sys.SysDictManager;
+import com.kotall.rms.core.manager.sys.SysDictManager;
 import com.kotall.rms.core.service.sys.SysDictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

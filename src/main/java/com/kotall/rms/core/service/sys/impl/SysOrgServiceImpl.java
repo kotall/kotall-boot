@@ -2,7 +2,7 @@ package com.kotall.rms.core.service.sys.impl;
 
 import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.entity.sys.SysOrgEntity;
-import com.kotall.rms.common.manager.sys.SysOrgManager;
+import com.kotall.rms.core.manager.sys.SysOrgManager;
 import com.kotall.rms.core.service.sys.SysOrgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

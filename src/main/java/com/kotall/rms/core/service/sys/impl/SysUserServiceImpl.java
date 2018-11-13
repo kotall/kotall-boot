@@ -6,7 +6,7 @@ import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.utils.MD5Utils;
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.common.entity.sys.SysUserTokenEntity;
-import com.kotall.rms.common.manager.sys.SysUserManager;
+import com.kotall.rms.core.manager.sys.SysUserManager;
 import com.kotall.rms.core.service.sys.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

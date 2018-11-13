@@ -2,7 +2,7 @@
 package com.kotall.rms.common.integration.cloud;
 
 import com.kotall.rms.common.utils.DateUtils;
-import com.kotall.rms.core.CloudStorageConfig;
+import com.kotall.rms.core.config.CloudStorageConfig;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.InputStream;

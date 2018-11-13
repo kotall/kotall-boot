@@ -4,7 +4,7 @@ import com.kotall.rms.common.utils.IdKit;
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.entity.sys.SysMenuEntity;
-import com.kotall.rms.common.manager.sys.SysMenuManager;
+import com.kotall.rms.core.manager.sys.SysMenuManager;
 import com.kotall.rms.core.service.sys.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

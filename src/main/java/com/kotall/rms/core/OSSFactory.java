@@ -7,6 +7,7 @@ import com.kotall.rms.common.integration.cloud.AliyunCloudStorageService;
 import com.kotall.rms.common.integration.cloud.CloudStorageService;
 import com.kotall.rms.common.integration.cloud.QcloudCloudStorageService;
 import com.kotall.rms.common.integration.cloud.QiniuCloudStorageService;
+import com.kotall.rms.core.config.CloudStorageConfig;
 import com.kotall.rms.core.constants.ConfigConstant;
 import com.kotall.rms.core.constants.Constant;
 import com.kotall.rms.common.utils.SpringContextUtils;

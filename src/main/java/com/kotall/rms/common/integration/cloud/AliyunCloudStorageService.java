@@ -2,7 +2,7 @@
 package com.kotall.rms.common.integration.cloud;
 
 import com.aliyun.oss.OSSClient;
-import com.kotall.rms.core.CloudStorageConfig;
+import com.kotall.rms.core.config.CloudStorageConfig;
 import com.kotall.rms.core.RmsException;
 
 import java.io.ByteArrayInputStream;

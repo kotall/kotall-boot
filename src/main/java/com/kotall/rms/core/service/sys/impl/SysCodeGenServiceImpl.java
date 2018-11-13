@@ -4,7 +4,7 @@ import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.entity.sys.SysGenColumnEntity;
 import com.kotall.rms.common.entity.sys.SysGenTableEntity;
-import com.kotall.rms.common.manager.sys.SysCodeGenManager;
+import com.kotall.rms.core.manager.sys.SysCodeGenManager;
 import com.kotall.rms.core.service.sys.SysCodeGenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

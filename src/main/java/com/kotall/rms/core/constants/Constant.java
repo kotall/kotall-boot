@@ -8,6 +8,12 @@ package com.kotall.rms.core.constants;
  * @date 2017年8月8日 下午12:02:46
  */
 public class Constant {
+
+    /**
+     * 任务调度参数key
+     */
+    public static final String JOB_PARAM_KEY = "JOB_PARAM_KEY";
+
 	/** 超级管理员ID */
 	public static final int SUPER_ADMIN = 1;
     /** 数据权限过滤 */

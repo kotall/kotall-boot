@@ -3,7 +3,7 @@ package com.kotall.rms.core.service.sys.impl;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.entity.sys.SysRoleEntity;
-import com.kotall.rms.common.manager.sys.SysRoleManager;
+import com.kotall.rms.core.manager.sys.SysRoleManager;
 import com.kotall.rms.core.service.sys.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

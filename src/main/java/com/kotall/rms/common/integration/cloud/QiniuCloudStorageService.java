@@ -1,7 +1,7 @@
 
 package com.kotall.rms.common.integration.cloud;
 
-import com.kotall.rms.core.CloudStorageConfig;
+import com.kotall.rms.core.config.CloudStorageConfig;
 import com.kotall.rms.core.RmsException;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
