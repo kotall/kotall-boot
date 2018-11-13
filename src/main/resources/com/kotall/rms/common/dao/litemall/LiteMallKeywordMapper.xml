@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallKeywordMapper">
+	
+	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallKeywordEntity">
+		SELECT
+			`id`, 
+			`keyword`, 
+			`url`, 
+			`is_hot`, 
+			`is_default`, 
+			`sort_order`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_keyword
+		ORDER BY
+			id DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO lite_mall_keyword (
+			`keyword`, 
+			`url`, 
+			`is_hot`, 
+			`is_default`, 
+			`sort_order`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		)
+		VALUES (
+			#{keyword}, 
+			#{url}, 
+			#{isHot}, 
+			#{isDefault}, 
+			#{sortOrder}, 
+			#{addTime}, 
+			#{updateTime}, 
+			#{deleted}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallKeywordEntity">
+		SELECT
+			`id`, 
+			`keyword`, 
+			`url`, 
+			`is_hot`, 
+			`is_default`, 
+			`sort_order`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_keyword
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE lite_mall_keyword
+	 	<set>
+			<if test="keyword != null">`keyword` = #{keyword}, </if>
+			<if test="url != null">`url` = #{url}, </if>
+			<if test="isHot != null">`is_hot` = #{isHot}, </if>
+			<if test="isDefault != null">`is_default` = #{isDefault}, </if>
+			<if test="sortOrder != null">`sort_order` = #{sortOrder}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="deleted != null">`deleted` = #{deleted}</if>
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			lite_mall_keyword
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,17 +1,15 @@
 
 -- 目录SQL
-#set($vars="/" + "${module}")
-INSERT INTO `sys_menu` (`menu_id`,`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`)
-    VALUES ('${vars.hashCode()}',0, '${comments}', '${vars}',NULL, NULL, '0', 'fa fa-coffee');
-
+#set($vars="${module.toUpperCase()}")
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`) VALUES (0, '${comments}', '${vars}',NULL, NULL, '0', 'fa fa-coffee');
 -- 菜单SQL
-INSERT INTO `sys_menu` (`menu_id`,`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`) VALUES ('${code.hashCode()}',(select m.menu_id from sys_menu m where m.code='${vars}'), '${comments}', '${code}','${viewPath}/list.html', NULL, '1', 'fa fa-th-list');
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='${vars}'), '${comments}', '${code}','${viewPath}/list.html', NULL, '1', 'fa fa-th-list', 1);
 -- 菜单对应按钮SQL
-#set($vars="$code" + "/list")
-INSERT INTO `sys_menu` (`menu_id`,`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ('${vars.hashCode()}',(select m.menu_id from sys_menu m where m.code='${code}'), '刷新', '${code}/list', '${authKey}:list', '2', NULL);
-#set($vars="$code" + "/save")
-INSERT INTO `sys_menu` (`menu_id`,`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ('${vars.hashCode()}',(select m.menu_id from sys_menu m where m.code='${code}'), '新增', '${code}/save', '${authKey}:save', '2', NULL);
-#set($vars="$code" + "/edit")
-INSERT INTO `sys_menu` (`menu_id`,`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ('${vars.hashCode()}',(select m.menu_id from sys_menu m where m.code='${code}'), '修改', '${code}/edit', '${authKey}:edit', '2', NULL);
-#set($vars="$code" + "/remove")
-INSERT INTO `sys_menu` (`menu_id`,`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ('${vars.hashCode()}',(select m.menu_id from sys_menu m where m.code='${code}'), '删除', '${code}/remove', '${authKey}:remove', '2', NULL);
+#set($vars="$code" + "_LIST")
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='${code}'), '刷新', '${code}_LIST', '${authKey}:list', '2', NULL);
+#set($vars="$code" + "_SAVE")
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='${code}'), '新增', '${code}_SAVE', '${authKey}:save', '2', NULL);
+#set($vars="$code" + "_EDIT")
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='${code}'), '修改', '${code}_EDIT', '${authKey}:edit', '2', NULL);
+#set($vars="$code" + "_REMOVE")
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='${code}'), '删除', '${code}_REMOVE', '${authKey}:remove', '2', NULL);

@@ -62,3 +62,40 @@ INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VAL
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_BRAND'), '新增', 'LITE_MALL_STORE_BRAND_SAVE', 'litemall:brand:save', '2', NULL);
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_BRAND'), '修改', 'LITE_MALL_STORE_BRAND_EDIT', 'litemall:brand:edit', '2', NULL);
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_BRAND'), '删除', 'LITE_MALL_STORE_BRAND_REMOVE', 'litemall:brand:remove', '2', NULL);
+
+
+-- 菜单SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE'), '商品类目', 'LITE_MALL_STORE_CATEGORY','mall/category/list.html', NULL, '1', 'fa fa-th-list', 2);
+-- 菜单对应按钮SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_CATEGORY'), '刷新', 'LITE_MALL_STORE_CATEGORY_LIST', 'litemall:category:list', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_CATEGORY'), '新增', 'LITE_MALL_STORE_CATEGORY_SAVE', 'litemall:category:save', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_CATEGORY'), '修改', 'LITE_MALL_STORE_CATEGORY_EDIT', 'litemall:category:edit', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_CATEGORY'), '删除', 'LITE_MALL_STORE_CATEGORY_REMOVE', 'litemall:category:remove', '2', NULL);
+
+
+-- 菜单SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE'), '订单管理', 'LITE_MALL_STORE_ORDER','mall/order/list.html', NULL, '1', 'fa fa-th-list', 3);
+-- 菜单对应按钮SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_ORDER'), '刷新', 'LITE_MALL_STORE_ORDER_LIST', 'litemall:order:list', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_ORDER'), '新增', 'LITE_MALL_STORE_ORDER_SAVE', 'litemall:order:save', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_ORDER'), '修改', 'LITE_MALL_STORE_ORDER_EDIT', 'litemall:order:edit', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_ORDER'), '删除', 'LITE_MALL_STORE_ORDER_REMOVE', 'litemall:order:remove', '2', NULL);
+
+
+-- 菜单SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE'), '常见问题', 'LITE_MALL_STORE_ISSUE','mall/issue/list.html', NULL, '1', 'fa fa-th-list', 4);
+-- 菜单对应按钮SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_ISSUE'), '刷新', 'LITE_MALL_STORE_ISSUE_LIST', 'litemall:issue:list', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_ISSUE'), '新增', 'LITE_MALL_STORE_ISSUE_SAVE', 'litemall:issue:save', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_ISSUE'), '修改', 'LITE_MALL_STORE_ISSUE_EDIT', 'litemall:issue:edit', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_ISSUE'), '删除', 'LITE_MALL_STORE_ISSUE_REMOVE', 'litemall:issue:remove', '2', NULL);
+
+
+-- 菜单SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE'), '关键字表', 'LITE_MALL_STORE_KEYWORD','mall/keyword/list.html', NULL, '1', 'fa fa-th-list', 5);
+-- 菜单对应按钮SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_KEYWORD'), '刷新', 'LITE_MALL_STORE_KEYWORD_LIST', 'litemall:keyword:list', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_KEYWORD'), '新增', 'LITE_MALL_STORE_KEYWORD_SAVE', 'litemall:keyword:save', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_KEYWORD'), '修改', 'LITE_MALL_STORE_KEYWORD_EDIT', 'litemall:keyword:edit', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_KEYWORD'), '删除', 'LITE_MALL_STORE_KEYWORD_REMOVE', 'litemall:keyword:remove', '2', NULL);
+

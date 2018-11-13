@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallOrderMapper">
+	
+	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallOrderEntity">
+		SELECT
+			`id`, 
+			`user_id`, 
+			`order_sn`, 
+			`order_status`, 
+			`consignee`, 
+			`mobile`, 
+			`address`, 
+			`message`, 
+			`goods_price`, 
+			`freight_price`, 
+			`coupon_price`, 
+			`integral_price`, 
+			`groupon_price`, 
+			`order_price`, 
+			`actual_price`, 
+			`pay_id`, 
+			`pay_time`, 
+			`ship_sn`, 
+			`ship_channel`, 
+			`ship_time`, 
+			`confirm_time`, 
+			`comments`, 
+			`end_time`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_order
+		ORDER BY
+			id DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO lite_mall_order (
+			`user_id`, 
+			`order_sn`, 
+			`order_status`, 
+			`consignee`, 
+			`mobile`, 
+			`address`, 
+			`message`, 
+			`goods_price`, 
+			`freight_price`, 
+			`coupon_price`, 
+			`integral_price`, 
+			`groupon_price`, 
+			`order_price`, 
+			`actual_price`, 
+			`pay_id`, 
+			`pay_time`, 
+			`ship_sn`, 
+			`ship_channel`, 
+			`ship_time`, 
+			`confirm_time`, 
+			`comments`, 
+			`end_time`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		)
+		VALUES (
+			#{userId}, 
+			#{orderSn}, 
+			#{orderStatus}, 
+			#{consignee}, 
+			#{mobile}, 
+			#{address}, 
+			#{message}, 
+			#{goodsPrice}, 
+			#{freightPrice}, 
+			#{couponPrice}, 
+			#{integralPrice}, 
+			#{grouponPrice}, 
+			#{orderPrice}, 
+			#{actualPrice}, 
+			#{payId}, 
+			#{payTime}, 
+			#{shipSn}, 
+			#{shipChannel}, 
+			#{shipTime}, 
+			#{confirmTime}, 
+			#{comments}, 
+			#{endTime}, 
+			#{addTime}, 
+			#{updateTime}, 
+			#{deleted}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallOrderEntity">
+		SELECT
+			`id`, 
+			`user_id`, 
+			`order_sn`, 
+			`order_status`, 
+			`consignee`, 
+			`mobile`, 
+			`address`, 
+			`message`, 
+			`goods_price`, 
+			`freight_price`, 
+			`coupon_price`, 
+			`integral_price`, 
+			`groupon_price`, 
+			`order_price`, 
+			`actual_price`, 
+			`pay_id`, 
+			`pay_time`, 
+			`ship_sn`, 
+			`ship_channel`, 
+			`ship_time`, 
+			`confirm_time`, 
+			`comments`, 
+			`end_time`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_order
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE lite_mall_order
+	 	<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="orderSn != null">`order_sn` = #{orderSn}, </if>
+			<if test="orderStatus != null">`order_status` = #{orderStatus}, </if>
+			<if test="consignee != null">`consignee` = #{consignee}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="message != null">`message` = #{message}, </if>
+			<if test="goodsPrice != null">`goods_price` = #{goodsPrice}, </if>
+			<if test="freightPrice != null">`freight_price` = #{freightPrice}, </if>
+			<if test="couponPrice != null">`coupon_price` = #{couponPrice}, </if>
+			<if test="integralPrice != null">`integral_price` = #{integralPrice}, </if>
+			<if test="grouponPrice != null">`groupon_price` = #{grouponPrice}, </if>
+			<if test="orderPrice != null">`order_price` = #{orderPrice}, </if>
+			<if test="actualPrice != null">`actual_price` = #{actualPrice}, </if>
+			<if test="payId != null">`pay_id` = #{payId}, </if>
+			<if test="payTime != null">`pay_time` = #{payTime}, </if>
+			<if test="shipSn != null">`ship_sn` = #{shipSn}, </if>
+			<if test="shipChannel != null">`ship_channel` = #{shipChannel}, </if>
+			<if test="shipTime != null">`ship_time` = #{shipTime}, </if>
+			<if test="confirmTime != null">`confirm_time` = #{confirmTime}, </if>
+			<if test="comments != null">`comments` = #{comments}, </if>
+			<if test="endTime != null">`end_time` = #{endTime}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="deleted != null">`deleted` = #{deleted}</if>
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			lite_mall_order
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
