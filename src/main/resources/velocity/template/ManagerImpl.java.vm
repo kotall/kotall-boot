@@ -1,4 +1,4 @@
-package ${package}.common.manager.${module}.impl;
+package ${package}.core.manager.${module}.impl;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Query;
 import ${package}.common.dao.${module}.${className}Mapper;
 import ${package}.common.entity.${module}.${className}Entity;
-import ${package}.common.manager.${module}.${className}Manager;
+import ${package}.core.manager.${module}.${className}Manager;
 
 /**
  * ${comments}

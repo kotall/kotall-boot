@@ -1,4 +1,4 @@
-package ${package}.common.manager.${module};
+package ${package}.core.manager.${module};
 
 import java.util.List;
 

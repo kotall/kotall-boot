@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.utils.Page;
 import ${package}.common.entity.${module}.${className}Entity;
-import ${package}.common.manager.${module}.${className}Manager;
+import ${package}.core.manager.${module}.${className}Manager;
 import ${package}.core.service.${module}.${className}Service;
 
 /**
