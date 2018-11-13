@@ -1,9 +1,12 @@
 
-package com.kotall.rms.common.integration.cloud;
+package com.kotall.rms.core;
 
 
 import com.google.gson.Gson;
-import com.kotall.rms.core.CloudStorageConfig;
+import com.kotall.rms.common.integration.cloud.AliyunCloudStorageService;
+import com.kotall.rms.common.integration.cloud.CloudStorageService;
+import com.kotall.rms.common.integration.cloud.QcloudCloudStorageService;
+import com.kotall.rms.common.integration.cloud.QiniuCloudStorageService;
 import com.kotall.rms.core.constants.ConfigConstant;
 import com.kotall.rms.core.constants.Constant;
 import com.kotall.rms.common.utils.SpringContextUtils;
@@ -27,7 +30,7 @@ public final class OSSFactory {
         // 获取云存储配置信息
         String value = sysConfigService.getValue(ConfigConstant.CLOUD_STORAGE_CONFIG_KEY);
 
-        CloudStorageConfig config = null;
+        CloudStorageConfig config;
         if(StringUtils.isNotBlank(value)){
             config = new Gson().fromJson(value, CloudStorageConfig.class);
         } else {
