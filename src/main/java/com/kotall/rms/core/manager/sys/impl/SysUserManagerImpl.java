@@ -22,6 +22,7 @@ import com.kotall.rms.common.dao.sys.SysUserRoleMapper;
 import com.kotall.rms.common.dao.sys.SysUserTokenMapper;
 import com.kotall.rms.common.entity.sys.SysUserTokenEntity;
 import com.kotall.rms.web.auth.TokenGenerator;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 系统用户
@@ -63,6 +64,7 @@ public class SysUserManagerImpl implements SysUserManager {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int saveUser(SysUserEntity user) {
         int count = sysUserMapper.save(user);
         Query query = new Query();
@@ -80,6 +82,7 @@ public class SysUserManagerImpl implements SysUserManager {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int updateUser(SysUserEntity user) {
         int count = sysUserMapper.update(user);
         Long userId = user.getUserId();
@@ -92,6 +95,7 @@ public class SysUserManagerImpl implements SysUserManager {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int batchRemove(Long[] id) {
         int count = sysUserMapper.batchRemove(id);
         sysUserRoleMapper.batchRemoveByUserId(id);

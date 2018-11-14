@@ -63,7 +63,7 @@ public class SysOrgServiceImpl implements SysOrgService {
 		if(children) {
 			throw RmsException.HAS_CHILD_EXCEPTION;
 		}
-		int count = sysOrgManager.bactchRemoveOrg(id);
+		int count = sysOrgManager.batchRemoveOrg(id);
 		return count;
 	}
 

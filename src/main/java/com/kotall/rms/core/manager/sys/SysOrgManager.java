@@ -21,7 +21,7 @@ public interface SysOrgManager {
 	
 	int updateOrg(SysOrgEntity org);
 	
-	int bactchRemoveOrg(Long[] id);
+	int batchRemoveOrg(Long[] id);
 	
 	boolean hasChildren(Long[] id);
 

@@ -13,6 +13,7 @@ import com.kotall.rms.common.dao.sys.SysRoleMenuMapper;
 import com.kotall.rms.common.dao.sys.SysUserMapper;
 import com.kotall.rms.common.entity.sys.SysMenuEntity;
 import com.kotall.rms.core.manager.sys.SysMenuManager;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 系统菜单
@@ -110,6 +111,7 @@ public class SysMenuManagerImpl implements SysMenuManager {
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int batchRemove(Long[] id) {
 		int count = sysMenuMapper.batchRemove(id);
 		sysRoleMenuMapper.batchRemoveByMenuId(id);

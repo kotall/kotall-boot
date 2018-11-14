@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.kotall.rms.common.dao.sys.SysRoleMapper;
 import com.kotall.rms.common.dao.sys.SysRoleOrgMapper;
 import com.kotall.rms.common.entity.sys.SysRoleEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 系统角色
@@ -61,6 +62,7 @@ public class SysRoleManagerImpl implements SysRoleManager {
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int batchRemove(Long[] id) {
 		int count = sysRoleMapper.batchRemove(id);
 		sysUserRoleMapper.batchRemoveByRoleId(id);
@@ -89,6 +91,7 @@ public class SysRoleManagerImpl implements SysRoleManager {
 	}
 	
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int updateRoleDataAuthorization(SysRoleEntity role) {
 		Long roleId = role.getRoleId();
 		int count = sysRoleOrgMapper.remove(roleId);

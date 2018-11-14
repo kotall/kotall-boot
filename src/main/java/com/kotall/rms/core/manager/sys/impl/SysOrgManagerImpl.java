@@ -9,6 +9,7 @@ import com.kotall.rms.common.dao.sys.SysOrgMapper;
 import com.kotall.rms.common.dao.sys.SysRoleOrgMapper;
 import com.kotall.rms.common.entity.sys.SysOrgEntity;
 import com.kotall.rms.core.manager.sys.SysOrgManager;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 组织架构
@@ -46,7 +47,8 @@ public class SysOrgManagerImpl implements SysOrgManager {
 	}
 
 	@Override
-	public int bactchRemoveOrg(Long[] id) {
+	@Transactional(rollbackFor = Exception.class)
+	public int batchRemoveOrg(Long[] id) {
 		int count = sysOrgMapper.batchRemove(id);
 		sysRoleOrgMapper.batchRemoveByOrgId(id);
 		return count;
