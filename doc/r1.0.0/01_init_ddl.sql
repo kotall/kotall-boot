@@ -1,6 +1,26 @@
 DROP TABLE IF EXISTS `lite_mall_ad`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
+
+CREATE TABLE `lite_mall_store`(
+    `id` INT NOT NULL AUTO_INCREMENT  COMMENT '店铺ID' ,
+    `name` VARCHAR(128) DEFAULT NULL   COMMENT '店铺名称' ,
+    `status` VARCHAR(32)   DEFAULT 1 COMMENT '店铺状态 0:关闭1:运营中 2:暂停营业' ,
+    `type` INT  DEFAULT NULL  COMMENT '店铺类型' ,
+    `main_buz` VARCHAR(128) DEFAULT NULL   COMMENT '主营业务' ,
+    `brand` VARCHAR(32)   DEFAULT NULL COMMENT '店铺招牌' ,
+    `address` VARCHAR(32)  DEFAULT NULL  COMMENT '店铺地址' ,
+    `location_x` VARCHAR(32) DEFAULT NULL   COMMENT '店铺位置X' ,
+    `location_y` VARCHAR(32) DEFAULT NULL   COMMENT '店铺位置Y' ,
+    `user_id` INT    COMMENT DEFAULT NULL '店主用户ID' ,
+    `contact_man` VARCHAR(32)  DEFAULT NULL  COMMENT '联系人' ,
+    `contact_phone` VARCHAR(32) DEFAULT NULL   COMMENT '联系电话 18321669370' ,
+    `CREATE_TIME` DATETIME  DEFAULT NULL  COMMENT '创建时间' ,
+    `UPDATE_TIME` DATETIME  DEFAULT NULL  COMMENT '更新时间' ,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT = '店铺表 ';
+
+
 CREATE TABLE `lite_mall_ad` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(63) NOT NULL DEFAULT '' COMMENT '广告标题',
