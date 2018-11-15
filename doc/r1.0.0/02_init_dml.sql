@@ -7,10 +7,10 @@ INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `ico
 -- 菜单: 店铺列表
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE'), '店铺列表', 'LITE_MALL_STORE_LIST','mall/store/list.html', NULL, '1', 'fa fa-th-list', 1);
 -- 菜单对应按钮SQL
-INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_LIST'), '刷新', 'LITE_MALL_STORE_LIST_LIST', 'litemall:brand:list', '2', NULL);
-INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_LIST'), '新增', 'LITE_MALL_STORE_LIST_SAVE', 'litemall:brand:save', '2', NULL);
-INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_LIST'), '修改', 'LITE_MALL_STORE_LIST_EDIT', 'litemall:brand:edit', '2', NULL);
-INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_LIST'), '删除', 'LITE_MALL_STORE_LIST_REMOVE', 'litemall:brand:remove', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_LIST'), '刷新', 'LITE_MALL_STORE_LIST_LIST', 'litemall:store:list', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_LIST'), '新增', 'LITE_MALL_STORE_LIST_SAVE', 'litemall:store:save', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_LIST'), '修改', 'LITE_MALL_STORE_LIST_EDIT', 'litemall:store:edit', '2', NULL);
+INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`perms`, `type`, `icon`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE_LIST'), '删除', 'LITE_MALL_STORE_LIST_REMOVE', 'litemall:store:remove', '2', NULL);
 
 -- 菜单: 品牌管理
 INSERT INTO `sys_menu` (`parent_id`, `name`, `code`,`url`, `perms`, `type`, `icon`, `order_num`) VALUES ((select m.menu_id from sys_menu m where m.code='LITE_MALL_STORE'), '品牌管理', 'LITE_MALL_STORE_BRAND','mall/brand/list.html', NULL, '1', 'fa fa-th-list', 2);
