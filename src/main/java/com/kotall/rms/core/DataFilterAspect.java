@@ -30,8 +30,8 @@ import java.util.Set;
  * @author aracwong
  * @since 2017年8月28日 上午11:07:35
  */
-@Order(value = 0)
 @Aspect
+@Order(value = -1)
 @Component
 public class DataFilterAspect {
 

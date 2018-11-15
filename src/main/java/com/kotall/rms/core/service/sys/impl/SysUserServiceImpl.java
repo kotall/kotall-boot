@@ -28,7 +28,7 @@ public class SysUserServiceImpl implements SysUserService {
 	@Autowired
 	private SysUserManager sysUserManager;
 
-	@DataFilter(subDept = true, user = false)
+	//@DataFilter(subDept = true, user = false)
 	@Override
 	public Page<SysUserEntity> listUser(Map<String, Object> params) {
 		Query query = new Query(params);
