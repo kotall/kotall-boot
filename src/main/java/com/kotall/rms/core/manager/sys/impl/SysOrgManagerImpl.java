@@ -66,7 +66,7 @@ public class SysOrgManagerImpl implements SysOrgManager {
 	}
 
 	@Override
-	public List<SysOrgEntity> listUserOrg(Long orgId) {
-		return this.sysOrgMapper.listUserOrg(orgId);
+	public List<Long> queryOrgIdList(Long parentId) {
+		return this.sysOrgMapper.queryOrgIdList(parentId);
 	}
 }

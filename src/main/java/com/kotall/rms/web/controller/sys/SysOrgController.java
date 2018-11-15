@@ -2,6 +2,7 @@ package com.kotall.rms.web.controller.sys;
 
 import com.kotall.rms.core.annotation.SysLog;
 import com.kotall.rms.common.utils.Result;
+import com.kotall.rms.core.constants.Constant;
 import com.kotall.rms.web.util.ResultKit;
 import com.kotall.rms.web.util.ShiroUtils;
 import com.kotall.rms.common.entity.sys.SysOrgEntity;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,9 +40,8 @@ public class SysOrgController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public List<SysOrgEntity> list() {
-		SysUserEntity sysUser = ShiroUtils.getUserEntity();
-		Long orgId = sysUser.getOrgId();
-		return sysOrgService.listUserOrg(orgId);
+		List<SysOrgEntity> sysOrgList = this.sysOrgService.queryList(new HashMap<String, Object>());
+		return sysOrgList;
 	}
 	
 	/**
@@ -48,7 +50,17 @@ public class SysOrgController extends AbstractController {
 	 */
 	@RequestMapping("/select")
 	public List<SysOrgEntity> select() {
-		return sysOrgService.listOrgTree();
+		List<SysOrgEntity> sysOrgList = this.sysOrgService.queryList(new HashMap<String, Object>());
+		// 添加一级部门
+		if(super.getUserId() == Constant.SUPER_ADMIN){
+			SysOrgEntity root = new SysOrgEntity();
+			root.setOrgId(0L);
+			root.setName("一级部门");
+			root.setParentId(-1L);
+			root.setOpen(true);
+			sysOrgList.add(root);
+		}
+		return sysOrgList;
 	}
 	
 	/**

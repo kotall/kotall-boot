@@ -19,5 +19,7 @@ public interface SysRoleOrgMapper extends BaseMapper<SysRoleOrgEntity> {
 	int batchRemoveByOrgId(Long[] id);
 	
 	int batchRemoveByRoleId(Long[] id);
-	
+
+
+    List<Long> queryOrgIdList(Long[] roleIds);
 }

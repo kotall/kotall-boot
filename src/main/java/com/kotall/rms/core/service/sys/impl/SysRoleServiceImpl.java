@@ -3,6 +3,7 @@ package com.kotall.rms.core.service.sys.impl;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.entity.sys.SysRoleEntity;
+import com.kotall.rms.core.annotation.DataFilter;
 import com.kotall.rms.core.manager.sys.SysRoleManager;
 import com.kotall.rms.core.service.sys.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 	@Autowired
 	private SysRoleManager sysRoleManager;
 
+	@DataFilter(subDept = true, user = false)
 	@Override
 	public Page<SysRoleEntity> listRole(Map<String, Object> params) {
 		Query query = new Query(params);

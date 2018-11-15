@@ -33,6 +33,9 @@
 			m.order_num
 		FROM
 			sys_menu m
+		<if test="sql_filter != null and sql_filter.trim() !='' ">
+			WHERE #{sql_filter}
+		</if>
 		ORDER BY
 			m.order_num ASC
 	</select>

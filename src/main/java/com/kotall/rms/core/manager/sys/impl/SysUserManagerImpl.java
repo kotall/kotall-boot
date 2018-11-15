@@ -77,7 +77,7 @@ public class SysUserManagerImpl implements SysUserManager {
     @Override
     public SysUserEntity getById(Long userId) {
         SysUserEntity user = sysUserMapper.getObjectById(userId);
-        user.setRoleIdList(sysUserRoleMapper.listUserRoleId(userId));
+        user.setRoleIdList(sysUserRoleMapper.queryRoleIdList(userId));
         return user;
     }
 

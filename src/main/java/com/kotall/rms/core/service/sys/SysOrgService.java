@@ -3,6 +3,7 @@ package com.kotall.rms.core.service.sys;
 import com.kotall.rms.common.entity.sys.SysOrgEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 组织机构
@@ -12,9 +13,7 @@ import java.util.List;
  */
 public interface SysOrgService {
 
-	List<SysOrgEntity> listOrg();
-	
-	List<SysOrgEntity> listOrgTree();
+	List<SysOrgEntity> queryList(Map<String, Object> params);
 	
 	int saveOrg(SysOrgEntity org);
 
@@ -24,10 +23,7 @@ public interface SysOrgService {
 	
 	int batchRemoveOrg(Long[] id);
 
-	/**
-	 * 查询下级机构列表
-	 * @param orgId
-	 * @return
-     */
-	List<SysOrgEntity> listUserOrg(Long orgId);
+	List<Long> queryOrgIdList(Long parentId);
+
+	List<Long> getSubOrgIdList(Long orgId);
 }

@@ -4,6 +4,7 @@ import com.kotall.rms.common.utils.IdKit;
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.entity.sys.SysMenuEntity;
+import com.kotall.rms.core.annotation.DataFilter;
 import com.kotall.rms.core.manager.sys.SysMenuManager;
 import com.kotall.rms.core.service.sys.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 		return menuList;
 	}
 
+	@DataFilter(subDept = true, user = false)
 	@Override
 	public List<SysMenuEntity> listMenu(Map<String, Object> params) {
 		Query query = new Query(params);

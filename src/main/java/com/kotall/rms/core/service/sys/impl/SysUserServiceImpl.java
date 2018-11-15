@@ -6,6 +6,7 @@ import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.utils.MD5Utils;
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.common.entity.sys.SysUserTokenEntity;
+import com.kotall.rms.core.annotation.DataFilter;
 import com.kotall.rms.core.manager.sys.SysUserManager;
 import com.kotall.rms.core.service.sys.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,8 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Autowired
 	private SysUserManager sysUserManager;
-	
+
+	@DataFilter(subDept = true, user = false)
 	@Override
 	public Page<SysUserEntity> listUser(Map<String, Object> params) {
 		Query form = new Query(params);

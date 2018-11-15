@@ -2,6 +2,7 @@ package com.kotall.rms.core.service.sys.impl;
 
 import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.entity.sys.SysOrgEntity;
+import com.kotall.rms.core.annotation.DataFilter;
 import com.kotall.rms.core.manager.sys.SysOrgManager;
 import com.kotall.rms.core.service.sys.SysOrgService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 组织机构
@@ -21,22 +23,12 @@ public class SysOrgServiceImpl implements SysOrgService {
 
 	@Autowired
 	private SysOrgManager sysOrgManager;
-	
-	@Override
-	public List<SysOrgEntity> listOrg() {
-		return sysOrgManager.listOrg();
-	}
 
+	@DataFilter(subDept = true, user = false)
 	@Override
-	public List<SysOrgEntity> listOrgTree() {
-		List<SysOrgEntity> orgList = sysOrgManager.listOrg();
-		SysOrgEntity org = new SysOrgEntity();
-		org.setOrgId(0L);
-		org.setName("一级机构");
-		org.setParentId(-1L);
-		org.setOpen(true);
-		orgList.add(org);
-		return orgList;
+	public List<SysOrgEntity> queryList(Map<String, Object> params) {
+		List<SysOrgEntity> sysOrgList = sysOrgManager.listOrg();
+		return sysOrgList;
 	}
 
 	@Override
@@ -68,32 +60,33 @@ public class SysOrgServiceImpl implements SysOrgService {
 	}
 
 	@Override
-	public List<SysOrgEntity> listUserOrg(Long orgId) {
-		List<SysOrgEntity> userOrgList = new ArrayList<>();
-		List<SysOrgEntity> allOrgs = this.sysOrgManager.listOrg();
-		SysOrgEntity rootOrg = this.sysOrgManager.getOrg(orgId);
-		rootOrg.setParentId(0L);
-		userOrgList.add(rootOrg);
-		this.fillChilds(rootOrg, allOrgs, userOrgList);
-		return userOrgList;
+	public List<Long> queryOrgIdList(Long parentId) {
+		return sysOrgManager.queryOrgIdList(parentId);
 	}
 
-	private void fillChilds(final SysOrgEntity rootOrg, final List<SysOrgEntity> allOrgs,
-							final List<SysOrgEntity> userOrgList) {
-		List<SysOrgEntity> subOrgList = new ArrayList<>();
-		for (SysOrgEntity allOrg : allOrgs) {
-			if (allOrg.getParentId().equals(rootOrg.getOrgId())) {
-				subOrgList.add(allOrg);
-			}
-		}
-		//rootOrg.setList(subOrgList);
-		allOrgs.removeAll(subOrgList);
+	@Override
+	public List<Long> getSubOrgIdList(Long deptId){
+		// 部门及子部门ID列表
+		List<Long> deptIdList = new ArrayList<>();
 
-		if (subOrgList.size() > 0 && allOrgs.size() > 0) {
-			userOrgList.addAll(subOrgList);
-			for (SysOrgEntity sysOrgEntity : subOrgList) {
-				fillChilds(sysOrgEntity, allOrgs, userOrgList);
+		// 获取子部门ID
+		List<Long> subIdList = queryOrgIdList(deptId);
+		getDeptTreeList(subIdList, deptIdList);
+
+		return deptIdList;
+	}
+
+	/**
+	 * 递归
+	 */
+	private void getDeptTreeList(List<Long> subIdList, List<Long> deptIdList){
+		for(Long deptId : subIdList){
+			List<Long> list = queryOrgIdList(deptId);
+			if(list.size() > 0){
+				getDeptTreeList(list, deptIdList);
 			}
+			deptIdList.add(deptId);
 		}
 	}
+
 }

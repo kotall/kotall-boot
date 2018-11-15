@@ -30,6 +30,9 @@
 			o.order_num
 		FROM
 			sys_org o
+		<if test="sql_filter != null and sql_filter.trim() !='' ">
+			WHERE #{sql_filter}
+		</if>
 		ORDER BY
 			o.order_num ASC
 	</select>	
@@ -101,28 +104,14 @@
 		</foreach>
 	</delete>
 
-	<select id="listUserOrg" resultType="com.kotall.rms.common.entity.sys.SysOrgEntity">
+	<select id="queryOrgIdList" resultType="long">
 		SELECT
-		o.org_id,
-		o.parent_id,
-		(
-		SELECT
-		p.name
+			distinct(o.org_id)
 		FROM
-		sys_org p
-		WHERE
-		p.org_id = o.parent_id
-		) AS parentName,
-		o.code,
-		o.name,
-		o.status,
-		o.order_num
-		FROM
-		sys_org o
+			sys_org o
 		WHERE o.parent_id = #{id}
-		OR o.org_id = #{id}
 		ORDER BY
-		o.order_num ASC
+			o.order_num ASC
 	</select>
 
 </mapper>

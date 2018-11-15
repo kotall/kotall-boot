@@ -44,7 +44,7 @@
 		</foreach>
 	</delete>
 	
-	<select id="listUserRoleId" resultType="long">
+	<select id="queryRoleIdList" resultType="long">
 		SELECT
 			role_id
 		FROM

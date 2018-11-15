@@ -17,6 +17,5 @@ public interface SysOrgMapper extends BaseMapper<SysOrgEntity> {
 
 	int countOrgChildren(Long parentId);
 
-	List<SysOrgEntity> listUserOrg(Long orgId);
-	
+	List<Long> queryOrgIdList(Long parentId);
 }

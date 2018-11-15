@@ -26,10 +26,9 @@ public interface SysOrgManager {
 	boolean hasChildren(Long[] id);
 
 	/**
-	 * 根据机构ID查询下属机构 包括机构自身
-	 * @param orgId
+	 * 根据 parentId 查询下级机构 ID
+	 * @param parentId
 	 * @return
-     */
-	List<SysOrgEntity> listUserOrg(Long orgId);
-
+	 */
+    List<Long> queryOrgIdList(Long parentId);
 }
