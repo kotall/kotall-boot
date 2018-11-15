@@ -85,6 +85,32 @@ public class SysOrgController extends AbstractController {
 		SysOrgEntity org = sysOrgService.getOrg(orgId);
 		return ResultKit.msg(org);
 	}
+
+	/**
+	 * 查询根机构号
+	 * @return
+	 */
+	@RequestMapping("/rootInfo")
+	public Result rootInfo() {
+		long deptId = 0;
+		if(getUserId() != Constant.SUPER_ADMIN){
+			List<SysOrgEntity> deptList = sysOrgService.queryList(new HashMap<>());
+			Long parentId = null;
+			for(SysOrgEntity sysDeptEntity : deptList){
+				if(parentId == null){
+					parentId = sysDeptEntity.getParentId();
+					continue;
+				}
+
+				if(parentId > sysDeptEntity.getParentId().longValue()){
+					parentId = sysDeptEntity.getParentId();
+				}
+			}
+			deptId = parentId;
+		}
+
+		return Result.ok().put("orgId", deptId);
+	}
 	
 	/**
 	 * 修改机构

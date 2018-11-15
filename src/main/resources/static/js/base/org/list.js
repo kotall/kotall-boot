@@ -14,16 +14,19 @@ function initialPage() {
 }
 
 function getGrid() {
-	var colunms = TreeGrid.initColumn();
-    var table = new TreeTable(TreeGrid.id, '../../sys/org/list?_' + $.now(), colunms);
-    table.setExpandColumn(2);
-    table.setIdField("orgId");
-    table.setCodeField("orgId");
-    table.setParentCodeField("parentId");
-    table.setExpandAll(false);
-    table.setHeight($(window).height()-100);
-    table.init();
-    TreeGrid.table = table;
+    $.get("../../sys/org/rootInfo", function(r){
+        var colunms = TreeGrid.initColumn();
+        var table = new TreeTable(TreeGrid.id, '../../sys/org/list?_' + $.now(), colunms);
+        table.setRootCodeValue(r.orgId);
+        table.setExpandColumn(2);
+        table.setIdField("orgId");
+        table.setCodeField("orgId");
+        table.setParentCodeField("parentId");
+        table.setExpandAll(false);
+        table.setHeight($(window).height()-100);
+        table.init();
+        TreeGrid.table = table;
+	});
 }
 
 var vm = new Vue({
