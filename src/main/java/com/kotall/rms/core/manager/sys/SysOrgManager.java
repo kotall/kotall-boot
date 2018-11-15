@@ -1,8 +1,10 @@
 package com.kotall.rms.core.manager.sys;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kotall.rms.common.entity.sys.SysOrgEntity;
+import com.kotall.rms.common.utils.Query;
 
 /**
  * 组织机构
@@ -13,7 +15,7 @@ import com.kotall.rms.common.entity.sys.SysOrgEntity;
  */
 public interface SysOrgManager {
 
-	List<SysOrgEntity> listOrg();
+	List<SysOrgEntity> listOrg(Query query);
 	
 	int saveOrg(SysOrgEntity org);
 	

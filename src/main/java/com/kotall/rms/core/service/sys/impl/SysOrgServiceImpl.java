@@ -1,5 +1,8 @@
 package com.kotall.rms.core.service.sys.impl;
 
+import com.kotall.rms.common.entity.sys.SysUserEntity;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.entity.sys.SysOrgEntity;
 import com.kotall.rms.core.annotation.DataFilter;
@@ -27,7 +30,8 @@ public class SysOrgServiceImpl implements SysOrgService {
 	@DataFilter(subDept = true, user = false)
 	@Override
 	public List<SysOrgEntity> queryList(Map<String, Object> params) {
-		List<SysOrgEntity> sysOrgList = sysOrgManager.listOrg();
+		Query form = new Query(params);
+		List<SysOrgEntity> sysOrgList = sysOrgManager.listOrg(form);
 		return sysOrgList;
 	}
 

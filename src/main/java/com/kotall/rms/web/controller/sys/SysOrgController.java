@@ -40,7 +40,7 @@ public class SysOrgController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public List<SysOrgEntity> list() {
-		List<SysOrgEntity> sysOrgList = this.sysOrgService.queryList(new HashMap<String, Object>());
+		List<SysOrgEntity> sysOrgList = this.sysOrgService.queryList(new HashMap<>());
 		return sysOrgList;
 	}
 	

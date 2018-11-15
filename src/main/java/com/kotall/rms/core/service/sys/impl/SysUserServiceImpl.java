@@ -7,6 +7,7 @@ import com.kotall.rms.common.utils.MD5Utils;
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.common.entity.sys.SysUserTokenEntity;
 import com.kotall.rms.core.annotation.DataFilter;
+import com.kotall.rms.core.constants.Constant;
 import com.kotall.rms.core.manager.sys.SysUserManager;
 import com.kotall.rms.core.service.sys.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,12 +70,11 @@ public class SysUserServiceImpl implements SysUserService {
 	@Override
 	public Set<String> listUserPerms(Long userId) {
 		Set<String> perms;
-		if (1L == userId) {
+		if (Constant.SUPER_ADMIN == userId) {
 			perms = sysUserManager.listUserPerms(null);
 		} else {
 			perms = sysUserManager.listUserPerms(userId);
 		}
-
 		return perms;
 	}
 

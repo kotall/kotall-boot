@@ -1,7 +1,9 @@
 package com.kotall.rms.core.manager.sys.impl;
 
 import java.util.List;
+import java.util.Map;
 
+import com.kotall.rms.common.utils.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,8 +29,8 @@ public class SysOrgManagerImpl implements SysOrgManager {
 	private SysRoleOrgMapper sysRoleOrgMapper;
 	
 	@Override
-	public List<SysOrgEntity> listOrg() {
-		return sysOrgMapper.list();
+	public List<SysOrgEntity> listOrg(Query query) {
+		return sysOrgMapper.list(query);
 	}
 
 	@Override

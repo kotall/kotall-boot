@@ -39,7 +39,7 @@
 				AND result.role_name LIKE concat('%',#{roleName},'%')
 			</if>
 			<if test="sql_filter != null and sql_filter.trim() !='' ">
-				AND #{sql_filter}
+				AND ${sql_filter}
 			</if>
 		</where>
 		ORDER BY

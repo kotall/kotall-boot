@@ -33,7 +33,7 @@
 				OR u.mobile LIKE concat('%',#{username},'%') 
 			</if>
 			<if test="sql_filter != null and sql_filter.trim() !='' ">
-				AND #{sql_filter}
+				AND ${sql_filter}
 			</if>
 		</where>
 		ORDER BY 
