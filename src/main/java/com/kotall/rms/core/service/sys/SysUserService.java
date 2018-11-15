@@ -15,6 +15,11 @@ import java.util.Set;
  */
 public interface SysUserService {
 
+	/**
+	 * 应根据当前用户所属的机构
+	 * @param params
+	 * @return
+	 */
 	Page<SysUserEntity> listUser(Map<String, Object> params);
 	
 	int saveUser(SysUserEntity user);

@@ -82,11 +82,11 @@ var vm = new Vue({
 						dialogMsg('新密码为空！');
 						return false;
 					}
-					var data = "pswd=" + vm.pswd + "&newPswd="
+					var data = "pwd=" + vm.pswd + "&newPwd="
 							+ vm.newPswd;
 					$.ajax({
 						type : "POST",
-						url : "sys/user/updatePswd?_" + $.now(),
+						url : "sys/user/updatePwd?_" + $.now(),
 						data : data,
 						dataType : "json",
 						success : function(result) {

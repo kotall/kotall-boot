@@ -37,6 +37,7 @@ public class SysUserController extends AbstractController {
 //		if(getUserId() != SUPER_ADMIN) {
 //			params.put("userIdCreate", getUserId());
 //		}
+		params.put("userId", getUserId());
 		return sysUserService.listUser(params);
 	}
 	
@@ -108,18 +109,18 @@ public class SysUserController extends AbstractController {
 	
 	/**
 	 * 用户修改密码
-	 * @param pswd
-	 * @param newPswd
+	 * @param pwd
+	 * @param newPwd
 	 * @return
 	 */
 	@SysLog("修改密码")
-	@RequestMapping("/updatePswd")
-	public Result updatePswdByUser(String pswd, String newPswd) {
+	@RequestMapping("/updatePwd")
+	public Result updatePwdByUser(String pwd, String newPwd) {
 		SysUserEntity user = getUser();
 		// 原密码
-		user.setPassword(pswd);
+		user.setPassword(pwd);
 		// 邮箱临时存储新密码
-		user.setEmail(newPswd);
+		user.setEmail(newPwd);
 		int count = sysUserService.updatePwdByUser(user);
 		return ResultKit.msg(count);
 	}
@@ -155,7 +156,7 @@ public class SysUserController extends AbstractController {
 	 */
 	@SysLog("重置密码")
 	@RequestMapping("/reset")
-	public Result updatePswd(@RequestBody SysUserEntity user) {
+	public Result updatePwd(@RequestBody SysUserEntity user) {
 		int count = sysUserService.updatePwd(user);
 		return ResultKit.msg(count);
 	}
