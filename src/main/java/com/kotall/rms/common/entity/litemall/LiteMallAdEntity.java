@@ -1,5 +1,7 @@
 package com.kotall.rms.common.entity.litemall;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,6 +14,7 @@ import java.util.Date;
  * @email kotall@admin.com
  * @date 2018年11月13日 下午6:08:21
  */
+@Data
 public class LiteMallAdEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -75,106 +78,10 @@ public class LiteMallAdEntity implements Serializable {
 	 * 逻辑删除
 	 */
 	private Integer deleted;
-	
 
-	public LiteMallAdEntity() {
-		super();
-	}
+	/**
+	 * 店铺ID
+	 */
+	private Integer storeId;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setLink(String link) {
-		this.link = link;
-	}
-	
-	public String getLink() {
-		return link;
-	}
-	
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	
-	public String getUrl() {
-		return url;
-	}
-	
-	public void setPosition(Integer position) {
-		this.position = position;
-	}
-	
-	public Integer getPosition() {
-		return position;
-	}
-	
-	public void setContent(String content) {
-		this.content = content;
-	}
-	
-	public String getContent() {
-		return content;
-	}
-	
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-	
-	public Date getStartTime() {
-		return startTime;
-	}
-	
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
-	
-	public Date getEndTime() {
-		return endTime;
-	}
-	
-	public void setEnabled(Integer enabled) {
-		this.enabled = enabled;
-	}
-	
-	public Integer getEnabled() {
-		return enabled;
-	}
-	
-	public void setAddTime(Date addTime) {
-		this.addTime = addTime;
-	}
-	
-	public Date getAddTime() {
-		return addTime;
-	}
-	
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-	
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	
-	public void setDeleted(Integer deleted) {
-		this.deleted = deleted;
-	}
-	
-	public Integer getDeleted() {
-		return deleted;
-	}
-	
 }

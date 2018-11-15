@@ -1,5 +1,7 @@
 package com.kotall.rms.common.entity.litemall;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,6 +14,7 @@ import java.util.Date;
  * @email kotall@admin.com
  * @date 2018年11月13日 下午6:32:18
  */
+@Data
 public class LiteMallGrouponEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -70,98 +73,10 @@ public class LiteMallGrouponEntity implements Serializable {
 	 * 逻辑删除
 	 */
 	private Integer deleted;
-	
 
-	public LiteMallGrouponEntity() {
-		super();
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
-	}
-	
-	public Integer getOrderId() {
-		return orderId;
-	}
-	
-	public void setGrouponId(Integer grouponId) {
-		this.grouponId = grouponId;
-	}
-	
-	public Integer getGrouponId() {
-		return grouponId;
-	}
-	
-	public void setRulesId(Integer rulesId) {
-		this.rulesId = rulesId;
-	}
-	
-	public Integer getRulesId() {
-		return rulesId;
-	}
-	
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-	
-	public Integer getUserId() {
-		return userId;
-	}
-	
-	public void setCreatorUserId(Integer creatorUserId) {
-		this.creatorUserId = creatorUserId;
-	}
-	
-	public Integer getCreatorUserId() {
-		return creatorUserId;
-	}
-	
-	public void setAddTime(Date addTime) {
-		this.addTime = addTime;
-	}
-	
-	public Date getAddTime() {
-		return addTime;
-	}
-	
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-	
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	
-	public void setShareUrl(String shareUrl) {
-		this.shareUrl = shareUrl;
-	}
-	
-	public String getShareUrl() {
-		return shareUrl;
-	}
-	
-	public void setPayed(Integer payed) {
-		this.payed = payed;
-	}
-	
-	public Integer getPayed() {
-		return payed;
-	}
-	
-	public void setDeleted(Integer deleted) {
-		this.deleted = deleted;
-	}
-	
-	public Integer getDeleted() {
-		return deleted;
-	}
+	/**
+	 * 店铺ID
+	 */
+	private Integer storeId;
 	
 }

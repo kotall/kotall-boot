@@ -1,5 +1,7 @@
 package com.kotall.rms.common.entity.litemall;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,6 +14,7 @@ import java.util.Date;
  * @email kotall@admin.com
  * @date 2018年11月13日 下午4:12:36
  */
+@Data
 public class LiteMallCategoryEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -75,106 +78,9 @@ public class LiteMallCategoryEntity implements Serializable {
 	 * 逻辑删除
 	 */
 	private Integer deleted;
-	
 
-	public LiteMallCategoryEntity() {
-		super();
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setKeywords(String keywords) {
-		this.keywords = keywords;
-	}
-	
-	public String getKeywords() {
-		return keywords;
-	}
-	
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-	
-	public String getDesc() {
-		return desc;
-	}
-	
-	public void setPid(Integer pid) {
-		this.pid = pid;
-	}
-	
-	public Integer getPid() {
-		return pid;
-	}
-	
-	public void setIconUrl(String iconUrl) {
-		this.iconUrl = iconUrl;
-	}
-	
-	public String getIconUrl() {
-		return iconUrl;
-	}
-	
-	public void setPicUrl(String picUrl) {
-		this.picUrl = picUrl;
-	}
-	
-	public String getPicUrl() {
-		return picUrl;
-	}
-	
-	public void setLevel(String level) {
-		this.level = level;
-	}
-	
-	public String getLevel() {
-		return level;
-	}
-	
-	public void setSortOrder(Integer sortOrder) {
-		this.sortOrder = sortOrder;
-	}
-	
-	public Integer getSortOrder() {
-		return sortOrder;
-	}
-	
-	public void setAddTime(Date addTime) {
-		this.addTime = addTime;
-	}
-	
-	public Date getAddTime() {
-		return addTime;
-	}
-	
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-	
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	
-	public void setDeleted(Integer deleted) {
-		this.deleted = deleted;
-	}
-	
-	public Integer getDeleted() {
-		return deleted;
-	}
-	
+	/**
+	 * 店铺ID
+	 */
+	private Integer storeId;
 }

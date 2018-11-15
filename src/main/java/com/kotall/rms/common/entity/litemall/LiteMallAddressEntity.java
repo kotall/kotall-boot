@@ -1,5 +1,7 @@
 package com.kotall.rms.common.entity.litemall;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,6 +14,7 @@ import java.util.Date;
  * @email kotall@admin.com
  * @date 2018年11月13日 上午11:28:53
  */
+@Data
 public class LiteMallAddressEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -75,106 +78,10 @@ public class LiteMallAddressEntity implements Serializable {
 	 * 逻辑删除
 	 */
 	private Integer deleted;
-	
 
-	public LiteMallAddressEntity() {
-		super();
-	}
+	/**
+	 * 店铺ID
+	 */
+	private Integer storeId;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-	
-	public Integer getUserId() {
-		return userId;
-	}
-	
-	public void setProvinceId(Integer provinceId) {
-		this.provinceId = provinceId;
-	}
-	
-	public Integer getProvinceId() {
-		return provinceId;
-	}
-	
-	public void setCityId(Integer cityId) {
-		this.cityId = cityId;
-	}
-	
-	public Integer getCityId() {
-		return cityId;
-	}
-	
-	public void setAreaId(Integer areaId) {
-		this.areaId = areaId;
-	}
-	
-	public Integer getAreaId() {
-		return areaId;
-	}
-	
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	
-	public String getAddress() {
-		return address;
-	}
-	
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-	
-	public String getMobile() {
-		return mobile;
-	}
-	
-	public void setIsDefault(Integer isDefault) {
-		this.isDefault = isDefault;
-	}
-	
-	public Integer getIsDefault() {
-		return isDefault;
-	}
-	
-	public void setAddTime(Date addTime) {
-		this.addTime = addTime;
-	}
-	
-	public Date getAddTime() {
-		return addTime;
-	}
-	
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-	
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	
-	public void setDeleted(Integer deleted) {
-		this.deleted = deleted;
-	}
-	
-	public Integer getDeleted() {
-		return deleted;
-	}
-	
 }

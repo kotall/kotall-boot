@@ -1,5 +1,7 @@
 package com.kotall.rms.common.entity.litemall;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,6 +15,7 @@ import java.util.Date;
  * @email kotall@admin.com
  * @date 2018年11月13日 下午4:22:38
  */
+@Data
 public class LiteMallOrderEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -146,218 +149,9 @@ public class LiteMallOrderEntity implements Serializable {
 	 * 逻辑删除
 	 */
 	private Integer deleted;
-	
 
-	public LiteMallOrderEntity() {
-		super();
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-	
-	public Integer getUserId() {
-		return userId;
-	}
-	
-	public void setOrderSn(String orderSn) {
-		this.orderSn = orderSn;
-	}
-	
-	public String getOrderSn() {
-		return orderSn;
-	}
-	
-	public void setOrderStatus(Integer orderStatus) {
-		this.orderStatus = orderStatus;
-	}
-	
-	public Integer getOrderStatus() {
-		return orderStatus;
-	}
-	
-	public void setConsignee(String consignee) {
-		this.consignee = consignee;
-	}
-	
-	public String getConsignee() {
-		return consignee;
-	}
-	
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-	
-	public String getMobile() {
-		return mobile;
-	}
-	
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	
-	public String getAddress() {
-		return address;
-	}
-	
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	
-	public String getMessage() {
-		return message;
-	}
-	
-	public void setGoodsPrice(BigDecimal goodsPrice) {
-		this.goodsPrice = goodsPrice;
-	}
-	
-	public BigDecimal getGoodsPrice() {
-		return goodsPrice;
-	}
-	
-	public void setFreightPrice(BigDecimal freightPrice) {
-		this.freightPrice = freightPrice;
-	}
-	
-	public BigDecimal getFreightPrice() {
-		return freightPrice;
-	}
-	
-	public void setCouponPrice(BigDecimal couponPrice) {
-		this.couponPrice = couponPrice;
-	}
-	
-	public BigDecimal getCouponPrice() {
-		return couponPrice;
-	}
-	
-	public void setIntegralPrice(BigDecimal integralPrice) {
-		this.integralPrice = integralPrice;
-	}
-	
-	public BigDecimal getIntegralPrice() {
-		return integralPrice;
-	}
-	
-	public void setGrouponPrice(BigDecimal grouponPrice) {
-		this.grouponPrice = grouponPrice;
-	}
-	
-	public BigDecimal getGrouponPrice() {
-		return grouponPrice;
-	}
-	
-	public void setOrderPrice(BigDecimal orderPrice) {
-		this.orderPrice = orderPrice;
-	}
-	
-	public BigDecimal getOrderPrice() {
-		return orderPrice;
-	}
-	
-	public void setActualPrice(BigDecimal actualPrice) {
-		this.actualPrice = actualPrice;
-	}
-	
-	public BigDecimal getActualPrice() {
-		return actualPrice;
-	}
-	
-	public void setPayId(String payId) {
-		this.payId = payId;
-	}
-	
-	public String getPayId() {
-		return payId;
-	}
-	
-	public void setPayTime(Date payTime) {
-		this.payTime = payTime;
-	}
-	
-	public Date getPayTime() {
-		return payTime;
-	}
-	
-	public void setShipSn(String shipSn) {
-		this.shipSn = shipSn;
-	}
-	
-	public String getShipSn() {
-		return shipSn;
-	}
-	
-	public void setShipChannel(String shipChannel) {
-		this.shipChannel = shipChannel;
-	}
-	
-	public String getShipChannel() {
-		return shipChannel;
-	}
-	
-	public void setShipTime(Date shipTime) {
-		this.shipTime = shipTime;
-	}
-	
-	public Date getShipTime() {
-		return shipTime;
-	}
-	
-	public void setConfirmTime(Date confirmTime) {
-		this.confirmTime = confirmTime;
-	}
-	
-	public Date getConfirmTime() {
-		return confirmTime;
-	}
-	
-	public void setComments(Integer comments) {
-		this.comments = comments;
-	}
-	
-	public Integer getComments() {
-		return comments;
-	}
-	
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
-	
-	public Date getEndTime() {
-		return endTime;
-	}
-	
-	public void setAddTime(Date addTime) {
-		this.addTime = addTime;
-	}
-	
-	public Date getAddTime() {
-		return addTime;
-	}
-	
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-	
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	
-	public void setDeleted(Integer deleted) {
-		this.deleted = deleted;
-	}
-	
-	public Integer getDeleted() {
-		return deleted;
-	}
-	
+	/**
+	 * 店铺ID
+	 */
+	private Integer storeId;
 }
