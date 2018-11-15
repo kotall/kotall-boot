@@ -52,6 +52,6 @@ public class LiteMallIssueEntity implements Serializable {
 	/**
 	 * 店铺ID
 	 */
-	private Integer storeId;
+	private Long storeId;
 	
 }

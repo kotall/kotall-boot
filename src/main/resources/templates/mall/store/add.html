@@ -9,67 +9,57 @@
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="店铺名称" v-model="liteMallStore.name" isvalid="yes" checkexpession="NotNull">
 	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">店铺状态 0:关闭1:运营中 2:暂停营业<font face="宋体">*</font></td>
-	            <td class="formValue">
+				<td class="formTitle">店铺状态<font face="宋体">*</font></td>
+				<td class="formValue">
 					<input type="text" class="form-control" placeholder="店铺状态 0:关闭1:运营中 2:暂停营业" v-model="liteMallStore.status" isvalid="yes" checkexpession="NotNull">
-	            </td>
+				</td>
         	</tr>
 			<tr>
 	            <td class="formTitle">店铺类型<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="店铺类型" v-model="liteMallStore.type" isvalid="yes" checkexpession="NotNull">
 	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">主营业务<font face="宋体">*</font></td>
-	            <td class="formValue">
+				<td class="formTitle">主营业务<font face="宋体">*</font></td>
+				<td class="formValue">
 					<input type="text" class="form-control" placeholder="主营业务" v-model="liteMallStore.mainBuz" isvalid="yes" checkexpession="NotNull">
-	            </td>
+				</td>
         	</tr>
 			<tr>
 	            <td class="formTitle">店铺招牌<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="店铺招牌" v-model="liteMallStore.brand" isvalid="yes" checkexpession="NotNull">
 	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">店铺地址<font face="宋体">*</font></td>
-	            <td class="formValue">
+				<td class="formTitle">店铺地址<font face="宋体">*</font></td>
+				<td class="formValue">
 					<input type="text" class="form-control" placeholder="店铺地址" v-model="liteMallStore.address" isvalid="yes" checkexpession="NotNull">
-	            </td>
+				</td>
         	</tr>
 			<tr>
 	            <td class="formTitle">店铺位置X<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="店铺位置X" v-model="liteMallStore.locationX" isvalid="yes" checkexpession="NotNull">
 	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">店铺位置Y<font face="宋体">*</font></td>
-	            <td class="formValue">
+				<td class="formTitle">店铺位置Y<font face="宋体">*</font></td>
+				<td class="formValue">
 					<input type="text" class="form-control" placeholder="店铺位置Y" v-model="liteMallStore.locationY" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">店主ID<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="店主ID" v-model="liteMallStore.userId" isvalid="yes" checkexpession="NotNull">
-	            </td>
+				</td>
         	</tr>
 			<tr>
 	            <td class="formTitle">联系人<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="联系人" v-model="liteMallStore.contactMan" isvalid="yes" checkexpession="NotNull">
 	            </td>
+				<td class="formTitle">联系电话<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="联系电话" v-model="liteMallStore.contactPhone" isvalid="yes" checkexpession="NotNull">
+				</td>
         	</tr>
 			<tr>
-	            <td class="formTitle">联系电话<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="联系电话" v-model="liteMallStore.contactPhone" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
+				<td class="formTitle">店主姓名<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="店主ID" v-model="liteMallStore.userId" isvalid="yes" checkexpession="NotNull">
+				</td>
+			</tr>
 		</table>
 	</div>
 	<div th:include="include/footer_js::footer"></div>

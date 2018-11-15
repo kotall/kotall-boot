@@ -23,7 +23,8 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
-			{field : "name", title : "店铺名称", width : "100px"}, 
+			{field : "userName", title : "店主姓名", width : "100px"},
+			{field : "name", title : "店铺名称", width : "100px"},
 			{field : "status", title : "店铺状态", width : "100px"},
 			{field : "type", title : "店铺类型", width : "100px"}, 
 			{field : "mainBuz", title : "主营业务", width : "100px"}, 
@@ -51,8 +52,8 @@ var vm = new Vue({
 			dialogOpen({
 				title: '新增店铺表 ',
 				url: 'mall/store/add.html?_' + $.now(),
-				width: '420px',
-				height: '350px',
+				width: '600px',
+				height: '420px',
 				yes : function(iframeId) {
 					top.frames[iframeId].vm.acceptClick();
 				},
@@ -64,8 +65,8 @@ var vm = new Vue({
 				dialogOpen({
 					title: '编辑店铺表 ',
 					url: 'mall/store/edit.html?_' + $.now(),
-					width: '420px',
-					height: '350px',
+					width: '600px',
+					height: '420px',
 					success: function(iframeId){
 						top.frames[iframeId].vm.liteMallStore.id = ck[0].id;
 						top.frames[iframeId].vm.setForm();

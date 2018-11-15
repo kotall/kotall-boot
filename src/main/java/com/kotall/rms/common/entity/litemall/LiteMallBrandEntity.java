@@ -63,6 +63,6 @@ public class LiteMallBrandEntity implements Serializable {
 	/**
 	 * 逻辑删除
 	 */
-	private Integer deleted;
+	private Long deleted;
 
 }

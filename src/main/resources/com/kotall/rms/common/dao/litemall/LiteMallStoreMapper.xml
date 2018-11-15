@@ -6,7 +6,16 @@
 	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallStoreEntity">
 		SELECT
 			`id`, 
-			`name`, 
+			`user_id`,
+			(
+				SELECT
+					name
+				FROM
+					sys_user u
+				WHERE
+					u.user_id = s.user_id
+			) AS `userName`,
+			`name`,
 			`status`, 
 			`type`, 
 			`main_buz`, 
@@ -14,21 +23,20 @@
 			`address`, 
 			`location_x`, 
 			`location_y`, 
-			`user_id`, 
-			`contact_man`, 
+			`contact_man`,
 			`contact_phone`, 
 			`CREATE_TIME`, 
 			`UPDATE_TIME`
 		FROM
-			lite_mall_store
+			lite_mall_store s
 		ORDER BY
 			id DESC
 	</select>
 	
 	<insert id="save">
 		INSERT INTO lite_mall_store (
-			`name`, 
-			`status`, 
+			`name`,
+			`status`,
 			`type`, 
 			`main_buz`, 
 			`brand`, 
@@ -42,8 +50,8 @@
 			`UPDATE_TIME`
 		)
 		VALUES (
-			#{name}, 
-			#{status}, 
+			#{name},
+			#{status},
 			#{type}, 
 			#{mainBuz}, 
 			#{brand}, 
@@ -61,7 +69,16 @@
 	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallStoreEntity">
 		SELECT
 			`id`, 
-			`name`, 
+			`user_id`,
+			(
+				SELECT
+					name
+				FROM
+					sys_user u
+				WHERE
+					u.user_id = s.user_id
+			) AS `userName`,
+			`name`,
 			`status`, 
 			`type`, 
 			`main_buz`, 
@@ -69,13 +86,12 @@
 			`address`, 
 			`location_x`, 
 			`location_y`, 
-			`user_id`, 
-			`contact_man`, 
+			`contact_man`,
 			`contact_phone`, 
 			`CREATE_TIME`, 
 			`UPDATE_TIME`
 		FROM
-			lite_mall_store
+			lite_mall_store s
 		WHERE
 			id = #{id}
 	</select>
@@ -83,6 +99,7 @@
 	<update id="update">
 		UPDATE lite_mall_store
 	 	<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
 			<if test="name != null">`name` = #{name}, </if>
 			<if test="status != null">`status` = #{status}, </if>
 			<if test="type != null">`type` = #{type}, </if>
@@ -91,7 +108,6 @@
 			<if test="address != null">`address` = #{address}, </if>
 			<if test="locationX != null">`location_x` = #{locationX}, </if>
 			<if test="locationY != null">`location_y` = #{locationY}, </if>
-			<if test="userId != null">`user_id` = #{userId}, </if>
 			<if test="contactMan != null">`contact_man` = #{contactMan}, </if>
 			<if test="contactPhone != null">`contact_phone` = #{contactPhone}, </if>
 			<if test="createTime != null">`CREATE_TIME` = #{createTime}, </if>
