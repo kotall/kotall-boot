@@ -34,9 +34,9 @@ public class SysUserController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<SysUserEntity> list(@RequestBody Map<String, Object> params) {
-		if(getUserId() != SUPER_ADMIN) {
-			params.put("userIdCreate", getUserId());
-		}
+//		if(getUserId() != SUPER_ADMIN) {
+//			params.put("userIdCreate", getUserId());
+//		}
 		return sysUserService.listUser(params);
 	}
 	

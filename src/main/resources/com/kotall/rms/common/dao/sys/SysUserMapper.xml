@@ -143,12 +143,12 @@
 		</foreach>
 	</delete>
 	
-	<update id="updatePswdByUser">
+	<update id="updatePasswordByUser">
 		UPDATE sys_user
 		SET
-			password = #{newPswd}
+			password = #{newPassword}
 		WHERE
-			user_id = #{userId} AND password = #{pswd}
+			user_id = #{userId} AND password = #{password}
 	</update>
 	
 	<update id="updateUserStatus">
@@ -162,7 +162,7 @@
 		</foreach> 
 	</update>
 	
-	<update id="updatePswd">
+	<update id="updatePassword">
 		UPDATE sys_user
 		SET
 			password = #{password}

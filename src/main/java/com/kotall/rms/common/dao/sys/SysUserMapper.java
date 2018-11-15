@@ -21,10 +21,10 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
 	
 	List<Long> listAllOrgId(Long userId);
 	
-	int updatePswdByUser(Query query);
+	int updatePasswordByUser(Query query);
 	
 	int updateUserStatus(Query query);
 	
-	int updatePswd(SysUserEntity user);
+	int updatePassword(SysUserEntity user);
 	
 }

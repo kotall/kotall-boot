@@ -133,7 +133,7 @@ public class SysUserManagerImpl implements SysUserManager {
 
     @Override
     public int updatePwdByUser(Query query) {
-        return sysUserMapper.updatePswdByUser(query);
+        return sysUserMapper.updatePasswordByUser(query);
     }
 
     @Override
@@ -156,7 +156,7 @@ public class SysUserManagerImpl implements SysUserManager {
 
     @Override
     public int updatePwd(SysUserEntity user) {
-        return sysUserMapper.updatePswd(user);
+        return sysUserMapper.updatePassword(user);
     }
 
     @Override

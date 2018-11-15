@@ -85,8 +85,8 @@ public class SysUserServiceImpl implements SysUserService {
 		newPwd = MD5Utils.encrypt(username, newPwd);
 		Query query = new Query();
 		query.put("userId", user.getUserId());
-		query.put("pswd", pwd);
-		query.put("newPswd", newPwd);
+		query.put("password", pwd);
+		query.put("newPassword", newPwd);
 		int count = sysUserManager.updatePwdByUser(query);
 		if(count < 1) {
 			throw new RmsException("原密码错误");
