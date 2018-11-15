@@ -16,6 +16,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -29,6 +30,7 @@ import java.util.Set;
  * @author aracwong
  * @since 2017年8月28日 上午11:07:35
  */
+@Order(value = 0)
 @Aspect
 @Component
 public class DataFilterAspect {

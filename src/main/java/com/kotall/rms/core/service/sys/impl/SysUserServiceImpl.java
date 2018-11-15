@@ -31,9 +31,9 @@ public class SysUserServiceImpl implements SysUserService {
 	@DataFilter(subDept = true, user = false)
 	@Override
 	public Page<SysUserEntity> listUser(Map<String, Object> params) {
-		Query form = new Query(params);
-		Page<SysUserEntity> page = new Page<>(form);
-		sysUserManager.listUser(page, form);
+		Query query = new Query(params);
+		Page<SysUserEntity> page = new Page<>(query);
+		sysUserManager.listUser(page, query);
 		return page;
 	}
 
