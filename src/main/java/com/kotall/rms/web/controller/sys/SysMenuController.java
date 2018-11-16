@@ -44,7 +44,6 @@ public class SysMenuController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public List<SysMenuEntity> listMenu(@RequestParam Map<String, Object> params) {
-		params.put("userId", getUserId());
 		// 数据权限控制
 		return sysMenuService.listMenu(params);
 	}

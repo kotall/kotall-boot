@@ -31,7 +31,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 		return menuList;
 	}
 
-	@DataFilter(subDept = true, user = false)
+	//@DataFilter(subDept = true, user = false)
 	@Override
 	public List<SysMenuEntity> listMenu(Map<String, Object> params) {
 		Query query = new Query(params);
