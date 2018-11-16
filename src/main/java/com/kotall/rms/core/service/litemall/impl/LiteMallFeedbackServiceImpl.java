@@ -2,6 +2,7 @@ package com.kotall.rms.core.service.litemall.impl;
 
 import java.util.Map;
 
+import com.kotall.rms.core.annotation.StoreFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class LiteMallFeedbackServiceImpl implements LiteMallFeedbackService {
 	@Autowired
 	private LiteMallFeedbackManager liteMallFeedbackManager;
 
+	@StoreFilter
 	@Override
 	public Page<LiteMallFeedbackEntity> listLiteMallFeedback(Map<String, Object> params) {
 		Query query = new Query(params);

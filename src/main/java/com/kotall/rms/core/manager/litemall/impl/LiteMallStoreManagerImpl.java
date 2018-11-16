@@ -50,5 +50,9 @@ public class LiteMallStoreManagerImpl implements LiteMallStoreManager {
 		int count = liteMallStoreMapper.batchRemove(id);
 		return count;
 	}
-	
+
+	@Override
+	public List<Integer> queryStoreIdListByUserId(Long userId) {
+		return this.liteMallStoreMapper.queryStoreIdListByUserId(userId);
+	}
 }

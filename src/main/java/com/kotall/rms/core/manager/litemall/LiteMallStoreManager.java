@@ -24,5 +24,6 @@ public interface LiteMallStoreManager {
 	int updateLiteMallStore(LiteMallStoreEntity liteMallStore);
 	
 	int batchRemove(Long[] id);
-	
+
+    List<Integer> queryStoreIdListByUserId(Long userId);
 }

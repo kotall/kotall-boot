@@ -2,6 +2,7 @@ package com.kotall.rms.core.service.litemall.impl;
 
 import java.util.Map;
 
+import com.kotall.rms.core.annotation.StoreFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class LiteMallAddressServiceImpl implements LiteMallAddressService {
 	@Autowired
 	private LiteMallAddressManager liteMallAddressManager;
 
+	@StoreFilter
 	@Override
 	public Page<LiteMallAddressEntity> listLiteMallAddress(Map<String, Object> params) {
 		Query query = new Query(params);

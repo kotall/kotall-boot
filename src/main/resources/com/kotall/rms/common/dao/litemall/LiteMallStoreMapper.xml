@@ -29,6 +29,9 @@
 			`UPDATE_TIME`
 		FROM
 			lite_mall_store s
+		<if test="sql_filter != null and sql_filter.trim() !='' ">
+			WHERE ${sql_filter}
+		</if>
 		ORDER BY
 			id DESC
 	</select>
@@ -127,5 +130,16 @@
 			#{id}
 		</foreach>
 	</delete>
+
+	<select id="queryStoreIdListByUserId" resultType="int">
+		SELECT
+			`id`
+		FROM
+			lite_mall_store s
+		WHERE
+			s.user_id = #{id}
+		ORDER BY
+			id DESC
+	</select>
 
 </mapper>

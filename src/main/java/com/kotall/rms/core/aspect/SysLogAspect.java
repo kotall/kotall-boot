@@ -1,4 +1,4 @@
-package com.kotall.rms.core;
+package com.kotall.rms.core.aspect;
 
 import java.lang.reflect.Method;
 import java.util.Objects;

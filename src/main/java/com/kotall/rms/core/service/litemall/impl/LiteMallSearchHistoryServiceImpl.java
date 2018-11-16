@@ -2,6 +2,7 @@ package com.kotall.rms.core.service.litemall.impl;
 
 import java.util.Map;
 
+import com.kotall.rms.core.annotation.StoreFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class LiteMallSearchHistoryServiceImpl implements LiteMallSearchHistorySe
 	@Autowired
 	private LiteMallSearchHistoryManager liteMallSearchHistoryManager;
 
+	@StoreFilter
 	@Override
 	public Page<LiteMallSearchHistoryEntity> listLiteMallSearchHistory(Map<String, Object> params) {
 		Query query = new Query(params);

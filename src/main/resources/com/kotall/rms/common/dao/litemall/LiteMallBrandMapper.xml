@@ -16,6 +16,9 @@
 			`deleted`
 		FROM
 			lite_mall_brand
+		<if test="sql_filter != null and sql_filter.trim() !='' ">
+			WHERE ${sql_filter}
+		</if>
 		ORDER BY
 			id DESC
 	</select>

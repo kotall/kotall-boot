@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import com.kotall.rms.common.entity.litemall.LiteMallStoreEntity;
 import com.kotall.rms.common.dao.sys.BaseMapper;
 
+import java.util.List;
+
 /**
  * 店铺表 
  *
@@ -14,5 +16,7 @@ import com.kotall.rms.common.dao.sys.BaseMapper;
  */
 @Mapper
 public interface LiteMallStoreMapper extends BaseMapper<LiteMallStoreEntity> {
-	
+
+    List<Integer> queryStoreIdListByUserId(Long userId);
+
 }

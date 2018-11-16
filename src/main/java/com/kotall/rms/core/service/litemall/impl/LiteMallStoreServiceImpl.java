@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,4 +57,8 @@ public class LiteMallStoreServiceImpl implements LiteMallStoreService {
 		return count;
 	}
 
+	@Override
+	public List<Integer> queryStoreIdListByUserId(Long userId) {
+		return this.liteMallStoreManager.queryStoreIdListByUserId(userId);
+	}
 }
