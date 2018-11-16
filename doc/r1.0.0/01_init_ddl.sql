@@ -23,6 +23,7 @@ CREATE TABLE `lite_mall_store`(
 
 CREATE TABLE `lite_mall_ad` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `name` varchar(63) NOT NULL DEFAULT '' COMMENT '广告标题',
   `link` varchar(255) NOT NULL DEFAULT '' COMMENT '所广告的商品页面或者活动页面链接地址',
   `url` varchar(255) NOT NULL COMMENT '广告宣传图片',
@@ -48,6 +49,7 @@ DROP TABLE IF EXISTS `lite_mall_address`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_address` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `name` varchar(63) NOT NULL DEFAULT '' COMMENT '收货人名称',
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户表的用户ID',
   `province_id` int(11) NOT NULL DEFAULT '0' COMMENT '行政区域表的省ID',
@@ -73,6 +75,7 @@ DROP TABLE IF EXISTS `lite_mall_admin`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `username` varchar(63) NOT NULL DEFAULT '' COMMENT '管理员名称',
   `password` varchar(63) NOT NULL DEFAULT '' COMMENT '管理员密码',
   `last_login_ip` varchar(63) DEFAULT '' COMMENT '最近一次登录IP地址',
@@ -94,6 +97,7 @@ DROP TABLE IF EXISTS `lite_mall_brand`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_brand` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '品牌商名称',
   `desc` varchar(255) NOT NULL DEFAULT '' COMMENT '品牌商简介',
   `pic_url` varchar(255) NOT NULL DEFAULT '' COMMENT '品牌商页的品牌商图片',
@@ -115,6 +119,7 @@ DROP TABLE IF EXISTS `lite_mall_cart`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_cart` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `user_id` int(11) DEFAULT NULL COMMENT '用户表的用户ID',
   `goods_id` int(11) DEFAULT NULL COMMENT '商品表的商品ID',
   `goods_sn` varchar(63) DEFAULT NULL COMMENT '商品编号',
@@ -141,6 +146,7 @@ DROP TABLE IF EXISTS `lite_mall_category`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `name` varchar(63) NOT NULL DEFAULT '' COMMENT '类目名称',
   `keywords` varchar(1023) NOT NULL DEFAULT '' COMMENT '类目关键字，以JSON数组格式',
   `desc` varchar(255) DEFAULT '' COMMENT '类目广告语介绍',
@@ -166,6 +172,7 @@ DROP TABLE IF EXISTS `lite_mall_collect`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_collect` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户表的用户ID',
   `value_id` int(11) NOT NULL DEFAULT '0' COMMENT '如果type=0，则是商品ID；如果type=1，则是专题ID',
   `type` tinyint(3) NOT NULL DEFAULT '0' COMMENT '收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID',
@@ -187,6 +194,7 @@ DROP TABLE IF EXISTS `lite_mall_comment`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `value_id` int(11) NOT NULL DEFAULT '0' COMMENT '如果type=0，则是商品评论；如果是type=1，则是专题评论。',
   `type` tinyint(3) NOT NULL DEFAULT '0' COMMENT '评论类型，如果type=0，则是商品评论；如果是type=1，则是专题评论；如果type=3，则是订单商品评论。',
   `content` varchar(1023) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '评论内容',
@@ -211,6 +219,7 @@ DROP TABLE IF EXISTS `lite_mall_feedback`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_feedback` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户表的用户ID',
   `username` varchar(63) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '用户名称',
   `mobile` varchar(20) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '手机号',
@@ -236,6 +245,7 @@ DROP TABLE IF EXISTS `lite_mall_footprint`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_footprint` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户表的用户ID',
   `goods_id` int(11) NOT NULL DEFAULT '0' COMMENT '浏览商品ID',
   `add_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -254,6 +264,7 @@ DROP TABLE IF EXISTS `lite_mall_goods`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_goods` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `goods_sn` varchar(63) NOT NULL DEFAULT '' COMMENT '商品编号',
   `name` varchar(127) NOT NULL DEFAULT '' COMMENT '商品名称',
   `category_id` int(11) DEFAULT '0' COMMENT '商品所属类目ID',
@@ -291,6 +302,7 @@ DROP TABLE IF EXISTS `lite_mall_goods_attribute`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_goods_attribute` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `goods_id` int(11) NOT NULL DEFAULT '0' COMMENT '商品表的商品ID',
   `attribute` varchar(255) NOT NULL COMMENT '商品参数名称',
   `value` varchar(255) NOT NULL COMMENT '商品参数值',
@@ -311,6 +323,7 @@ DROP TABLE IF EXISTS `lite_mall_goods_product`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_goods_product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `goods_id` int(11) NOT NULL DEFAULT '0' COMMENT '商品表的商品ID',
   `specifications` varchar(1023) NOT NULL COMMENT '商品规格值列表，采用JSON数组格式',
   `price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '商品货品价格',
@@ -332,6 +345,7 @@ DROP TABLE IF EXISTS `lite_mall_goods_specification`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_goods_specification` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `goods_id` int(11) NOT NULL DEFAULT '0' COMMENT '商品表的商品ID',
   `specification` varchar(255) NOT NULL DEFAULT '' COMMENT '商品规格名称',
   `value` varchar(255) NOT NULL DEFAULT '' COMMENT '商品规格值',
@@ -353,6 +367,7 @@ DROP TABLE IF EXISTS `lite_mall_groupon`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_groupon` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `order_id` int(11) NOT NULL COMMENT '关联的订单ID',
   `groupon_id` int(11) DEFAULT '0' COMMENT '参与的团购ID，仅当user_type不是1',
   `rules_id` int(11) NOT NULL COMMENT '团购规则ID，关联litemall_groupon_rules表ID字段',
@@ -376,6 +391,7 @@ DROP TABLE IF EXISTS `lite_mall_groupon_rules`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_groupon_rules` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `goods_id` int(11) NOT NULL COMMENT '商品表的商品ID',
   `goods_name` varchar(127) NOT NULL COMMENT '商品名称',
   `pic_url` varchar(255) DEFAULT NULL COMMENT '商品图片或者商品货品图片',
@@ -398,6 +414,7 @@ DROP TABLE IF EXISTS `lite_mall_issue`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_issue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `question` varchar(255) DEFAULT NULL COMMENT '问题标题',
   `answer` varchar(255) DEFAULT NULL COMMENT '问题答案',
   `add_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -416,6 +433,7 @@ DROP TABLE IF EXISTS `lite_mall_keyword`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_keyword` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `keyword` varchar(127) NOT NULL DEFAULT '' COMMENT '关键字',
   `url` varchar(255) NOT NULL DEFAULT '' COMMENT '关键字的跳转链接',
   `is_hot` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否是热门关键字',
@@ -437,6 +455,7 @@ DROP TABLE IF EXISTS `lite_mall_order`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `user_id` int(11) NOT NULL COMMENT '用户表的用户ID',
   `order_sn` varchar(63) NOT NULL COMMENT '订单编号',
   `order_status` smallint(6) NOT NULL COMMENT '订单状态',
@@ -475,6 +494,7 @@ DROP TABLE IF EXISTS `lite_mall_order_goods`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_order_goods` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `order_id` int(11) NOT NULL DEFAULT '0' COMMENT '订单表的订单ID',
   `goods_id` int(11) NOT NULL DEFAULT '0' COMMENT '商品表的商品ID',
   `goods_name` varchar(127) NOT NULL DEFAULT '' COMMENT '商品名称',
@@ -523,6 +543,7 @@ DROP TABLE IF EXISTS `lite_mall_search_history`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_search_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `user_id` int(11) NOT NULL COMMENT '用户表的用户ID',
   `keyword` varchar(63) NOT NULL COMMENT '搜索关键字',
   `from` varchar(63) NOT NULL DEFAULT '' COMMENT '搜索来源，如pc、wx、app',
@@ -542,6 +563,7 @@ DROP TABLE IF EXISTS `lite_mall_storage`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_storage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `key` varchar(63) NOT NULL COMMENT '文件的唯一索引',
   `name` varchar(255) NOT NULL COMMENT '文件名',
   `type` varchar(20) NOT NULL COMMENT '文件类型',
@@ -581,6 +603,7 @@ DROP TABLE IF EXISTS `lite_mall_topic`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_topic` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `title` varchar(255) NOT NULL DEFAULT '''' COMMENT '专题标题',
   `subtitle` varchar(255) DEFAULT '''' COMMENT '专题子标题',
   `content` text COMMENT '专题内容，富文本格式',
@@ -606,6 +629,7 @@ DROP TABLE IF EXISTS `lite_mall_user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `username` varchar(63) NOT NULL COMMENT '用户名称',
   `password` varchar(63) NOT NULL DEFAULT '' COMMENT '用户密码',
   `gender` tinyint(3) NOT NULL DEFAULT '0' COMMENT '性别：0 未知， 1男， 1 女',
@@ -635,6 +659,7 @@ DROP TABLE IF EXISTS `lite_mall_user_formid`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lite_mall_user_formid` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL COMMENT '店铺ID',
   `formId` varchar(63) NOT NULL COMMENT '缓存的FormId',
   `isprepay` tinyint(1) NOT NULL COMMENT '是FormId还是prepayId',
   `useAmount` int(2) NOT NULL COMMENT '可用次数，fromId为1，prepay为3，用1次减1',
