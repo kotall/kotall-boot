@@ -12,7 +12,7 @@ CREATE TABLE `lite_mall_store`(
     `address` VARCHAR(32)  DEFAULT NULL  COMMENT '店铺地址' ,
     `location_x` VARCHAR(32) DEFAULT NULL   COMMENT '店铺位置X' ,
     `location_y` VARCHAR(32) DEFAULT NULL   COMMENT '店铺位置Y' ,
-    `user_id` INT    COMMENT DEFAULT NULL '店主用户ID' ,
+    `user_id` INT DEFAULT NULL COMMENT '店主用户ID' ,
     `contact_man` VARCHAR(32)  DEFAULT NULL  COMMENT '联系人' ,
     `contact_phone` VARCHAR(32) DEFAULT NULL   COMMENT '联系电话 18321669370' ,
     `CREATE_TIME` DATETIME  DEFAULT NULL  COMMENT '创建时间' ,
