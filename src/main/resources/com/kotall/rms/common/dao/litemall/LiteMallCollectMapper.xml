@@ -6,7 +6,8 @@
 	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallCollectEntity">
 		SELECT
 			`id`, 
-			`user_id`, 
+			`store_id`,
+			`user_id`,
 			`value_id`, 
 			`type`, 
 			`add_time`, 
@@ -23,16 +24,18 @@
 	
 	<insert id="save">
 		INSERT INTO lite_mall_collect (
-			`user_id`, 
-			`value_id`, 
+			`store_id`,
+			`user_id`,
+			`value_id`,
 			`type`, 
 			`add_time`, 
 			`update_time`, 
 			`deleted`
 		)
 		VALUES (
-			#{userId}, 
-			#{valueId}, 
+			#{storeId},
+			#{userId},
+			#{valueId},
 			#{type}, 
 			#{addTime}, 
 			#{updateTime}, 
@@ -43,7 +46,8 @@
 	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallCollectEntity">
 		SELECT
 			`id`, 
-			`user_id`, 
+			`store_id`,
+			`user_id`,
 			`value_id`, 
 			`type`, 
 			`add_time`, 
@@ -58,6 +62,7 @@
 	<update id="update">
 		UPDATE lite_mall_collect
 	 	<set>
+			<if test="storeId != null">`store_id` = #{storeId}, </if>
 			<if test="userId != null">`user_id` = #{userId}, </if>
 			<if test="valueId != null">`value_id` = #{valueId}, </if>
 			<if test="type != null">`type` = #{type}, </if>

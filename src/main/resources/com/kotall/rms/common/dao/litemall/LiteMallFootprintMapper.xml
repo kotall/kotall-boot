@@ -6,7 +6,8 @@
 	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallFootprintEntity">
 		SELECT
 			`id`, 
-			`user_id`, 
+			`store_id`,
+			`user_id`,
 			`goods_id`, 
 			`add_time`, 
 			`update_time`, 
@@ -22,15 +23,17 @@
 	
 	<insert id="save">
 		INSERT INTO lite_mall_footprint (
-			`user_id`, 
-			`goods_id`, 
+			`store_id`,
+			`user_id`,
+			`goods_id`,
 			`add_time`, 
 			`update_time`, 
 			`deleted`
 		)
 		VALUES (
-			#{userId}, 
-			#{goodsId}, 
+			#{storeId},
+			#{userId},
+			#{goodsId},
 			#{addTime}, 
 			#{updateTime}, 
 			#{deleted}
@@ -40,7 +43,8 @@
 	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallFootprintEntity">
 		SELECT
 			`id`, 
-			`user_id`, 
+			`store_id`,
+			`user_id`,
 			`goods_id`, 
 			`add_time`, 
 			`update_time`, 
@@ -54,6 +58,7 @@
 	<update id="update">
 		UPDATE lite_mall_footprint
 	 	<set>
+			<if test="storeId != null">`store_id` = #{storeId}, </if>
 			<if test="userId != null">`user_id` = #{userId}, </if>
 			<if test="goodsId != null">`goods_id` = #{goodsId}, </if>
 			<if test="addTime != null">`add_time` = #{addTime}, </if>

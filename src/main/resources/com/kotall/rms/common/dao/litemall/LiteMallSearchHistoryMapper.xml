@@ -6,7 +6,8 @@
 	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallSearchHistoryEntity">
 		SELECT
 			`id`, 
-			`user_id`, 
+			`store_id`,
+			`user_id`,
 			`keyword`, 
 			`from`, 
 			`add_time`, 
@@ -23,16 +24,18 @@
 	
 	<insert id="save">
 		INSERT INTO lite_mall_search_history (
-			`user_id`, 
-			`keyword`, 
+			`store_id`,
+			`user_id`,
+			`keyword`,
 			`from`, 
 			`add_time`, 
 			`update_time`, 
 			`deleted`
 		)
 		VALUES (
-			#{userId}, 
-			#{keyword}, 
+			#{storeId},
+			#{userId},
+			#{keyword},
 			#{from}, 
 			#{addTime}, 
 			#{updateTime}, 
@@ -42,8 +45,9 @@
 	
 	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallSearchHistoryEntity">
 		SELECT
-			`id`, 
-			`user_id`, 
+			`store_id`,
+			`id`,
+			`user_id`,
 			`keyword`, 
 			`from`, 
 			`add_time`, 
@@ -58,6 +62,7 @@
 	<update id="update">
 		UPDATE lite_mall_search_history
 	 	<set>
+			<if test="storeId != null">`store_id` = #{storeId}, </if>
 			<if test="userId != null">`user_id` = #{userId}, </if>
 			<if test="keyword != null">`keyword` = #{keyword}, </if>
 			<if test="from != null">`from` = #{from}, </if>

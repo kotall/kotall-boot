@@ -6,7 +6,8 @@
 	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity">
 		SELECT
 			`id`, 
-			`order_id`, 
+			`store_id`,
+			`order_id`,
 			`groupon_id`, 
 			`rules_id`, 
 			`user_id`, 
@@ -27,8 +28,9 @@
 	
 	<insert id="save">
 		INSERT INTO lite_mall_groupon (
-			`order_id`, 
-			`groupon_id`, 
+			`store_id`,
+			`order_id`,
+			`groupon_id`,
 			`rules_id`, 
 			`user_id`, 
 			`creator_user_id`, 
@@ -39,8 +41,9 @@
 			`deleted`
 		)
 		VALUES (
-			#{orderId}, 
-			#{grouponId}, 
+			#{storeId},
+			#{orderId},
+			#{grouponId},
 			#{rulesId}, 
 			#{userId}, 
 			#{creatorUserId}, 
@@ -55,7 +58,8 @@
 	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity">
 		SELECT
 			`id`, 
-			`order_id`, 
+			`store_id`,
+			`order_id`,
 			`groupon_id`, 
 			`rules_id`, 
 			`user_id`, 
@@ -74,6 +78,7 @@
 	<update id="update">
 		UPDATE lite_mall_groupon
 	 	<set>
+			<if test="storeId != null">`store_id` = #{storeId}, </if>
 			<if test="orderId != null">`order_id` = #{orderId}, </if>
 			<if test="grouponId != null">`groupon_id` = #{grouponId}, </if>
 			<if test="rulesId != null">`rules_id` = #{rulesId}, </if>

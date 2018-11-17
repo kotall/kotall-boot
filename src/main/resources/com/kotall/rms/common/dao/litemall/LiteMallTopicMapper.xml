@@ -6,7 +6,8 @@
 	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallTopicEntity">
 		SELECT
 			`id`, 
-			`title`, 
+			`store_id`,
+			`title`,
 			`subtitle`, 
 			`content`, 
 			`price`, 
@@ -28,8 +29,9 @@
 	
 	<insert id="save">
 		INSERT INTO lite_mall_topic (
-			`title`, 
-			`subtitle`, 
+			`store_id`,
+			`title`,
+			`subtitle`,
 			`content`, 
 			`price`, 
 			`read_count`, 
@@ -41,8 +43,9 @@
 			`deleted`
 		)
 		VALUES (
-			#{title}, 
-			#{subtitle}, 
+			#{storeId},
+			#{title},
+			#{subtitle},
 			#{content}, 
 			#{price}, 
 			#{readCount}, 
@@ -58,7 +61,8 @@
 	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallTopicEntity">
 		SELECT
 			`id`, 
-			`title`, 
+			`store_id`,
+			`title`,
 			`subtitle`, 
 			`content`, 
 			`price`, 
@@ -78,6 +82,7 @@
 	<update id="update">
 		UPDATE lite_mall_topic
 	 	<set>
+			<if test="storeId != null">`store_id` = #{storeId}, </if>
 			<if test="title != null">`title` = #{title}, </if>
 			<if test="subtitle != null">`subtitle` = #{subtitle}, </if>
 			<if test="content != null">`content` = #{content}, </if>

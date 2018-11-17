@@ -6,7 +6,8 @@
 	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserEntity">
 		SELECT
 			`id`, 
-			`username`, 
+			`store_id`,
+			`username`,
 			`password`, 
 			`gender`, 
 			`birthday`, 
@@ -32,8 +33,9 @@
 	
 	<insert id="save">
 		INSERT INTO lite_mall_user (
-			`username`, 
-			`password`, 
+			`store_id`,
+			`username`,
+			`password`,
 			`gender`, 
 			`birthday`, 
 			`last_login_time`, 
@@ -49,8 +51,9 @@
 			`deleted`
 		)
 		VALUES (
-			#{username}, 
-			#{password}, 
+			#{storeId},
+			#{username},
+			#{password},
 			#{gender}, 
 			#{birthday}, 
 			#{lastLoginTime}, 
@@ -70,7 +73,8 @@
 	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserEntity">
 		SELECT
 			`id`, 
-			`username`, 
+			`store_id`,
+			`username`,
 			`password`, 
 			`gender`, 
 			`birthday`, 
@@ -94,6 +98,7 @@
 	<update id="update">
 		UPDATE lite_mall_user
 	 	<set>
+			<if test="storeId != null">`store_id` = #{storeId}, </if>
 			<if test="username != null">`username` = #{username}, </if>
 			<if test="password != null">`password` = #{password}, </if>
 			<if test="gender != null">`gender` = #{gender}, </if>

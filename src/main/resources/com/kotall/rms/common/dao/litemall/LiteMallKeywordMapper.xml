@@ -6,7 +6,8 @@
 	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallKeywordEntity">
 		SELECT
 			`id`, 
-			`keyword`, 
+			`store_id`,
+			`keyword`,
 			`url`, 
 			`is_hot`, 
 			`is_default`, 
@@ -25,8 +26,9 @@
 	
 	<insert id="save">
 		INSERT INTO lite_mall_keyword (
-			`keyword`, 
-			`url`, 
+			`store_id`,
+			`keyword`,
+			`url`,
 			`is_hot`, 
 			`is_default`, 
 			`sort_order`, 
@@ -35,8 +37,9 @@
 			`deleted`
 		)
 		VALUES (
-			#{keyword}, 
-			#{url}, 
+			#{storeId},
+			#{keyword},
+			#{url},
 			#{isHot}, 
 			#{isDefault}, 
 			#{sortOrder}, 
@@ -49,7 +52,8 @@
 	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallKeywordEntity">
 		SELECT
 			`id`, 
-			`keyword`, 
+			`store_id`,
+			`keyword`,
 			`url`, 
 			`is_hot`, 
 			`is_default`, 
@@ -66,6 +70,7 @@
 	<update id="update">
 		UPDATE lite_mall_keyword
 	 	<set>
+			<if test="storeId != null">`store_id` = #{storeId}, </if>
 			<if test="keyword != null">`keyword` = #{keyword}, </if>
 			<if test="url != null">`url` = #{url}, </if>
 			<if test="isHot != null">`is_hot` = #{isHot}, </if>

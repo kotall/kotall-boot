@@ -6,7 +6,8 @@
 	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallBrandEntity">
 		SELECT
 			`id`, 
-			`name`, 
+			`store_id`,
+			`name`,
 			`desc`, 
 			`pic_url`, 
 			`sort_order`, 
@@ -25,8 +26,9 @@
 	
 	<insert id="save">
 		INSERT INTO lite_mall_brand (
-			`name`, 
-			`desc`, 
+			`store_id`,
+			`name`,
+			`desc`,
 			`pic_url`, 
 			`sort_order`, 
 			`floor_price`, 
@@ -35,8 +37,9 @@
 			`deleted`
 		)
 		VALUES (
-			#{name}, 
-			#{desc}, 
+			#{storeId},
+			#{name},
+			#{desc},
 			#{picUrl}, 
 			#{sortOrder}, 
 			#{floorPrice}, 
@@ -49,7 +52,8 @@
 	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallBrandEntity">
 		SELECT
 			`id`, 
-			`name`, 
+			`store_id`,
+			`name`,
 			`desc`, 
 			`pic_url`, 
 			`sort_order`, 
@@ -66,6 +70,7 @@
 	<update id="update">
 		UPDATE lite_mall_brand
 	 	<set>
+			<if test="storeId != null">`store_id` = #{storeId}, </if>
 			<if test="name != null">`name` = #{name}, </if>
 			<if test="desc != null">`desc` = #{desc}, </if>
 			<if test="picUrl != null">`pic_url` = #{picUrl}, </if>

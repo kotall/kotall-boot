@@ -6,7 +6,8 @@
 	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallCommentEntity">
 		SELECT
 			`id`, 
-			`value_id`, 
+			`store_id`,
+			`value_id`,
 			`type`, 
 			`content`, 
 			`user_id`, 
@@ -27,8 +28,9 @@
 	
 	<insert id="save">
 		INSERT INTO lite_mall_comment (
-			`value_id`, 
-			`type`, 
+			`store_id`,
+			`value_id`,
+			`type`,
 			`content`, 
 			`user_id`, 
 			`has_picture`, 
@@ -39,8 +41,9 @@
 			`deleted`
 		)
 		VALUES (
-			#{valueId}, 
-			#{type}, 
+			#{storeId},
+			#{valueId},
+			#{type},
 			#{content}, 
 			#{userId}, 
 			#{hasPicture}, 
@@ -55,7 +58,8 @@
 	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallCommentEntity">
 		SELECT
 			`id`, 
-			`value_id`, 
+			`store_id`,
+			`value_id`,
 			`type`, 
 			`content`, 
 			`user_id`, 
@@ -74,6 +78,7 @@
 	<update id="update">
 		UPDATE lite_mall_comment
 	 	<set>
+			<if test="storeId != null">`store_id` = #{storeId}, </if>
 			<if test="valueId != null">`value_id` = #{valueId}, </if>
 			<if test="type != null">`type` = #{type}, </if>
 			<if test="content != null">`content` = #{content}, </if>
