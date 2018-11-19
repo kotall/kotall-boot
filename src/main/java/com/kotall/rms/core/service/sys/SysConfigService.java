@@ -3,6 +3,8 @@ package com.kotall.rms.core.service.sys;
 import com.kotall.rms.common.entity.sys.SysConfigEntity;
 import com.kotall.rms.common.utils.Page;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,5 +33,5 @@ public interface SysConfigService {
      */
     String getValue(String key);
 
-
+    List<SysConfigEntity> queryAll(Map<String, Object> params);
 }

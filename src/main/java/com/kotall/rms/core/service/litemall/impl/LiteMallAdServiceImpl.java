@@ -1,5 +1,7 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.core.annotation.StoreFilter;
@@ -58,4 +60,12 @@ public class LiteMallAdServiceImpl implements LiteMallAdService {
 		return count;
 	}
 
+	@Override
+	public List<LiteMallAdEntity> queryIndex(Map<String, Object> params) {
+		params.put("position", 1);
+		params.put("deleted", 0);
+		params.put("enabled", 1);
+		Query query = new Query(params);
+		return this.liteMallAdManager.queryAdList(query);
+	}
 }

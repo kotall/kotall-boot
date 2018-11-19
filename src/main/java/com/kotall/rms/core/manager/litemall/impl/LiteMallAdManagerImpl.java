@@ -1,6 +1,7 @@
 package com.kotall.rms.core.manager.litemall.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,11 @@ public class LiteMallAdManagerImpl implements LiteMallAdManager {
 	@Override
 	public List<LiteMallAdEntity> listLiteMallAd(Page<LiteMallAdEntity> page, Query search) {
 		return liteMallAdMapper.listForPage(page, search);
+	}
+
+	@Override
+	public List<LiteMallAdEntity> queryAdList(Query search) {
+		return liteMallAdMapper.list(search);
 	}
 
 	@Override

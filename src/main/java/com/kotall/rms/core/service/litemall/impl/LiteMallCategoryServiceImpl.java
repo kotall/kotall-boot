@@ -1,7 +1,9 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.List;
 import java.util.Map;
 
+import com.kotall.rms.common.entity.litemall.LiteMallAdEntity;
 import com.kotall.rms.core.annotation.StoreFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,4 +60,11 @@ public class LiteMallCategoryServiceImpl implements LiteMallCategoryService {
 		return count;
 	}
 
+	@Override
+	public List<LiteMallCategoryEntity> queryChannel(Map<String, Object> params) {
+		params.put("level", "L1");
+		params.put("deleted", 0);
+		Query query = new Query(params);
+		return this.liteMallCategoryManager.queryChannel(query);
+	}
 }

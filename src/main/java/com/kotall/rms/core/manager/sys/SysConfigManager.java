@@ -26,4 +26,6 @@ public interface SysConfigManager {
 	int batchRemove(Long[] id);
 
 	SysConfigEntity queryByKey(String key);
+
+    List<SysConfigEntity> queryAll(Query query);
 }

@@ -2,6 +2,7 @@ package com.kotall.rms.core.manager.litemall;
 
 import java.util.List;
 
+import com.kotall.rms.common.entity.litemall.LiteMallAdEntity;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity;
@@ -24,5 +25,6 @@ public interface LiteMallCategoryManager {
 	int updateLiteMallCategory(LiteMallCategoryEntity liteMallCategory);
 	
 	int batchRemove(Long[] id);
-	
+
+    List<LiteMallCategoryEntity> queryChannel(Query query);
 }

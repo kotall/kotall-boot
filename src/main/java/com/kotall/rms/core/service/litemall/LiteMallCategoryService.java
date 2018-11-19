@@ -1,10 +1,10 @@
 package com.kotall.rms.core.service.litemall;
 
-import java.util.Map;
-
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity;
+import com.kotall.rms.common.utils.Page;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 类目表
@@ -24,5 +24,11 @@ public interface LiteMallCategoryService {
     int updateLiteMallCategory(LiteMallCategoryEntity liteMallCategory);
 
     int batchRemove(Long[] id);
-	
+
+    /**
+     * 查询栏目
+     * @param params
+     * @return
+     */
+    List<LiteMallCategoryEntity> queryChannel(Map<String, Object> params);
 }

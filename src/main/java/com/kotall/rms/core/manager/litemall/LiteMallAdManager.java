@@ -1,6 +1,7 @@
 package com.kotall.rms.core.manager.litemall;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Query;
@@ -24,5 +25,6 @@ public interface LiteMallAdManager {
 	int updateLiteMallAd(LiteMallAdEntity liteMallAd);
 	
 	int batchRemove(Long[] id);
-	
+
+	List<LiteMallAdEntity> queryAdList(Query search);
 }

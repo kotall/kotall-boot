@@ -2,6 +2,7 @@ package com.kotall.rms.core.manager.litemall.impl;
 
 import java.util.List;
 
+import com.kotall.rms.common.entity.litemall.LiteMallAdEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.kotall.rms.common.utils.Page;
@@ -50,5 +51,9 @@ public class LiteMallCategoryManagerImpl implements LiteMallCategoryManager {
 		int count = liteMallCategoryMapper.batchRemove(id);
 		return count;
 	}
-	
+
+	@Override
+	public List<LiteMallCategoryEntity> queryChannel(Query query) {
+		return this.liteMallCategoryMapper.list(query);
+	}
 }

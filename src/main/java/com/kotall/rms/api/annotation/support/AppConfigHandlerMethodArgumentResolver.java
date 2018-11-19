@@ -1,6 +1,7 @@
 package com.kotall.rms.api.annotation.support;
 
 import com.kotall.rms.api.annotation.AppConfig;
+import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
 import com.kotall.rms.core.service.litemall.LiteMallAppService;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -22,7 +23,7 @@ public class AppConfigHandlerMethodArgumentResolver implements HandlerMethodArgu
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterType().isAssignableFrom(Integer.class)&&parameter.hasParameterAnnotation(AppConfig.class);
+        return parameter.getParameterType().isAssignableFrom(LiteMallAppEntity.class) && parameter.hasParameterAnnotation(AppConfig.class);
     }
 
     @Override

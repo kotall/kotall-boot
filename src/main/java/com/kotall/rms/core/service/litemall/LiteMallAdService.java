@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
@@ -24,5 +25,10 @@ public interface LiteMallAdService {
     int updateLiteMallAd(LiteMallAdEntity liteMallAd);
 
     int batchRemove(Long[] id);
-	
+
+    /**
+     * 查询首页广告
+     * @return
+     */
+    List<LiteMallAdEntity> queryIndex(Map<String, Object> params);
 }

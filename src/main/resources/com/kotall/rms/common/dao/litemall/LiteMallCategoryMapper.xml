@@ -110,4 +110,29 @@
 		</foreach>
 	</delete>
 
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`name`,
+			`keywords`,
+			`desc`,
+			`pid`,
+			`icon_url`,
+			`pic_url`,
+			`level`,
+			`sort_order`,
+			`add_time`,
+			`update_time`,
+			`deleted`
+		FROM
+			lite_mall_category
+		<where>
+			<if test="storeId != null and storeId !='' ">`store_id` = #{storeId}</if>
+			<if test="deleted != null and deleted !='' "> and `deleted` = #{deleted}</if>
+			<if test="level != null and level !='' "> and `level` = #{level}</if>
+		</where>
+		ORDER BY
+			id DESC
+	</select>
 </mapper>

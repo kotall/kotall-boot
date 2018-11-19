@@ -9,6 +9,8 @@ import com.kotall.rms.core.service.sys.SysConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -67,7 +69,12 @@ public class SysConfigServiceImpl implements SysConfigService {
 			config = sysConfigManager.queryByKey(key);
 			sysConfigRedis.saveOrUpdate(config);
 		}
-
 		return config == null ? null : config.getParamValue();
+	}
+
+	@Override
+	public List<SysConfigEntity> queryAll(Map<String, Object> params) {
+		Query query = new Query(params);
+		return this.sysConfigManager.queryAll(query);
 	}
 }

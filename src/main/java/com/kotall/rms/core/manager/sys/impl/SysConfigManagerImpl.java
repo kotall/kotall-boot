@@ -54,4 +54,9 @@ public class SysConfigManagerImpl implements SysConfigManager {
 	public SysConfigEntity queryByKey(String key) {
 		return this.sysConfigMapper.queryByKey(key);
 	}
+
+	@Override
+	public List<SysConfigEntity> queryAll(Query query) {
+		return this.sysConfigMapper.list(query);
+	}
 }

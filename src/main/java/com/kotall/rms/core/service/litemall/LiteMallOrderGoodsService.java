@@ -1,10 +1,9 @@
 package com.kotall.rms.core.service.litemall;
 
-import java.util.Map;
-
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.common.entity.litemall.LiteMallOrderGoodsEntity;
+import com.kotall.rms.common.utils.Page;
+
+import java.util.Map;
 
 /**
  * 订单商品表
@@ -24,5 +23,5 @@ public interface LiteMallOrderGoodsService {
     int updateLiteMallOrderGoods(LiteMallOrderGoodsEntity liteMallOrderGoods);
 
     int batchRemove(Long[] id);
-	
+
 }
