@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity;
 import com.kotall.rms.common.dao.sys.BaseMapper;
 
+import java.util.List;
+
 /**
  * 类目表
  *
@@ -14,5 +16,7 @@ import com.kotall.rms.common.dao.sys.BaseMapper;
  */
 @Mapper
 public interface LiteMallCategoryMapper extends BaseMapper<LiteMallCategoryEntity> {
-	
+
+    List<LiteMallCategoryEntity> listByPid(Integer pid);
+
 }

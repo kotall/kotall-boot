@@ -67,4 +67,20 @@ public class LiteMallCategoryServiceImpl implements LiteMallCategoryService {
 		Query query = new Query(params);
 		return this.liteMallCategoryManager.queryChannel(query);
 	}
+
+	@Override
+	public List<LiteMallCategoryEntity> queryL1WithoutRecommend(Map<String, Object> params) {
+		params.put("level", "L1");
+		params.put("deleted", 0);
+		// params.put("name", "推荐");
+		Query query = new Query(params);
+		Page<LiteMallCategoryEntity> page = new Page<>(query);
+		this.liteMallCategoryManager.listLiteMallCategory(page, query);
+		return page.getRows();
+	}
+
+	@Override
+	public List<LiteMallCategoryEntity> queryByPid(Integer pid) {
+		return this.liteMallCategoryManager.queryByPid(pid);
+	}
 }

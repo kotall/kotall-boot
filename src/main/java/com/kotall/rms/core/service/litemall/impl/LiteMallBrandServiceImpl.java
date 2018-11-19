@@ -1,7 +1,9 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.List;
 import java.util.Map;
 
+import com.kotall.rms.common.entity.litemall.LiteMallAdEntity;
 import com.kotall.rms.core.annotation.StoreFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,15 @@ public class LiteMallBrandServiceImpl implements LiteMallBrandService {
 		Page<LiteMallBrandEntity> page = new Page<>(query);
 		liteMallBrandManager.listLiteMallBrand(page, query);
 		return page;
+	}
+
+	@Override
+	public List<LiteMallBrandEntity> queryBrandList(Map<String, Object> params) {
+		params.put("deleted", 0);
+		Query query = new Query(params);
+		Page<LiteMallBrandEntity> page = new Page<>(query);
+		liteMallBrandManager.listLiteMallBrand(page, query);
+		return page.getRows();
 	}
 
 	@Override

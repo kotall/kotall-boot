@@ -56,4 +56,9 @@ public class LiteMallCategoryManagerImpl implements LiteMallCategoryManager {
 	public List<LiteMallCategoryEntity> queryChannel(Query query) {
 		return this.liteMallCategoryMapper.list(query);
 	}
+
+	@Override
+	public List<LiteMallCategoryEntity> queryByPid(Integer pid) {
+		return this.liteMallCategoryMapper.listByPid(pid);
+	}
 }

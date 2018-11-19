@@ -1,10 +1,10 @@
 package com.kotall.rms.core.service.litemall;
 
-import java.util.Map;
-
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.common.entity.litemall.LiteMallBrandEntity;
+import com.kotall.rms.common.utils.Page;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 品牌商表
@@ -24,5 +24,11 @@ public interface LiteMallBrandService {
     int updateLiteMallBrand(LiteMallBrandEntity liteMallBrand);
 
     int batchRemove(Long[] id);
-	
+
+    /**
+     * 获取品牌列表
+     * @param params
+     * @return
+     */
+    List<LiteMallBrandEntity> queryBrandList(Map<String, Object> params);
 }

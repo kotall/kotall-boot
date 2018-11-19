@@ -18,11 +18,12 @@
 			`deleted`
 		FROM
 			lite_mall_groupon_rules
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="storeId != null "> `store_id` = #{storeId}</if>
+			<if test="deleted != null "> and `deleted` = #{deleted}</if>
+		</where>
 		ORDER BY
-			id DESC
+			add_time DESC
 	</select>
 	
 	<insert id="save">

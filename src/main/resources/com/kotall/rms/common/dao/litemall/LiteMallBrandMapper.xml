@@ -17,9 +17,10 @@
 			`deleted`
 		FROM
 			lite_mall_brand
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="deleted != null"> `deleted` = #{deleted}</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter} </if>
+		</where>
 		ORDER BY
 			id DESC
 	</select>

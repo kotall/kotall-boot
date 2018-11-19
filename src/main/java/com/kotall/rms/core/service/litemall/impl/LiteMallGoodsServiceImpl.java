@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.core.annotation.StoreFilter;
@@ -35,6 +36,28 @@ public class LiteMallGoodsServiceImpl implements LiteMallGoodsService {
 	}
 
 	@Override
+	public List<LiteMallGoodsEntity> queryByNew(Map<String, Object> params) {
+		params.put("isNew", 1);
+		params.put("isOnSale", 1);
+		params.put("deleted", 0);
+		Query query = new Query(params);
+		Page<LiteMallGoodsEntity> page = new Page<>(query);
+		liteMallGoodsManager.listLiteMallGoods(page, query);
+		return page.getRows();
+	}
+
+	@Override
+	public List<LiteMallGoodsEntity> queryByHot(Map<String, Object> params) {
+		params.put("isHot", 1);
+		params.put("isOnSale", 1);
+		params.put("deleted", 0);
+		Query query = new Query(params);
+		Page<LiteMallGoodsEntity> page = new Page<>(query);
+		liteMallGoodsManager.listLiteMallGoods(page, query);
+		return page.getRows();
+	}
+
+	@Override
 	public int saveLiteMallGoods(LiteMallGoodsEntity role) {
 		int count = liteMallGoodsManager.saveLiteMallGoods(role);
 		return count;
@@ -58,4 +81,13 @@ public class LiteMallGoodsServiceImpl implements LiteMallGoodsService {
 		return count;
 	}
 
+	@Override
+	public List<LiteMallGoodsEntity> queryByCategory(Map<String, Object> params) {
+		params.put("isOnSale", 1);
+		params.put("deleted", 0);
+		Query query = new Query(params);
+		Page<LiteMallGoodsEntity> page = new Page<>(query);
+		liteMallGoodsManager.listLiteMallGoods(page, query);
+		return page.getRows();
+	}
 }

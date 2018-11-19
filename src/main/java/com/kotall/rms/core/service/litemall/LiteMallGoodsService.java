@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
@@ -24,5 +25,25 @@ public interface LiteMallGoodsService {
     int updateLiteMallGoods(LiteMallGoodsEntity liteMallGoods);
 
     int batchRemove(Long[] id);
-	
+
+    /**
+     * 查询最新商品列表
+     * @param params
+     * @return
+     */
+    List<LiteMallGoodsEntity> queryByNew(Map<String, Object> params);
+
+    /**
+     * 查询热卖商品
+     * @param params
+     * @return
+     */
+    List<LiteMallGoodsEntity> queryByHot(Map<String, Object> params);
+
+    /**
+     * 根据类别查询产品列表
+     * @param params
+     * @return
+     */
+    List<LiteMallGoodsEntity> queryByCategory(Map<String, Object> params);
 }

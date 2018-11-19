@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
@@ -24,5 +25,11 @@ public interface LiteMallGrouponRulesService {
     int updateLiteMallGrouponRules(LiteMallGrouponRulesEntity liteMallGrouponRules);
 
     int batchRemove(Long[] id);
-	
+
+    /**
+     * 获取首页团购活动列表
+     * @param params
+     * @return
+     */
+    List<Map<String,Object>> queryGroupOnList(Map<String, Object> params);
 }

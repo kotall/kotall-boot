@@ -31,4 +31,18 @@ public interface LiteMallCategoryService {
      * @return
      */
     List<LiteMallCategoryEntity> queryChannel(Map<String, Object> params);
+
+    /**
+     *
+     * @param params
+     * @return
+     */
+    List<LiteMallCategoryEntity> queryL1WithoutRecommend(Map<String, Object> params);
+
+    /**
+     * 查询子类目列表
+     * @param id
+     * @return
+     */
+    List<LiteMallCategoryEntity> queryByPid(Integer id);
 }

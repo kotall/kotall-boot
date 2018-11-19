@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.core.annotation.StoreFilter;
@@ -32,6 +33,15 @@ public class LiteMallTopicServiceImpl implements LiteMallTopicService {
 		Page<LiteMallTopicEntity> page = new Page<>(query);
 		liteMallTopicManager.listLiteMallTopic(page, query);
 		return page;
+	}
+
+	@Override
+	public List<LiteMallTopicEntity> queryTopicList(Map<String, Object> params) {
+		params.put("deleted", 0);
+		Query query = new Query(params);
+		Page<LiteMallTopicEntity> page = new Page<>(query);
+		liteMallTopicManager.listLiteMallTopic(page, query);
+		return page.getRows();
 	}
 
 	@Override
