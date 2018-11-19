@@ -94,7 +94,7 @@ public class WxHomeController {
         // ---------------------------------------------------------------------------------------
         params = new HashMap<>();
         params.put("store_id", appConfig.getStoreId());
-        params.put("pageNumber", 0);
+        params.put("pageNumber", 1);
         params.put("pageSize", SystemConfig.getNewLimit());
         List<LiteMallGoodsEntity> newGoods = goodsService.queryByNew(params);
         data.put("newGoodsList", newGoods);
@@ -102,7 +102,7 @@ public class WxHomeController {
         // ---------------------------------------------------------------------------------------
         params = new HashMap<>();
         params.put("store_id", appConfig.getStoreId());
-        params.put("pageNumber", 0);
+        params.put("pageNumber", 1);
         params.put("pageSize", SystemConfig.getHotLimit());
         List<LiteMallGoodsEntity> hotGoods = goodsService.queryByHot(params);
         data.put("hotGoodsList", hotGoods);
@@ -110,7 +110,7 @@ public class WxHomeController {
         // ---------------------------------------------------------------------------------------
         params = new HashMap<>();
         params.put("store_id", appConfig.getStoreId());
-        params.put("pageNumber", 0);
+        params.put("pageNumber", 1);
         params.put("pageSize", SystemConfig.getBrandLimit());
         List<LiteMallBrandEntity> brandList = brandService.queryBrandList(params);
         data.put("brandList", brandList);
@@ -118,7 +118,7 @@ public class WxHomeController {
         // ---------------------------------------------------------------------------------------
         params = new HashMap<>();
         params.put("store_id", appConfig.getStoreId());
-        params.put("pageNumber", 0);
+        params.put("pageNumber", 1);
         params.put("pageSize", SystemConfig.getTopicLimit());
         List<LiteMallTopicEntity> topicList = topicService.queryTopicList(params);
         data.put("topicList", topicList);
@@ -126,7 +126,7 @@ public class WxHomeController {
         // 团购专区 ---------------------------------------------------------------------------------------
         params = new HashMap<>();
         params.put("store_id", appConfig.getStoreId());
-        params.put("pageNumber", 0);
+        params.put("pageNumber", 1);
         params.put("pageSize", 5);
         List<Map<String, Object>> grouponList = grouponRulesService.queryGroupOnList(params);
         data.put("grouponList", grouponList);
@@ -134,7 +134,7 @@ public class WxHomeController {
         // ---------------------------------------------------------------------------------------
         params = new HashMap<>();
         params.put("store_id", appConfig.getStoreId());
-        params.put("pageNumber", 0);
+        params.put("pageNumber", 1);
         params.put("pageSize", SystemConfig.getCatlogListLimit());
         List<Map> categoryList = new ArrayList<>();
         List<LiteMallCategoryEntity> catL1List = categoryService.queryL1WithoutRecommend(params);
@@ -149,7 +149,7 @@ public class WxHomeController {
             if (l2List.size() == 0) {
                 categoryGoods = new ArrayList<>();
             } else {
-                params.put("pageNumber", 0);
+                params.put("pageNumber", 1);
                 params.put("pageSize", SystemConfig.getCatlogMoreLimit());
                 params.put("ids", l2List);
                 categoryGoods = goodsService.queryByCategory(params);

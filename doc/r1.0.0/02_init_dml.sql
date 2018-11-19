@@ -1,4 +1,18 @@
 
+INSERT INTO `sys_config`(`param_key`, `param_value`, `create_time`, `update_time`, `deleted`) VALUES ('litemall.system.banner.new.title', '大家都在买的', NOW(), NOW(), 0);
+INSERT INTO `sys_config`(`param_key`, `param_value`, `create_time`, `update_time`, `deleted`) VALUES ('litemall.system.banner.new.imageurl', 'http://yanxuan.nosdn.127.net/8976116db321744084774643a933c5ce.png', NOW(), NOW(), 0);
+INSERT INTO `sys_config`(`param_key`, `param_value`, `create_time`, `update_time`, `deleted`) VALUES ('litemall.system.banner.hot.title', '大家都在买的', NOW(), NOW(), 0);
+INSERT INTO `sys_config`(`param_key`, `param_value`, `create_time`, `update_time`, `deleted`) VALUES ('litemall.system.banner.hot.imageurl', 'http://yanxuan.nosdn.127.net/8976116db321744084774643a933c5ce.png', NOW(), NOW(), 0);
+INSERT INTO `sys_config`(`param_key`, `param_value`, `create_time`, `update_time`, `deleted`) VALUES ('litemall.system.freight.value', '8', NOW(), NOW(), 0);
+INSERT INTO `sys_config`(`param_key`, `param_value`, `create_time`, `update_time`, `deleted`) VALUES ('litemall.system.freight.limit', '88', NOW(), NOW(), 0);
+INSERT INTO `sys_config`(`param_key`, `param_value`, `create_time`, `update_time`, `deleted`) VALUES ('litemall.system.indexlimit.new', '6', NOW(), NOW(), 0);
+INSERT INTO `sys_config`(`param_key`, `param_value`, `create_time`, `update_time`, `deleted`) VALUES ('litemall.system.indexlimit.hot', '6', NOW(), NOW(), 0);
+INSERT INTO `sys_config`(`param_key`, `param_value`, `create_time`, `update_time`, `deleted`) VALUES ('litemall.system.indexlimit.brand', '4', NOW(), NOW(), 0);
+INSERT INTO `sys_config`(`param_key`, `param_value`, `create_time`, `update_time`, `deleted`) VALUES ('litemall.system.indexlimit.topic', '4', NOW(), NOW(), 0);
+INSERT INTO `sys_config`(`param_key`, `param_value`, `create_time`, `update_time`, `deleted`) VALUES ('litemall.system.indexlimit.catloglist', '4', NOW(), NOW(), 0);
+INSERT INTO `sys_config`(`param_key`, `param_value`, `create_time`, `update_time`, `deleted`) VALUES ('litemall.system.indexlimit.catloggood', '4', NOW(), NOW(), 0);
+INSERT INTO `sys_config`(`param_key`, `param_value`, `create_time`, `update_time`, `deleted`) VALUES ('litemall.system.mallname', 'litemall', NOW(), NOW(), 0);
+INSERT INTO `sys_config`(`param_key`, `param_value`, `create_time`, `update_time`, `deleted`) VALUES ('litemall.system.shareimage.autocreate', '0', NOW(), NOW(), 0);
 
 
 -- 目录：店铺管理
