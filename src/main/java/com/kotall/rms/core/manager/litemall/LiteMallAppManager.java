@@ -24,5 +24,6 @@ public interface LiteMallAppManager {
 	int updateLiteMallApp(LiteMallAppEntity liteMallApp);
 	
 	int batchRemove(Long[] id);
-	
+
+    LiteMallAppEntity getLiteMallAppByAppId(String appId);
 }

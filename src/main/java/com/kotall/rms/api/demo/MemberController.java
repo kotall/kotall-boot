@@ -1,4 +1,4 @@
-package com.kotall.rms.api;
+package com.kotall.rms.api.demo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

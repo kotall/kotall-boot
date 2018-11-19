@@ -14,5 +14,7 @@ import com.kotall.rms.common.dao.sys.BaseMapper;
  */
 @Mapper
 public interface LiteMallAppMapper extends BaseMapper<LiteMallAppEntity> {
-	
+
+    LiteMallAppEntity getObjectByAppId(String appId);
+
 }

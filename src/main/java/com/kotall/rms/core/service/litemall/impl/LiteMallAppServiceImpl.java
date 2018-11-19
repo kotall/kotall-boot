@@ -56,4 +56,9 @@ public class LiteMallAppServiceImpl implements LiteMallAppService {
 		return count;
 	}
 
+	@Override
+	public LiteMallAppEntity getLiteMallAppByAppId(String appId) {
+		LiteMallAppEntity liteMallApp = liteMallAppManager.getLiteMallAppByAppId(appId);
+		return liteMallApp;
+	}
 }

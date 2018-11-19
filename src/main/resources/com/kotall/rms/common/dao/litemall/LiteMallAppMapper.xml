@@ -72,4 +72,18 @@
 		</foreach>
 	</delete>
 
+	<select id="getObjectByAppId" resultType="com.kotall.rms.common.entity.litemall.LiteMallAppEntity">
+		SELECT
+			`id`,
+			`app_id`,
+			`store_id`,
+			`version`,
+			`CREATED_TIME`,
+			`UPDATED_TIME`
+		FROM
+			lite_mall_app
+		WHERE
+			app_id = #{appId}
+	</select>
+
 </mapper>

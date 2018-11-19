@@ -50,5 +50,9 @@ public class LiteMallAppManagerImpl implements LiteMallAppManager {
 		int count = liteMallAppMapper.batchRemove(id);
 		return count;
 	}
-	
+
+	@Override
+	public LiteMallAppEntity getLiteMallAppByAppId(String appId) {
+		return this.liteMallAppMapper.getObjectByAppId(appId);
+	}
 }

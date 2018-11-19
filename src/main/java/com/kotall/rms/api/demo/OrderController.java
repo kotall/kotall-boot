@@ -1,4 +1,4 @@
-package com.kotall.rms.api;
+package com.kotall.rms.api.demo;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
