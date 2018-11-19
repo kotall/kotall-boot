@@ -670,3 +670,14 @@ CREATE TABLE `lite_mall_user_formid` (
   `deleted` tinyint(1) DEFAULT '0' COMMENT '逻辑删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
+
+CREATE TABLE `lite_mall_app`(
+    id INT NOT NULL AUTO_INCREMENT  COMMENT '主键' ,
+    app_id VARCHAR(32)    COMMENT 'appID' ,
+    store_id VARCHAR(32)    COMMENT '店铺ID' ,
+    version VARCHAR(32)    COMMENT '版本' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' ,
+    PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT = 'app配置表';
