@@ -1,5 +1,5 @@
 /**
- * 订单商品表js
+ * 商品基本信息表js
  */
 
 $(function () {
@@ -23,17 +23,27 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
-			{field : "orderId", title : "订单表的订单ID", width : "100px"}, 
-			{field : "goodsId", title : "商品表的商品ID", width : "100px"}, 
-			{field : "goodsName", title : "商品名称", width : "100px"}, 
+			{field : "storeId", title : "店铺ID", width : "100px"}, 
 			{field : "goodsSn", title : "商品编号", width : "100px"}, 
-			{field : "productId", title : "商品货品表的货品ID", width : "100px"}, 
-			{field : "number", title : "商品货品的购买数量", width : "100px"}, 
-			{field : "price", title : "商品货品的售价", width : "100px"}, 
-			{field : "specifications", title : "商品货品的规格列表", width : "100px"}, 
-			{field : "picUrl", title : "商品货品图片或者商品图片", width : "100px"}, 
-			{field : "comment", title : "订单商品评论，如果是-1，则超期不能评价；如果是0，则可以评价；如果其他值，则是comment表里面的评论ID。", width : "100px"}, 
-			{field : "addTime", title : "创建时间", width : "100px"}
+			{field : "name", title : "商品名称", width : "100px"}, 
+			{field : "categoryId", title : "商品所属类目ID", width : "100px"}, 
+			{field : "brandId", title : "", width : "100px"}, 
+			{field : "gallery", title : "商品宣传图片列表，采用JSON数组格式", width : "100px"}, 
+			{field : "keywords", title : "商品关键字，采用逗号间隔", width : "100px"}, 
+			{field : "brief", title : "商品简介", width : "100px"}, 
+			{field : "isOnSale", title : "是否上架", width : "100px"}, 
+			{field : "sortOrder", title : "", width : "100px"}, 
+			{field : "picUrl", title : "商品页面商品图片", width : "100px"}, 
+			{field : "shareUrl", title : "商品分享朋友圈图片", width : "100px"}, 
+			{field : "isNew", title : "是否新品首发，如果设置则可以在新品首发页面展示", width : "100px"}, 
+			{field : "isHot", title : "是否人气推荐，如果设置则可以在人气推荐页面展示", width : "100px"}, 
+			{field : "unit", title : "商品单位，例如件、盒", width : "100px"}, 
+			{field : "counterPrice", title : "专柜价格", width : "100px"}, 
+			{field : "retailPrice", title : "零售价格", width : "100px"}, 
+			{field : "detail", title : "商品详细介绍，是富文本格式", width : "100px"}, 
+			{field : "addTime", title : "创建时间", width : "100px"}, 
+			{field : "updateTime", title : "更新时间", width : "100px"}, 
+			{field : "deleted", title : "逻辑删除", width : "100px"}
 		]
 	})
 }
@@ -49,7 +59,7 @@ var vm = new Vue({
 		},
 		save: function() {
 			dialogOpen({
-				title: '新增订单商品表',
+				title: '新增商品基本信息表',
 				url: 'mall/goods/add.html?_' + $.now(),
 				width: '420px',
 				height: '350px',
@@ -62,12 +72,12 @@ var vm = new Vue({
 			var ck = $('#dataGrid').bootstrapTable('getSelections');
 			if(checkedRow(ck)){
 				dialogOpen({
-					title: '编辑订单商品表',
+					title: '编辑商品基本信息表',
 					url: 'mall/goods/edit.html?_' + $.now(),
 					width: '420px',
 					height: '350px',
 					success: function(iframeId){
-						top.frames[iframeId].vm.liteMallOrderGoods.id = ck[0].id;
+						top.frames[iframeId].vm.liteMallGoods.id = ck[0].id;
 						top.frames[iframeId].vm.setForm();
 					},
 					yes: function(iframeId){

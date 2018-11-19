@@ -98,48 +98,48 @@ public class WxHomeController {
         params.put("store_id", appConfig.getStoreId());
         params.put("pageNumber", 0);
         params.put("pageSize", SystemConfig.getNewLimit());
-        List<LiteMallAdEntity> newGoods = goodsService.queryByNew(params);
-        data.put("newGoodsList", newGoods);
-
-        List<LiteMallAdEntity> hotGoods = goodsService.queryByHot(0, SystemConfig.getHotLimit());
-        data.put("hotGoodsList", hotGoods);
-
-        List<LiteMallAdEntity> brandList = brandService.queryVO(0, SystemConfig.getBrandLimit());
-        data.put("brandList", brandList);
-
-        List<LiteMallAdEntity> topicList = topicService.queryList(0, SystemConfig.getTopicLimit());
-        data.put("topicList", topicList);
-
-        // 团购专区
-        List<Map<String, Object>> grouponList = grouponRulesService.queryList(0, 5);
-        data.put("grouponList", grouponList);
-
-        List<Map> categoryList = new ArrayList<>();
-        List<LiteMallAdEntity> catL1List = categoryService.queryL1WithoutRecommend(0, SystemConfig.getCatlogListLimit());
-        for (LiteMallAdEntity catL1 : catL1List) {
-            List<LiteMallAdEntity> catL2List = categoryService.queryByPid(catL1.getId());
-            List<Integer> l2List = new ArrayList<>();
-            for (LiteMallAdEntity catL2 : catL2List) {
-                l2List.add(catL2.getId());
-            }
-
-            List<LiteMallAdEntity> categoryGoods = null;
-            if (l2List.size() == 0) {
-                categoryGoods = new ArrayList<>();
-            } else {
-                categoryGoods = goodsService.queryByCategory(l2List, 0, SystemConfig.getCatlogMoreLimit());
-            }
-
-            Map<String, Object> catGoods = new HashMap<String, Object>();
-            catGoods.put("id", catL1.getId());
-            catGoods.put("name", catL1.getName());
-            catGoods.put("goodsList", categoryGoods);
-            categoryList.add(catGoods);
-        }
-        data.put("floorGoodsList", categoryList);
-
-        // 缓存数据
-        HomeCacheManager.loadData(HomeCacheManager.INDEX, data);
+//        List<LiteMallAdEntity> newGoods = goodsService.queryByNew(params);
+//        data.put("newGoodsList", newGoods);
+//
+//        List<LiteMallAdEntity> hotGoods = goodsService.queryByHot(0, SystemConfig.getHotLimit());
+//        data.put("hotGoodsList", hotGoods);
+//
+//        List<LiteMallAdEntity> brandList = brandService.queryVO(0, SystemConfig.getBrandLimit());
+//        data.put("brandList", brandList);
+//
+//        List<LiteMallAdEntity> topicList = topicService.queryList(0, SystemConfig.getTopicLimit());
+//        data.put("topicList", topicList);
+//
+//        // 团购专区
+//        List<Map<String, Object>> grouponList = grouponRulesService.queryList(0, 5);
+//        data.put("grouponList", grouponList);
+//
+//        List<Map> categoryList = new ArrayList<>();
+//        List<LiteMallAdEntity> catL1List = categoryService.queryL1WithoutRecommend(0, SystemConfig.getCatlogListLimit());
+//        for (LiteMallAdEntity catL1 : catL1List) {
+//            List<LiteMallAdEntity> catL2List = categoryService.queryByPid(catL1.getId());
+//            List<Integer> l2List = new ArrayList<>();
+//            for (LiteMallAdEntity catL2 : catL2List) {
+//                l2List.add(catL2.getId());
+//            }
+//
+//            List<LiteMallAdEntity> categoryGoods = null;
+//            if (l2List.size() == 0) {
+//                categoryGoods = new ArrayList<>();
+//            } else {
+//                categoryGoods = goodsService.queryByCategory(l2List, 0, SystemConfig.getCatlogMoreLimit());
+//            }
+//
+//            Map<String, Object> catGoods = new HashMap<String, Object>();
+//            catGoods.put("id", catL1.getId());
+//            catGoods.put("name", catL1.getName());
+//            catGoods.put("goodsList", categoryGoods);
+//            categoryList.add(catGoods);
+//        }
+//        data.put("floorGoodsList", categoryList);
+//
+//        // 缓存数据
+//        HomeCacheManager.loadData(HomeCacheManager.INDEX, data);
         return Result.ok(data);
     }
 }

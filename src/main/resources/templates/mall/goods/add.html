@@ -1,67 +1,133 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="include/header_css::header('订单商品表')"></head>
+<head th:include="include/header_css::header('商品基本信息表')"></head>
 <body>
 	<div id="dpLTE" class="container-fluid" v-cloak>
 		<table class="form" id="form">
 			<tr>
-	            <td class="formTitle">订单表的订单ID<font face="宋体">*</font></td>
+	            <td class="formTitle">店铺ID<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="订单表的订单ID" v-model="liteMallOrderGoods.orderId" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">商品表的商品ID<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="商品表的商品ID" v-model="liteMallOrderGoods.goodsId" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">商品名称<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="商品名称" v-model="liteMallOrderGoods.goodsName" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="店铺ID" v-model="liteMallGoods.storeId" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 			<tr>
 	            <td class="formTitle">商品编号<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="商品编号" v-model="liteMallOrderGoods.goodsSn" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="商品编号" v-model="liteMallGoods.goodsSn" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">商品货品表的货品ID<font face="宋体">*</font></td>
+	            <td class="formTitle">商品名称<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="商品货品表的货品ID" v-model="liteMallOrderGoods.productId" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="商品名称" v-model="liteMallGoods.name" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">商品货品的购买数量<font face="宋体">*</font></td>
+	            <td class="formTitle">商品所属类目ID<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="商品货品的购买数量" v-model="liteMallOrderGoods.number" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="商品所属类目ID" v-model="liteMallGoods.categoryId" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">商品货品的售价<font face="宋体">*</font></td>
+	            <td class="formTitle"><font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="商品货品的售价" v-model="liteMallOrderGoods.price" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="" v-model="liteMallGoods.brandId" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">商品货品的规格列表<font face="宋体">*</font></td>
+	            <td class="formTitle">商品宣传图片列表，采用JSON数组格式<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="商品货品的规格列表" v-model="liteMallOrderGoods.specifications" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="商品宣传图片列表，采用JSON数组格式" v-model="liteMallGoods.gallery" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">商品货品图片或者商品图片<font face="宋体">*</font></td>
+	            <td class="formTitle">商品关键字，采用逗号间隔<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="商品货品图片或者商品图片" v-model="liteMallOrderGoods.picUrl" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="商品关键字，采用逗号间隔" v-model="liteMallGoods.keywords" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">订单商品评论，如果是-1，则超期不能评价；如果是0，则可以评价；如果其他值，则是comment表里面的评论ID。<font face="宋体">*</font></td>
+	            <td class="formTitle">商品简介<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="订单商品评论，如果是-1，则超期不能评价；如果是0，则可以评价；如果其他值，则是comment表里面的评论ID。" v-model="liteMallOrderGoods.comment" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="商品简介" v-model="liteMallGoods.brief" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">是否上架<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="是否上架" v-model="liteMallGoods.isOnSale" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle"><font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="" v-model="liteMallGoods.sortOrder" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">商品页面商品图片<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="商品页面商品图片" v-model="liteMallGoods.picUrl" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">商品分享朋友圈图片<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="商品分享朋友圈图片" v-model="liteMallGoods.shareUrl" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">是否新品首发，如果设置则可以在新品首发页面展示<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="是否新品首发，如果设置则可以在新品首发页面展示" v-model="liteMallGoods.isNew" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">是否人气推荐，如果设置则可以在人气推荐页面展示<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="是否人气推荐，如果设置则可以在人气推荐页面展示" v-model="liteMallGoods.isHot" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">商品单位，例如件、盒<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="商品单位，例如件、盒" v-model="liteMallGoods.unit" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">专柜价格<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="专柜价格" v-model="liteMallGoods.counterPrice" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">零售价格<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="零售价格" v-model="liteMallGoods.retailPrice" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">商品详细介绍，是富文本格式<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="商品详细介绍，是富文本格式" v-model="liteMallGoods.detail" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">创建时间<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="创建时间" v-model="liteMallGoods.addTime" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">更新时间<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="更新时间" v-model="liteMallGoods.updateTime" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">逻辑删除<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="逻辑删除" v-model="liteMallGoods.deleted" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 		</table>

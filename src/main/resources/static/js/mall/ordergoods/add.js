@@ -1,10 +1,10 @@
 /**
- * 新增-商品基本信息表js
+ * 新增-订单商品表js
  */
 var vm = new Vue({
 	el:'#dpLTE',
 	data: {
-		liteMallGoods: {
+		liteMallOrderGoods: {
 			id: 0
 		}
 	},
@@ -14,8 +14,8 @@ var vm = new Vue({
 		        return false;
 		    }
 		    $.SaveForm({
-		    	url: '../../litemall/goods/save?_' + $.now(),
-		    	param: vm.liteMallGoods,
+		    	url: '../../litemall/ordergoods/save?_' + $.now(),
+		    	param: vm.liteMallOrderGoods,
 		    	success: function(data) {
 		    		$.currentIframe().vm.load();
 		    	}

@@ -1,20 +1,20 @@
 /**
- * 编辑-商品基本信息表js
+ * 编辑-订单商品表js
  */
 var vm = new Vue({
 	el:'#dpLTE',
 	data: {
-		liteMallGoods: {
+		liteMallOrderGoods: {
 			id: 0
 		}
 	},
 	methods : {
 		setForm: function() {
 			$.SetForm({
-				url: '../../litemall/goods/info?_' + $.now(),
-		    	param: vm.liteMallGoods.id,
+				url: '../../litemall/ordergoods/info?_' + $.now(),
+		    	param: vm.liteMallOrderGoods.id,
 		    	success: function(data) {
-		    		vm.liteMallGoods = data;
+		    		vm.liteMallOrderGoods = data;
 		    	}
 			});
 		},
@@ -23,8 +23,8 @@ var vm = new Vue({
 		        return false;
 		    }
 		    $.ConfirmForm({
-		    	url: '../../litemall/goods/update?_' + $.now(),
-		    	param: vm.liteMallGoods,
+		    	url: '../../litemall/ordergoods/update?_' + $.now(),
+		    	param: vm.liteMallOrderGoods,
 		    	success: function(data) {
 		    		$.currentIframe().vm.load();
 		    	}

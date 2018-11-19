@@ -23,7 +23,7 @@ import com.kotall.rms.core.service.litemall.LiteMallOrderGoodsService;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("/litemall/goods")
+@RequestMapping("/litemall/ordergoods")
 public class LiteMallOrderGoodsController extends AbstractController {
 	
 	@Autowired
