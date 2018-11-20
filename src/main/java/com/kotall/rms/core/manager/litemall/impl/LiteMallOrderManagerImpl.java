@@ -30,6 +30,11 @@ public class LiteMallOrderManagerImpl implements LiteMallOrderManager {
 	}
 
 	@Override
+	public List<LiteMallOrderEntity> queryOrderList(Query query) {
+		return liteMallOrderMapper.list(query);
+	}
+
+	@Override
 	public int saveLiteMallOrder(LiteMallOrderEntity liteMallOrder) {
 		return liteMallOrderMapper.save(liteMallOrder);
 	}

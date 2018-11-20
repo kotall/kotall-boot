@@ -109,5 +109,64 @@
 			#{id}
 		</foreach>
 	</delete>
+	<select id="getByUserId" resultType="com.kotall.rms.common.entity.litemall.LiteMallAddressEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`name`,
+			`user_id`,
+			`province_id`,
+			`city_id`,
+			`area_id`,
+			`address`,
+			`mobile`,
+			`is_default`,
+			`add_time`,
+			`update_time`,
+			`deleted`
+		FROM
+			lite_mall_address
+		WHERE
+			user_id = #{userId}
+	</select>
+
+	<update id="resetDefault">
+		UPDATE lite_mall_address
+		<set>
+			<if test="isDefault != null">`is_default` = #{address.isDefault}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+		</set>
+		WHERE
+			userId = #{query.userId}
+		AND deleted = #{query.deleted}
+	</update>
+
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallAddressEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`name`,
+			`user_id`,
+			`province_id`,
+			`city_id`,
+			`area_id`,
+			`address`,
+			`mobile`,
+			`is_default`,
+			`add_time`,
+			`update_time`,
+			`deleted`
+		FROM
+			lite_mall_address
+		<where>
+			<if test="storeId != null "> `store_id` = #{storeId}</if>
+			<if test="userId != null "> and `user_id` = #{userId}</if>
+			<if test="isDefault != null "> and `is_default` = #{isDefault}</if>
+			<if test="deleted != null "> and `deleted` = #{deleted}</if>
+			<if test="mobile != null "> and `mobile` = #{mobile}</if>
+		</where>
+		ORDER BY
+			id DESC
+	</select>
 
 </mapper>

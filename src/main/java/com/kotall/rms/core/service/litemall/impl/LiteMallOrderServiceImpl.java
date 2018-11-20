@@ -1,7 +1,10 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.kotall.rms.common.utils.OrderUtil;
 import com.kotall.rms.core.annotation.StoreFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +38,12 @@ public class LiteMallOrderServiceImpl implements LiteMallOrderService {
 	}
 
 	@Override
+	public List<LiteMallOrderEntity> queryOrderList(Map<String, Object> params) {
+		Query query = new Query(params);
+		return this.liteMallOrderManager.queryOrderList(query);
+	}
+
+	@Override
 	public int saveLiteMallOrder(LiteMallOrderEntity role) {
 		int count = liteMallOrderManager.saveLiteMallOrder(role);
 		return count;
@@ -58,4 +67,41 @@ public class LiteMallOrderServiceImpl implements LiteMallOrderService {
 		return count;
 	}
 
+	@Override
+	public Map<Object, Object> queryOrderInfo(Integer userId) {
+		Map<String, Object> params = new HashMap<>();
+		//params.put("storeId", storeId);
+		params.put("userId", userId);
+		params.put("deleted", 0);
+		List<LiteMallOrderEntity> orders = this.queryOrderList(params);
+
+		int unpaid = 0;
+		int unship = 0;
+		int unrecv = 0;
+		int uncomment = 0;
+		for(LiteMallOrderEntity order : orders){
+			if(OrderUtil.isCreateStatus(order)){
+				unpaid++;
+			}
+			else if(OrderUtil.isPayStatus(order)){
+				unship++;
+			}
+			else if(OrderUtil.isShipStatus(order)){
+				unrecv++;
+			}
+			else if(OrderUtil.isConfirmStatus(order) || OrderUtil.isAutoConfirmStatus(order)){
+				uncomment += order.getComments();
+			}
+			else {
+				// do nothing
+			}
+		}
+
+		Map<Object, Object> orderInfo = new HashMap<>();
+		orderInfo.put("unpaid", unpaid);
+		orderInfo.put("unship", unship);
+		orderInfo.put("unrecv", unrecv);
+		orderInfo.put("uncomment", uncomment);
+		return orderInfo;
+	}
 }

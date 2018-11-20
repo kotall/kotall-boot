@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallUserFormidMapper">
+	
+	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserFormidEntity">
+		SELECT
+			`id`, 
+			`store_id`, 
+			`formId`, 
+			`isprepay`, 
+			`useAmount`, 
+			`expire_time`, 
+			`openId`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_user_formid
+		ORDER BY
+			id DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO lite_mall_user_formid (
+			`store_id`, 
+			`formId`, 
+			`isprepay`, 
+			`useAmount`, 
+			`expire_time`, 
+			`openId`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		)
+		VALUES (
+			#{storeId}, 
+			#{formid}, 
+			#{isprepay}, 
+			#{useamount}, 
+			#{expireTime}, 
+			#{openid}, 
+			#{addTime}, 
+			#{updateTime}, 
+			#{deleted}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserFormidEntity">
+		SELECT
+			`id`, 
+			`store_id`, 
+			`formId`, 
+			`isprepay`, 
+			`useAmount`, 
+			`expire_time`, 
+			`openId`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_user_formid
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE lite_mall_user_formid
+	 	<set>
+			<if test="storeId != null">`store_id` = #{storeId}, </if>
+			<if test="formid != null">`formId` = #{formid}, </if>
+			<if test="isprepay != null">`isprepay` = #{isprepay}, </if>
+			<if test="useamount != null">`useAmount` = #{useamount}, </if>
+			<if test="expireTime != null">`expire_time` = #{expireTime}, </if>
+			<if test="openid != null">`openId` = #{openid}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="deleted != null">`deleted` = #{deleted}</if>
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			lite_mall_user_formid
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

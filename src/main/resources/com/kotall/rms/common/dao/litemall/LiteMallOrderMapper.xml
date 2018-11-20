@@ -180,4 +180,45 @@
 		</foreach>
 	</delete>
 
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallOrderEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`user_id`,
+			`order_sn`,
+			`order_status`,
+			`consignee`,
+			`mobile`,
+			`address`,
+			`message`,
+			`goods_price`,
+			`freight_price`,
+			`coupon_price`,
+			`integral_price`,
+			`groupon_price`,
+			`order_price`,
+			`actual_price`,
+			`pay_id`,
+			`pay_time`,
+			`ship_sn`,
+			`ship_channel`,
+			`ship_time`,
+			`confirm_time`,
+			`comments`,
+			`end_time`,
+			`add_time`,
+			`update_time`,
+			`deleted`
+		FROM
+			lite_mall_order
+		<where>
+            <if test=" storeId != null">`store_id` = #{storeId}</if>
+            <if test=" userId != null">`user_id` = #{userId}</if>
+            <if test=" orderStatus != null">`order_status` = #{orderStatus}</if>
+            <if test=" deleted != null">`deleted` = #{deleted}</if>
+		</where>
+		ORDER BY
+			add_time DESC
+	</select>
+
 </mapper>

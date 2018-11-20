@@ -4,6 +4,7 @@ import com.kotall.rms.api.HomeCacheManager;
 import com.kotall.rms.api.SystemConfig;
 import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.common.entity.litemall.*;
+import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.core.service.litemall.*;
 import lombok.extern.slf4j.Slf4j;
@@ -110,10 +111,11 @@ public class WxHomeController {
         // ---------------------------------------------------------------------------------------
         params = new HashMap<>();
         params.put("store_id", appConfig.getStoreId());
+        params.put("deleted", 0);
         params.put("pageNumber", 1);
         params.put("pageSize", SystemConfig.getBrandLimit());
-        List<LiteMallBrandEntity> brandList = brandService.queryBrandList(params);
-        data.put("brandList", brandList);
+        Page<LiteMallBrandEntity> page = brandService.queryBrandList(params);
+        data.put("brandList", page.getRows());
 
         // ---------------------------------------------------------------------------------------
         params = new HashMap<>();

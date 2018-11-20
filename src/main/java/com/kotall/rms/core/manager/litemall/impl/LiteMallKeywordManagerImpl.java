@@ -30,6 +30,11 @@ public class LiteMallKeywordManagerImpl implements LiteMallKeywordManager {
 	}
 
 	@Override
+	public List<LiteMallKeywordEntity> queryKeywordList(Query query) {
+		return liteMallKeywordMapper.list(query);
+	}
+
+	@Override
 	public int saveLiteMallKeyword(LiteMallKeywordEntity liteMallKeyword) {
 		return liteMallKeywordMapper.save(liteMallKeyword);
 	}

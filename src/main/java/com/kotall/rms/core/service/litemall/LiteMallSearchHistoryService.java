@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
@@ -17,6 +18,8 @@ public interface LiteMallSearchHistoryService {
 
 	Page<LiteMallSearchHistoryEntity> listLiteMallSearchHistory(Map<String, Object> params);
 
+    List<LiteMallSearchHistoryEntity> querySearchHistoryList(Map<String, Object> params);
+
     int saveLiteMallSearchHistory(LiteMallSearchHistoryEntity liteMallSearchHistory);
 
     LiteMallSearchHistoryEntity getLiteMallSearchHistoryById(Long id);
@@ -24,5 +27,9 @@ public interface LiteMallSearchHistoryService {
     int updateLiteMallSearchHistory(LiteMallSearchHistoryEntity liteMallSearchHistory);
 
     int batchRemove(Long[] id);
-	
+
+    void deleteByUserId(Integer userId);
+
+    List<LiteMallSearchHistoryEntity> queryByUserId(Integer userId);
+
 }

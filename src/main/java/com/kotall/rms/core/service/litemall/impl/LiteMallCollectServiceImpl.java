@@ -1,8 +1,10 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.core.annotation.StoreFilter;
+import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +30,34 @@ public class LiteMallCollectServiceImpl implements LiteMallCollectService {
 	@StoreFilter
 	@Override
 	public Page<LiteMallCollectEntity> listLiteMallCollect(Map<String, Object> params) {
+		return this.queryCollectListByPage(params);
+	}
+
+	@Override
+	public Page<LiteMallCollectEntity> queryByType(Map<String, Object> params) {
+
+		return this.queryCollectListByPage(params);
+	}
+
+	@Override
+	public LiteMallCollectEntity queryByTypeAndValue(Map<String, Object> params) {
+		List<LiteMallCollectEntity> list = this.queryCollectList(params);
+
+		return CollectionUtils.isEmpty(list) ? null : list.get(0);
+	}
+
+	@Override
+	public Page<LiteMallCollectEntity> queryCollectListByPage(Map<String, Object> params) {
 		Query query = new Query(params);
 		Page<LiteMallCollectEntity> page = new Page<>(query);
 		liteMallCollectManager.listLiteMallCollect(page, query);
 		return page;
+	}
+
+	@Override
+	public List<LiteMallCollectEntity> queryCollectList(Map<String, Object> params) {
+		Query query = new Query(params);
+		return this.liteMallCollectManager.queryCollectList(query);
 	}
 
 	@Override

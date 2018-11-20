@@ -24,5 +24,5 @@ public interface SysAreaManager {
 	int batchRemoveArea(Long[] id);
 	
 	boolean hasChildren(Long[] id);
-	
+
 }

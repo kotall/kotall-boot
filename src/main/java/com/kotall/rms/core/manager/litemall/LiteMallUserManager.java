@@ -24,5 +24,6 @@ public interface LiteMallUserManager {
 	int updateLiteMallUser(LiteMallUserEntity liteMallUser);
 	
 	int batchRemove(Long[] id);
-	
+
+    List<LiteMallUserEntity> queryUserList(Query query);
 }

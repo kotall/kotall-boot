@@ -24,5 +24,6 @@ public interface LiteMallCollectManager {
 	int updateLiteMallCollect(LiteMallCollectEntity liteMallCollect);
 	
 	int batchRemove(Long[] id);
-	
+
+    List<LiteMallCollectEntity> queryCollectList(Query query);
 }

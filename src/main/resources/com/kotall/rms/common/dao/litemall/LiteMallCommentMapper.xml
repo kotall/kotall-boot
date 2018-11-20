@@ -19,9 +19,17 @@
 			`deleted`
 		FROM
 			lite_mall_comment
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="storeId != null "> `store_id` = #{storeId}</if>
+			<if test="valueId != null "> and `value_id` = #{valueId}</if>
+			<if test="type != null "> and `type` = #{type}</if>
+			<if test="hasPicture != null "> and `has_picture` = #{hasPicture}</if>
+			<if test="star != null "> and `star` = #{star}</if>
+			<if test="userId != null "> and `user_id` = #{userId}</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' ">
+				and ${sql_filter}
+			</if>
+		</where>
 		ORDER BY
 			id DESC
 	</select>
@@ -104,5 +112,20 @@
 			#{id}
 		</foreach>
 	</delete>
+
+	<select id="countTotal" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			lite_mall_comment
+		<where>
+			<if test="type != null "> `type` = #{type}</if>
+			<if test="valueId != null "> `valueId` = #{valueId}</if>
+			<if test="deleted != null "> `deleted` = #{deleted}</if>
+			<if test="hasPicture != null "> `has_picture` = #{hasPicture}</if>
+		</where>
+		ORDER BY
+			add_time DESC
+	</select>
 
 </mapper>

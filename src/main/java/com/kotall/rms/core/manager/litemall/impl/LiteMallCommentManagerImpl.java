@@ -50,5 +50,9 @@ public class LiteMallCommentManagerImpl implements LiteMallCommentManager {
 		int count = liteMallCommentMapper.batchRemove(id);
 		return count;
 	}
-	
+
+	@Override
+	public int countComment(Query query) {
+		return this.liteMallCommentMapper.countTotal(query);
+	}
 }

@@ -50,5 +50,9 @@ public class LiteMallUserManagerImpl implements LiteMallUserManager {
 		int count = liteMallUserMapper.batchRemove(id);
 		return count;
 	}
-	
+
+	@Override
+	public List<LiteMallUserEntity> queryUserList(Query query) {
+		return this.liteMallUserMapper.list(query);
+	}
 }

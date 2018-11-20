@@ -45,4 +45,7 @@ public interface LiteMallCategoryService {
      * @return
      */
     List<LiteMallCategoryEntity> queryByPid(Integer id);
+
+
+    List<LiteMallCategoryEntity> queryL1();
 }

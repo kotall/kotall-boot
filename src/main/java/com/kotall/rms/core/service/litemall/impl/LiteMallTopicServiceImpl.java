@@ -1,9 +1,11 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.core.annotation.StoreFilter;
+import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,14 @@ public class LiteMallTopicServiceImpl implements LiteMallTopicService {
 	@StoreFilter
 	@Override
 	public Page<LiteMallTopicEntity> listLiteMallTopic(Map<String, Object> params) {
+		Query query = new Query(params);
+		Page<LiteMallTopicEntity> page = new Page<>(query);
+		liteMallTopicManager.listLiteMallTopic(page, query);
+		return page;
+	}
+
+	@Override
+	public Page<LiteMallTopicEntity> queryListByPage(Map<String, Object> params) {
 		Query query = new Query(params);
 		Page<LiteMallTopicEntity> page = new Page<>(query);
 		liteMallTopicManager.listLiteMallTopic(page, query);
@@ -68,4 +78,30 @@ public class LiteMallTopicServiceImpl implements LiteMallTopicService {
 		return count;
 	}
 
+	@Override
+	public List<LiteMallTopicEntity> queryRelatedList(Map<String, Object> params) {
+		List<LiteMallTopicEntity> list = this.queryTopicList(params);
+		Integer pageNumber = (Integer)params.get("pageNumber");
+		Integer pageSize = (Integer)params.get("pageSize");
+		if (list.size() == 0) {
+           params = new HashMap<>();
+           params.put("pageNumber", pageNumber);
+           params.put("pageSize", pageSize);
+           return this.queryTopicList(params);
+		}
+
+		LiteMallTopicEntity topic = list.get(0);
+		params = new HashMap<>();
+		params.put("deleted", 0);
+		params.put("idNotEqual", topic.getId());
+		list = this.queryTopicList(params);
+		if (!CollectionUtils.isEmpty(list)) {
+			return list;
+		}
+
+		params = new HashMap<>();
+		params.put("pageNumber", pageNumber);
+		params.put("pageSize", pageSize);
+		return this.queryTopicList(params);
+	}
 }

@@ -24,5 +24,8 @@ public interface LiteMallCommentService {
     int updateLiteMallComment(LiteMallCommentEntity liteMallComment);
 
     int batchRemove(Long[] id);
-	
+
+    int count(int showType, int type, int valueId);
+
+    Page<LiteMallCommentEntity> queryCommentByPage(Integer showType, Map<String, Object> params);
 }

@@ -50,5 +50,9 @@ public class LiteMallCollectManagerImpl implements LiteMallCollectManager {
 		int count = liteMallCollectMapper.batchRemove(id);
 		return count;
 	}
-	
+
+	@Override
+	public List<LiteMallCollectEntity> queryCollectList(Query query) {
+		return this.liteMallCollectMapper.list(query);
+	}
 }

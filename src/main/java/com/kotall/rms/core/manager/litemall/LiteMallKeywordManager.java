@@ -24,5 +24,6 @@ public interface LiteMallKeywordManager {
 	int updateLiteMallKeyword(LiteMallKeywordEntity liteMallKeyword);
 	
 	int batchRemove(Long[] id);
-	
+
+    List<LiteMallKeywordEntity> queryKeywordList(Query query);
 }

@@ -1,5 +1,7 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.core.annotation.StoreFilter;
@@ -58,4 +60,36 @@ public class LiteMallUserServiceImpl implements LiteMallUserService {
 		return count;
 	}
 
+	@Override
+	public List<LiteMallUserEntity> queryByUsername(String username) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("username", username);
+		params.put("deleted", 0);
+
+		return this.queryUserList(params);
+	}
+
+	@Override
+	public List<LiteMallUserEntity> queryByOpenId(String openId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("weixinOpenid", openId);
+		params.put("deleted", 0);
+
+		return this.queryUserList(params);
+	}
+
+	@Override
+	public List<LiteMallUserEntity> queryByMobile(String mobile) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("mobile", mobile);
+		params.put("deleted", 0);
+
+		return this.queryUserList(params);
+	}
+
+	@Override
+	public List<LiteMallUserEntity> queryUserList(Map<String, Object> params) {
+		Query query = new Query(params);
+		return this.liteMallUserManager.queryUserList(query);
+	}
 }

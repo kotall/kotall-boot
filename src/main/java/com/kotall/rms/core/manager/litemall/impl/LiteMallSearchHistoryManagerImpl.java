@@ -30,6 +30,11 @@ public class LiteMallSearchHistoryManagerImpl implements LiteMallSearchHistoryMa
 	}
 
 	@Override
+	public List<LiteMallSearchHistoryEntity> querySearchHistoryList(Query query) {
+		return liteMallSearchHistoryMapper.list(query);
+	}
+
+	@Override
 	public int saveLiteMallSearchHistory(LiteMallSearchHistoryEntity liteMallSearchHistory) {
 		return liteMallSearchHistoryMapper.save(liteMallSearchHistory);
 	}
@@ -50,5 +55,9 @@ public class LiteMallSearchHistoryManagerImpl implements LiteMallSearchHistoryMa
 		int count = liteMallSearchHistoryMapper.batchRemove(id);
 		return count;
 	}
-	
+
+	@Override
+	public void deleteByUserId(Integer userId) {
+		this.liteMallSearchHistoryMapper.deleteByUserId(userId);
+	}
 }

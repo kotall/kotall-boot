@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
@@ -24,5 +25,10 @@ public interface LiteMallKeywordService {
     int updateLiteMallKeyword(LiteMallKeywordEntity liteMallKeyword);
 
     int batchRemove(Long[] id);
-	
+
+    List<LiteMallKeywordEntity> queryKeywordList(Map<String, Object> params);
+
+    LiteMallKeywordEntity queryDefault();
+
+    List<LiteMallKeywordEntity> queryHots();
 }
