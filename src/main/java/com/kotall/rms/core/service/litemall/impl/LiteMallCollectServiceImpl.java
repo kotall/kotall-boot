@@ -84,4 +84,9 @@ public class LiteMallCollectServiceImpl implements LiteMallCollectService {
 		return count;
 	}
 
+	@Override
+	public int countUserCollect(Map<String, Object> params) {
+		Query query = new Query(params);
+		return this.liteMallCollectManager.countUserCollect(query);
+	}
 }

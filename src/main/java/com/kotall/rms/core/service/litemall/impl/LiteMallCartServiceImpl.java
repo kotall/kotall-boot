@@ -118,4 +118,17 @@ public class LiteMallCartServiceImpl implements LiteMallCartService {
 
 		this.liteMallCartManager.deleteCartByCause(new Query(params));
 	}
+
+	@Override
+	public void clearGoods(Integer userId) {
+		Map<String, Object> params = new HashMap<>();
+		//params.put("storeId", storeId);
+		params.put("userId", userId);
+		params.put("checked", 1);
+
+		LiteMallCartEntity cartEntity = new LiteMallCartEntity();
+		cartEntity.setDeleted(1);
+
+		this.liteMallCartManager.updateCartByCause(cartEntity, new Query(params));
+	}
 }

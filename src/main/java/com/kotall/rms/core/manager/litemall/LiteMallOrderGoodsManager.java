@@ -24,5 +24,8 @@ public interface LiteMallOrderGoodsManager {
 	int updateLiteMallOrderGoods(LiteMallOrderGoodsEntity liteMallOrderGoods);
 	
 	int batchRemove(Long[] id);
-	
+
+    List<LiteMallOrderGoodsEntity> queryOrderGoodsList(Query query);
+
+    Integer countTotal(Query query);
 }

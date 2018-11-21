@@ -18,6 +18,8 @@ public interface LiteMallOrderService {
 
 	Page<LiteMallOrderEntity> listLiteMallOrder(Map<String, Object> params);
 
+    Page<LiteMallOrderEntity> queryOrderListByPage(Map<String, Object> params);
+
 	List<LiteMallOrderEntity> queryOrderList(Map<String, Object> params);
 
     int saveLiteMallOrder(LiteMallOrderEntity liteMallOrder);
@@ -29,4 +31,12 @@ public interface LiteMallOrderService {
     int batchRemove(Long[] id);
 
     Map<Object, Object> queryOrderInfo(Integer userId);
+
+    String generateOrderSn(Integer userId);
+
+    LiteMallOrderEntity findOrderBySn(Map<String, Object> params);
+
+    void deleteById(Integer orderId);
+
+
 }

@@ -50,5 +50,14 @@ public class LiteMallGoodsManagerImpl implements LiteMallGoodsManager {
 		int count = liteMallGoodsMapper.batchRemove(id);
 		return count;
 	}
-	
+
+	@Override
+	public Integer countOnSale(Query query) {
+		return this.liteMallGoodsMapper.countTotal(query);
+	}
+
+	@Override
+	public List<Integer> queryCategoryIds(Query query) {
+		return this.liteMallGoodsMapper.queryCategoryIds(query);
+	}
 }

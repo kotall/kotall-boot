@@ -30,6 +30,11 @@ public class LiteMallGoodsAttributeManagerImpl implements LiteMallGoodsAttribute
 	}
 
 	@Override
+	public List<LiteMallGoodsAttributeEntity> queryGoodsAttributeList(Query query) {
+		return liteMallGoodsAttributeMapper.list(query);
+	}
+
+	@Override
 	public int saveLiteMallGoodsAttribute(LiteMallGoodsAttributeEntity liteMallGoodsAttribute) {
 		return liteMallGoodsAttributeMapper.save(liteMallGoodsAttribute);
 	}

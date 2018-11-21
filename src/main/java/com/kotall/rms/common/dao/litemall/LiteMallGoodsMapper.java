@@ -1,9 +1,12 @@
 package com.kotall.rms.common.dao.litemall;
 
+import com.kotall.rms.common.utils.Query;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity;
 import com.kotall.rms.common.dao.sys.BaseMapper;
+
+import java.util.List;
 
 /**
  * 商品基本信息表
@@ -14,5 +17,6 @@ import com.kotall.rms.common.dao.sys.BaseMapper;
  */
 @Mapper
 public interface LiteMallGoodsMapper extends BaseMapper<LiteMallGoodsEntity> {
-	
+
+    List<Integer> queryCategoryIds(Query query);
 }

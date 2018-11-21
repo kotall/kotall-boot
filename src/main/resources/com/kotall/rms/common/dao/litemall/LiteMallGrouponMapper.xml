@@ -105,4 +105,46 @@
 		</foreach>
 	</delete>
 
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`order_id`,
+			`groupon_id`,
+			`rules_id`,
+			`user_id`,
+			`creator_user_id`,
+			`add_time`,
+			`update_time`,
+			`share_url`,
+			`payed`,
+			`deleted`
+		FROM
+			lite_mall_groupon
+		<where>
+			<if test="storeId != null" > `store_id` = #{storeId}</if>
+			<if test="orderId != null" > and `order_id` = #{orderId}</if>
+			<if test="grouponId != null" > and `groupon_id` = #{grouponId}</if>
+			<if test="payed != null" > and `payed` = #{payed}</if>
+			<if test="deleted != null" > and `deleted` = #{deleted}</if>
+		</where>
+		ORDER BY
+			id DESC
+	</select>
+
+	<select id="countTotal" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity">
+		SELECT
+			COUNT(1)
+		FROM
+			lite_mall_groupon
+		<where>
+			<if test="storeId != null" > `store_id` = #{storeId}</if>
+			<if test="orderId != null" > and `order_id` = #{orderId}</if>
+			<if test="grouponId != null" > and `groupon_id` = #{grouponId}</if>
+			<if test="payed != null" > and `payed` = #{payed}</if>
+			<if test="deleted != null" > and `deleted` = #{deleted}</if>
+		</where>
+		ORDER BY
+		id DESC
+	</select>
 </mapper>

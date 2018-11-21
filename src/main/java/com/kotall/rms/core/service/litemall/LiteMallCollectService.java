@@ -36,4 +36,5 @@ public interface LiteMallCollectService {
     List<LiteMallCollectEntity> queryCollectList(Map<String, Object> params);
 
 
+    int countUserCollect(Map<String, Object> params);
 }

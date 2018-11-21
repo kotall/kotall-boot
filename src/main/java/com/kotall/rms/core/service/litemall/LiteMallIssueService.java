@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
@@ -24,5 +25,6 @@ public interface LiteMallIssueService {
     int updateLiteMallIssue(LiteMallIssueEntity liteMallIssue);
 
     int batchRemove(Long[] id);
-	
+
+    List<LiteMallIssueEntity> queryIssueList(Map<String, Object> params);
 }

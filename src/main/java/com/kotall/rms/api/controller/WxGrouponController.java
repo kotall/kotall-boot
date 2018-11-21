@@ -5,6 +5,7 @@ import com.kotall.rms.common.entity.litemall.*;
 import com.kotall.rms.common.integration.express.ExpressService;
 import com.kotall.rms.common.integration.express.dao.ExpressInfo;
 import com.kotall.rms.common.utils.OrderUtil;
+import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.core.service.litemall.*;
 import lombok.extern.slf4j.Slf4j;
@@ -68,11 +69,16 @@ public class WxGrouponController {
                        @RequestParam(defaultValue = "10") Integer size,
                        @RequestParam(defaultValue = "add_time") String sort,
                        @RequestParam(defaultValue = "desc") String order) {
-        Object topicList = grouponRulesService.queryList(page, size, sort, order);
-        int total = grouponRulesService.countList(page, size, sort, order);
-        Map<String, Object> data = new HashMap<String, Object>();
-        data.put("data", topicList);
-        data.put("count", total);
+        Map<String, Object> params = new HashMap<>();
+        //params.put("storeId", storeId);
+        params.put("pageNumber", page);
+        params.put("pageSize", size);
+        Page<Map<String, Object>> pages = grouponRulesService.queryGroupOnList(params);
+        //Object topicList = grouponRulesService.queryList(page, size, sort, order);
+        //int total = grouponRulesService.countList(page, size, sort, order);
+        Map<String, Object> data = new HashMap<>();
+        data.put("data", pages.getRows());
+        data.put("count", pages.getTotal());
         return Result.ok().put("data", data);
     }
 
@@ -115,7 +121,11 @@ public class WxGrouponController {
         orderVo.put("expCode", order.getShipChannel());
         orderVo.put("expNo", order.getShipSn());
 
-        List<LiteMallOrderGoodsEntity> orderGoodsList = orderGoodsService.queryByOid(order.getId());
+        Map<String, Object> params = new HashMap<>();
+        //params.put("storeId", storeId);
+        params.put("orderId", order.getId());
+        params.put("deleted", 0);
+        List<LiteMallOrderGoodsEntity> orderGoodsList = orderGoodsService.queryByOrderId(params);
         List<Map<String, Object>> orderGoodsVoList = new ArrayList<>(orderGoodsList.size());
         for (LiteMallOrderGoodsEntity orderGoods : orderGoodsList) {
             Map<String, Object> orderGoodsVo = new HashMap<>();
@@ -141,8 +151,8 @@ public class WxGrouponController {
             result.put("expressInfo", ei);
         }
 
-        UserVo creator = userService.findUserVoById(groupon.getCreatorUserId());
-        List<UserVo> joiners = new ArrayList<>();
+        LiteMallUserEntity creator = userService.getLiteMallUserById(new Long(groupon.getCreatorUserId()));
+        List<LiteMallUserEntity> joiners = new ArrayList<>();
         joiners.add(creator);
         int linkGrouponId;
         // 这是一个团购发起记录
@@ -152,11 +162,15 @@ public class WxGrouponController {
             linkGrouponId = groupon.getGrouponId();
 
         }
-        List<LiteMallGrouponEntity> groupons = grouponService.queryJoinRecord(linkGrouponId);
+        params = new HashMap<>();
+        //params.put("storeId", storeId);
+        params.put("id", linkGrouponId);
 
-        UserVo joiner;
+        List<LiteMallGrouponEntity> groupons = grouponService.queryJoinRecord(params);
+
+        LiteMallUserEntity joiner;
         for (LiteMallGrouponEntity grouponItem : groupons) {
-            joiner = userService.findUserVoById(grouponItem.getUserId());
+            joiner = userService.getLiteMallUserById(new Long(grouponItem.getUserId()));
             joiners.add(joiner);
         }
 
@@ -200,9 +214,21 @@ public class WxGrouponController {
 
         List<LiteMallGrouponEntity> myGroupons;
         if (showType == 0) {
-            myGroupons = grouponService.queryMyGroupon(userId);
+            Map<String, Object> params = new HashMap<>();
+            params.put("userId", userId);
+            params.put("creatorUserId", userId);
+            params.put("grouponId", 0);
+            params.put("deleted", 0);
+            params.put("deleted", 0);
+            params.put("payed", 1);
+            myGroupons = grouponService.queryMyGroupon(params);
         } else {
-            myGroupons = grouponService.queryMyJoinGroupon(userId);
+            Map<String, Object> params = new HashMap<>();
+            params.put("userId", userId);
+            params.put("grouponId", 0);
+            params.put("deleted", 0);
+            params.put("payed", 1);
+            myGroupons = grouponService.queryMyJoinGroupon(params);
         }
 
         List<Map<String, Object>> grouponVoList = new ArrayList<>(myGroupons.size());
@@ -231,7 +257,12 @@ public class WxGrouponController {
                 linkGrouponId = groupon.getGrouponId();
                 grouponVo.put("isCreator", false);
             }
-            int joinerCount = grouponService.countGroupon(linkGrouponId);
+
+            Map<String, Object> params = new HashMap<>();
+            params.put("grouponId", 0);
+            params.put("deleted", 0);
+            params.put("payed", 1);
+            int joinerCount = grouponService.countGroupon(params);
             grouponVo.put("joinerCount", joinerCount + 1);
 
             //填充订单信息
@@ -241,7 +272,10 @@ public class WxGrouponController {
             grouponVo.put("orderStatusText", OrderUtil.orderStatusText(order));
             grouponVo.put("handleOption", OrderUtil.build(order));
 
-            List<LiteMallOrderGoodsEntity> orderGoodsList = orderGoodsService.queryByOid(order.getId());
+            params = new HashMap<>();
+            //params.put("storeId", storeId);
+            params.put("orderId", order.getId());
+            List<LiteMallOrderGoodsEntity> orderGoodsList = orderGoodsService.queryByOrderId(params);
             List<Map<String, Object>> orderGoodsVoList = new ArrayList<>(orderGoodsList.size());
             for (LiteMallOrderGoodsEntity orderGoods : orderGoodsList) {
                 Map<String, Object> orderGoodsVo = new HashMap<>();
@@ -269,7 +303,11 @@ public class WxGrouponController {
             return Result.error(-1, "未找到对应的商品");
         }
 
-        List<LiteMallGrouponRulesEntity> rules = rulesService.queryByGoodsId(goodsId);
+        Map<String, Object> params = new HashMap<>();
+        //params.put("storeId", storeId);
+        params.put("goodsId", goodsId);
+        params.put("deleted", 0);
+        List<LiteMallGrouponRulesEntity> rules = rulesService.queryByGoodsId(params);
 
         return Result.ok().put("data", rules);
     }

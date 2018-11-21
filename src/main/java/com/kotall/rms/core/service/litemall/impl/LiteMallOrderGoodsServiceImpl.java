@@ -9,6 +9,7 @@ import com.kotall.rms.core.service.litemall.LiteMallOrderGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,6 +32,18 @@ public class LiteMallOrderGoodsServiceImpl implements LiteMallOrderGoodsService 
 		Page<LiteMallOrderGoodsEntity> page = new Page<>(query);
 		liteMallOrderGoodsManager.listLiteMallOrderGoods(page, query);
 		return page;
+	}
+
+	@Override
+	public List<LiteMallOrderGoodsEntity> queryOrderGoodsList(Map<String, Object> params) {
+		Query query = new Query(params);
+		return this.liteMallOrderGoodsManager.queryOrderGoodsList(query);
+	}
+
+	@Override
+	public List<LiteMallOrderGoodsEntity> queryByOrderId(Map<String, Object> params) {
+		Query query = new Query(params);
+		return this.liteMallOrderGoodsManager.queryOrderGoodsList(query);
 	}
 
 	@Override
@@ -57,4 +70,9 @@ public class LiteMallOrderGoodsServiceImpl implements LiteMallOrderGoodsService 
 		return count;
 	}
 
+	@Override
+	public Integer countCommentIds(Map<String, Object> params) {
+		Query query = new Query(params);
+		return liteMallOrderGoodsManager.countTotal(query);
+	}
 }

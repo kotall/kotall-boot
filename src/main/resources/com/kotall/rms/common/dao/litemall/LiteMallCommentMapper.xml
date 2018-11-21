@@ -26,12 +26,10 @@
 			<if test="hasPicture != null "> and `has_picture` = #{hasPicture}</if>
 			<if test="star != null "> and `star` = #{star}</if>
 			<if test="userId != null "> and `user_id` = #{userId}</if>
-			<if test="sql_filter != null and sql_filter.trim() !='' ">
-				and ${sql_filter}
-			</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter}</if>
 		</where>
 		ORDER BY
-			id DESC
+			add_time DESC
 	</select>
 	
 	<insert id="save">
@@ -123,6 +121,34 @@
 			<if test="valueId != null "> `valueId` = #{valueId}</if>
 			<if test="deleted != null "> `deleted` = #{deleted}</if>
 			<if test="hasPicture != null "> `has_picture` = #{hasPicture}</if>
+		</where>
+		ORDER BY
+			add_time DESC
+	</select>
+
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallCommentEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`value_id`,
+			`type`,
+			`content`,
+			`user_id`,
+			`has_picture`,
+			`pic_urls`,
+			`star`,
+			`add_time`,
+			`update_time`,
+			`deleted`
+		FROM
+			lite_mall_comment
+		<where>
+			<if test="storeId != null "> `store_id` = #{storeId}</if>
+			<if test="valueId != null "> and `value_id` = #{valueId}</if>
+			<if test="type != null "> and `type` = #{type}</if>
+			<if test="hasPicture != null "> and `has_picture` = #{hasPicture}</if>
+			<if test="star != null "> and `star` = #{star}</if>
+			<if test="userId != null "> and `user_id` = #{userId}</if>
 		</where>
 		ORDER BY
 			add_time DESC

@@ -30,6 +30,11 @@ public class LiteMallOrderGoodsManagerImpl implements LiteMallOrderGoodsManager 
 	}
 
 	@Override
+	public List<LiteMallOrderGoodsEntity> queryOrderGoodsList(Query query) {
+		return liteMallOrderGoodsMapper.list(query);
+	}
+
+	@Override
 	public int saveLiteMallOrderGoods(LiteMallOrderGoodsEntity liteMallOrderGoods) {
 		return liteMallOrderGoodsMapper.save(liteMallOrderGoods);
 	}
@@ -50,5 +55,9 @@ public class LiteMallOrderGoodsManagerImpl implements LiteMallOrderGoodsManager 
 		int count = liteMallOrderGoodsMapper.batchRemove(id);
 		return count;
 	}
-	
+
+	@Override
+	public Integer countTotal(Query query) {
+		return this.liteMallOrderGoodsMapper.countTotal(query);
+	}
 }

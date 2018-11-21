@@ -24,5 +24,6 @@ public interface LiteMallIssueManager {
 	int updateLiteMallIssue(LiteMallIssueEntity liteMallIssue);
 	
 	int batchRemove(Long[] id);
-	
+
+    List<LiteMallIssueEntity> queryIssueList(Query query);
 }

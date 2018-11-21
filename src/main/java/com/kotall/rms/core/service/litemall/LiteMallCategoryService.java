@@ -17,6 +17,8 @@ public interface LiteMallCategoryService {
 
 	Page<LiteMallCategoryEntity> listLiteMallCategory(Map<String, Object> params);
 
+    List<LiteMallCategoryEntity> queryCategoryList(Map<String, Object> params);
+
     int saveLiteMallCategory(LiteMallCategoryEntity liteMallCategory);
 
     LiteMallCategoryEntity getLiteMallCategoryById(Long id);
@@ -48,4 +50,6 @@ public interface LiteMallCategoryService {
 
 
     List<LiteMallCategoryEntity> queryL1();
+
+    List<LiteMallCategoryEntity> queryL2ByIds(Map<String, Object> params);
 }

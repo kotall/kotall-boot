@@ -113,4 +113,17 @@
 			add_time DESC
 	</select>
 
+	<select id="countTotal" resultType="com.kotall.rms.common.entity.litemall.LiteMallCollectEntity">
+		SELECT
+			COUNT(1)
+		FROM
+			lite_mall_collect
+		<where>
+			<if test="storeId != null "> `store_id` = #{storeId}</if>
+			<if test="userId != null "> and `user_id` = #{userId}</if>
+			<if test="valueId != null "> and `value_id` = #{valueId}</if>
+			<if test="type != null "> and `type` = #{type}</if>
+		</where>
+	</select>
+
 </mapper>

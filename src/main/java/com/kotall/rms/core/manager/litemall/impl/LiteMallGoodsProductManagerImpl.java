@@ -30,6 +30,11 @@ public class LiteMallGoodsProductManagerImpl implements LiteMallGoodsProductMana
 	}
 
 	@Override
+	public List<LiteMallGoodsProductEntity> queryGoodsProductList(Query query) {
+		return this.liteMallGoodsProductMapper.list(query);
+	}
+
+	@Override
 	public int saveLiteMallGoodsProduct(LiteMallGoodsProductEntity liteMallGoodsProduct) {
 		return liteMallGoodsProductMapper.save(liteMallGoodsProduct);
 	}

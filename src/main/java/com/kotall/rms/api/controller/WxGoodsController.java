@@ -3,6 +3,7 @@ package com.kotall.rms.api.controller;
 import com.kotall.rms.api.SystemConfig;
 import com.kotall.rms.api.annotation.LoginUser;
 import com.kotall.rms.common.entity.litemall.*;
+import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.core.service.litemall.*;
 import com.mysql.jdbc.StringUtils;
@@ -86,17 +87,29 @@ public class WxGoodsController {
         LiteMallGoodsEntity info = goodsService.getLiteMallGoodsById(new Long(id));
 
         // 商品属性
-        List<LiteMallGoodsAttributeEntity> goodsAttributeList = goodsAttributeService.queryByGid(id);
+        Map<String, Object> params = new HashMap<>();
+        //params.put("storeId", storeId);
+        params.put("goodsId", id);
+        params.put("deleted", 0);
+        List<LiteMallGoodsAttributeEntity> goodsAttributeList = goodsAttributeService.queryByGid(params);
 
         // 商品规格
         // 返回的是定制的GoodsSpecificationVo
-        Object specificationList = goodsSpecificationService.getSpecificationVoList(id);
+        // TODO
+        Object specificationList = null; //goodsSpecificationService.getSpecificationList(id);
 
         // 商品规格对应的数量和价格
-        List<LiteMallGoodsProductEntity> productList = productService.queryByGid(id);
+        params = new HashMap<>();
+        //params.put("storeId", storeId);
+        params.put("goodsId", id);
+        params.put("deleted", 0);
+        List<LiteMallGoodsProductEntity> productList = productService.queryByGoodsId(params);
 
         // 商品问题，这里是一些通用问题
-        List<LiteMallIssueEntity> issue = goodsIssueService.query();
+        params = new HashMap<>();
+        //params.put("storeId", storeId);
+        params.put("deleted", 0);
+        List<LiteMallIssueEntity> issue = goodsIssueService.queryIssueList(params);
 
         // 商品品牌商
         Integer brandId = info.getBrandId();
@@ -109,10 +122,15 @@ public class WxGoodsController {
         }
 
         // 评论
-        List<LiteMallCommentEntity> comments = commentService.queryGoodsByGid(id, 0, 2);
-        List<Map<String, Object>> commentsVo = new ArrayList<>(comments.size());
-        int commentCount = commentService.countGoodsByGid(id, 0, 2);
-        for (LiteMallCommentEntity comment : comments) {
+        params = new HashMap<>();
+        //params.put("storeId", storeId);
+        params.put("deleted", 0);
+        params.put("goodsId", id);
+        params.put("pageNumber", 1);
+        params.put("pageSize", 2);
+        Page<LiteMallCommentEntity> pages = commentService.queryCommentListByPage(params);
+        List<Map<String, Object>> commentsVo = new ArrayList<>(pages.getRows().size());
+        for (LiteMallCommentEntity comment : pages.getRows()) {
             Map<String, Object> c = new HashMap<>();
             c.put("id", comment.getId());
             c.put("addTime", comment.getAddTime());
@@ -124,16 +142,24 @@ public class WxGoodsController {
             commentsVo.add(c);
         }
         Map<String, Object> commentList = new HashMap<>();
-        commentList.put("count", commentCount);
+        commentList.put("count", pages.getTotal());
         commentList.put("data", commentsVo);
 
         //团购信息
-        List<LiteMallGrouponRulesEntity> rules = rulesService.queryByGoodsId(id);
+        params = new HashMap<>();
+        //params.put("storeId", storeId);
+        params.put("goodsId", id);
+        params.put("deleted", 0);
+        List<LiteMallGrouponRulesEntity> rules = rulesService.queryByGoodsId(params);
 
         // 用户收藏
         int userHasCollect = 0;
         if (userId != null) {
-            userHasCollect = collectService.count(userId, id);
+            params = new HashMap<>();
+            //params.put("storeId", storeId);
+            params.put("userId", userId);
+            params.put("goodsId", id);
+            userHasCollect = collectService.countUserCollect(params);
         }
 
         // 记录用户的足迹
@@ -239,7 +265,7 @@ public class WxGoodsController {
                        @RequestParam(defaultValue = "add_time") String sort,
                        @RequestParam(defaultValue = "desc") String order) {
 
-        //添加到搜索历史
+        // 添加到搜索历史
         if (userId != null && !StringUtils.isNullOrEmpty(keyword)) {
             LiteMallSearchHistoryEntity searchHistoryVo = new LiteMallSearchHistoryEntity();
             searchHistoryVo.setKeyword(keyword);
@@ -248,23 +274,46 @@ public class WxGoodsController {
             searchHistoryService.saveLiteMallSearchHistory(searchHistoryVo);
         }
 
-        //查询列表数据
-        List<LiteMallGoodsEntity> goodsList = goodsService.querySelective(categoryId, brandId, keyword, isHot, isNew, page, size, sort, order);
-        int total = goodsService.countSelective(categoryId, brandId, keyword, isHot, isNew, page, size, sort, order);
+        // 查询列表数据
+        Map<String, Object> params = new HashMap<>();
+        //params.put("storeId", storeId);
+        params.put("categoryId", categoryId);
+        params.put("brandId", brandId);
+        params.put("keyword", keyword);
+        params.put("isHot", isHot);
+        params.put("isNew", isNew);
+        params.put("pageNumber", page);
+        params.put("pageSize", size);
+        params.put("deleted", 0);
+
+        Page<LiteMallGoodsEntity> pages = goodsService.queryGoodsListByPage(params);
 
         // 查询商品所属类目列表。
-        List<Integer> goodsCatIds = goodsService.getCatIds(brandId, keyword, isHot, isNew);
-        List<LiteMallCategoryEntity> categoryList = null;
+        params = new HashMap<>();
+        //params.put("storeId", storeId);
+        params.put("categoryId", categoryId);
+        params.put("brandId", brandId);
+        params.put("keyword", keyword);
+        params.put("isHot", isHot);
+        params.put("isNew", isNew);
+        params.put("deleted", 0);
+        List<Integer> goodsCatIds = goodsService.queryCategoryIds(params);
+        List<LiteMallCategoryEntity> categoryList;
         if (goodsCatIds.size() != 0) {
-            categoryList = categoryService.queryL2ByIds(goodsCatIds);
+            params = new HashMap<>();
+            //params.put("storeId", storeId);
+            params.put("ids", goodsCatIds);
+            params.put("level", "L2");
+            params.put("deleted", 0);
+            categoryList = categoryService.queryL2ByIds(params);
         } else {
             categoryList = new ArrayList<>(0);
         }
 
         Map<String, Object> data = new HashMap<>();
-        data.put("goodsList", goodsList);
+        data.put("goodsList", pages.getRows());
         data.put("filterCategoryList", categoryList);
-        data.put("count", total);
+        data.put("count", pages.getTotal());
         return Result.ok().put("data", data);
     }
 
@@ -351,8 +400,13 @@ public class WxGoodsController {
         int cid = goods.getCategoryId();
 
         // 查找六个相关商品
-        int related = 6;
-        List<LiteMallGoodsEntity> goodsList = goodsService.queryByCategory(cid, 0, related);
+        Map<String, Object> params = new HashMap<>();
+        //params.put("storeId", storeId);
+        params.put("categoryId", cid);
+        params.put("pageNumber", 1);
+        params.put("pageSize", 6);
+        params.put("deleted", 0);
+        List<LiteMallGoodsEntity> goodsList = goodsService.queryByCategory(params);
         Map<String, Object> data = new HashMap<>();
         data.put("goodsList", goodsList);
         return Result.ok().put("data", data);
@@ -375,7 +429,9 @@ public class WxGoodsController {
      */
     @GetMapping("count")
     public Object count() {
-        Integer goodsCount = goodsService.queryOnSale();
+        Map<String, Object> params = new HashMap<>();
+        //params.put("storeId", storeId);
+        Integer goodsCount = goodsService.countOnSale(params);
         Map<String, Object> data = new HashMap<>();
         data.put("goodsCount", goodsCount);
         return Result.ok().put("data", data);

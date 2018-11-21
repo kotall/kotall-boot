@@ -1,11 +1,10 @@
 package com.kotall.rms.core.service.litemall;
 
+import com.kotall.rms.common.entity.litemall.LiteMallGrouponRulesEntity;
+import com.kotall.rms.common.utils.Page;
+
 import java.util.List;
 import java.util.Map;
-
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
-import com.kotall.rms.common.entity.litemall.LiteMallGrouponRulesEntity;
 
 /**
  * 
@@ -17,6 +16,8 @@ import com.kotall.rms.common.entity.litemall.LiteMallGrouponRulesEntity;
 public interface LiteMallGrouponRulesService {
 
 	Page<LiteMallGrouponRulesEntity> listLiteMallGrouponRules(Map<String, Object> params);
+
+    List<LiteMallGrouponRulesEntity> queryLiteMallGrouponRules(Map<String, Object> params);
 
     int saveLiteMallGrouponRules(LiteMallGrouponRulesEntity liteMallGrouponRules);
 
@@ -31,5 +32,9 @@ public interface LiteMallGrouponRulesService {
      * @param params
      * @return
      */
-    List<Map<String,Object>> queryGroupOnList(Map<String, Object> params);
+    Page<Map<String,Object>> queryGroupOnList(Map<String, Object> params);
+
+    List<LiteMallGrouponRulesEntity> queryByGoodsId(Map<String, Object> params);
+
+    boolean isExpired(LiteMallGrouponRulesEntity rules);
 }

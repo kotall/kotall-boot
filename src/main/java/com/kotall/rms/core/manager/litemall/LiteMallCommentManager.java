@@ -26,4 +26,6 @@ public interface LiteMallCommentManager {
 	int batchRemove(Long[] id);
 
     int countComment(Query query);
+
+    List<LiteMallCommentEntity> queryCommentList(Query query);
 }

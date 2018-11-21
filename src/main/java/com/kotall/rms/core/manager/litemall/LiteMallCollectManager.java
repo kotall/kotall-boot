@@ -26,4 +26,6 @@ public interface LiteMallCollectManager {
 	int batchRemove(Long[] id);
 
     List<LiteMallCollectEntity> queryCollectList(Query query);
+
+    int countUserCollect(Query query);
 }

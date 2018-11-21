@@ -18,6 +18,8 @@ public interface LiteMallGoodsService {
 
 	Page<LiteMallGoodsEntity> listLiteMallGoods(Map<String, Object> params);
 
+    Page<LiteMallGoodsEntity> queryGoodsListByPage(Map<String, Object> params);
+
     int saveLiteMallGoods(LiteMallGoodsEntity liteMallGoods);
 
     LiteMallGoodsEntity getLiteMallGoodsById(Long id);
@@ -46,4 +48,8 @@ public interface LiteMallGoodsService {
      * @return
      */
     List<LiteMallGoodsEntity> queryByCategory(Map<String, Object> params);
+
+    Integer countOnSale(Map<String, Object> params);
+
+    List<Integer> queryCategoryIds(Map<String, Object> params);
 }

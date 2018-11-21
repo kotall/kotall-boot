@@ -34,11 +34,15 @@
 			`deleted`
 		FROM
 			lite_mall_order
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="storeId != null"> `store_id` = #{storeId}</if>
+			<if test="userId != null"> and `user_id` = #{userId}</if>
+			<if test="orderSn != null"> and `order_sn` = #{orderSn}</if>
+			<if test="orderStatus != null"> and `order_status` = #{orderStatus}</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter}</if>
+		</where>
 		ORDER BY
-			id DESC
+			add_time DESC
 	</select>
 	
 	<insert id="save">
@@ -165,8 +169,13 @@
 			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
 			<if test="deleted != null">`deleted` = #{deleted}</if>
 		</set>
-		WHERE
-			id = #{id}
+		<where>
+			<if test=" id != null"> `id` = #{id}</if>
+			<if test=" storeId != null"> and `store_id` = #{storeId}</if>
+			<if test=" userId != null"> and `user_id` = #{userId}</if>
+			<if test=" orderStatus != null"> and `order_status` = #{orderStatus}</if>
+			<if test=" deleted != null"> and `deleted` = #{deleted}</if>
+		</where>
 	</update>
 	
 	<delete id="batchRemove">
@@ -213,12 +222,25 @@
 			lite_mall_order
 		<where>
             <if test=" storeId != null">`store_id` = #{storeId}</if>
-            <if test=" userId != null">`user_id` = #{userId}</if>
-            <if test=" orderStatus != null">`order_status` = #{orderStatus}</if>
-            <if test=" deleted != null">`deleted` = #{deleted}</if>
+            <if test=" userId != null"> and `user_id` = #{userId}</if>
+            <if test=" orderStatus != null"> and `order_status` = #{orderStatus}</if>
+            <if test=" deleted != null"> and `deleted` = #{deleted}</if>
 		</where>
 		ORDER BY
 			add_time DESC
+	</select>
+
+	<select id="countTotal" resultType="com.kotall.rms.common.entity.litemall.LiteMallOrderEntity">
+		SELECT
+			COUNT(1)
+		FROM
+		lite_mall_order
+		<where>
+			<if test="storeId != null"> `store_id` = #{storeId}</if>
+			<if test="userId != null"> and `user_id` = #{userId}</if>
+			<if test="orderSn != null"> and `order_sn` = #{orderSn}</if>
+			<if test="orderStatus != null"> and `order_status` = #{orderStatus}</if>
+		</where>
 	</select>
 
 </mapper>

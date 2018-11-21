@@ -37,6 +37,17 @@ public class LiteMallCategoryServiceImpl implements LiteMallCategoryService {
 	}
 
 	@Override
+	public List<LiteMallCategoryEntity> queryCategoryList(Map<String, Object> params) {
+		Query query = new Query(params);
+		return this.liteMallCategoryManager.queryCategoryList(query);
+	}
+
+	@Override
+	public List<LiteMallCategoryEntity> queryL2ByIds(Map<String, Object> params) {
+		return this.queryCategoryList(params);
+	}
+
+	@Override
 	public int saveLiteMallCategory(LiteMallCategoryEntity role) {
 		int count = liteMallCategoryManager.saveLiteMallCategory(role);
 		return count;

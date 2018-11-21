@@ -130,8 +130,8 @@ public class WxHomeController {
         params.put("store_id", appConfig.getStoreId());
         params.put("pageNumber", 1);
         params.put("pageSize", 5);
-        List<Map<String, Object>> grouponList = grouponRulesService.queryGroupOnList(params);
-        data.put("grouponList", grouponList);
+        Page<Map<String, Object>> grouponList = grouponRulesService.queryGroupOnList(params);
+        data.put("grouponList", grouponList.getRows());
 
         // ---------------------------------------------------------------------------------------
         params = new HashMap<>();
@@ -154,10 +154,12 @@ public class WxHomeController {
                 params.put("pageNumber", 1);
                 params.put("pageSize", SystemConfig.getCatlogMoreLimit());
                 params.put("ids", l2List);
+                params.put("isOnSale", 1);
+                params.put("deleted", 0);
                 categoryGoods = goodsService.queryByCategory(params);
             }
 
-            Map<String, Object> catGoods = new HashMap<String, Object>();
+            Map<String, Object> catGoods = new HashMap<>();
             catGoods.put("id", catL1.getId());
             catGoods.put("name", catL1.getName());
             catGoods.put("goodsList", categoryGoods);

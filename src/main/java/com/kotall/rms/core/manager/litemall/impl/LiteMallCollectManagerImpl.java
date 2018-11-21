@@ -55,4 +55,9 @@ public class LiteMallCollectManagerImpl implements LiteMallCollectManager {
 	public List<LiteMallCollectEntity> queryCollectList(Query query) {
 		return this.liteMallCollectMapper.list(query);
 	}
+
+	@Override
+	public int countUserCollect(Query query) {
+		return this.liteMallCollectMapper.countTotal(query);
+	}
 }

@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.core.annotation.StoreFilter;
@@ -32,6 +33,12 @@ public class LiteMallIssueServiceImpl implements LiteMallIssueService {
 		Page<LiteMallIssueEntity> page = new Page<>(query);
 		liteMallIssueManager.listLiteMallIssue(page, query);
 		return page;
+	}
+
+	@Override
+	public List<LiteMallIssueEntity> queryIssueList(Map<String, Object> params) {
+		Query query = new Query(params);
+		return liteMallIssueManager.queryIssueList(query);
 	}
 
 	@Override

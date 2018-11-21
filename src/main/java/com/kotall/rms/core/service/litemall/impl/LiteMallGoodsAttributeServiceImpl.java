@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,17 @@ public class LiteMallGoodsAttributeServiceImpl implements LiteMallGoodsAttribute
 		Page<LiteMallGoodsAttributeEntity> page = new Page<>(query);
 		liteMallGoodsAttributeManager.listLiteMallGoodsAttribute(page, query);
 		return page;
+	}
+
+	@Override
+	public List<LiteMallGoodsAttributeEntity> queryGoodsAttributeList(Map<String, Object> params) {
+		Query query = new Query(params);
+		return liteMallGoodsAttributeManager.queryGoodsAttributeList(query);
+	}
+
+	@Override
+	public List<LiteMallGoodsAttributeEntity> queryByGid(Map<String, Object> params) {
+		return this.queryGoodsAttributeList(params);
 	}
 
 	@Override

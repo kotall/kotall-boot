@@ -24,5 +24,8 @@ public interface LiteMallGoodsManager {
 	int updateLiteMallGoods(LiteMallGoodsEntity liteMallGoods);
 	
 	int batchRemove(Long[] id);
-	
+
+    Integer countOnSale(Query query);
+
+	List<Integer> queryCategoryIds(Query query);
 }

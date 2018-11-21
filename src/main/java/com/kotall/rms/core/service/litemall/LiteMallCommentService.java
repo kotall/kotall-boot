@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
@@ -17,6 +18,10 @@ public interface LiteMallCommentService {
 
 	Page<LiteMallCommentEntity> listLiteMallComment(Map<String, Object> params);
 
+    Page<LiteMallCommentEntity> queryCommentListByPage(Map<String, Object> params);
+
+    List<LiteMallCommentEntity> queryCommentList(Map<String, Object> params);
+
     int saveLiteMallComment(LiteMallCommentEntity liteMallComment);
 
     LiteMallCommentEntity getLiteMallCommentById(Long id);
@@ -28,4 +33,6 @@ public interface LiteMallCommentService {
     int count(int showType, int type, int valueId);
 
     Page<LiteMallCommentEntity> queryCommentByPage(Integer showType, Map<String, Object> params);
+
+    List<LiteMallCommentEntity> queryGoodsByGid(Map<String, Object> params);
 }

@@ -29,6 +29,11 @@ public class LiteMallGoodsServiceImpl implements LiteMallGoodsService {
 	@StoreFilter
 	@Override
 	public Page<LiteMallGoodsEntity> listLiteMallGoods(Map<String, Object> params) {
+		return this.queryGoodsListByPage(params);
+	}
+
+	@Override
+	public Page<LiteMallGoodsEntity> queryGoodsListByPage(Map<String, Object> params) {
 		Query query = new Query(params);
 		Page<LiteMallGoodsEntity> page = new Page<>(query);
 		liteMallGoodsManager.listLiteMallGoods(page, query);
@@ -83,11 +88,21 @@ public class LiteMallGoodsServiceImpl implements LiteMallGoodsService {
 
 	@Override
 	public List<LiteMallGoodsEntity> queryByCategory(Map<String, Object> params) {
-		params.put("isOnSale", 1);
-		params.put("deleted", 0);
 		Query query = new Query(params);
 		Page<LiteMallGoodsEntity> page = new Page<>(query);
 		liteMallGoodsManager.listLiteMallGoods(page, query);
 		return page.getRows();
+	}
+
+	@Override
+	public Integer countOnSale(Map<String, Object> params) {
+		Query query = new Query(params);
+		return this.liteMallGoodsManager.countOnSale(query);
+	}
+
+	@Override
+	public List<Integer> queryCategoryIds(Map<String, Object> params) {
+		Query query = new Query(params);
+		return this.liteMallGoodsManager.queryCategoryIds(query);
 	}
 }

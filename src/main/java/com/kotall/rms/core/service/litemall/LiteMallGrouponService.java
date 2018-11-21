@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
@@ -17,6 +18,8 @@ public interface LiteMallGrouponService {
 
 	Page<LiteMallGrouponEntity> listLiteMallGroupon(Map<String, Object> params);
 
+    List<LiteMallGrouponEntity> queryGrouponList(Map<String, Object> params);
+
     int saveLiteMallGroupon(LiteMallGrouponEntity liteMallGroupon);
 
     LiteMallGrouponEntity getLiteMallGrouponById(Long id);
@@ -24,5 +27,14 @@ public interface LiteMallGrouponService {
     int updateLiteMallGroupon(LiteMallGrouponEntity liteMallGroupon);
 
     int batchRemove(Long[] id);
-	
+
+    List<LiteMallGrouponEntity> queryJoinRecord(Map<String, Object> params);
+
+    List<LiteMallGrouponEntity> queryMyGroupon(Map<String, Object> params);
+
+    List<LiteMallGrouponEntity> queryMyJoinGroupon(Map<String, Object> params);
+
+    int countGroupon(Map<String, Object> params);
+
+    LiteMallGrouponEntity queryByOrderId(Map<String, Object> params);
 }

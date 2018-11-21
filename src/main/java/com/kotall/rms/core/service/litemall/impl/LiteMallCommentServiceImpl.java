@@ -1,6 +1,7 @@
 package com.kotall.rms.core.service.litemall.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.core.annotation.StoreFilter;
@@ -29,6 +30,11 @@ public class LiteMallCommentServiceImpl implements LiteMallCommentService {
 	@StoreFilter
 	@Override
 	public Page<LiteMallCommentEntity> listLiteMallComment(Map<String, Object> params) {
+		return this.queryCommentListByPage(params);
+	}
+
+	@Override
+	public Page<LiteMallCommentEntity> queryCommentListByPage(Map<String, Object> params) {
 		Query query = new Query(params);
 		Page<LiteMallCommentEntity> page = new Page<>(query);
 		liteMallCommentManager.listLiteMallComment(page, query);
@@ -49,6 +55,17 @@ public class LiteMallCommentServiceImpl implements LiteMallCommentService {
 		Page<LiteMallCommentEntity> page = new Page<>(query);
 		this.liteMallCommentManager.listLiteMallComment(page, query);
 		return page;
+	}
+
+	@Override
+	public List<LiteMallCommentEntity> queryCommentList(Map<String, Object> params) {
+		Query query = new Query(params);
+		return this.liteMallCommentManager.queryCommentList(query);
+	}
+
+	@Override
+	public List<LiteMallCommentEntity> queryGoodsByGid(Map<String, Object> params) {
+		return this.queryCommentList(params);
 	}
 
 	@Override

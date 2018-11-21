@@ -1,8 +1,10 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.core.annotation.StoreFilter;
+import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,17 @@ public class LiteMallGrouponServiceImpl implements LiteMallGrouponService {
 	}
 
 	@Override
+	public List<LiteMallGrouponEntity> queryGrouponList(Map<String, Object> params) {
+		Query query = new Query(params);
+		return liteMallGrouponManager.queryGroupOnList(query);
+	}
+
+	@Override
+	public List<LiteMallGrouponEntity> queryJoinRecord(Map<String, Object> params) {
+		return this.queryGrouponList(params);
+	}
+
+	@Override
 	public int saveLiteMallGroupon(LiteMallGrouponEntity role) {
 		int count = liteMallGrouponManager.saveLiteMallGroupon(role);
 		return count;
@@ -58,4 +71,26 @@ public class LiteMallGrouponServiceImpl implements LiteMallGrouponService {
 		return count;
 	}
 
+	@Override
+	public List<LiteMallGrouponEntity> queryMyGroupon(Map<String, Object> params) {
+		return this.queryGrouponList(params);
+	}
+
+	@Override
+	public List<LiteMallGrouponEntity> queryMyJoinGroupon(Map<String, Object> params) {
+		return this.queryGrouponList(params);
+	}
+
+	@Override
+	public int countGroupon(Map<String, Object> params) {
+		Query query = new Query(params);
+		return this.liteMallGrouponManager.countGroupOn(query);
+	}
+
+	@Override
+	public LiteMallGrouponEntity queryByOrderId(Map<String, Object> params) {
+		List<LiteMallGrouponEntity> list = this.queryGrouponList(params);
+
+		return CollectionUtils.isEmpty(list) ? null : list.get(0);
+	}
 }

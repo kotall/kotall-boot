@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
@@ -17,6 +18,8 @@ public interface LiteMallGoodsProductService {
 
 	Page<LiteMallGoodsProductEntity> listLiteMallGoodsProduct(Map<String, Object> params);
 
+    List<LiteMallGoodsProductEntity> queryGoodsProductList(Map<String, Object> params);
+
     int saveLiteMallGoodsProduct(LiteMallGoodsProductEntity liteMallGoodsProduct);
 
     LiteMallGoodsProductEntity getLiteMallGoodsProductById(Long id);
@@ -24,5 +27,6 @@ public interface LiteMallGoodsProductService {
     int updateLiteMallGoodsProduct(LiteMallGoodsProductEntity liteMallGoodsProduct);
 
     int batchRemove(Long[] id);
-	
+
+    List<LiteMallGoodsProductEntity> queryByGoodsId(Map<String, Object> params);
 }

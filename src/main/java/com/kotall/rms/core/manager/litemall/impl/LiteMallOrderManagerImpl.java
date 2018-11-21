@@ -55,5 +55,9 @@ public class LiteMallOrderManagerImpl implements LiteMallOrderManager {
 		int count = liteMallOrderMapper.batchRemove(id);
 		return count;
 	}
-	
+
+	@Override
+	public int countTotal(Query query) {
+		return this.liteMallOrderMapper.countTotal(query);
+	}
 }

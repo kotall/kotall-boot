@@ -17,8 +17,14 @@
 			`deleted`
 		FROM
 			lite_mall_goods_product
+		<where>
+			<if test="storeId != null"> `store_id` = #{storeId}</if>
+			<if test="goodsId != null"> and  `goods_id` = #{goodsId}</if>
+			<if test="deleted != null"> and  `deleted` = #{deleted}</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter}</if>
+		</where>
 		ORDER BY
-			id DESC
+			add_time DESC
 	</select>
 	
 	<insert id="save">
@@ -91,5 +97,28 @@
 			#{id}
 		</foreach>
 	</delete>
+
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsProductEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`goods_id`,
+			`specifications`,
+			`price`,
+			`number`,
+			`url`,
+			`add_time`,
+			`update_time`,
+			`deleted`
+		FROM
+			lite_mall_goods_product
+		<where>
+			<if test="storeId != null"> `store_id` = #{storeId}</if>
+			<if test="goodsId != null"> and `goods_id` = #{goodsId}</if>
+			<if test="deleted != null"> and `deleted` = #{deleted}</if>
+		</where>
+		ORDER BY
+			add_time DESC
+	</select>
 
 </mapper>

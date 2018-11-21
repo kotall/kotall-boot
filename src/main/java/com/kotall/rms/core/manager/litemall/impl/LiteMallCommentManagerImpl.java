@@ -30,6 +30,11 @@ public class LiteMallCommentManagerImpl implements LiteMallCommentManager {
 	}
 
 	@Override
+	public List<LiteMallCommentEntity> queryCommentList(Query query) {
+		return this.liteMallCommentMapper.list(query);
+	}
+
+	@Override
 	public int saveLiteMallComment(LiteMallCommentEntity liteMallComment) {
 		return liteMallCommentMapper.save(liteMallComment);
 	}

@@ -37,4 +37,6 @@ public interface LiteMallCartService {
     void updateCheck(Integer userId, List<Integer> productIds, Boolean isChecked);
 
     void delete(List<Integer> productIds, Integer userId);
+
+    void clearGoods(Integer userId);
 }

@@ -30,6 +30,11 @@ public class LiteMallIssueManagerImpl implements LiteMallIssueManager {
 	}
 
 	@Override
+	public List<LiteMallIssueEntity> queryIssueList(Query query) {
+		return liteMallIssueMapper.list(query);
+	}
+
+	@Override
 	public int saveLiteMallIssue(LiteMallIssueEntity liteMallIssue) {
 		return liteMallIssueMapper.save(liteMallIssue);
 	}
