@@ -169,6 +169,6 @@ public class WxHomeController {
 
         // 缓存数据
         HomeCacheManager.loadData(HomeCacheManager.INDEX, data);
-        return Result.ok(data);
+        return Result.ok().put("data", data);
     }
 }
