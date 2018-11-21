@@ -164,7 +164,7 @@
 		</foreach>
 	</delete>
 
-	<select id="countTotal" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity">
+	<select id="countTotal" resultType="int">
 		SELECT
 			COUNT(1)
 		FROM
@@ -184,7 +184,7 @@
 		</where>
 	</select>
 
-	<select id="countTotal" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity">
+	<select id="queryCategoryIds" resultType="java.lang.Integer">
 		SELECT
 			distinct(`category_id`)
 		FROM

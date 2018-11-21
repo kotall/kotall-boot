@@ -1,7 +1,12 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +38,12 @@ public class LiteMallUserFormidServiceImpl implements LiteMallUserFormidService 
 	}
 
 	@Override
+	public List<LiteMallUserFormidEntity> queryUserFormid(Map<String, Object> params) {
+		Query query = new Query(params);
+		return liteMallUserFormidManager.queryUserFormId(query);
+	}
+
+	@Override
 	public int saveLiteMallUserFormid(LiteMallUserFormidEntity role) {
 		int count = liteMallUserFormidManager.saveLiteMallUserFormid(role);
 		return count;
@@ -56,4 +67,29 @@ public class LiteMallUserFormidServiceImpl implements LiteMallUserFormidService 
 		return count;
 	}
 
+	@Override
+	public LiteMallUserFormidEntity queryByOpenId(Map<String, Object> params) {
+		List<LiteMallUserFormidEntity> list = this.queryUserFormid(params);
+		if (CollectionUtils.isEmpty(list)) {
+			return null;
+		}
+		LiteMallUserFormidEntity data = list.get(0);
+		Date expireTime = data.getExpireTime();
+		if (expireTime.compareTo(new Date()) < 0) {
+           return null;
+		}
+		return data;
+	}
+
+	@Override
+	public int updateUserFormId(LiteMallUserFormidEntity userFormid) {
+		//更新或者删除缓存
+		if (userFormid.getIsprepay() == 1 && userFormid.getUseamount() > 1) {
+			userFormid.setUseamount(userFormid.getUseamount() - 1);
+			userFormid.setUpdateTime(new Date());
+			return liteMallUserFormidManager.updateLiteMallUserFormid(userFormid);
+		} else {
+			return liteMallUserFormidManager.batchRemove(new Long[] {new Long(userFormid.getId())});
+		}
+	}
 }

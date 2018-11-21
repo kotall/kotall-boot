@@ -24,9 +24,16 @@
 			`deleted`
 		FROM
 			lite_mall_user
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="storeId != null"> `store_id` = #{storeId}</if>
+			<if test="username != null"> and `username` = #{username}</if>
+			<if test="gender != null"> and `gender` = #{gender}</if>
+			<if test="mobile != null"> and `mobile` = #{mobile}</if>
+			<if test="status != null"> and `status` = #{status}</if>
+			<if test="deleted != null"> and `deleted` = #{deleted}</if>
+			<if test="weixin_openid != null"> `weixinOpenid` = #{weixin_openid}</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter} </if>
+		</where>
 		ORDER BY
 			add_time DESC
 	</select>
@@ -153,11 +160,11 @@
 			lite_mall_user
 		<where>
 			<if test="storeId != null"> `store_id` = #{storeId}</if>
-			<if test="weixinOpenid != null"> `weixin_openid` = #{weixinOpenid}</if>
-			<if test="username != null"> `username` = #{username}</if>
-			<if test="nickname != null"> `nickname` = #{nickname}</if>
-			<if test="userLevel != null"> `user_level` = #{userLevel}</if>
-			<if test="gender != null"> `gender` = #{gender}</if>
+			<if test="weixinOpenid != null"> and `weixin_openid` = #{weixinOpenid}</if>
+			<if test="username != null"> and `username` = #{username}</if>
+			<if test="nickname != null"> and `nickname` = #{nickname}</if>
+			<if test="userLevel != null"> and `user_level` = #{userLevel}</if>
+			<if test="gender != null"> and `gender` = #{gender}</if>
 			<if test="deleted != null"> and `deleted` = #{deleted}</if>
 			<if test="mobile != null"> and `mobile` = #{mobile}</if>
 			<if test="status != null"> and `status` = #{status}</if>

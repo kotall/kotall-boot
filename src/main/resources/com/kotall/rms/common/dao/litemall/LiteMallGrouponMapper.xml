@@ -132,7 +132,7 @@
 			id DESC
 	</select>
 
-	<select id="countTotal" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity">
+	<select id="countTotal" resultType="int">
 		SELECT
 			COUNT(1)
 		FROM

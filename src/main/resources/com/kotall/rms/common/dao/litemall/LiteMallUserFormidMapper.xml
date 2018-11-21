@@ -17,8 +17,15 @@
 			`deleted`
 		FROM
 			lite_mall_user_formid
+		<where>
+			<if test="storeId != null"> `store_id` = #{storeId}</if>
+			<if test="formId != null"> and `formId` = #{formId}</if>
+			<if test="isprepay != null"> and `isprepay` = #{isprepay}</if>
+			<if test="openId != null"> and `openid` = #{openId}</if>
+			<if test="deleted != null"> and `deleted` = #{deleted}</if>
+		</where>
 		ORDER BY
-			id DESC
+			add_time DESC
 	</select>
 	
 	<insert id="save">
@@ -91,5 +98,30 @@
 			#{id}
 		</foreach>
 	</delete>
+
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserFormidEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`formId`,
+			`isprepay`,
+			`useAmount`,
+			`expire_time`,
+			`openId`,
+			`add_time`,
+			`update_time`,
+			`deleted`
+		FROM
+			lite_mall_user_formid
+		<where>
+			<if test="storeId != null"> `store_id` = #{storeId}</if>
+			<if test="formId != null"> and `formId` = #{formId}</if>
+			<if test="isprepay != null"> and `isprepay` = #{isprepay}</if>
+			<if test="openId != null"> and `openid` = #{openId}</if>
+			<if test="deleted != null"> and `deleted` = #{deleted}</if>
+		</where>
+		ORDER BY
+			add_time DESC
+	</select>
 
 </mapper>

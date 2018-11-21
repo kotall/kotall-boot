@@ -3,26 +3,27 @@ package com.kotall.rms.notify;
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaTemplateData;
 import cn.binarywang.wx.miniapp.bean.WxMaTemplateMessage;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.linlinjava.litemall.db.domain.LitemallUserFormid;
-import org.linlinjava.litemall.db.service.LitemallUserFormIdService;
+import com.kotall.rms.common.entity.litemall.LiteMallUserFormidEntity;
+import com.kotall.rms.core.service.litemall.LiteMallUserFormidService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 微信模版消息通知
  */
+@Slf4j
 public class WxTemplateSender {
-    private final Log logger = LogFactory.getLog(WxTemplateSender.class);
 
     @Autowired
     private WxMaService wxMaService;
 
     @Autowired
-    private LitemallUserFormIdService formIdService;
+    private LiteMallUserFormidService formIdService;
 
     /**
      * 发送微信消息(模板消息),不带跳转
@@ -48,10 +49,11 @@ public class WxTemplateSender {
     }
 
     private void sendMsg(String touser, String templatId, String[] parms, String page, String color, String emphasisKeyword) {
-        LitemallUserFormid userFormid = formIdService.queryByOpenId(touser);
+        Map<String, Object> params = new HashMap<>();
+        params.put("openid", touser);
+        LiteMallUserFormidEntity userFormid = formIdService.queryByOpenId(params);
         if (userFormid == null)
             return;
-
 
         WxMaTemplateMessage msg = new WxMaTemplateMessage();
         msg.setTemplateId(templatId);
@@ -65,7 +67,7 @@ public class WxTemplateSender {
         try {
             wxMaService.getMsgService().sendTemplateMsg(msg);
             if(formIdService.updateUserFormId(userFormid) == 0){
-                logger.warn("更新数据已失效");
+                log.warn("更新数据已失效");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,7 +75,7 @@ public class WxTemplateSender {
     }
 
     private List<WxMaTemplateData> createMsgData(String[] parms) {
-        List<WxMaTemplateData> dataList = new ArrayList<WxMaTemplateData>();
+        List<WxMaTemplateData> dataList = new ArrayList<>();
         for (int i = 1; i <= parms.length; i++) {
             dataList.add(new WxMaTemplateData("keyword" + i, parms[i - 1]));
         }

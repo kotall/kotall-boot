@@ -8,6 +8,7 @@ import com.qcloud.cos.model.ObjectMetadata;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.PutObjectResult;
 import com.qcloud.cos.region.Region;
+import lombok.Data;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 
@@ -20,6 +21,7 @@ import java.util.stream.Stream;
 /**
  * 腾讯对象存储服务
  */
+@Data
 public class TencentStorage implements Storage {
 
     private String secretId;

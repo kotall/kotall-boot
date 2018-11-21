@@ -153,7 +153,7 @@
 			add_time DESC
 	</select>
 
-	<select id="countTotal" resultType="com.kotall.rms.common.entity.litemall.LiteMallOrderGoodsEntity">
+	<select id="countTotal" resultType="int">
 		SELECT
 			COUNT(1)
 		FROM

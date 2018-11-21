@@ -1,9 +1,9 @@
 package com.kotall.rms.notify.config;
 
 import com.github.qcloudsms.SmsSingleSender;
-import org.linlinjava.litemall.core.notify.NotifyService;
-import org.linlinjava.litemall.core.notify.TencentSmsSender;
-import org.linlinjava.litemall.core.notify.WxTemplateSender;
+import com.kotall.rms.notify.NotifyService;
+import com.kotall.rms.notify.TencentSmsSender;
+import com.kotall.rms.notify.WxTemplateSender;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

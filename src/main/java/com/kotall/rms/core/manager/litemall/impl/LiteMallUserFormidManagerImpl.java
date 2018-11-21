@@ -30,6 +30,11 @@ public class LiteMallUserFormidManagerImpl implements LiteMallUserFormidManager 
 	}
 
 	@Override
+	public List<LiteMallUserFormidEntity> queryUserFormId(Query query) {
+		return liteMallUserFormidMapper.list(query);
+	}
+
+	@Override
 	public int saveLiteMallUserFormid(LiteMallUserFormidEntity liteMallUserFormid) {
 		return liteMallUserFormidMapper.save(liteMallUserFormid);
 	}

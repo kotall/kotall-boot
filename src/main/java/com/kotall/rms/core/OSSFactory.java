@@ -5,7 +5,6 @@ package com.kotall.rms.core;
 import com.google.gson.Gson;
 import com.kotall.rms.common.integration.cloud.AliyunCloudStorageService;
 import com.kotall.rms.common.integration.cloud.CloudStorageService;
-import com.kotall.rms.common.integration.cloud.QcloudCloudStorageService;
 import com.kotall.rms.common.integration.cloud.QiniuCloudStorageService;
 import com.kotall.rms.core.config.CloudStorageConfig;
 import com.kotall.rms.core.constants.ConfigConstant;
@@ -41,9 +40,9 @@ public final class OSSFactory {
             return new QiniuCloudStorageService(config);
         }else if(config.getType() == Constant.CloudService.ALIYUN.getValue()){
             return new AliyunCloudStorageService(config);
-        }else if(config.getType() == Constant.CloudService.QCLOUD.getValue()){
+        }/*else if(config.getType() == Constant.CloudService.QCLOUD.getValue()){
             return new QcloudCloudStorageService(config);
-        }
+        }*/
 
         return null;
     }

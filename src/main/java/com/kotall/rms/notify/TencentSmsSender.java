@@ -2,11 +2,8 @@ package com.kotall.rms.notify;
 
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
-import com.github.qcloudsms.httpclient.HTTPException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import java.io.IOException;
 
 /*
  * 腾讯云短信服务
@@ -34,7 +31,7 @@ public class TencentSmsSender implements SmsSender {
             smsResult.setSuccessful(true);
             smsResult.setResult(result);
             return smsResult;
-        } catch (HTTPException | IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -51,7 +48,7 @@ public class TencentSmsSender implements SmsSender {
             smsResult.setSuccessful(true);
             smsResult.setResult(result);
             return smsResult;
-        } catch (HTTPException | IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

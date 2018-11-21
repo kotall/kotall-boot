@@ -24,5 +24,6 @@ public interface LiteMallUserFormidManager {
 	int updateLiteMallUserFormid(LiteMallUserFormidEntity liteMallUserFormid);
 	
 	int batchRemove(Long[] id);
-	
+
+    List<LiteMallUserFormidEntity> queryUserFormId(Query query);
 }
