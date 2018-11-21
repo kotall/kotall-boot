@@ -1,6 +1,7 @@
 package com.kotall.rms.qcode;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
+import com.kotall.rms.api.StorageService;
 import com.kotall.rms.api.SystemConfig;
 import com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity;
 import me.chanjar.weixin.common.error.WxErrorException;

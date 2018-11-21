@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallStorageMapper">
+	
+	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallStorageEntity">
+		SELECT
+			`id`, 
+			`store_id`, 
+			`key`, 
+			`name`, 
+			`type`, 
+			`size`, 
+			`url`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_storage
+		<where>
+			<if test="storeId != null" >`store_id` = #{storeId}</if>
+			<if test="key != null" > and `key` = #{key}</if>
+			<if test="type != null" > and `type` = #{type}</if>
+			<if test="name != null" > and `name` = #{name}</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter}</if>
+		</where>
+		ORDER BY
+			add_time DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO lite_mall_storage (
+			`store_id`, 
+			`key`, 
+			`name`, 
+			`type`, 
+			`size`, 
+			`url`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		)
+		VALUES (
+			#{storeId}, 
+			#{key}, 
+			#{name}, 
+			#{type}, 
+			#{size}, 
+			#{url}, 
+			#{addTime}, 
+			#{updateTime}, 
+			#{deleted}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallStorageEntity">
+		SELECT
+			`id`, 
+			`store_id`, 
+			`key`, 
+			`name`, 
+			`type`, 
+			`size`, 
+			`url`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_storage
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE lite_mall_storage
+	 	<set>
+			<if test="storeId != null">`store_id` = #{storeId}, </if>
+			<if test="key != null">`key` = #{key}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="size != null">`size` = #{size}, </if>
+			<if test="url != null">`url` = #{url}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="deleted != null">`deleted` = #{deleted}</if>
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			lite_mall_storage
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallStorageEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`key`,
+			`name`,
+			`type`,
+			`size`,
+			`url`,
+			`add_time`,
+			`update_time`,
+			`deleted`
+		FROM
+			lite_mall_storage
+		<where>
+			<if test="storeId != null" >`store_id` = #{storeId}</if>
+			<if test="key != null" > and `key` = #{key}</if>
+			<if test="type != null" > and `type` = #{type}</if>
+			<if test="name != null" > and `name` = #{name}</if>
+		</where>
+		ORDER BY
+			add_time DESC
+	</select>
+
+</mapper>

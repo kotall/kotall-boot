@@ -1,5 +1,6 @@
 package com.kotall.rms.api.controller;
 
+import com.kotall.rms.api.StorageService;
 import com.kotall.rms.common.entity.litemall.LiteMallStoreEntity;
 import com.kotall.rms.common.utils.CharUtil;
 import com.kotall.rms.common.utils.Result;
