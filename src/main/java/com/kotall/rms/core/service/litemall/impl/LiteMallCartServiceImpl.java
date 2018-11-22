@@ -1,6 +1,5 @@
 package com.kotall.rms.core.service.litemall.impl;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -68,15 +67,17 @@ public class LiteMallCartServiceImpl implements LiteMallCartService {
 	}
 
 	@Override
-	public List<LiteMallCartEntity> queryByUserId(Integer userId) {
+	public List<LiteMallCartEntity> queryByUserId(Long storeId, Integer userId) {
 		Map<String, Object> params = new HashMap<>();
+		params.put("storeId", storeId);
+		params.put("userId", userId);
 		return this.queryCartList(params);
 	}
 
 	@Override
-	public LiteMallCartEntity queryExist(Integer goodsId, Integer productId, Integer userId) {
+	public LiteMallCartEntity queryExist(Long storeId, Integer goodsId, Integer productId, Integer userId) {
 		Map<String, Object> params = new HashMap<>();
-		//params.put("storeId", storeId);
+		params.put("storeId", storeId);
 		params.put("userId", userId);
 		params.put("goodsId", goodsId);
 		params.put("productId", productId);

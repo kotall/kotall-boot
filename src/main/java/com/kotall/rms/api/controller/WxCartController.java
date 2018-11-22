@@ -1,6 +1,7 @@
 package com.kotall.rms.api.controller;
 
 import com.kotall.rms.api.SystemConfig;
+import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.api.annotation.LoginUser;
 import com.kotall.rms.common.entity.litemall.*;
 import com.kotall.rms.common.utils.JacksonUtil;
@@ -42,23 +43,23 @@ public class WxCartController {
      * @return 购物车
      * 成功则
      * {
-     * errno: 0,
-     * errmsg: '成功',
+     * code: 0,
+     * msg: '成功',
      * data:
      * {
      * cartList: xxx,
      * cartTotal: xxx
      * }
      * }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("index")
-    public Object index(@LoginUser Integer userId) {
+    public Object index(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig) {
         if (userId == null) {
             return Result.unlogin();
         }
 
-        List<LiteMallCartEntity> cartList = cartService.queryByUserId(userId);
+        List<LiteMallCartEntity> cartList = cartService.queryByUserId(appConfig.getStoreId(), userId);
         Integer goodsCount = 0;
         BigDecimal goodsAmount = new BigDecimal(0.00);
         Integer checkedGoodsCount = 0;
@@ -101,7 +102,7 @@ public class WxCartController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @PostMapping("add")
-    public Object add(@LoginUser Integer userId, @RequestBody LiteMallCartEntity cart) {
+    public Object add(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody LiteMallCartEntity cart) {
         if (userId == null) {
             return Result.unlogin();
         }
@@ -116,7 +117,7 @@ public class WxCartController {
             return Result.badArgument();
         }
 
-        //判断商品是否可以购买
+        // 判断商品是否可以购买
         LiteMallGoodsEntity goods = goodsService.getLiteMallGoodsById(new Long(goodsId));
         if (goods == null || goods.getIsOnSale() == 0) {
             return Result.error(400, "商品已下架");
@@ -124,7 +125,7 @@ public class WxCartController {
 
         LiteMallGoodsProductEntity product = productService.getLiteMallGoodsProductById(new Long(productId));
         // 判断购物车中是否存在此规格商品
-        LiteMallCartEntity existCart = cartService.queryExist(goodsId, productId, userId);
+        LiteMallCartEntity existCart = cartService.queryExist(appConfig.getStoreId(), goodsId, productId, userId);
         if (existCart == null) {
             // 取得规格的信息,判断规格库存
             if (product == null || number > product.getNumber()) {
@@ -152,7 +153,7 @@ public class WxCartController {
             }
         }
 
-        return goodscount(userId);
+        return goodscount(userId, appConfig);
     }
 
     /**
@@ -167,14 +168,14 @@ public class WxCartController {
      * @return 即购买操作结果
      * 成功则
      * {
-     * errno: 0,
-     * errmsg: '成功',
+     * code: 0,
+     * msg: '成功',
      * data: xxx
      * }
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @PostMapping("fastadd")
-    public Object fastadd(@LoginUser Integer userId, @RequestBody LiteMallCartEntity cart) {
+    public Object fastadd(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig,@RequestBody LiteMallCartEntity cart) {
         if (userId == null) {
             return Result.unlogin();
         }
@@ -189,15 +190,15 @@ public class WxCartController {
             return Result.badArgument();
         }
 
-        //判断商品是否可以购买
+        // 判断商品是否可以购买
         LiteMallGoodsEntity goods = goodsService.getLiteMallGoodsById(new Long(goodsId));
         if (goods == null || goods.getIsOnSale() == 0) {
             return Result.error(400, "商品已下架");
         }
 
         LiteMallGoodsProductEntity product = productService.getLiteMallGoodsProductById(new Long(productId));
-        //判断购物车中是否存在此规格商品
-        LiteMallCartEntity existCart = cartService.queryExist(goodsId, productId, userId);
+        // 判断购物车中是否存在此规格商品
+        LiteMallCartEntity existCart = cartService.queryExist(appConfig.getStoreId(), goodsId, productId, userId);
         if (existCart == null) {
             //取得规格的信息,判断规格库存
             if (product == null || number > product.getNumber()) {
@@ -239,7 +240,7 @@ public class WxCartController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @PostMapping("update")
-    public Object update(@LoginUser Integer userId, @RequestBody LiteMallCartEntity cart) {
+    public Object update(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody LiteMallCartEntity cart) {
         if (userId == null) {
             return Result.unlogin();
         }
@@ -304,7 +305,7 @@ public class WxCartController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @PostMapping("checked")
-    public Object checked(@LoginUser Integer userId, @RequestBody String body) {
+    public Object checked(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody String body) {
         if (userId == null) {
             return Result.unlogin();
         }
@@ -324,7 +325,7 @@ public class WxCartController {
         Boolean isChecked = (checkValue == 1);
 
         cartService.updateCheck(userId, productIds, isChecked);
-        return index(userId);
+        return index(userId, appConfig);
     }
 
     /**
@@ -335,14 +336,14 @@ public class WxCartController {
      * @return 购物车信息
      * 成功则
      * {
-     * errno: 0,
-     * errmsg: '成功',
+     * code: 0,
+     * msg: '成功',
      * data: xxx
      * }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("delete")
-    public Object delete(@LoginUser Integer userId, @RequestBody String body) {
+    public Object delete(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody String body) {
         if (userId == null) {
             return Result.unlogin();
         }
@@ -357,7 +358,7 @@ public class WxCartController {
         }
 
         cartService.delete(productIds, userId);
-        return index(userId);
+        return index(userId, appConfig);
     }
 
     /**
@@ -368,20 +369,20 @@ public class WxCartController {
      * @return 购物车商品数量
      * 成功则
      * {
-     * errno: 0,
-     * errmsg: '成功',
+     * code: 0,
+     * msg: '成功',
      * data: xxx
      * }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("goodscount")
-    public Object goodscount(@LoginUser Integer userId) {
+    public Object goodscount(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig) {
         if (userId == null) {
             return Result.error(0, "错误");
         }
 
         int goodsCount = 0;
-        List<LiteMallCartEntity> cartList = cartService.queryByUserId(userId);
+        List<LiteMallCartEntity> cartList = cartService.queryByUserId(appConfig.getStoreId(), userId);
         for (LiteMallCartEntity cart : cartList) {
             goodsCount += cart.getNumber();
         }

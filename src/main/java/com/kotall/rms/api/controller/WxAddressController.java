@@ -1,7 +1,9 @@
 package com.kotall.rms.api.controller;
 
+import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.api.annotation.LoginUser;
 import com.kotall.rms.common.entity.litemall.LiteMallAddressEntity;
+import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
 import com.kotall.rms.common.utils.RegexUtil;
 import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.core.service.litemall.LiteMallAddressService;
@@ -186,7 +188,7 @@ public class WxAddressController {
      *   失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("save")
-    public Object save(@LoginUser Integer userId, @RequestBody LiteMallAddressEntity address) {
+    public Object save(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody LiteMallAddressEntity address) {
         if(userId == null){
             return Result.unlogin();
         }
@@ -202,6 +204,7 @@ public class WxAddressController {
 
         if (address.getId() == null || address.getId().equals(0)) {
             address.setId(null);
+            address.setStoreId(appConfig.getStoreId());
             address.setUserId(userId);
             addressService.saveLiteMallAddress(address);
         } else {
