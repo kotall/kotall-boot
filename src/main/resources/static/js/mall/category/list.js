@@ -27,8 +27,14 @@ function getGrid() {
 			{field : "keywords", title : "类目关键字", width : "100px"},
 			{field : "desc", title : "类目广告语介绍", width : "100px"}, 
 			{field : "pid", title : "父类目ID", width : "100px"}, 
-			{field : "iconUrl", title : "类目图标", width : "100px"}, 
-			{field : "picUrl", title : "类目图片", width : "100px"}, 
+			{field : "iconUrl", title : "类目图标", width : "100px",
+                formatter : function(value, row, index) {
+                    return '<img  src="'+value+'" class="img-rounded" width="80px">';
+                }},
+			{field : "picUrl", title : "类目图片", width : "100px",
+                formatter : function(value, row, index) {
+                    return '<img  src="'+value+'" class="img-rounded" width="80px">';
+                }},
 			{field : "level", title : "", width : "100px"}, 
 			{field : "sortOrder", title : "排序", width : "100px"}, 
 			{field : "addTime", title : "创建时间", width : "100px"}
@@ -51,7 +57,7 @@ var vm = new Vue({
 				title: '新增类目表',
 				url: 'mall/category/add.html?_' + $.now(),
 				width: '620px',
-				height: '750px',
+				height: '650px',
 				yes : function(iframeId) {
 					top.frames[iframeId].vm.acceptClick();
 				},
@@ -64,9 +70,11 @@ var vm = new Vue({
 					title: '编辑类目表',
 					url: 'mall/category/edit.html?_' + $.now(),
                     width: '620px',
-                    height: '450px',
+                    height: '650px',
 					success: function(iframeId){
 						top.frames[iframeId].vm.liteMallCategory.id = ck[0].id;
+						top.frames[iframeId].vm.liteMallCategory.iconUrl = ck[0].iconUrl;
+						top.frames[iframeId].vm.liteMallCategory.picUrl = ck[0].picUrl;
 						top.frames[iframeId].vm.setForm();
 					},
 					yes: function(iframeId){

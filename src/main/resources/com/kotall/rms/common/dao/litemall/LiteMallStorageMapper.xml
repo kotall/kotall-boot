@@ -68,9 +68,7 @@
 			`type`, 
 			`size`, 
 			`url`, 
-			`add_time`, 
-			`update_time`, 
-			`deleted`
+			`add_time`
 		)
 		VALUES (
 			#{storeId}, 
@@ -79,9 +77,7 @@
 			#{type}, 
 			#{size}, 
 			#{url}, 
-			#{addTime}, 
-			#{updateTime}, 
-			#{deleted}
+			now()
 		)
 	</insert>
 
@@ -149,7 +145,7 @@
 	<update id="update">
 		UPDATE lite_mall_storage
 	 	<set>
-			<if test="storeId != null">`store_id` = #{storeId}, </if>
+			<!--<if test="storeId != null">`store_id` = #{storeId}, </if>-->
 			<if test="key != null">`key` = #{key}, </if>
 			<if test="name != null">`name` = #{name}, </if>
 			<if test="type != null">`type` = #{type}, </if>

@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="include/header_css::header('类目表')"></head>
+<style>
+	.layui-upload-img {
+		width: 92px;
+		height: 92px;
+		margin: 0 10px 10px 0;
+	}
+</style>
 <body>
 	<div id="dpLTE" class="container-fluid" v-cloak>
 		<table class="form" id="form">
@@ -35,17 +42,25 @@
 				</td>
 			</tr>
 			<tr>
-	            <td class="formTitle">类目图标<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="类目图标" v-model="liteMallCategory.iconUrl" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
+				<input id="iconUrl" type="hidden" v-model="liteMallCategory.iconUrl" >
+				<td class="formTitle" style=" vertical-align:top; padding-top:15px">类目图标<font face="宋体">*</font></td>
+				<td class="formValue">
+					<div class="layui-upload-list"  id="test1">
+						<img class="layui-upload-img" id="demo1" :src="liteMallCategory.iconUrl">
+						<p id="demoText"></p>
+					</div>
+				</td>
+			</tr>
 			<tr>
-	            <td class="formTitle">类目图片<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="类目图片" v-model="liteMallCategory.picUrl" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
+				<input id="picUrl" type="hidden" v-model="liteMallCategory.picUrl" >
+				<td class="formTitle" style=" vertical-align:top; padding-top:15px">类目图片<font face="宋体">*</font></td>
+				<td class="formValue">
+					<div class="layui-upload-list"  id="test2">
+						<img class="layui-upload-img" id="demo2" :src="liteMallCategory.picUrl">
+						<p id="demoText2"></p>
+					</div>
+				</td>
+			</tr>
 			<tr>
 	            <td class="formTitle">排序<font face="宋体">*</font></td>
 	            <td class="formValue">

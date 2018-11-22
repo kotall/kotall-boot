@@ -48,7 +48,8 @@
 				</td>
 			</tr>
 			<tr>
-	            <td class="formTitle" style=" vertical-align:top; padding-top:15px">类目图标<font face="宋体">*</font></td>
+				<input id="iconUrl" type="hidden" v-model="liteMallCategory.iconUrl" >
+				<td class="formTitle" style=" vertical-align:top; padding-top:15px">类目图标<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<div class="layui-upload-list"  id="test1">
 						<img class="layui-upload-img" id="demo1">
@@ -57,11 +58,15 @@
 				</td>
         	</tr>
 			<tr>
-	            <td class="formTitle">类目图片<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="类目图片" v-model="liteMallCategory.picUrl" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
+				<input id="picUrl" type="hidden" v-model="liteMallCategory.picUrl" >
+				<td class="formTitle" style=" vertical-align:top; padding-top:15px">类目图片<font face="宋体">*</font></td>
+				<td class="formValue">
+					<div class="layui-upload-list"  id="test2">
+						<img class="layui-upload-img" id="demo2">
+						<p id="demoText2"></p>
+					</div>
+				</td>
+			</tr>
 			<tr>
 	            <td class="formTitle">排序<font face="宋体">*</font></td>
 	            <td class="formValue">
