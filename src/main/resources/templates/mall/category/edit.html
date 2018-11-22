@@ -17,17 +17,23 @@
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">类目广告语介绍<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="类目广告语介绍" v-model="liteMallCategory.desc" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">父类目ID<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="父类目ID" v-model="liteMallCategory.pid" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
+				<td class="formTitle">级别<font face="宋体">*</font></td>
+				<td class="formValue">
+					<select v-model="liteMallCategory.level" class="form-control"  style = "width:200px;" isvalid="yes" checkexpession="NotNull" @change="selectChange">
+						<option value="L1">一级类目</option>
+						<option value="L2">二级类目</option>
+					</select>
+				</td>
+			</tr>
+			<tr v-if="liteMallCategory.level === 'L2'">
+				<td class="formTitle">父类目<font face="宋体">*</font></td>
+				<td class="formValue">
+					<select v-model="liteMallCategory.pid" class="form-control"  style = "width:200px;" isvalid="yes" checkexpession="NotNull">
+						<option value="">请选择</option>
+						<option v-for="opt in categoryDatas" :value="opt.id">{{opt.name}}</option>
+					</select>
+				</td>
+			</tr>
 			<tr>
 	            <td class="formTitle">类目图标<font face="宋体">*</font></td>
 	            <td class="formValue">
@@ -38,12 +44,6 @@
 	            <td class="formTitle">类目图片<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="类目图片" v-model="liteMallCategory.picUrl" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="liteMallCategory.level" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 			<tr>

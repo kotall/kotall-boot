@@ -61,4 +61,9 @@ public class LiteMallCategoryManagerImpl implements LiteMallCategoryManager {
 	public List<LiteMallCategoryEntity> queryByPid(Integer pid) {
 		return this.liteMallCategoryMapper.listByPid(pid);
 	}
+
+	@Override
+	public List<LiteMallCategoryEntity> getSecondCategory() {
+		return liteMallCategoryMapper.getSecondCategory();
+	}
 }

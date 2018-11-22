@@ -18,7 +18,7 @@ import com.kotall.rms.core.manager.litemall.LiteMallSearchHistoryManager;
  * @since 1.0.0
  */
 @Component("liteMallSearchHistoryManager")
-public class LiteMallSearchHistoryManagerImpl implements LiteMallSearchHistoryManager {
+public class LiteMallSearchHistoryManagerImpl implements LiteMallSearchHistoryManager{
 
 	@Autowired
 	private LiteMallSearchHistoryMapper liteMallSearchHistoryMapper;

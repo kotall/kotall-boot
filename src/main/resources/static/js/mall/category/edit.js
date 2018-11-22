@@ -4,9 +4,12 @@
 var vm = new Vue({
 	el:'#dpLTE',
 	data: {
-		liteMallCategory: {
-			id: 0
-		}
+        liteMallCategory: {
+            id: 0,
+            pid:'',
+            level:'L1'
+        },
+        categoryDatas:[]
 	},
 	methods : {
 		setForm: function() {
@@ -29,6 +32,27 @@ var vm = new Vue({
 		    		$.currentIframe().vm.load();
 		    	}
 		    });
-		}
-	}
+		},
+        getCategory:function () {
+            var _self = this;
+            $.ajax("../../litemall/category/getSecondCategory").then(function(response){
+                _self.categoryDatas = response.rows;
+            });
+            /*this.$http({           //调用接口
+                method:'GET',
+                url:"/rms/litemall/category/getSecondCategory"  //this指data
+            }).then(function(response){  //接口返回数据
+                this.categoryDatas = response.data;
+				console.log(response);
+            },function(error){
+            })*/
+
+        },
+        selectChange:function () {
+            this.liteMallCategory.pid = 0;
+        }
+	},
+    created: function () {
+        this.getCategory();
+    }
 })

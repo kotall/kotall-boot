@@ -39,7 +39,8 @@ function getGrid() {
 var vm = new Vue({
 	el:'#dpLTE',
 	data: {
-		keyword: null
+		keyword: null,
+
 	},
 	methods : {
 		load: function() {
@@ -49,8 +50,8 @@ var vm = new Vue({
 			dialogOpen({
 				title: '新增类目表',
 				url: 'mall/category/add.html?_' + $.now(),
-				width: '420px',
-				height: '350px',
+				width: '620px',
+				height: '750px',
 				yes : function(iframeId) {
 					top.frames[iframeId].vm.acceptClick();
 				},
@@ -62,8 +63,8 @@ var vm = new Vue({
 				dialogOpen({
 					title: '编辑类目表',
 					url: 'mall/category/edit.html?_' + $.now(),
-					width: '420px',
-					height: '350px',
+                    width: '620px',
+                    height: '450px',
 					success: function(iframeId){
 						top.frames[iframeId].vm.liteMallCategory.id = ck[0].id;
 						top.frames[iframeId].vm.setForm();

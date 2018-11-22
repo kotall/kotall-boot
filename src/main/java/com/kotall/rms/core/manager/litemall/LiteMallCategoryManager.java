@@ -29,4 +29,6 @@ public interface LiteMallCategoryManager {
     List<LiteMallCategoryEntity> queryChannel(Query query);
 
     List<LiteMallCategoryEntity> queryByPid(Integer pid);
+
+    List<LiteMallCategoryEntity> getSecondCategory();
 }

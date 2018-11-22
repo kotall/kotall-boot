@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="include/header_css::header('类目表')"></head>
+<style>
+	.layui-upload-img {
+		width: 92px;
+		height: 92px;
+		margin: 0 10px 10px 0;
+	}
+</style>
 <body>
 	<div id="dpLTE" class="container-fluid" v-cloak>
 		<table class="form" id="form">
@@ -16,34 +23,43 @@
 					<input type="text" class="form-control" placeholder="类目关键字，以JSON数组格式" v-model="liteMallCategory.keywords" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
+			<!--<tr>-->
+	            <!--<td class="formTitle">类目广告语介绍<font face="宋体">*</font></td>-->
+	            <!--<td class="formValue">-->
+					<!--<input type="text" class="form-control" placeholder="类目广告语介绍" v-model="liteMallCategory.desc" isvalid="yes" checkexpession="NotNull">-->
+	            <!--</td>-->
+        	<!--</tr>-->
 			<tr>
-	            <td class="formTitle">类目广告语介绍<font face="宋体">*</font></td>
+	            <td class="formTitle">级别<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="类目广告语介绍" v-model="liteMallCategory.desc" isvalid="yes" checkexpession="NotNull">
-	            </td>
+					<select v-model="liteMallCategory.level" class="form-control"  style = "width:200px;" isvalid="yes" checkexpession="NotNull">
+						<option value="L1">一级类目</option>
+						<option value="L2">二级类目</option>
+					</select>
+				</td>
         	</tr>
+			<tr v-if="liteMallCategory.level === 'L2'">
+				<td class="formTitle">父类目<font face="宋体">*</font></td>
+				<td class="formValue">
+					<select v-model="liteMallCategory.pid" class="form-control"  style = "width:200px;" isvalid="yes" checkexpession="NotNull">
+						<option value="">请选择</option>
+					     <option v-for="opt in categoryDatas" :value="opt.id">{{opt.name}}</option>
+					</select>
+				</td>
+			</tr>
 			<tr>
-	            <td class="formTitle">父类目ID<font face="宋体">*</font></td>
+	            <td class="formTitle" style=" vertical-align:top; padding-top:15px">类目图标<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="父类目ID" v-model="liteMallCategory.pid" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">类目图标<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="类目图标" v-model="liteMallCategory.iconUrl" isvalid="yes" checkexpession="NotNull">
-	            </td>
+					<div class="layui-upload-list"  id="test1">
+						<img class="layui-upload-img" id="demo1">
+						<p id="demoText"></p>
+					</div>
+				</td>
         	</tr>
 			<tr>
 	            <td class="formTitle">类目图片<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="类目图片" v-model="liteMallCategory.picUrl" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="liteMallCategory.level" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 			<tr>

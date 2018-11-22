@@ -1,5 +1,6 @@
 package com.kotall.rms.web.controller.litemall;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,16 @@ public class LiteMallCategoryController extends AbstractController {
 	@RequestMapping("/info")
 	public Result getById(@RequestBody Long id) {
 		LiteMallCategoryEntity liteMallCategory = liteMallCategoryService.getLiteMallCategoryById(id);
+		return ResultKit.msg(liteMallCategory);
+	}
+
+	/**
+	 * 根据id查询详情
+	 * @return
+	 */
+	@RequestMapping("/getSecondCategory")
+	public Result getSecondCategory() {
+		List<LiteMallCategoryEntity> liteMallCategory = liteMallCategoryService.getSecondCategory();
 		return ResultKit.msg(liteMallCategory);
 	}
 	

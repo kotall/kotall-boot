@@ -19,4 +19,5 @@ public interface LiteMallCategoryMapper extends BaseMapper<LiteMallCategoryEntit
 
     List<LiteMallCategoryEntity> listByPid(Integer pid);
 
+    List<LiteMallCategoryEntity> getSecondCategory();
 }
