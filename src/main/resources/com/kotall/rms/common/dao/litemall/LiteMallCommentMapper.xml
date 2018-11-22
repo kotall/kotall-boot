@@ -117,13 +117,12 @@
 		FROM
 			lite_mall_comment
 		<where>
-			<if test="type != null "> `type` = #{type}</if>
-			<if test="valueId != null "> `valueId` = #{valueId}</if>
-			<if test="deleted != null "> `deleted` = #{deleted}</if>
-			<if test="hasPicture != null "> `has_picture` = #{hasPicture}</if>
+			<if test="storeId != null "> `store_id` = #{storeId}</if>
+			<if test="type != null "> and `type` = #{type}</if>
+			<if test="valueId != null "> and `value_id` = #{valueId}</if>
+			<if test="deleted != null "> and `deleted` = #{deleted}</if>
+			<if test="hasPicture != null "> and `has_picture` = #{hasPicture}</if>
 		</where>
-		ORDER BY
-			add_time DESC
 	</select>
 
 	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallCommentEntity">
