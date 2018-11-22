@@ -1,6 +1,8 @@
 package com.kotall.rms.api.controller;
 
+import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.api.annotation.LoginUser;
+import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallUserEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallUserFormidEntity;
 import com.kotall.rms.common.utils.Result;
@@ -28,13 +30,16 @@ public class WxUserFormId {
     private LiteMallUserFormidService formIdService;
 
     @GetMapping("create")
-    public Object create(@LoginUser Integer userId, @NotNull String formId) {
+    public Object create(@LoginUser Integer userId,
+                         @NotNull String formId,
+                         @AppConfig LiteMallAppEntity appConfig) {
         if (userId == null) {
             return Result.unlogin();
         }
 
         LiteMallUserEntity user = userService.getLiteMallUserById(new Long(userId));
         LiteMallUserFormidEntity userFormid = new LiteMallUserFormidEntity();
+        userFormid.setStoreId(appConfig.getStoreId());
         userFormid.setOpenid(user.getWeixinOpenid());
         userFormid.setFormid(formId);
         userFormid.setIsprepay(0);

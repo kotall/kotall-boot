@@ -78,9 +78,9 @@ public class LiteMallOrderServiceImpl implements LiteMallOrderService {
 	}
 
 	@Override
-	public Map<Object, Object> queryOrderInfo(Integer userId) {
+	public Map<Object, Object> queryOrderInfo(Integer userId, Long storeId) {
 		Map<String, Object> params = new HashMap<>();
-		//params.put("storeId", storeId);
+		params.put("storeId", storeId);
 		params.put("userId", userId);
 		params.put("deleted", 0);
 		List<LiteMallOrderEntity> orders = this.queryOrderList(params);

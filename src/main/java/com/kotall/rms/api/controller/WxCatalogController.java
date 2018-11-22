@@ -1,6 +1,8 @@
 package com.kotall.rms.api.controller;
 
 import com.kotall.rms.api.HomeCacheManager;
+import com.kotall.rms.api.annotation.AppConfig;
+import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity;
 import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.core.service.litemall.LiteMallCategoryService;
@@ -50,11 +52,12 @@ public class WxCatalogController {
      */
     @GetMapping("index")
     public Object index(Integer id,
+                        @AppConfig LiteMallAppEntity appConfig,
                         @RequestParam(defaultValue = "1") Integer page,
                         @RequestParam(defaultValue = "10") Integer size) {
 
         // 所有一级分类目录
-        List<LiteMallCategoryEntity> l1CatList = categoryService.queryL1();
+        List<LiteMallCategoryEntity> l1CatList = categoryService.queryL1(appConfig.getStoreId());
 
         // 当前一级分类目录
         LiteMallCategoryEntity currentCategory;
@@ -70,7 +73,7 @@ public class WxCatalogController {
             currentSubCategory = categoryService.queryByPid(currentCategory.getId());
         }
 
-        Map<String, Object> data = new HashMap<String, Object>();
+        Map<String, Object> data = new HashMap<>();
         data.put("categoryList", l1CatList);
         data.put("currentCategory", currentCategory);
         data.put("currentSubCategory", currentSubCategory);
@@ -83,7 +86,7 @@ public class WxCatalogController {
      * @return
      */
     @GetMapping("all")
-    public Object queryAll() {
+    public Object queryAll(@AppConfig LiteMallAppEntity appConfig) {
         // 优先从缓存中读取
         if (HomeCacheManager.hasData(HomeCacheManager.CATALOG)) {
             return Result.ok().put("data", HomeCacheManager.getCacheData(HomeCacheManager.CATALOG));
@@ -91,7 +94,7 @@ public class WxCatalogController {
 
 
         // 所有一级分类目录
-        List<LiteMallCategoryEntity> l1CatList = categoryService.queryL1();
+        List<LiteMallCategoryEntity> l1CatList = categoryService.queryL1(appConfig.getStoreId());
 
         //所有子分类列表
         Map<Integer, List<LiteMallCategoryEntity>> allList = new HashMap<>();
@@ -110,7 +113,7 @@ public class WxCatalogController {
             currentSubCategory = categoryService.queryByPid(currentCategory.getId());
         }
 
-        Map<String, Object> data = new HashMap<String, Object>();
+        Map<String, Object> data = new HashMap<>();
         data.put("categoryList", l1CatList);
         data.put("allList", allList);
         data.put("currentCategory", currentCategory);
@@ -128,15 +131,15 @@ public class WxCatalogController {
      * @return 当前分类栏目
      * 成功则
      * {
-     * errno: 0,
-     * errmsg: '成功',
+     * code: 0,
+     * msg: '成功',
      * data:
      * {
      * currentCategory: xxx,
      * currentSubCategory: xxx
      * }
      * }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("current")
     public Object current(@NotNull Integer id) {

@@ -2,7 +2,9 @@ package com.kotall.rms.api.controller;
 
 import com.kotall.rms.api.UserInfo;
 import com.kotall.rms.api.UserInfoService;
+import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.api.annotation.LoginUser;
+import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallCommentEntity;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Result;
@@ -83,14 +85,14 @@ public class WxCommentController {
      * @return 发表评论操作结果
      *   成功则
      *  {
-     *      errno: 0,
-     *      errmsg: '成功',
+     *      code: 0,
+     *      msg: '成功',
      *      data: xxx
      *  }
      *   失败则 { errno: XXX, errmsg: XXX }
      */
     @PostMapping("post")
-    public Object post(@LoginUser Integer userId, @RequestBody LiteMallCommentEntity comment) {
+    public Object post(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody LiteMallCommentEntity comment) {
         if(userId == null){
             return Result.unlogin();
         }
@@ -99,6 +101,7 @@ public class WxCommentController {
             return error;
         }
 
+        comment.setStoreId(appConfig.getStoreId());
         comment.setUserId(userId);
         commentService.saveLiteMallComment(comment);
         return Result.ok().put("data", comment);
@@ -112,20 +115,20 @@ public class WxCommentController {
      * @return 评论数量
      *   成功则
      *  {
-     *      errno: 0,
-     *      errmsg: '成功',
+     *      code: 0,
+     *      msg: '成功',
      *      data:
      *          {
      *              allCount: xxx,
      *              hasPicCount: xxx
      *          }
      *  }
-     *   失败则 { errno: XXX, errmsg: XXX }
+     *   失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("count")
-    public Object count(@NotNull Byte type, @NotNull Integer valueId) {
-        int allCount = commentService.count(0, type, valueId);
-        int hasPicCount = commentService.count(1, type, valueId);
+    public Object count(@NotNull Byte type, @NotNull Integer valueId, @AppConfig LiteMallAppEntity appConfig) {
+        int allCount = commentService.count(appConfig.getStoreId(), 0, type, valueId);
+        int hasPicCount = commentService.count(appConfig.getStoreId(), 1, type, valueId);
         Map<String, Object> data = new HashMap<>();
         data.put("allCount", allCount);
         data.put("hasPicCount", hasPicCount);
@@ -158,9 +161,11 @@ public class WxCommentController {
     public Object list(@NotNull Byte type,
                        @NotNull Integer valueId,
                        @NotNull Integer showType,
+                       @AppConfig LiteMallAppEntity appConfig,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer size) {
         Map<String, Object> params = new HashMap<>();
+        params.put("storeId", appConfig.getStoreId());
         params.put("type", type);
         params.put("valueId", valueId);
         params.put("pageNumber", page);

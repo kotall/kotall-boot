@@ -93,8 +93,9 @@ public class LiteMallCommentServiceImpl implements LiteMallCommentService {
 	}
 
 	@Override
-	public int count(int showType, int type, int valueId) {
+	public int count(Long storeId, int showType, int type, int valueId) {
 		Map<String, Object> params = new HashMap<>();
+		params.put("storeId", storeId);
 		params.put("type", type);
 		params.put("valueId", valueId);
 		params.put("deleted", 0);

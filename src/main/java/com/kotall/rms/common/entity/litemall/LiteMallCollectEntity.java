@@ -54,4 +54,9 @@ public class LiteMallCollectEntity implements Serializable {
 	 */
 	private Long deleted;
 
+	/**
+	 * 店铺ID
+	 */
+	private Long storeId;
+
 }

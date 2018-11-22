@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.common.entity.litemall.LiteMallOrderEntity;
 
 /**
@@ -30,7 +29,7 @@ public interface LiteMallOrderService {
 
     int batchRemove(Long[] id);
 
-    Map<Object, Object> queryOrderInfo(Integer userId);
+    Map<Object, Object> queryOrderInfo(Integer userId, Long storeId);
 
     String generateOrderSn(Integer userId);
 

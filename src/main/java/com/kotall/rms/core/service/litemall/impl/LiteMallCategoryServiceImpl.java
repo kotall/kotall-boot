@@ -99,8 +99,9 @@ public class LiteMallCategoryServiceImpl implements LiteMallCategoryService {
 	}
 
 	@Override
-	public List<LiteMallCategoryEntity> queryL1() {
+	public List<LiteMallCategoryEntity> queryL1(Long storeId) {
 		Map<String, Object> params = new HashMap<>();
+		params.put("storeId", storeId);
 		params.put("level", "L1");
 		params.put("deleted", 0);
 

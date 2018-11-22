@@ -50,7 +50,7 @@ public interface LiteMallCategoryService {
 
     List<LiteMallCategoryEntity> getSecondCategory();
 
-    List<LiteMallCategoryEntity> queryL1();
+    List<LiteMallCategoryEntity> queryL1(Long storeId);
 
     List<LiteMallCategoryEntity> queryL2ByIds(Map<String, Object> params);
 }

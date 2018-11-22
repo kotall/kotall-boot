@@ -68,8 +68,9 @@ public class LiteMallKeywordServiceImpl implements LiteMallKeywordService {
 	}
 
 	@Override
-	public LiteMallKeywordEntity queryDefault() {
+	public LiteMallKeywordEntity queryDefault(Long storeId) {
 		Map<String, Object> params = new HashMap<>();
+		params.put("storeId", storeId);
 		params.put("isDefault", 1);
 		params.put("deleted", 0);
 
@@ -78,8 +79,9 @@ public class LiteMallKeywordServiceImpl implements LiteMallKeywordService {
 	}
 
 	@Override
-	public List<LiteMallKeywordEntity> queryHots() {
+	public List<LiteMallKeywordEntity> queryHots(Long storeId) {
 		Map<String, Object> params = new HashMap<>();
+		params.put("storeId", storeId);
 		params.put("isHot", 1);
 		params.put("deleted", 0);
 

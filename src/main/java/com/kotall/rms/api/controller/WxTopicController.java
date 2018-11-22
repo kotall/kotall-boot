@@ -1,5 +1,7 @@
 package com.kotall.rms.api.controller;
 
+import com.kotall.rms.api.annotation.AppConfig;
+import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallTopicEntity;
 import com.kotall.rms.common.utils.Page;
@@ -50,12 +52,13 @@ public class WxTopicController {
      * 失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("list")
-    public Object list(@RequestParam(defaultValue = "1") Integer page,
+    public Object list(@AppConfig LiteMallAppEntity appConfig,
+                       @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer size,
                        @RequestParam(defaultValue = "add_time") String sort,
                        @RequestParam(defaultValue = "desc") String order) {
         Map<String, Object> params = new HashMap<>();
-        //params.put("storeId", storeId);
+        params.put("storeId", appConfig.getStoreId());
         params.put("pageNumber", page);
         params.put("pageSize", size);
         Page<LiteMallTopicEntity> pages = topicService.queryListByPage(params);

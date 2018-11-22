@@ -1,5 +1,7 @@
 package com.kotall.rms.common.entity.litemall;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,6 +14,7 @@ import java.util.Date;
  * @email kotall@admin.com
  * @date 2018年11月20日 下午1:56:37
  */
+@Data
 public class LiteMallUserFormidEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -24,7 +27,7 @@ public class LiteMallUserFormidEntity implements Serializable {
 	/**
 	 * 店铺ID
 	 */
-	private Integer storeId;
+	private Long storeId;
 	
 	/**
 	 * 缓存的FormId
@@ -67,88 +70,4 @@ public class LiteMallUserFormidEntity implements Serializable {
 	private Integer deleted;
 	
 
-	public LiteMallUserFormidEntity() {
-		super();
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
-	}
-	
-	public Integer getStoreId() {
-		return storeId;
-	}
-	
-	public void setFormid(String formid) {
-		this.formid = formid;
-	}
-	
-	public String getFormid() {
-		return formid;
-	}
-	
-	public void setIsprepay(Integer isprepay) {
-		this.isprepay = isprepay;
-	}
-	
-	public Integer getIsprepay() {
-		return isprepay;
-	}
-	
-	public void setUseamount(Integer useamount) {
-		this.useamount = useamount;
-	}
-	
-	public Integer getUseamount() {
-		return useamount;
-	}
-	
-	public void setExpireTime(Date expireTime) {
-		this.expireTime = expireTime;
-	}
-	
-	public Date getExpireTime() {
-		return expireTime;
-	}
-	
-	public void setOpenid(String openid) {
-		this.openid = openid;
-	}
-	
-	public String getOpenid() {
-		return openid;
-	}
-	
-	public void setAddTime(Date addTime) {
-		this.addTime = addTime;
-	}
-	
-	public Date getAddTime() {
-		return addTime;
-	}
-	
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-	
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	
-	public void setDeleted(Integer deleted) {
-		this.deleted = deleted;
-	}
-	
-	public Integer getDeleted() {
-		return deleted;
-	}
-	
 }

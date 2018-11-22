@@ -1,6 +1,8 @@
 package com.kotall.rms.api.controller;
 
+import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.api.annotation.LoginUser;
+import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallCollectEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity;
 import com.kotall.rms.common.utils.JacksonUtil;
@@ -54,6 +56,7 @@ public class WxCollectController {
      */
     @GetMapping("list")
     public Object list(@LoginUser Integer userId,
+                       @AppConfig LiteMallAppEntity appConfig,
                        @NotNull Byte type,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer size) {
@@ -62,6 +65,7 @@ public class WxCollectController {
         }
 
         Map<String, Object> params = new HashMap<>();
+        params.put("storeId", appConfig.getStoreId());
         params.put("userId", userId);
         params.put("type", type);
         params.put("userId", userId);
@@ -99,17 +103,17 @@ public class WxCollectController {
      * @return 操作结果
      *   成功则
      *  {
-     *      errno: 0,
-     *      errmsg: '成功',
+     *      code: 0,
+     *      msg: '成功',
      *      data:
      *          {
      *              type: xxx,
      *          }
      *  }
-     *   失败则 { errno: XXX, errmsg: XXX }
+     *   失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("addordelete")
-    public Object addordelete(@LoginUser Integer userId, @RequestBody String body) {
+    public Object addordelete(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody String body) {
         if(userId == null){
             return Result.unlogin();
         }
@@ -137,6 +141,7 @@ public class WxCollectController {
         else{
             handleType = "add";
             collect = new LiteMallCollectEntity();
+            collect.setStoreId(appConfig.getStoreId());
             collect.setUserId(userId);
             collect.setValueId(valueId);
             collect.setType(new Integer(type));

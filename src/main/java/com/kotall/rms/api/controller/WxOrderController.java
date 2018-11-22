@@ -8,6 +8,7 @@ import com.github.binarywang.wxpay.bean.result.BaseWxPayResult;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.kotall.rms.api.SystemConfig;
+import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.api.annotation.LoginUser;
 import com.kotall.rms.common.entity.litemall.*;
 import com.kotall.rms.common.integration.express.ExpressService;
@@ -129,7 +130,8 @@ public class WxOrderController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @GetMapping("list")
-    public Object list(@LoginUser Integer userId,
+    public Object list(@AppConfig LiteMallAppEntity appConfig,
+                       @LoginUser Integer userId,
                        @RequestParam(defaultValue = "0") Integer showType,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer size) {
@@ -139,7 +141,7 @@ public class WxOrderController {
 
         List<Short> orderStatus = OrderUtil.orderStatus(showType);
         Map<String, Object> params = new HashMap<>();
-        //params.put("storeId", storeId);
+        params.put("storeId", appConfig.getStoreId());
         params.put("userId", userId);
         params.put("orderStatus", orderStatus);
         params.put("deleted", 0);
@@ -168,7 +170,7 @@ public class WxOrderController {
             }
 
             params = new HashMap<>();
-            //params.put("storeId", storeId);
+            params.put("storeId", appConfig.getStoreId());
             params.put("orderId", order.getId());
             params.put("deleted", 0);
             List<LiteMallOrderGoodsEntity> orderGoodsList = orderGoodsService.queryByOrderId(params);
@@ -212,7 +214,7 @@ public class WxOrderController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @GetMapping("detail")
-    public Object detail(@LoginUser Integer userId, @NotNull Integer orderId) {
+    public Object detail(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig,@NotNull Integer orderId) {
         if (userId == null) {
             return Result.unlogin();
         }
@@ -241,7 +243,7 @@ public class WxOrderController {
         orderVo.put("expNo", order.getShipSn());
 
         Map<String, Object> params = new HashMap<>();
-        //params.put("storeId", storeId);
+        params.put("storeId", appConfig.getStoreId());
         params.put("orderId", order.getId());
         params.put("deleted", 0);
         List<LiteMallOrderGoodsEntity> orderGoodsList = orderGoodsService.queryByOrderId(params);
@@ -275,7 +277,9 @@ public class WxOrderController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @PostMapping("submit")
-    public Object submit(@LoginUser Integer userId, @RequestBody String body) {
+    public Object submit(@LoginUser Integer userId,
+                         @AppConfig LiteMallAppEntity appConfig,
+                         @RequestBody String body) {
         if (userId == null) {
             return Result.unlogin();
         }
@@ -327,7 +331,7 @@ public class WxOrderController {
         List<LiteMallCartEntity> checkedGoodsList;
         if (cartId.equals(0)) {
             Map<String, Object> params = new HashMap<>();
-            //params.put("storeId", storeId);
+            params.put("storeId", appConfig.getStoreId());
             params.put("userId", userId);
             params.put("deleted", 0);
             checkedGoodsList = cartService.queryCartList(params);
@@ -371,6 +375,7 @@ public class WxOrderController {
         try {
             // 订单
             order = new LiteMallOrderEntity();
+            order.setStoreId(appConfig.getStoreId());
             order.setUserId(userId);
             order.setOrderSn(orderService.generateOrderSn(userId));
             order.setOrderStatus(new Integer(OrderUtil.STATUS_CREATE));
@@ -440,6 +445,7 @@ public class WxOrderController {
                 LiteMallGrouponEntity groupon = new LiteMallGrouponEntity();
                 groupon.setOrderId(orderId);
                 groupon.setPayed(0);
+                groupon.setStoreId(appConfig.getStoreId());
                 groupon.setUserId(userId);
                 groupon.setRulesId(grouponRulesId);
 
@@ -482,7 +488,9 @@ public class WxOrderController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @PostMapping("cancel")
-    public Object cancel(@LoginUser Integer userId, @RequestBody String body) {
+    public Object cancel(@LoginUser Integer userId,
+                         @AppConfig LiteMallAppEntity appConfig,
+                         @RequestBody String body) {
         if (userId == null) {
             return Result.unlogin();
         }
@@ -520,7 +528,7 @@ public class WxOrderController {
 
             // 商品货品数量增加
             Map<String, Object> params = new HashMap<>();
-            //params.put("storeId", storeId);
+            params.put("storeId", appConfig.getStoreId());
             params.put("orderId", orderId);
             List<LiteMallOrderGoodsEntity> orderGoodsList = orderGoodsService.queryByOrderId(params);
             for (LiteMallOrderGoodsEntity orderGoods : orderGoodsList) {
@@ -556,7 +564,10 @@ public class WxOrderController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @PostMapping("prepay")
-    public Object prepay(@LoginUser Integer userId, @RequestBody String body, HttpServletRequest request) {
+    public Object prepay(@LoginUser Integer userId,
+                         @AppConfig LiteMallAppEntity appConfig,
+                         @RequestBody String body,
+                         HttpServletRequest request) {
         if (userId == null) {
             return Result.unlogin();
         }
@@ -607,6 +618,7 @@ public class WxOrderController {
             userFormid.setFormid(prepayId);
             userFormid.setIsprepay(1);
             userFormid.setUseamount(3);
+            userFormid.setStoreId(appConfig.getStoreId());
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date());
             calendar.add(Calendar.DAY_OF_MONTH, 7);
@@ -640,7 +652,7 @@ public class WxOrderController {
      * 注意，这里pay-notify是示例地址，开发者应该设立一个隐蔽的回调地址
      */
     @PostMapping("pay-notify")
-    public Object payNotify(HttpServletRequest request, HttpServletResponse response) {
+    public Object payNotify(@AppConfig LiteMallAppEntity appConfig,HttpServletRequest request, HttpServletResponse response) {
         String xmlResult = null;
         try {
             xmlResult = IOUtils.toString(request.getInputStream(), request.getCharacterEncoding());
@@ -665,7 +677,7 @@ public class WxOrderController {
         // 分转化成元
         String totalFee = BaseWxPayResult.fenToYuan(result.getTotalFee());
         Map<String, Object> params = new HashMap<>();
-        //params.put("storeId", storeId);
+        params.put("storeId", appConfig.getStoreId());
         params.put("orderSn", orderSn);
         LiteMallOrderEntity order = orderService.findOrderBySn(params);
         if (order == null) {
@@ -710,7 +722,7 @@ public class WxOrderController {
 
         //  支付成功，有团购信息，更新团购信息
         params = new HashMap<>();
-        //params.put("storeId", storeId);
+        params.put("storeId", appConfig.getStoreId());
         params.put("orderId", order.getId());
         LiteMallGrouponEntity groupon = grouponService.queryByOrderId(params);
         if (groupon != null) {
@@ -760,7 +772,9 @@ public class WxOrderController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @PostMapping("refund")
-    public Object refund(@LoginUser Integer userId, @RequestBody String body) {
+    public Object refund(@LoginUser Integer userId,
+                         @AppConfig LiteMallAppEntity appConfig,
+                         @RequestBody String body) {
         if (userId == null) {
             return Result.unlogin();
         }
@@ -807,7 +821,9 @@ public class WxOrderController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @PostMapping("confirm")
-    public Object confirm(@LoginUser Integer userId, @RequestBody String body) {
+    public Object confirm(@LoginUser Integer userId,
+                          @AppConfig LiteMallAppEntity appConfig,
+                          @RequestBody String body) {
         if (userId == null) {
             return Result.unlogin();
         }
@@ -830,7 +846,7 @@ public class WxOrderController {
         }
 
         Map<String, Object> params = new HashMap<>();
-        //params.put("storeId", storeId);
+        params.put("storeId", appConfig.getStoreId());
         params.put("orderId", orderId);
         params.put("deleted", 0);
         Integer comments = orderGoodsService.countCommentIds(params);
@@ -897,14 +913,15 @@ public class WxOrderController {
      */
     @GetMapping("goods")
     public Object goods(@LoginUser Integer userId,
-                          @NotNull Integer orderId,
-                          @NotNull Integer goodsId) {
+                        @AppConfig LiteMallAppEntity appConfig,
+                        @NotNull Integer orderId,
+                        @NotNull Integer goodsId) {
         if (userId == null) {
             return Result.unlogin();
         }
 
         Map<String, Object> params = new HashMap<>();
-		//params.put("storeId", storeId);
+		params.put("storeId", appConfig.getStoreId());
 		params.put("orderId", orderId);
 		params.put("goodsId", goodsId);
         List<LiteMallOrderGoodsEntity> orderGoodsList = orderGoodsService.queryOrderGoodsList(params);

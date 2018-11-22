@@ -1,6 +1,8 @@
 package com.kotall.rms.api.controller;
 
+import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.api.annotation.LoginUser;
+import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallFootprintEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity;
 import com.kotall.rms.common.utils.JacksonUtil;
@@ -84,6 +86,7 @@ public class WxFootprintController {
      */
     @GetMapping("list")
     public Object list(@LoginUser Integer userId,
+                       @AppConfig LiteMallAppEntity appConfig,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer size) {
         if(userId == null){
@@ -91,7 +94,7 @@ public class WxFootprintController {
         }
 
         Map<String, Object> params = new HashMap<>();
-        //params.put("storeId", userId);
+        params.put("storeId", appConfig.getStoreId());
         params.put("userId", userId);
         params.put("pageNumber", page);
         params.put("pageSize", size);

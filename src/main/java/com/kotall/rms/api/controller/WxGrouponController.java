@@ -1,5 +1,6 @@
 package com.kotall.rms.api.controller;
 
+import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.api.annotation.LoginUser;
 import com.kotall.rms.common.entity.litemall.*;
 import com.kotall.rms.common.integration.express.ExpressService;
@@ -65,12 +66,14 @@ public class WxGrouponController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @GetMapping("list")
-    public Object list(@RequestParam(defaultValue = "1") Integer page,
-                       @RequestParam(defaultValue = "10") Integer size,
-                       @RequestParam(defaultValue = "add_time") String sort,
-                       @RequestParam(defaultValue = "desc") String order) {
+    public Object list(
+            @AppConfig LiteMallAppEntity appConfig,
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(defaultValue = "add_time") String sort,
+            @RequestParam(defaultValue = "desc") String order) {
         Map<String, Object> params = new HashMap<>();
-        //params.put("storeId", storeId);
+        params.put("storeId", appConfig.getStoreId());
         params.put("pageNumber", page);
         params.put("pageSize", size);
         Page<Map<String, Object>> pages = grouponRulesService.queryGroupOnList(params);
@@ -83,7 +86,9 @@ public class WxGrouponController {
     }
 
     @GetMapping("detail")
-    public Object detail(@LoginUser Integer userId, @NotNull Integer grouponId) {
+    public Object detail(@LoginUser Integer userId,
+                         @NotNull Integer grouponId,
+                         @AppConfig LiteMallAppEntity appConfig) {
         if (userId == null) {
             return Result.unlogin();
         }
@@ -163,7 +168,7 @@ public class WxGrouponController {
 
         }
         params = new HashMap<>();
-        //params.put("storeId", storeId);
+        params.put("storeId", appConfig.getStoreId());
         params.put("id", linkGrouponId);
 
         List<LiteMallGrouponEntity> groupons = grouponService.queryJoinRecord(params);
@@ -207,7 +212,9 @@ public class WxGrouponController {
     }
 
     @GetMapping("my")
-    public Object my(@LoginUser Integer userId, @RequestParam(defaultValue = "0") Integer showType) {
+    public Object my(@LoginUser Integer userId,
+                     @AppConfig LiteMallAppEntity appConfig,
+                     @RequestParam(defaultValue = "0") Integer showType) {
         if (userId == null) {
             return Result.unlogin();
         }
@@ -259,6 +266,7 @@ public class WxGrouponController {
             }
 
             Map<String, Object> params = new HashMap<>();
+            params.put("storeId", appConfig.getStoreId());
             params.put("grouponId", 0);
             params.put("deleted", 0);
             params.put("payed", 1);
@@ -273,7 +281,7 @@ public class WxGrouponController {
             grouponVo.put("handleOption", OrderUtil.build(order));
 
             params = new HashMap<>();
-            //params.put("storeId", storeId);
+            params.put("storeId", appConfig.getStoreId());
             params.put("orderId", order.getId());
             List<LiteMallOrderGoodsEntity> orderGoodsList = orderGoodsService.queryByOrderId(params);
             List<Map<String, Object>> orderGoodsVoList = new ArrayList<>(orderGoodsList.size());

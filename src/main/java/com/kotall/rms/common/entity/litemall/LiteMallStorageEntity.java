@@ -1,5 +1,7 @@
 package com.kotall.rms.common.entity.litemall;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,6 +14,7 @@ import java.util.Date;
  * @email kotall@admin.com
  * @date 2018年11月21日 上午11:42:26
  */
+@Data
 public class LiteMallStorageEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -24,7 +27,7 @@ public class LiteMallStorageEntity implements Serializable {
 	/**
 	 * 店铺ID
 	 */
-	private Integer storeId;
+	private Long storeId;
 	
 	/**
 	 * 文件的唯一索引
@@ -67,88 +70,5 @@ public class LiteMallStorageEntity implements Serializable {
 	private Integer deleted;
 	
 
-	public LiteMallStorageEntity() {
-		super();
-	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
-	}
-	
-	public Integer getStoreId() {
-		return storeId;
-	}
-	
-	public void setKey(String key) {
-		this.key = key;
-	}
-	
-	public String getKey() {
-		return key;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setType(String type) {
-		this.type = type;
-	}
-	
-	public String getType() {
-		return type;
-	}
-	
-	public void setSize(Integer size) {
-		this.size = size;
-	}
-	
-	public Integer getSize() {
-		return size;
-	}
-	
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	
-	public String getUrl() {
-		return url;
-	}
-	
-	public void setAddTime(Date addTime) {
-		this.addTime = addTime;
-	}
-	
-	public Date getAddTime() {
-		return addTime;
-	}
-	
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-	
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	
-	public void setDeleted(Integer deleted) {
-		this.deleted = deleted;
-	}
-	
-	public Integer getDeleted() {
-		return deleted;
-	}
-	
 }

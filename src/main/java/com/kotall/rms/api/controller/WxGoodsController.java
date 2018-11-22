@@ -1,6 +1,7 @@
 package com.kotall.rms.api.controller;
 
 import com.kotall.rms.api.SystemConfig;
+import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.api.annotation.LoginUser;
 import com.kotall.rms.api.vo.GoodsSpecificationVO;
 import com.kotall.rms.common.entity.litemall.*;
@@ -83,7 +84,7 @@ public class WxGoodsController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @GetMapping("detail")
-    public Object detail(@LoginUser Integer userId, @NotNull Integer id) {
+    public Object detail(@LoginUser Integer userId, @NotNull Integer id, @AppConfig LiteMallAppEntity appConfig) {
         // 商品信息
         LiteMallGoodsEntity info = goodsService.getLiteMallGoodsById(new Long(id));
 
@@ -110,7 +111,7 @@ public class WxGoodsController {
 
         // 商品问题，这里是一些通用问题
         params = new HashMap<>();
-        //params.put("storeId", storeId);
+        params.put("storeId", appConfig.getStoreId());
         params.put("deleted", 0);
         List<LiteMallIssueEntity> issue = goodsIssueService.queryIssueList(params);
 
@@ -148,9 +149,8 @@ public class WxGoodsController {
         commentList.put("count", pages.getTotal());
         commentList.put("data", commentsVo);
 
-        //团购信息
+        // 团购信息
         params = new HashMap<>();
-        //params.put("storeId", storeId);
         params.put("goodsId", id);
         params.put("deleted", 0);
         List<LiteMallGrouponRulesEntity> rules = rulesService.queryByGoodsId(params);
@@ -287,6 +287,7 @@ public class WxGoodsController {
     @GetMapping("list")
     public Object list(Integer categoryId, Integer brandId, String keyword, Boolean isNew, Boolean isHot,
                        @LoginUser Integer userId,
+                       @AppConfig LiteMallAppEntity appConfig,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer size,
                        @RequestParam(defaultValue = "add_time") String sort,
@@ -296,6 +297,7 @@ public class WxGoodsController {
         if (userId != null && !StringUtils.isNullOrEmpty(keyword)) {
             LiteMallSearchHistoryEntity searchHistoryVo = new LiteMallSearchHistoryEntity();
             searchHistoryVo.setKeyword(keyword);
+            searchHistoryVo.setStoreId(appConfig.getStoreId());
             searchHistoryVo.setUserId(userId);
             searchHistoryVo.setFrom("wx");
             searchHistoryService.saveLiteMallSearchHistory(searchHistoryVo);
@@ -303,7 +305,7 @@ public class WxGoodsController {
 
         // 查询列表数据
         Map<String, Object> params = new HashMap<>();
-        //params.put("storeId", storeId);
+        params.put("storeId", appConfig.getStoreId());
         params.put("categoryId", categoryId);
         params.put("brandId", brandId);
         params.put("keyword", keyword);
@@ -317,7 +319,7 @@ public class WxGoodsController {
 
         // 查询商品所属类目列表。
         params = new HashMap<>();
-        //params.put("storeId", storeId);
+        params.put("storeId", appConfig.getStoreId());
         params.put("categoryId", categoryId);
         params.put("brandId", brandId);
         params.put("keyword", keyword);
@@ -417,7 +419,7 @@ public class WxGoodsController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @GetMapping("related")
-    public Object related(@NotNull Integer id) {
+    public Object related(@NotNull Integer id, @AppConfig LiteMallAppEntity appConfig) {
         LiteMallGoodsEntity goods = goodsService.getLiteMallGoodsById(new Long(id));
         if (goods == null) {
             return Result.badArgumentValue();
@@ -428,7 +430,7 @@ public class WxGoodsController {
 
         // 查找六个相关商品
         Map<String, Object> params = new HashMap<>();
-        //params.put("storeId", storeId);
+        params.put("storeId", appConfig.getStoreId());
         params.put("categoryId", cid);
         params.put("pageNumber", 1);
         params.put("pageSize", 6);
@@ -455,9 +457,9 @@ public class WxGoodsController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @GetMapping("count")
-    public Object count() {
+    public Object count(@AppConfig LiteMallAppEntity appConfig) {
         Map<String, Object> params = new HashMap<>();
-        //params.put("storeId", storeId);
+        params.put("storeId", appConfig.getStoreId());
         Integer goodsCount = goodsService.countOnSale(params);
         Map<String, Object> data = new HashMap<>();
         data.put("goodsCount", goodsCount);

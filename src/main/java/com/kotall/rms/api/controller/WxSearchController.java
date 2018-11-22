@@ -1,6 +1,8 @@
 package com.kotall.rms.api.controller;
 
+import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.api.annotation.LoginUser;
+import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallKeywordEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallSearchHistoryEntity;
 import com.kotall.rms.common.utils.Result;
@@ -49,11 +51,11 @@ public class WxSearchController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @GetMapping("index")
-    public Object index(@LoginUser Integer userId) {
+    public Object index(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig) {
         // 取出输入框默认的关键词
-        LiteMallKeywordEntity defaultKeyword = keywordsService.queryDefault();
+        LiteMallKeywordEntity defaultKeyword = keywordsService.queryDefault(appConfig.getStoreId());
         // 取出热闹关键词
-        List<LiteMallKeywordEntity> hotKeywordList = keywordsService.queryHots();
+        List<LiteMallKeywordEntity> hotKeywordList = keywordsService.queryHots(appConfig.getStoreId());
 
         List<LiteMallSearchHistoryEntity> historyList;
         if (userId != null) {

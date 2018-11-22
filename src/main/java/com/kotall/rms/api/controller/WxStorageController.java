@@ -1,5 +1,7 @@
 package com.kotall.rms.api.controller;
 
+import com.kotall.rms.api.annotation.AppConfig;
+import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallStorageEntity;
 import com.kotall.rms.common.integration.storage.StorageService;
 import com.kotall.rms.common.utils.FileKit;
@@ -32,7 +34,7 @@ public class WxStorageController {
     private LiteMallStorageService liteMallStorageService;
 
     @PostMapping("/upload")
-    public Object upload(@RequestParam("file") MultipartFile file) throws IOException {
+    public Object upload(@AppConfig LiteMallAppEntity appConfig, @RequestParam("file") MultipartFile file) throws IOException {
         String originalFilename = file.getOriginalFilename();
         String url = storageService.store(file.getInputStream(), file.getSize(), file.getContentType(), storageService.getActive(), FileKit.getFileSufix(originalFilename));
 
@@ -42,6 +44,7 @@ public class WxStorageController {
         storageInfo.setType(file.getContentType());
         storageInfo.setKey(null);
         storageInfo.setUrl(url);
+        storageInfo.setStoreId(appConfig.getStoreId());
         this.liteMallStorageService.saveLiteMallStorage(storageInfo);
 
         Map<String, Object> data = new HashMap<>();
@@ -50,7 +53,7 @@ public class WxStorageController {
     }
 
     @GetMapping("/fetch/{key:.+}")
-    public ResponseEntity<Resource> fetch(@PathVariable String key) {
+    public ResponseEntity<Resource> fetch(@PathVariable String key, @AppConfig LiteMallAppEntity appConfig) {
         LiteMallStorageEntity litemallStorage = liteMallStorageService.findByKey(key);
         if (key == null) {
             return ResponseEntity.notFound().build();
@@ -69,7 +72,7 @@ public class WxStorageController {
     }
 
     @GetMapping("/download/{key:.+}")
-    public ResponseEntity<Resource> download(@PathVariable String key) {
+    public ResponseEntity<Resource> download(@PathVariable String key, @AppConfig LiteMallAppEntity appConfig) {
         LiteMallStorageEntity litemallStorage = liteMallStorageService.findByKey(key);
         if (key == null) {
             return ResponseEntity.notFound().build();

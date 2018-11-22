@@ -1,6 +1,8 @@
 package com.kotall.rms.api.controller;
 
+import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.api.annotation.LoginUser;
+import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
 import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.core.service.litemall.LiteMallOrderService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,13 +38,13 @@ public class WxUserController {
      *   失败则 { errno: XXX, errmsg: XXX }
      */
     @GetMapping("index")
-    public Object list(@LoginUser Integer userId) {
+    public Object list(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig) {
         if(userId == null){
             return Result.unlogin();
         }
 
         Map<Object, Object> data = new HashMap<>();
-        data.put("order", orderService.queryOrderInfo(userId));
+        data.put("order", orderService.queryOrderInfo(userId, appConfig.getStoreId()));
         return Result.ok().put("data", data);
     }
 

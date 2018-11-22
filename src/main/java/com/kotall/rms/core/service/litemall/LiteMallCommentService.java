@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.common.entity.litemall.LiteMallCommentEntity;
 
 /**
@@ -30,7 +29,7 @@ public interface LiteMallCommentService {
 
     int batchRemove(Long[] id);
 
-    int count(int showType, int type, int valueId);
+    int count(Long storeId, int showType, int type, int valueId);
 
     Page<LiteMallCommentEntity> queryCommentByPage(Integer showType, Map<String, Object> params);
 

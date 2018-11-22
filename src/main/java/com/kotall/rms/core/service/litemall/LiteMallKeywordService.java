@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.common.entity.litemall.LiteMallKeywordEntity;
 
 /**
@@ -28,7 +27,7 @@ public interface LiteMallKeywordService {
 
     List<LiteMallKeywordEntity> queryKeywordList(Map<String, Object> params);
 
-    LiteMallKeywordEntity queryDefault();
+    LiteMallKeywordEntity queryDefault(Long storeId);
 
-    List<LiteMallKeywordEntity> queryHots();
+    List<LiteMallKeywordEntity> queryHots(Long storeId);
 }
