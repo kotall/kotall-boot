@@ -24,11 +24,18 @@
 			`deleted`
 		FROM
 			lite_mall_user
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="storeId != null"> `store_id` = #{storeId}</if>
+			<if test="username != null"> and `username` = #{username}</if>
+			<if test="gender != null"> and `gender` = #{gender}</if>
+			<if test="mobile != null"> and `mobile` = #{mobile}</if>
+			<if test="status != null"> and `status` = #{status}</if>
+			<if test="deleted != null"> and `deleted` = #{deleted}</if>
+			<if test="weixin_openid != null"> `weixinOpenid` = #{weixin_openid}</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter} </if>
+		</where>
 		ORDER BY
-			id DESC
+			add_time DESC
 	</select>
 	
 	<insert id="save">
@@ -129,5 +136,41 @@
 			#{id}
 		</foreach>
 	</delete>
+
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`username`,
+			`password`,
+			`gender`,
+			`birthday`,
+			`last_login_time`,
+			`last_login_ip`,
+			`user_level`,
+			`nickname`,
+			`mobile`,
+			`avatar`,
+			`weixin_openid`,
+			`status`,
+			`add_time`,
+			`update_time`,
+			`deleted`
+		FROM
+			lite_mall_user
+		<where>
+			<if test="storeId != null"> `store_id` = #{storeId}</if>
+			<if test="weixinOpenid != null"> and `weixin_openid` = #{weixinOpenid}</if>
+			<if test="username != null"> and `username` = #{username}</if>
+			<if test="nickname != null"> and `nickname` = #{nickname}</if>
+			<if test="userLevel != null"> and `user_level` = #{userLevel}</if>
+			<if test="gender != null"> and `gender` = #{gender}</if>
+			<if test="deleted != null"> and `deleted` = #{deleted}</if>
+			<if test="mobile != null"> and `mobile` = #{mobile}</if>
+			<if test="status != null"> and `status` = #{status}</if>
+		</where>
+		ORDER BY
+			add_time DESC
+	</select>
 
 </mapper>

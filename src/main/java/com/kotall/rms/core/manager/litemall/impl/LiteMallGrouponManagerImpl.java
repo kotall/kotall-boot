@@ -30,6 +30,11 @@ public class LiteMallGrouponManagerImpl implements LiteMallGrouponManager {
 	}
 
 	@Override
+	public List<LiteMallGrouponEntity> queryGroupOnList(Query query) {
+		return liteMallGrouponMapper.list(query);
+	}
+
+	@Override
 	public int saveLiteMallGroupon(LiteMallGrouponEntity liteMallGroupon) {
 		return liteMallGrouponMapper.save(liteMallGroupon);
 	}
@@ -50,5 +55,9 @@ public class LiteMallGrouponManagerImpl implements LiteMallGrouponManager {
 		int count = liteMallGrouponMapper.batchRemove(id);
 		return count;
 	}
-	
+
+	@Override
+	public int countGroupOn(Query query) {
+		return this.liteMallGrouponMapper.countTotal(query);
+	}
 }

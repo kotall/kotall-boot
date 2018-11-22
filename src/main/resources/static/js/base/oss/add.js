@@ -1,5 +1,5 @@
 /**
- * 新增-文件上传js
+ * 新增-文件存储表js
  */
 var vm = new Vue({
 	el:'#dpLTE',

@@ -16,7 +16,7 @@ import com.kotall.rms.common.utils.Page;
  */
 public interface LiteMallStorageService {
 
-	Page<LiteMallStorageEntity> listLiteMallStorage(Map<String, Object> params);
+    Page<LiteMallStorageEntity> listLiteMallStorage(Map<String, Object> params);
 
     int saveLiteMallStorage(LiteMallStorageEntity liteMallStorage);
 

@@ -1,19 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="include/header_css::header('文件上传')"></head>
+<head th:include="include/header_css::header('文件存储表')"></head>
 <body>
 	<div id="dpLTE" class="container-fluid" v-cloak>
 		<table class="form" id="form">
 			<tr>
-	            <td class="formTitle">URL地址<font face="宋体">*</font></td>
+	            <td class="formTitle">文件的唯一ID<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="URL地址" v-model="sysOss.url" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="文件的唯一索引" v-model="sysOss.key" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">创建时间<font face="宋体">*</font></td>
+	            <td class="formTitle">文件名<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="创建时间" v-model="sysOss.createDate" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="文件名" v-model="sysOss.name" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">文件类型<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="文件类型" v-model="sysOss.type" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">文件大小<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="文件大小" v-model="sysOss.size" isvalid="yes" checkexpession="NotNull">
+	            </td>
+        	</tr>
+			<tr>
+	            <td class="formTitle">文件访问链接<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<input type="text" class="form-control" placeholder="文件访问链接" v-model="sysOss.url" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 		</table>

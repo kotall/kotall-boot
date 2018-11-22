@@ -30,5 +30,5 @@ public interface LiteMallBrandService {
      * @param params
      * @return
      */
-    List<LiteMallBrandEntity> queryBrandList(Map<String, Object> params);
+    Page<LiteMallBrandEntity> queryBrandList(Map<String, Object> params);
 }

@@ -18,16 +18,16 @@ import java.util.List;
 public interface LiteMallStorageManager {
 
 	List<LiteMallStorageEntity> listLiteMallStorage(Page<LiteMallStorageEntity> page, Query search);
-	
+
 	int saveLiteMallStorage(LiteMallStorageEntity liteMallStorage);
-	
+
 	LiteMallStorageEntity getLiteMallStorageById(Long id);
-	
+
 	int updateLiteMallStorage(LiteMallStorageEntity liteMallStorage);
-	
+
 	int batchRemove(Long[] id);
 
-    LiteMallStorageEntity findByKey(LitemallStorageExample example);
+	LiteMallStorageEntity findByKey(LitemallStorageExample example);
 
 	void add(LiteMallStorageEntity storageInfo);
 }

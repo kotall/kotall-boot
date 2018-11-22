@@ -26,7 +26,7 @@ public interface LiteMallCategoryManager {
 	
 	int batchRemove(Long[] id);
 
-    List<LiteMallCategoryEntity> queryChannel(Query query);
+    List<LiteMallCategoryEntity> queryCategoryList(Query query);
 
     List<LiteMallCategoryEntity> queryByPid(Integer pid);
 

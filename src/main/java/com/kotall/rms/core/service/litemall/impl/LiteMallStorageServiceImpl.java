@@ -15,7 +15,24 @@ import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.utils.Page;
 
 
-/**
+/**package com.kotall.rms.core.service.litemall.impl;
+
+ import java.io.InputStream;
+ import java.util.Map;
+
+ import com.kotall.rms.common.entity.litemall.LiteMallStorageEntity;
+ import com.kotall.rms.common.entity.litemall.LitemallStorage;
+ import com.kotall.rms.common.entity.litemall.LitemallStorageExample;
+ import com.kotall.rms.core.manager.litemall.LiteMallStorageManager;
+ import com.kotall.rms.core.service.litemall.LiteMallStorageService;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Service;
+
+ import com.kotall.rms.common.utils.Query;
+ import com.kotall.rms.common.utils.Page;
+
+
+ /**
  * 文件存储表
  *
  * @author kotall

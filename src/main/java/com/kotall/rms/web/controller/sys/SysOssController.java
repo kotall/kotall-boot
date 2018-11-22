@@ -107,7 +107,7 @@ public class SysOssController extends AbstractController {
 		// 保存文件信息
 		SysOssEntity ossEntity = new SysOssEntity();
 		ossEntity.setUrl(url);
-		ossEntity.setCreateDate(new Date());
+		ossEntity.setCreateTime(new Date());
 		sysOssService.saveSysOss(ossEntity);
 
 		return Result.ok().put("url", url);

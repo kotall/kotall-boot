@@ -14,9 +14,11 @@
 			`deleted`
 		FROM
 			lite_mall_issue
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="storeId != null"> `store_id` = #{storeId}</if>
+			<if test="deleted != null"> and `deleted` = #{deleted}</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter}</if>
+		</where>
 		ORDER BY
 			id DESC
 	</select>
@@ -79,5 +81,24 @@
 			#{id}
 		</foreach>
 	</delete>
+
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallIssueEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`question`,
+			`answer`,
+			`add_time`,
+			`update_time`,
+			`deleted`
+		FROM
+			lite_mall_issue
+		<where>
+			<if test="storeId != null"> `store_id` = #{storeId}</if>
+			<if test="deleted != null"> and `deleted` = #{deleted}</if>
+		</where>
+		ORDER BY
+			add_time DESC
+	</select>
 
 </mapper>

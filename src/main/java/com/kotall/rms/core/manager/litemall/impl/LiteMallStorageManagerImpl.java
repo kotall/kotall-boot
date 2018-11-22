@@ -23,7 +23,7 @@ public class LiteMallStorageManagerImpl implements LiteMallStorageManager {
 
 	@Autowired
 	private LiteMallStorageMapper liteMallStorageMapper;
-	
+
 
 	@Override
 	public List<LiteMallStorageEntity> listLiteMallStorage(Page<LiteMallStorageEntity> page, Query search) {
@@ -59,7 +59,7 @@ public class LiteMallStorageManagerImpl implements LiteMallStorageManager {
 
 	@Override
 	public void add(LiteMallStorageEntity storageInfo) {
-		 liteMallStorageMapper.add(storageInfo);
+		liteMallStorageMapper.add(storageInfo);
 	}
 
 }

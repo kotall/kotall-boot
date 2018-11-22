@@ -24,5 +24,6 @@ public interface LiteMallGrouponRulesManager {
 	int updateLiteMallGrouponRules(LiteMallGrouponRulesEntity liteMallGrouponRules);
 	
 	int batchRemove(Long[] id);
-	
+
+    List<LiteMallGrouponRulesEntity> queryGrouponRules(Query query);
 }

@@ -1,9 +1,9 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.kotall.rms.common.entity.litemall.LiteMallAdEntity;
 import com.kotall.rms.core.annotation.StoreFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +37,17 @@ public class LiteMallCategoryServiceImpl implements LiteMallCategoryService {
 	}
 
 	@Override
+	public List<LiteMallCategoryEntity> queryCategoryList(Map<String, Object> params) {
+		Query query = new Query(params);
+		return this.liteMallCategoryManager.queryCategoryList(query);
+	}
+
+	@Override
+	public List<LiteMallCategoryEntity> queryL2ByIds(Map<String, Object> params) {
+		return this.queryCategoryList(params);
+	}
+
+	@Override
 	public int saveLiteMallCategory(LiteMallCategoryEntity role) {
 		int count = liteMallCategoryManager.saveLiteMallCategory(role);
 		return count;
@@ -65,7 +76,7 @@ public class LiteMallCategoryServiceImpl implements LiteMallCategoryService {
 		params.put("level", "L1");
 		params.put("deleted", 0);
 		Query query = new Query(params);
-		return this.liteMallCategoryManager.queryChannel(query);
+		return this.liteMallCategoryManager.queryCategoryList(query);
 	}
 
 	@Override
@@ -85,7 +96,12 @@ public class LiteMallCategoryServiceImpl implements LiteMallCategoryService {
 	}
 
 	@Override
-	public List<LiteMallCategoryEntity> getSecondCategory() {
-		return liteMallCategoryManager.getSecondCategory();
+	public List<LiteMallCategoryEntity> queryL1() {
+		Map<String, Object> params = new HashMap<>();
+		params.put("level", "L1");
+		params.put("deleted", 0);
+
+		Query query = new Query(params);
+		return this.liteMallCategoryManager.queryCategoryList(query);
 	}
 }

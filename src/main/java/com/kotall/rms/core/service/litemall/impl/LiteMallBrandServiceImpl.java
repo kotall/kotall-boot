@@ -30,19 +30,15 @@ public class LiteMallBrandServiceImpl implements LiteMallBrandService {
 	@StoreFilter
 	@Override
 	public Page<LiteMallBrandEntity> listLiteMallBrand(Map<String, Object> params) {
+		return this.queryBrandList(params);
+	}
+
+	@Override
+	public Page<LiteMallBrandEntity> queryBrandList(Map<String, Object> params) {
 		Query query = new Query(params);
 		Page<LiteMallBrandEntity> page = new Page<>(query);
 		liteMallBrandManager.listLiteMallBrand(page, query);
 		return page;
-	}
-
-	@Override
-	public List<LiteMallBrandEntity> queryBrandList(Map<String, Object> params) {
-		params.put("deleted", 0);
-		Query query = new Query(params);
-		Page<LiteMallBrandEntity> page = new Page<>(query);
-		liteMallBrandManager.listLiteMallBrand(page, query);
-		return page.getRows();
 	}
 
 	@Override

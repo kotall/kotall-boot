@@ -1,5 +1,5 @@
 /**
- * 文件上传js
+ * 文件存储表js
  */
 
 $(function () {
@@ -23,8 +23,12 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
-			{field : "url", title : "URL地址", width : "100px"}, 
-			{field : "createDate", title : "创建时间", width : "100px"}
+			{field : "key", title : "文件的唯一ID", width : "100px"},
+			{field : "name", title : "文件名", width : "100px"}, 
+			{field : "type", title : "文件类型", width : "100px"}, 
+			{field : "size", title : "文件大小", width : "100px"}, 
+			{field : "url", title : "文件访问链接", width : "100px"}, 
+			{field : "createTime", title : "创建时间", width : "100px"}
 		]
 	})
 }
@@ -40,7 +44,7 @@ var vm = new Vue({
 		},
 		save: function() {
 			dialogOpen({
-				title: '新增文件上传',
+				title: '新增文件存储表',
 				url: 'base/oss/add.html?_' + $.now(),
 				width: '420px',
 				height: '350px',
@@ -53,7 +57,7 @@ var vm = new Vue({
 			var ck = $('#dataGrid').bootstrapTable('getSelections');
 			if(checkedRow(ck)){
 				dialogOpen({
-					title: '编辑文件上传',
+					title: '编辑文件存储表',
 					url: 'base/oss/edit.html?_' + $.now(),
 					width: '420px',
 					height: '350px',

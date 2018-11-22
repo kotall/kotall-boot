@@ -14,5 +14,6 @@ import com.kotall.rms.common.dao.sys.BaseMapper;
  */
 @Mapper
 public interface LiteMallSearchHistoryMapper extends BaseMapper<LiteMallSearchHistoryEntity> {
-	
+
+    void deleteByUserId(Integer userId);
 }

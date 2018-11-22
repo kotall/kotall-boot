@@ -15,11 +15,17 @@
 			`deleted`
 		FROM
 			lite_mall_collect
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="storeId != null "> `store_id` = #{storeId}</if>
+			<if test="userId != null "> and `user_id` = #{userId}</if>
+			<if test="valueId != null "> and `value_id` = #{valueId}</if>
+			<if test="type != null "> and `type` = #{type}</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' ">
+				and ${sql_filter}
+			</if>
+		</where>
 		ORDER BY
-			id DESC
+			add_time DESC
 	</select>
 	
 	<insert id="save">
@@ -84,5 +90,40 @@
 			#{id}
 		</foreach>
 	</delete>
+
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallCollectEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`user_id`,
+			`value_id`,
+			`type`,
+			`add_time`,
+			`update_time`,
+			`deleted`
+		FROM
+			lite_mall_collect
+		<where>
+			<if test="storeId != null "> `store_id` = #{storeId}</if>
+			<if test="userId != null "> and `user_id` = #{userId}</if>
+			<if test="valueId != null "> and `value_id` = #{valueId}</if>
+			<if test="type != null "> and `type` = #{type}</if>
+		</where>
+		ORDER BY
+			add_time DESC
+	</select>
+
+	<select id="countTotal" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			lite_mall_collect
+		<where>
+			<if test="storeId != null "> `store_id` = #{storeId}</if>
+			<if test="userId != null "> and `user_id` = #{userId}</if>
+			<if test="valueId != null "> and `value_id` = #{valueId}</if>
+			<if test="type != null "> and `type` = #{type}</if>
+		</where>
+	</select>
 
 </mapper>

@@ -30,6 +30,11 @@ public class LiteMallGrouponRulesManagerImpl implements LiteMallGrouponRulesMana
 	}
 
 	@Override
+	public List<LiteMallGrouponRulesEntity> queryGrouponRules(Query query) {
+		return liteMallGrouponRulesMapper.list(query);
+	}
+
+	@Override
 	public int saveLiteMallGrouponRules(LiteMallGrouponRulesEntity liteMallGrouponRules) {
 		return liteMallGrouponRulesMapper.save(liteMallGrouponRules);
 	}

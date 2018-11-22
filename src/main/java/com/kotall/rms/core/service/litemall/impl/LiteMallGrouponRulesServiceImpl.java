@@ -1,21 +1,17 @@
 package com.kotall.rms.core.service.litemall.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.kotall.rms.common.dao.litemall.LiteMallGoodsMapper;
 import com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity;
+import com.kotall.rms.common.entity.litemall.LiteMallGrouponRulesEntity;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.annotation.StoreFilter;
+import com.kotall.rms.core.manager.litemall.LiteMallGrouponRulesManager;
+import com.kotall.rms.core.service.litemall.LiteMallGrouponRulesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.entity.litemall.LiteMallGrouponRulesEntity;
-import com.kotall.rms.core.manager.litemall.LiteMallGrouponRulesManager;
-import com.kotall.rms.core.service.litemall.LiteMallGrouponRulesService;
+import java.util.*;
 
 /**
  * 
@@ -42,7 +38,13 @@ public class LiteMallGrouponRulesServiceImpl implements LiteMallGrouponRulesServ
 	}
 
 	@Override
-	public List<Map<String, Object>> queryGroupOnList(Map<String, Object> params) {
+	public List<LiteMallGrouponRulesEntity> queryLiteMallGrouponRules(Map<String, Object> params) {
+		Query query = new Query(params);
+		return liteMallGrouponRulesManager.queryGrouponRules(query);
+	}
+
+	@Override
+	public Page<Map<String, Object>> queryGroupOnList(Map<String, Object> params) {
 		params.put("deleted", 0);
 		Query query = new Query(params);
 		Page<LiteMallGrouponRulesEntity> page = new Page<>(query);
@@ -61,7 +63,11 @@ public class LiteMallGrouponRulesServiceImpl implements LiteMallGrouponRulesServ
 			item.put("groupon_member", rule.getDiscountMember());
 			grouponList.add(item);
 		}
-		return grouponList;
+
+		Page<Map<String, Object>> newPage = new Page<>();
+		newPage.setRows(grouponList);
+		newPage.setTotal(page.getTotal());
+		return newPage;
 	}
 
 	@Override
@@ -88,4 +94,20 @@ public class LiteMallGrouponRulesServiceImpl implements LiteMallGrouponRulesServ
 		return count;
 	}
 
+	@Override
+	public List<LiteMallGrouponRulesEntity> queryByGoodsId(Map<String, Object> params) {
+		return this.queryLiteMallGrouponRules(params);
+	}
+
+	/**
+	 * 判断某个团购活动是否已经过期
+	 *
+	 * @return
+	 */
+	public boolean isExpired(LiteMallGrouponRulesEntity rules) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(rules.getExpireTime());
+
+		return (rules == null || calendar.before(new Date()));
+	}
 }

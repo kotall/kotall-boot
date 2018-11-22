@@ -1,8 +1,11 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.core.annotation.StoreFilter;
+import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +38,12 @@ public class LiteMallKeywordServiceImpl implements LiteMallKeywordService {
 	}
 
 	@Override
+	public List<LiteMallKeywordEntity> queryKeywordList(Map<String, Object> params) {
+		Query query = new Query(params);
+		return liteMallKeywordManager.queryKeywordList(query);
+	}
+
+	@Override
 	public int saveLiteMallKeyword(LiteMallKeywordEntity role) {
 		int count = liteMallKeywordManager.saveLiteMallKeyword(role);
 		return count;
@@ -58,4 +67,22 @@ public class LiteMallKeywordServiceImpl implements LiteMallKeywordService {
 		return count;
 	}
 
+	@Override
+	public LiteMallKeywordEntity queryDefault() {
+		Map<String, Object> params = new HashMap<>();
+		params.put("isDefault", 1);
+		params.put("deleted", 0);
+
+		List<LiteMallKeywordEntity> list = this.queryKeywordList(params);
+		return CollectionUtils.isEmpty(list) ? null : list.get(0);
+	}
+
+	@Override
+	public List<LiteMallKeywordEntity> queryHots() {
+		Map<String, Object> params = new HashMap<>();
+		params.put("isHot", 1);
+		params.put("deleted", 0);
+
+		return this.queryKeywordList(params);
+	}
 }

@@ -13,7 +13,7 @@ import java.util.UUID;
  * @author zpwang
  * @version 1.0.0
  */
-public abstract class CloudStorageService {
+public abstract class StorageService {
     /** 云存储配置信息 */
     CloudStorageConfig config;
 
@@ -24,9 +24,9 @@ public abstract class CloudStorageService {
      * @return 返回上传路径
      */
     public String getPath(String prefix, String suffix) {
-        //生成uuid
+        // 生成uuid
         String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-        //文件路径
+        // 文件路径
         String path = DateUtils.format(new Date(), "yyyyMMdd") + "/" + uuid;
 
         if(StringUtils.isNotBlank(prefix)){

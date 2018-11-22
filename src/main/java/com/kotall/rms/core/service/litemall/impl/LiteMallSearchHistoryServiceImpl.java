@@ -1,5 +1,7 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.core.annotation.StoreFilter;
@@ -35,6 +37,12 @@ public class LiteMallSearchHistoryServiceImpl implements LiteMallSearchHistorySe
 	}
 
 	@Override
+	public List<LiteMallSearchHistoryEntity> querySearchHistoryList(Map<String, Object> params) {
+		Query query = new Query(params);
+		return liteMallSearchHistoryManager.querySearchHistoryList(query);
+	}
+
+	@Override
 	public int saveLiteMallSearchHistory(LiteMallSearchHistoryEntity role) {
 		int count = liteMallSearchHistoryManager.saveLiteMallSearchHistory(role);
 		return count;
@@ -58,4 +66,17 @@ public class LiteMallSearchHistoryServiceImpl implements LiteMallSearchHistorySe
 		return count;
 	}
 
+	@Override
+	public void deleteByUserId(Integer userId) {
+		this.liteMallSearchHistoryManager.deleteByUserId(userId);
+	}
+
+	@Override
+	public List<LiteMallSearchHistoryEntity> queryByUserId(Integer userId) {
+		Map<String, Object> params = new HashMap<>();
+		//params.put("storeId", storeId);
+		params.put("userId", userId);
+		params.put("deleted", 0);
+		return this.querySearchHistoryList(params);
+	}
 }

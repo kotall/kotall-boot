@@ -1,14 +1,14 @@
 package com.kotall.rms.core.manager.litemall.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.dao.litemall.LiteMallAddressMapper;
 import com.kotall.rms.common.entity.litemall.LiteMallAddressEntity;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.manager.litemall.LiteMallAddressManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * 收货地址表
@@ -27,6 +27,11 @@ public class LiteMallAddressManagerImpl implements LiteMallAddressManager {
 	@Override
 	public List<LiteMallAddressEntity> listLiteMallAddress(Page<LiteMallAddressEntity> page, Query search) {
 		return liteMallAddressMapper.listForPage(page, search);
+	}
+
+	@Override
+	public List<LiteMallAddressEntity> queryAddressList(Query query) {
+		return liteMallAddressMapper.list(query);
 	}
 
 	@Override
@@ -50,5 +55,14 @@ public class LiteMallAddressManagerImpl implements LiteMallAddressManager {
 		int count = liteMallAddressMapper.batchRemove(id);
 		return count;
 	}
-	
+
+	@Override
+	public List<LiteMallAddressEntity> queryByUserId(Integer userId) {
+		return this.liteMallAddressMapper.getByUserId(userId);
+	}
+
+	@Override
+	public void resetDefault(LiteMallAddressEntity address, Query query) {
+		this.liteMallAddressMapper.resetDefault(address, query);
+	}
 }

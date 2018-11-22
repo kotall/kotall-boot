@@ -54,4 +54,32 @@ public class Result extends HashMap<String, Object> {
 		super.put(key, value);
 		return this;
 	}
+
+	public static Object badArgument(){
+		return error(401, "参数不对");
+	}
+
+	public static Object badArgumentValue(){
+		return error(402, "参数值不对");
+	}
+
+	public static Object updatedDateExpired(){
+		return error(403, "更新数据已经失效");
+	}
+
+	public static Object updatedDataFailed(){
+		return error(404, "更新数据失败");
+	}
+
+	public static Object unlogin(){
+		return error(501, "请登录");
+	}
+
+	public static Object serious(){
+		return error(502, "系统内部错误");
+	}
+
+	public static Object unsupport(){
+		return error(503, "业务不支持");
+	}
 }

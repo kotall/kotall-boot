@@ -25,5 +25,5 @@ public interface SysAreaService {
 	int updateArea(SysAreaEntity area);
 	
 	int batchRemoveArea(Long[] id) throws RmsException;
-	
+
 }

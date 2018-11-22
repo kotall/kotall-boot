@@ -164,4 +164,44 @@
 		</foreach>
 	</delete>
 
+	<select id="countTotal" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			lite_mall_goods
+		<where>
+			<if test="isOnSale != null "> `is_on_sale` = #{isOnSale}</if>
+			<if test="deleted != null "> and `deleted` = #{deleted}</if>
+			<if test="isNew != null "> and `is_new` = #{isNew}</if>
+			<if test="isHot != null "> and `is_hot` = #{isHot}</if>
+			<if test="keywords != null "> and `keywords` = #{keywords}</if>
+			<if test="ids != null and ids.size() > 0 ">
+				and `id` in
+				<foreach collection="ids" item="item" separator="," open="(" close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
+
+	<select id="queryCategoryIds" resultType="java.lang.Integer">
+		SELECT
+			distinct(`category_id`)
+		FROM
+			lite_mall_goods
+		<where>
+			<if test="isOnSale != null "> `is_on_sale` = #{isOnSale}</if>
+			<if test="deleted != null "> and `deleted` = #{deleted}</if>
+			<if test="isNew != null "> and `is_new` = #{isNew}</if>
+			<if test="isHot != null "> and `is_hot` = #{isHot}</if>
+			<if test="keywords != null "> and `keywords` = #{keywords}</if>
+			<if test="ids != null and ids.size() > 0 ">
+				and `id` in
+				<foreach collection="ids" item="item" separator="," open="(" close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
+
 </mapper>

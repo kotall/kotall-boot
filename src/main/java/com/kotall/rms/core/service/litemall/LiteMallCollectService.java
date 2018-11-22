@@ -1,5 +1,6 @@
 package com.kotall.rms.core.service.litemall;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
@@ -24,5 +25,16 @@ public interface LiteMallCollectService {
     int updateLiteMallCollect(LiteMallCollectEntity liteMallCollect);
 
     int batchRemove(Long[] id);
-	
+
+    Page<LiteMallCollectEntity> queryByType(Map<String, Object> params);
+
+    Page<LiteMallCollectEntity> queryCollectListByPage(Map<String, Object> params);
+
+
+    LiteMallCollectEntity queryByTypeAndValue(Map<String, Object> params);
+
+    List<LiteMallCollectEntity> queryCollectList(Map<String, Object> params);
+
+
+    int countUserCollect(Map<String, Object> params);
 }

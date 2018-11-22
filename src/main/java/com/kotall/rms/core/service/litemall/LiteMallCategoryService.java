@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public interface LiteMallCategoryService {
 
-	Page<LiteMallCategoryEntity> listLiteMallCategory(Map<String, Object> params);
+    Page<LiteMallCategoryEntity> listLiteMallCategory(Map<String, Object> params);
 
     int saveLiteMallCategory(LiteMallCategoryEntity liteMallCategory);
 

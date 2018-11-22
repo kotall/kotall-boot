@@ -1,5 +1,7 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.core.annotation.StoreFilter;
@@ -28,10 +30,42 @@ public class LiteMallCommentServiceImpl implements LiteMallCommentService {
 	@StoreFilter
 	@Override
 	public Page<LiteMallCommentEntity> listLiteMallComment(Map<String, Object> params) {
+		return this.queryCommentListByPage(params);
+	}
+
+	@Override
+	public Page<LiteMallCommentEntity> queryCommentListByPage(Map<String, Object> params) {
 		Query query = new Query(params);
 		Page<LiteMallCommentEntity> page = new Page<>(query);
 		liteMallCommentManager.listLiteMallComment(page, query);
 		return page;
+	}
+
+	@Override
+	public Page<LiteMallCommentEntity> queryCommentByPage(Integer showType, Map<String, Object> params) {
+		if(showType == 0) {
+		}
+		else if(showType == 1){
+			params.put("hasPicture", 1);
+		}
+		else{
+			throw new RuntimeException("showType不支持");
+		}
+		Query query = new Query(params);
+		Page<LiteMallCommentEntity> page = new Page<>(query);
+		this.liteMallCommentManager.listLiteMallComment(page, query);
+		return page;
+	}
+
+	@Override
+	public List<LiteMallCommentEntity> queryCommentList(Map<String, Object> params) {
+		Query query = new Query(params);
+		return this.liteMallCommentManager.queryCommentList(query);
+	}
+
+	@Override
+	public List<LiteMallCommentEntity> queryGoodsByGid(Map<String, Object> params) {
+		return this.queryCommentList(params);
 	}
 
 	@Override
@@ -58,4 +92,21 @@ public class LiteMallCommentServiceImpl implements LiteMallCommentService {
 		return count;
 	}
 
+	@Override
+	public int count(int showType, int type, int valueId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("type", type);
+		params.put("valueId", valueId);
+		params.put("deleted", 0);
+		if(showType == 0) {
+		}
+		else if(showType == 1){
+			params.put("hasPicture", 1);
+		}
+		else{
+			throw new RuntimeException("showType不支持");
+		}
+		Query query = new Query(params);
+		return this.liteMallCommentManager.countComment(query);
+	}
 }

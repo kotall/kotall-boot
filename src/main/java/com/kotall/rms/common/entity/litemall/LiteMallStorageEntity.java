@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author kotall
  * @email kotall@admin.com
- * @date 2018年11月21日 下午2:11:06
+ * @date 2018年11月21日 上午11:42:26
  */
 public class LiteMallStorageEntity implements Serializable {
 	

@@ -6,8 +6,14 @@
 	<select id="listForPage" resultType="com.kotall.rms.common.entity.sys.SysOssEntity">
 		SELECT
 			`id`, 
+			`key`, 
+			`name`, 
+			`type`, 
+			`size`, 
 			`url`, 
-			`create_date`
+			`create_time`, 
+			`update_time`, 
+			`deleted`
 		FROM
 			sys_oss
 		ORDER BY
@@ -16,20 +22,38 @@
 	
 	<insert id="save">
 		INSERT INTO sys_oss (
+			`key`, 
+			`name`, 
+			`type`, 
+			`size`, 
 			`url`, 
-			`create_date`
+			`create_time`, 
+			`update_time`, 
+			`deleted`
 		)
 		VALUES (
+			#{key}, 
+			#{name}, 
+			#{type}, 
+			#{size}, 
 			#{url}, 
-			#{createDate}
+			#{createTime}, 
+			#{updateTime}, 
+			#{deleted}
 		)
 	</insert>
 	
 	<select id="getObjectById" resultType="com.kotall.rms.common.entity.sys.SysOssEntity">
 		SELECT
 			`id`, 
+			`key`, 
+			`name`, 
+			`type`, 
+			`size`, 
 			`url`, 
-			`create_date`
+			`create_time`, 
+			`update_time`, 
+			`deleted`
 		FROM
 			sys_oss
 		WHERE
@@ -39,8 +63,14 @@
 	<update id="update">
 		UPDATE sys_oss
 	 	<set>
+			<if test="key != null">`key` = #{key}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="size != null">`size` = #{size}, </if>
 			<if test="url != null">`url` = #{url}, </if>
-			<if test="createDate != null">`create_date` = #{createDate}</if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="deleted != null">`deleted` = #{deleted}</if>
 		</set>
 		WHERE
 			id = #{id}

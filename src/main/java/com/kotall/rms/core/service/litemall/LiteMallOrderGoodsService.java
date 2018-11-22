@@ -3,6 +3,7 @@ package com.kotall.rms.core.service.litemall;
 import com.kotall.rms.common.entity.litemall.LiteMallOrderGoodsEntity;
 import com.kotall.rms.common.utils.Page;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,4 +25,9 @@ public interface LiteMallOrderGoodsService {
 
     int batchRemove(Long[] id);
 
+    List<LiteMallOrderGoodsEntity> queryByOrderId(Map<String, Object> params);
+
+    Integer countCommentIds(Map<String, Object> params);
+
+    List<LiteMallOrderGoodsEntity> queryOrderGoodsList(Map<String, Object> params);
 }

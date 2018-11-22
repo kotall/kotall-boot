@@ -24,5 +24,10 @@ public interface LiteMallAddressManager {
 	int updateLiteMallAddress(LiteMallAddressEntity liteMallAddress);
 	
 	int batchRemove(Long[] id);
-	
+
+    List<LiteMallAddressEntity> queryByUserId(Integer userId);
+
+	void resetDefault(LiteMallAddressEntity address, Query query);
+
+    List<LiteMallAddressEntity> queryAddressList(Query query);
 }

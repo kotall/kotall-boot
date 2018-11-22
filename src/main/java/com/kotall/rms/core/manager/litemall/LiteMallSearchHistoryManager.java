@@ -24,5 +24,8 @@ public interface LiteMallSearchHistoryManager {
 	int updateLiteMallSearchHistory(LiteMallSearchHistoryEntity liteMallSearchHistory);
 	
 	int batchRemove(Long[] id);
-	
+
+    void deleteByUserId(Integer userId);
+
+    List<LiteMallSearchHistoryEntity> querySearchHistoryList(Query query);
 }

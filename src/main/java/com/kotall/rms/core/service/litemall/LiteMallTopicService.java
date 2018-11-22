@@ -18,6 +18,8 @@ public interface LiteMallTopicService {
 
 	Page<LiteMallTopicEntity> listLiteMallTopic(Map<String, Object> params);
 
+    Page<LiteMallTopicEntity> queryListByPage(Map<String, Object> params);
+
     int saveLiteMallTopic(LiteMallTopicEntity liteMallTopic);
 
     LiteMallTopicEntity getLiteMallTopicById(Long id);
@@ -32,4 +34,11 @@ public interface LiteMallTopicService {
      * @return
      */
     List<LiteMallTopicEntity> queryTopicList(Map<String, Object> params);
+
+    /**
+     * 查询相关主题
+     * @param params
+     * @return
+     */
+    List<LiteMallTopicEntity> queryRelatedList(Map<String, Object> params);
 }

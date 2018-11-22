@@ -1,31 +1,67 @@
-
 package com.kotall.rms.common.entity.sys;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
 
-@Getter
-@Setter
-@ToString
+
+/**
+ * 文件存储表
+ *
+ * @author kotall
+ * @email kotall@admin.com
+ * @date 2018年11月22日 上午10:30:34
+ */
+@Data
 public class SysOssEntity implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
 	/**
-	 * URL地址
+	 * 
+	 */
+	private Long id;
+	
+	/**
+	 * 文件的唯一索引
+	 */
+	private String key;
+	
+	/**
+	 * 文件名
+	 */
+	private String name;
+	
+	/**
+	 * 文件类型
+	 */
+	private String type;
+	
+	/**
+	 * 文件大小
+	 */
+	private Integer size;
+	
+	/**
+	 * 文件访问链接
 	 */
 	private String url;
-
+	
 	/**
 	 * 创建时间
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date createDate;
+	private Date createTime;
+	
+	/**
+	 * 更新时间
+	 */
+	private Date updateTime;
+	
+	/**
+	 * 逻辑删除
+	 */
+	private Integer deleted;
 
 }

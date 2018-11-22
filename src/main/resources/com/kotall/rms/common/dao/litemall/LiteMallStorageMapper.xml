@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallStorageMapper">
+<<<<<<< HEAD
 	<sql id="Example_Where_Clause">
 		<!--
           WARNING - @mbg.generated
@@ -35,6 +36,9 @@
 			</foreach>
 		</where>
 	</sql>
+=======
+	
+>>>>>>> f540a6f71acc461f4aa521713565af657c4990a5
 	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallStorageEntity">
 		SELECT
 			`id`, 
@@ -49,8 +53,20 @@
 			`deleted`
 		FROM
 			lite_mall_storage
+<<<<<<< HEAD
 		ORDER BY
 			id DESC
+=======
+		<where>
+			<if test="storeId != null" >`store_id` = #{storeId}</if>
+			<if test="key != null" > and `key` = #{key}</if>
+			<if test="type != null" > and `type` = #{type}</if>
+			<if test="name != null" > and `name` = #{name}</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter}</if>
+		</where>
+		ORDER BY
+			add_time DESC
+>>>>>>> f540a6f71acc461f4aa521713565af657c4990a5
 	</select>
 	
 	<insert id="save">
@@ -77,6 +93,7 @@
 			#{deleted}
 		)
 	</insert>
+<<<<<<< HEAD
 
 	<insert id="add">
 		INSERT INTO lite_mall_storage (
@@ -139,6 +156,27 @@
 		limit 1
 	</select>
 
+=======
+	
+	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallStorageEntity">
+		SELECT
+			`id`, 
+			`store_id`, 
+			`key`, 
+			`name`, 
+			`type`, 
+			`size`, 
+			`url`, 
+			`add_time`, 
+			`update_time`, 
+			`deleted`
+		FROM
+			lite_mall_storage
+		WHERE
+			id = #{id}
+	</select>
+	
+>>>>>>> f540a6f71acc461f4aa521713565af657c4990a5
 	<update id="update">
 		UPDATE lite_mall_storage
 	 	<set>
@@ -167,4 +205,31 @@
 		</foreach>
 	</delete>
 
+<<<<<<< HEAD
+=======
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallStorageEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`key`,
+			`name`,
+			`type`,
+			`size`,
+			`url`,
+			`add_time`,
+			`update_time`,
+			`deleted`
+		FROM
+			lite_mall_storage
+		<where>
+			<if test="storeId != null" >`store_id` = #{storeId}</if>
+			<if test="key != null" > and `key` = #{key}</if>
+			<if test="type != null" > and `type` = #{type}</if>
+			<if test="name != null" > and `name` = #{name}</if>
+		</where>
+		ORDER BY
+			add_time DESC
+	</select>
+
+>>>>>>> f540a6f71acc461f4aa521713565af657c4990a5
 </mapper>
