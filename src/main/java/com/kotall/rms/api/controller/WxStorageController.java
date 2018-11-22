@@ -1,10 +1,14 @@
 package com.kotall.rms.api.controller;
 
 import com.kotall.rms.api.StorageService;
+import com.kotall.rms.common.entity.litemall.LiteMallStorageEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallStoreEntity;
+import com.kotall.rms.common.entity.litemall.LitemallStorage;
 import com.kotall.rms.common.utils.CharUtil;
 import com.kotall.rms.common.utils.Result;
+import com.kotall.rms.core.service.litemall.LiteMallStorageService;
 import com.kotall.rms.core.service.litemall.LiteMallStoreService;
+import com.kotall.rms.web.util.ResultKit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -29,18 +33,18 @@ public class WxStorageController {
     private StorageService storageService;
 
     @Autowired
-    private LiteMallStoreService liteMallStorageService;
+    private LiteMallStorageService liteMallStorageService;
 
     private String generateKey(String originalFilename) {
         int index = originalFilename.lastIndexOf('.');
         String suffix = originalFilename.substring(index);
 
-        String key;
-        LiteMallStoreEntity storageInfo;
+        String key = null;
+        LiteMallStorageEntity storageInfo = null;
 
         do {
             key = CharUtil.getRandomString(20) + suffix;
-            storageInfo = liteMallStorageService.getLiteMallStoreById(new Long(key));
+            storageInfo = liteMallStorageService.findByKey(key);
         }
         while (storageInfo != null);
 
@@ -54,20 +58,20 @@ public class WxStorageController {
 
         Map<String, Object> data = new HashMap<>();
         data.put("url", url);
-        return Result.ok().put("data", data);
+        return ResultKit.msg(data);
     }
 
     @GetMapping("/fetch/{key:.+}")
     public ResponseEntity<Resource> fetch(@PathVariable String key) {
-        LiteMallStoreEntity liteMallStorage = liteMallStorageService.getLiteMallStoreById(new Long(key));
+        LiteMallStorageEntity litemallStorage = liteMallStorageService.findByKey(key);
         if (key == null) {
             return ResponseEntity.notFound().build();
         }
         if(key.contains("../")){
             return ResponseEntity.badRequest().build();
         }
-        Integer type = liteMallStorage.getType();
-        MediaType mediaType = MediaType.parseMediaType("" +type);
+        String type = litemallStorage.getType();
+        MediaType mediaType = MediaType.parseMediaType(type);
 
         Resource file = storageService.loadAsResource(key);
         if (file == null) {
@@ -78,7 +82,7 @@ public class WxStorageController {
 
     @GetMapping("/download/{key:.+}")
     public ResponseEntity<Resource> download(@PathVariable String key) {
-        LiteMallStoreEntity litemallStorage = liteMallStorageService.getLiteMallStoreById(new Long(key));
+        LiteMallStorageEntity litemallStorage = liteMallStorageService.findByKey(key);
         if (key == null) {
             return ResponseEntity.notFound().build();
         }
@@ -86,8 +90,8 @@ public class WxStorageController {
             return ResponseEntity.badRequest().build();
         }
 
-        Integer type = litemallStorage.getType();
-        MediaType mediaType = MediaType.parseMediaType("" + type);
+        String type = litemallStorage.getType();
+        MediaType mediaType = MediaType.parseMediaType(type);
 
         Resource file = storageService.loadAsResource(key);
         if (file == null) {
