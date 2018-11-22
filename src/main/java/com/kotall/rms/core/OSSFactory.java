@@ -3,9 +3,9 @@ package com.kotall.rms.core;
 
 
 import com.google.gson.Gson;
-import com.kotall.rms.common.integration.cloud.AliyunCloudStorageService;
-import com.kotall.rms.common.integration.cloud.CloudStorageService;
-import com.kotall.rms.common.integration.cloud.QiniuCloudStorageService;
+import com.kotall.rms.common.integration.cloud.AliyunStorageService;
+import com.kotall.rms.common.integration.cloud.StorageService;
+import com.kotall.rms.common.integration.cloud.QiniuStorageService;
 import com.kotall.rms.core.config.CloudStorageConfig;
 import com.kotall.rms.core.constants.ConfigConstant;
 import com.kotall.rms.core.constants.Constant;
@@ -26,7 +26,7 @@ public final class OSSFactory {
         OSSFactory.sysConfigService = (SysConfigService) SpringContextUtils.getBean("sysConfigService");
     }
 
-    public static CloudStorageService build(){
+    public static StorageService build(){
         // 获取云存储配置信息
         String value = sysConfigService.getValue(ConfigConstant.CLOUD_STORAGE_CONFIG_KEY);
 
@@ -37,9 +37,9 @@ public final class OSSFactory {
             config = new CloudStorageConfig();
         }
         if(config.getType() == Constant.CloudService.QINIU.getValue()){
-            return new QiniuCloudStorageService(config);
+            return new QiniuStorageService(config);
         }else if(config.getType() == Constant.CloudService.ALIYUN.getValue()){
-            return new AliyunCloudStorageService(config);
+            return new AliyunStorageService(config);
         }/*else if(config.getType() == Constant.CloudService.QCLOUD.getValue()){
             return new QcloudCloudStorageService(config);
         }*/
