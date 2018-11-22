@@ -3,7 +3,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.kotall.rms.api.StorageService;
+import com.kotall.rms.common.integration.storage.StorageService;
+import com.kotall.rms.common.utils.FileKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,7 +59,16 @@ public class LiteMallStorageController extends AbstractController {
 	@PostMapping("/create")
 	public Object create(@RequestParam("file") MultipartFile file) throws IOException {
 		String originalFilename = file.getOriginalFilename();
-		String url = storageService.store(file.getInputStream(), file.getSize(), file.getContentType(), originalFilename);
+		String url = storageService.store(file.getInputStream(), file.getSize(), file.getContentType(), storageService.getActive(), FileKit.getFileSufix(originalFilename));
+
+		LiteMallStorageEntity storageInfo = new LiteMallStorageEntity();
+		storageInfo.setName(originalFilename);
+		storageInfo.setSize((int) file.getSize());
+		storageInfo.setType(file.getContentType());
+		storageInfo.setKey(null);
+		storageInfo.setUrl(url);
+		liteMallStorageService.saveLiteMallStorage(storageInfo);
+
 		Map<String, Object> data = new HashMap<>();
 		data.put("url", url);
 		return ResultKit.msg(data);

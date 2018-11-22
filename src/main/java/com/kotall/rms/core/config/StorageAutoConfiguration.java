@@ -1,6 +1,6 @@
-package com.kotall.rms.api.config;
+package com.kotall.rms.core.config;
 
-import com.kotall.rms.api.StorageService;
+import com.kotall.rms.common.integration.storage.StorageService;
 import com.kotall.rms.common.integration.storage.AliyunStorage;
 import com.kotall.rms.common.integration.storage.LocalStorage;
 import com.kotall.rms.common.integration.storage.QiniuStorage;

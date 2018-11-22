@@ -1,12 +1,12 @@
 package com.kotall.rms.web.controller.sys;
 
 import com.kotall.rms.common.entity.sys.SysOssEntity;
-import com.kotall.rms.common.integration.cloud.OSSFactory;
+import com.kotall.rms.common.integration.storage.StorageService;
+import com.kotall.rms.common.utils.FileKit;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.core.RmsException;
 import com.kotall.rms.core.annotation.SysLog;
-import com.kotall.rms.core.constants.ConfigConstant;
 import com.kotall.rms.core.service.sys.SysConfigService;
 import com.kotall.rms.core.service.sys.SysOssService;
 import com.kotall.rms.web.util.ResultKit;
@@ -31,11 +31,14 @@ import java.util.Map;
 @RestController
 @RequestMapping("/sys/oss")
 public class SysOssController extends AbstractController {
-	
+
 	@Autowired
 	private SysOssService sysOssService;
 	@Autowired
 	private SysConfigService sysConfigService;
+
+	@Autowired
+	private StorageService storageService;
 	
 	/**
 	 * 列表
@@ -105,10 +108,8 @@ public class SysOssController extends AbstractController {
 			throw new RmsException("上传文件不能为空");
 		}
 
-		// 上传文件
-		String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-		String cloudStorageConfigKey = this.sysConfigService.getValue(ConfigConstant.CLOUD_STORAGE_CONFIG_KEY);
-		String url = OSSFactory.build(cloudStorageConfigKey).uploadSuffix(file.getBytes(), suffix);
+		String originalFilename = file.getOriginalFilename();
+		String url = storageService.store(file.getInputStream(), file.getSize(), file.getContentType(), storageService.getActive(), FileKit.getFileSufix(originalFilename));
 
 		// 保存文件信息
 		SysOssEntity ossEntity = new SysOssEntity();

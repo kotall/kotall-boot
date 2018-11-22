@@ -1,9 +1,12 @@
 package com.kotall.rms.qcode;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
-import com.kotall.rms.api.StorageService;
+import com.kotall.rms.common.entity.litemall.LiteMallStorageEntity;
+import com.kotall.rms.common.integration.storage.StorageService;
 import com.kotall.rms.api.SystemConfig;
 import com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity;
+import com.kotall.rms.common.utils.FileKit;
+import com.kotall.rms.core.service.litemall.LiteMallStorageService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -22,6 +25,8 @@ public class QCodeService {
 
     @Autowired
     private StorageService storageService;
+    @Autowired
+    private LiteMallStorageService liteMallStorageService;
 
 
     public String createGrouponShareImage(String goodName, String goodPicUrl, LiteMallGrouponEntity groupon) {
@@ -33,8 +38,15 @@ public class QCodeService {
             byte[] imageData = drawPicture(inputStream, goodPicUrl, goodName);
             ByteArrayInputStream inputStream2 = new ByteArrayInputStream(imageData);
             //存储分享图
-            String url = storageService.store(inputStream2, imageData.length, "image/jpeg", getKeyName(groupon.getId().toString()));
+            String url = storageService.store(inputStream2, imageData.length, "image/jpeg", storageService.getActive(), ".jpg");
 
+            LiteMallStorageEntity storageInfo = new LiteMallStorageEntity();
+            storageInfo.setName(getKeyName(groupon.getId().toString()));
+            storageInfo.setSize(imageData.length);
+            storageInfo.setType("image/jpeg");
+            storageInfo.setKey(null);
+            storageInfo.setUrl(url);
+            liteMallStorageService.saveLiteMallStorage(storageInfo);
             return url;
         } catch (WxErrorException e) {
             e.printStackTrace();
@@ -67,7 +79,15 @@ public class QCodeService {
             byte[] imageData = drawPicture(inputStream, goodPicUrl, goodName);
             ByteArrayInputStream inputStream2 = new ByteArrayInputStream(imageData);
             //存储分享图
-            String url = storageService.store(inputStream2, imageData.length, "image/jpeg", getKeyName(goodId));
+            String url = storageService.store(inputStream2, imageData.length, "image/jpeg", storageService.getActive(), ".jpgs");
+
+            LiteMallStorageEntity storageInfo = new LiteMallStorageEntity();
+            storageInfo.setName(getKeyName(goodId));
+            storageInfo.setSize(imageData.length);
+            storageInfo.setType("image/jpeg");
+            storageInfo.setKey(null);
+            storageInfo.setUrl(url);
+            liteMallStorageService.saveLiteMallStorage(storageInfo);
 
             return url;
         } catch (WxErrorException e) {

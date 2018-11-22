@@ -1,13 +1,9 @@
 package com.kotall.rms.api.controller;
 
-import com.kotall.rms.api.StorageService;
 import com.kotall.rms.common.entity.litemall.LiteMallStorageEntity;
-import com.kotall.rms.common.entity.litemall.LiteMallStoreEntity;
-import com.kotall.rms.common.entity.litemall.LitemallStorage;
-import com.kotall.rms.common.utils.CharUtil;
-import com.kotall.rms.common.utils.Result;
+import com.kotall.rms.common.integration.storage.StorageService;
+import com.kotall.rms.common.utils.FileKit;
 import com.kotall.rms.core.service.litemall.LiteMallStorageService;
-import com.kotall.rms.core.service.litemall.LiteMallStoreService;
 import com.kotall.rms.web.util.ResultKit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,26 +31,18 @@ public class WxStorageController {
     @Autowired
     private LiteMallStorageService liteMallStorageService;
 
-    private String generateKey(String originalFilename) {
-        int index = originalFilename.lastIndexOf('.');
-        String suffix = originalFilename.substring(index);
-
-        String key = null;
-        LiteMallStorageEntity storageInfo = null;
-
-        do {
-            key = CharUtil.getRandomString(20) + suffix;
-            storageInfo = liteMallStorageService.findByKey(key);
-        }
-        while (storageInfo != null);
-
-        return key;
-    }
-
     @PostMapping("/upload")
     public Object upload(@RequestParam("file") MultipartFile file) throws IOException {
         String originalFilename = file.getOriginalFilename();
-        String url = storageService.store(file.getInputStream(), file.getSize(), file.getContentType(), originalFilename);
+        String url = storageService.store(file.getInputStream(), file.getSize(), file.getContentType(), storageService.getActive(), FileKit.getFileSufix(originalFilename));
+
+        LiteMallStorageEntity storageInfo = new LiteMallStorageEntity();
+        storageInfo.setName(originalFilename);
+        storageInfo.setSize((int) file.getSize());
+        storageInfo.setType(file.getContentType());
+        storageInfo.setKey(null);
+        storageInfo.setUrl(url);
+        this.liteMallStorageService.saveLiteMallStorage(storageInfo);
 
         Map<String, Object> data = new HashMap<>();
         data.put("url", url);

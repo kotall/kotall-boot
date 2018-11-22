@@ -1,4 +1,4 @@
-package com.kotall.rms.api.config;
+package com.kotall.rms.core.config;
 
 import com.kotall.rms.api.annotation.support.AppConfigHandlerMethodArgumentResolver;
 import com.kotall.rms.core.service.litemall.LiteMallAppService;

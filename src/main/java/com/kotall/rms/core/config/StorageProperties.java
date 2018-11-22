@@ -1,4 +1,4 @@
-package com.kotall.rms.api.config;
+package com.kotall.rms.core.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
