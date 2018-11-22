@@ -89,6 +89,9 @@ public class LiteMallCategoryServiceImpl implements LiteMallCategoryService {
 		this.liteMallCategoryManager.listLiteMallCategory(page, query);
 		return page.getRows();
 	}
+	public List<LiteMallCategoryEntity> getSecondCategory() {
+		return liteMallCategoryManager.getSecondCategory();
+	}
 
 	@Override
 	public List<LiteMallCategoryEntity> queryByPid(Integer pid) {

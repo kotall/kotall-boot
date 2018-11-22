@@ -1,11 +1,11 @@
 package com.kotall.rms.web.controller.litemall;
-
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
+import com.kotall.rms.api.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.kotall.rms.core.annotation.SysLog;
 import com.kotall.rms.web.controller.sys.AbstractController;
@@ -14,6 +14,7 @@ import com.kotall.rms.common.utils.Result;
         import com.kotall.rms.web.util.ResultKit;
 import com.kotall.rms.common.entity.litemall.LiteMallStorageEntity;
 import com.kotall.rms.core.service.litemall.LiteMallStorageService;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 文件存储表
@@ -28,7 +29,9 @@ public class LiteMallStorageController extends AbstractController {
 	
 	@Autowired
 	private LiteMallStorageService liteMallStorageService;
-	
+	@Autowired
+	private StorageService storageService;
+
 	/**
 	 * 列表
 	 * @param params
@@ -50,7 +53,17 @@ public class LiteMallStorageController extends AbstractController {
 	    int count = liteMallStorageService.saveLiteMallStorage(liteMallStorage);
 		return ResultKit.msg(count);
 	}
-	
+
+
+	@PostMapping("/create")
+	public Object create(@RequestParam("file") MultipartFile file) throws IOException {
+		String originalFilename = file.getOriginalFilename();
+		String url = storageService.store(file.getInputStream(), file.getSize(), file.getContentType(), originalFilename);
+		Map<String, Object> data = new HashMap<>();
+		data.put("url", url);
+		return ResultKit.msg(data);
+	}
+
 	/**
 	 * 根据id查询详情
 	 * @param id

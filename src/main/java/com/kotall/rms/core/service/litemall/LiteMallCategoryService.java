@@ -15,7 +15,9 @@ import java.util.Map;
  */
 public interface LiteMallCategoryService {
 
-    Page<LiteMallCategoryEntity> listLiteMallCategory(Map<String, Object> params);
+	Page<LiteMallCategoryEntity> listLiteMallCategory(Map<String, Object> params);
+
+    List<LiteMallCategoryEntity> queryCategoryList(Map<String, Object> params);
 
     int saveLiteMallCategory(LiteMallCategoryEntity liteMallCategory);
 
@@ -47,4 +49,8 @@ public interface LiteMallCategoryService {
     List<LiteMallCategoryEntity> queryByPid(Integer id);
 
     List<LiteMallCategoryEntity> getSecondCategory();
+
+    List<LiteMallCategoryEntity> queryL1();
+
+    List<LiteMallCategoryEntity> queryL2ByIds(Map<String, Object> params);
 }
