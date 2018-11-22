@@ -2,6 +2,7 @@ package com.kotall.rms.api.controller;
 
 import com.kotall.rms.api.SystemConfig;
 import com.kotall.rms.api.annotation.LoginUser;
+import com.kotall.rms.api.vo.GoodsSpecificationVO;
 import com.kotall.rms.common.entity.litemall.*;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Result;
@@ -65,8 +66,8 @@ public class WxGoodsController {
      * @return 商品详情
      * 成功则
      * {
-     * errno: 0,
-     * errmsg: '成功',
+     * code: 0,
+     * msg: '成功',
      * data:
      * {
      * info: xxx,
@@ -95,8 +96,10 @@ public class WxGoodsController {
 
         // 商品规格
         // 返回的是定制的GoodsSpecificationVo
-        // TODO
-        Object specificationList = null; //goodsSpecificationService.getSpecificationList(id);
+        params = new HashMap<>();
+        params.put("goodsId", id);
+        List<LiteMallGoodsSpecificationEntity> list = goodsSpecificationService.querySpecificationList(params);
+        List<GoodsSpecificationVO> specificationList = this.convertToGoodsSpecificationVO(list);
 
         // 商品规格对应的数量和价格
         params = new HashMap<>();
@@ -184,6 +187,30 @@ public class WxGoodsController {
         //商品分享图片地址
         data.put("shareImage", info.getShareUrl());
         return Result.ok().put("data", data);
+    }
+
+    private List<GoodsSpecificationVO> convertToGoodsSpecificationVO(List<LiteMallGoodsSpecificationEntity> list) {
+        Map<String, GoodsSpecificationVO> map = new HashMap<>();
+        List<GoodsSpecificationVO> specificationVoList = new ArrayList<>();
+
+        for(LiteMallGoodsSpecificationEntity goodsSpecification : list){
+            String specification = goodsSpecification.getSpecification();
+            GoodsSpecificationVO goodsSpecificationVo = map.get(specification);
+            if(goodsSpecificationVo == null){
+                goodsSpecificationVo = new GoodsSpecificationVO();
+                goodsSpecificationVo.setName(specification);
+                List<LiteMallGoodsSpecificationEntity> valueList = new ArrayList<>();
+                valueList.add(goodsSpecification);
+                goodsSpecificationVo.setValueList(valueList);
+                map.put(specification, goodsSpecificationVo);
+                specificationVoList.add(goodsSpecificationVo);
+            }
+            else{
+                List<LiteMallGoodsSpecificationEntity> valueList = goodsSpecificationVo.getValueList();
+                valueList.add(goodsSpecification);
+            }
+        }
+        return specificationVoList;
     }
 
     /**

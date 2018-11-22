@@ -5,7 +5,9 @@ import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaPhoneNumberInfo;
 import com.kotall.rms.api.*;
+import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.api.annotation.LoginUser;
+import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallUserEntity;
 import com.kotall.rms.common.utils.*;
 import com.kotall.rms.common.utils.bcrypt.BCryptPasswordEncoder;
@@ -63,14 +65,14 @@ public class WxAuthController {
      * 失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("login")
-    public Object login(@RequestBody String body, HttpServletRequest request) {
+    public Object login(@RequestBody String body, @AppConfig LiteMallAppEntity appConfig, HttpServletRequest request) {
         String username = JacksonUtil.parseString(body, "username");
         String password = JacksonUtil.parseString(body, "password");
         if (username == null || password == null) {
             return Result.badArgument();
         }
 
-        List<LiteMallUserEntity> userList = userService.queryByUsername(username);
+        List<LiteMallUserEntity> userList = userService.queryByUsername(appConfig.getStoreId(), username);
         LiteMallUserEntity user;
         if (userList.size() > 1) {
             return Result.serious();
@@ -108,8 +110,8 @@ public class WxAuthController {
      * @return 登录结果
      * 成功则
      * {
-     * errno: 0,
-     * errmsg: '成功',
+     * code: 0,
+     * msg: '成功',
      * data:
      * {
      * token: xxx,
@@ -120,7 +122,7 @@ public class WxAuthController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @PostMapping("login_by_weixin")
-    public Object loginByWeixin(@RequestBody WxLoginInfo wxLoginInfo, HttpServletRequest request) {
+    public Object loginByWeixin(@RequestBody WxLoginInfo wxLoginInfo, @AppConfig LiteMallAppEntity appConfig, HttpServletRequest request) {
         String code = wxLoginInfo.getCode();
         UserInfo userInfo = wxLoginInfo.getUserInfo();
         if (code == null || userInfo == null) {
@@ -141,12 +143,14 @@ public class WxAuthController {
             return Result.error();
         }
 
-        List<LiteMallUserEntity> userListWithOpenId = userService.queryByOpenId(openId);
+        List<LiteMallUserEntity> userListWithOpenId = userService.queryByOpenId(appConfig.getStoreId(), openId);
         LiteMallUserEntity user = CollectionUtils.isEmpty(userListWithOpenId) ? null : userListWithOpenId.get(0);
         if (user == null) {
             user = new LiteMallUserEntity();
+            user.setStoreId(appConfig.getStoreId());
             user.setUsername(openId);
             user.setPassword(openId);
+            user.setMobile("");
             user.setWeixinOpenid(openId);
             user.setAvatar(userInfo.getAvatarUrl());
             user.setNickname(userInfo.getNickName());
@@ -222,8 +226,8 @@ public class WxAuthController {
      * @return 登录结果
      * 成功则
      * {
-     * errno: 0,
-     * errmsg: '成功',
+     * code: 0,
+     * msg: '成功',
      * data:
      * {
      * token: xxx,
@@ -234,7 +238,7 @@ public class WxAuthController {
      * 失败则 { errno: XXX, errmsg: XXX }
      */
     @PostMapping("register")
-    public Object register(@RequestBody String body, HttpServletRequest request) {
+    public Object register(@RequestBody String body, @AppConfig LiteMallAppEntity appConfig,HttpServletRequest request) {
         String username = JacksonUtil.parseString(body, "username");
         String password = JacksonUtil.parseString(body, "password");
         String mobile = JacksonUtil.parseString(body, "mobile");
@@ -246,7 +250,7 @@ public class WxAuthController {
             return Result.badArgument();
         }
 
-        List<LiteMallUserEntity> userList = userService.queryByUsername(username);
+        List<LiteMallUserEntity> userList = userService.queryByUsername(appConfig.getStoreId(), username);
         if (userList.size() > 0) {
             return Result.error(403, "用户名已注册");
         }
@@ -272,7 +276,7 @@ public class WxAuthController {
             e.printStackTrace();
             return Result.error(403, "openid 获取失败");
         }
-        userList = userService.queryByOpenId(openId);
+        userList = userService.queryByOpenId(appConfig.getStoreId(), openId);
         if (userList.size() > 1) {
             return Result.error(403, "openid 存在多个");
         }

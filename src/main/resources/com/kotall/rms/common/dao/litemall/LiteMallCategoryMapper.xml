@@ -152,7 +152,7 @@
 			<if test="storeId != null and storeId !='' ">`store_id` = #{storeId}</if>
 			<if test="deleted != null and deleted !='' "> and `deleted` = #{deleted}</if>
 			<if test="level != null and level !='' "> and `level` = #{level}</if>
-			<if test="ids != null and ids !='' ">
+			<if test="ids != null and ids.size()>0 ">
 				and id in
 				<foreach collection="ids" item="id" separator="," open="(" close=")">
 					#{id}

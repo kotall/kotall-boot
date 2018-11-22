@@ -24,5 +24,7 @@ public interface LiteMallGoodsSpecificationManager {
 	int updateLiteMallGoodsSpecification(LiteMallGoodsSpecificationEntity liteMallGoodsSpecification);
 	
 	int batchRemove(Long[] id);
-	
+
+    List<LiteMallGoodsSpecificationEntity> querySpecificationList(Query query);
+
 }

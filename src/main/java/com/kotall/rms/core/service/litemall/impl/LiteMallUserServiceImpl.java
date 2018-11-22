@@ -61,8 +61,9 @@ public class LiteMallUserServiceImpl implements LiteMallUserService {
 	}
 
 	@Override
-	public List<LiteMallUserEntity> queryByUsername(String username) {
+	public List<LiteMallUserEntity> queryByUsername(Long storeId, String username) {
 		Map<String, Object> params = new HashMap<>();
+		params.put("storeId", storeId);
 		params.put("username", username);
 		params.put("deleted", 0);
 
@@ -70,8 +71,9 @@ public class LiteMallUserServiceImpl implements LiteMallUserService {
 	}
 
 	@Override
-	public List<LiteMallUserEntity> queryByOpenId(String openId) {
+	public List<LiteMallUserEntity> queryByOpenId(Long storeId, String openId) {
 		Map<String, Object> params = new HashMap<>();
+		params.put("storeId", storeId);
 		params.put("weixinOpenid", openId);
 		params.put("deleted", 0);
 

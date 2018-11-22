@@ -30,6 +30,11 @@ public class LiteMallGoodsSpecificationManagerImpl implements LiteMallGoodsSpeci
 	}
 
 	@Override
+	public List<LiteMallGoodsSpecificationEntity> querySpecificationList(Query query) {
+		return this.liteMallGoodsSpecificationMapper.list(query);
+	}
+
+	@Override
 	public int saveLiteMallGoodsSpecification(LiteMallGoodsSpecificationEntity liteMallGoodsSpecification) {
 		return liteMallGoodsSpecificationMapper.save(liteMallGoodsSpecification);
 	}
