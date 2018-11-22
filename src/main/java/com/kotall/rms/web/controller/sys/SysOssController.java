@@ -1,11 +1,13 @@
 package com.kotall.rms.web.controller.sys;
 
-import com.kotall.rms.core.annotation.SysLog;
-import com.kotall.rms.core.OSSFactory;
 import com.kotall.rms.common.entity.sys.SysOssEntity;
-import com.kotall.rms.core.RmsException;
+import com.kotall.rms.common.integration.cloud.OSSFactory;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Result;
+import com.kotall.rms.core.RmsException;
+import com.kotall.rms.core.annotation.SysLog;
+import com.kotall.rms.core.constants.ConfigConstant;
+import com.kotall.rms.core.service.sys.SysConfigService;
 import com.kotall.rms.core.service.sys.SysOssService;
 import com.kotall.rms.web.util.ResultKit;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -32,6 +34,8 @@ public class SysOssController extends AbstractController {
 	
 	@Autowired
 	private SysOssService sysOssService;
+	@Autowired
+	private SysConfigService sysConfigService;
 	
 	/**
 	 * 列表
@@ -86,6 +90,7 @@ public class SysOssController extends AbstractController {
 	@SysLog("删除文件上传")
 	@RequestMapping("/remove")
 	public Result batchRemove(@RequestBody Long[] id) {
+		//TODO 先删除OSS中的文件
 	    int count = sysOssService.batchRemove(id);
 		return ResultKit.msg(count);
 	}
@@ -102,10 +107,15 @@ public class SysOssController extends AbstractController {
 
 		// 上传文件
 		String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-		String url = OSSFactory.build().uploadSuffix(file.getBytes(), suffix);
+		String cloudStorageConfigKey = this.sysConfigService.getValue(ConfigConstant.CLOUD_STORAGE_CONFIG_KEY);
+		String url = OSSFactory.build(cloudStorageConfigKey).uploadSuffix(file.getBytes(), suffix);
 
 		// 保存文件信息
 		SysOssEntity ossEntity = new SysOssEntity();
+		ossEntity.setName(file.getOriginalFilename());
+		ossEntity.setSize((int) file.getSize());
+		ossEntity.setType(file.getContentType());
+		ossEntity.setKey(null);
 		ossEntity.setUrl(url);
 		ossEntity.setCreateTime(new Date());
 		sysOssService.saveSysOss(ossEntity);
