@@ -22,7 +22,7 @@ import java.util.stream.Stream;
  * 腾讯对象存储服务
  */
 @Data
-public class TencentStorage implements Storage {
+public class TencentStorage extends Storage {
 
     private String secretId;
     private String secretKey;
@@ -30,38 +30,6 @@ public class TencentStorage implements Storage {
     private String bucketName;
 
     private COSClient cosClient;
-
-    public String getSecretId() {
-        return secretId;
-    }
-
-    public void setSecretId(String secretId) {
-        this.secretId = secretId;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getBucketName() {
-        return bucketName;
-    }
-
-    public void setBucketName(String bucketName) {
-        this.bucketName = bucketName;
-    }
 
     private COSClient getCOSClient() {
         if (cosClient == null) {
@@ -102,22 +70,6 @@ public class TencentStorage implements Storage {
     @Override
     public Path load(String keyName) {
         return null;
-    }
-
-    @Override
-    public Resource loadAsResource(String keyName) {
-        try {
-            URL url = new URL(getBaseUrl() + keyName);
-            Resource resource = new UrlResource(url);
-            if (resource.exists() || resource.isReadable()) {
-                return resource;
-            } else {
-                return null;
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     @Override

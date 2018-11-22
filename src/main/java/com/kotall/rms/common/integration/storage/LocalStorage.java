@@ -1,6 +1,7 @@
 package com.kotall.rms.common.integration.storage;
 
 
+import lombok.Data;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 
@@ -16,16 +17,13 @@ import java.util.stream.Stream;
 /**
  * 服务器本地对象存储服务
  */
-public class LocalStorage implements Storage {
+@Data
+public class LocalStorage extends Storage {
 
     private String storagePath;
     private String address;
 
     private Path rootLocation;
-
-    public String getStoragePath() {
-        return storagePath;
-    }
 
     public void setStoragePath(String storagePath) {
         this.storagePath = storagePath;
@@ -36,14 +34,6 @@ public class LocalStorage implements Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     @Override

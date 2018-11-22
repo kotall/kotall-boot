@@ -4,12 +4,9 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
+import lombok.Data;
 
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
@@ -18,44 +15,14 @@ import java.util.stream.Stream;
  * @date 2018/7/16 16:10
  * @decrpt 阿里云对象存储服务
  */
-public class AliyunStorage implements Storage {
+@Data
+public class AliyunStorage extends Storage {
 
     private  String endpoint;
     private  String accessKeyId;
     private  String accessKeySecret;
     private  String bucketName;
 
-    public String getEndpoint() {
-        return endpoint;
-    }
-
-    public void setEndpoint(String endpoint) {
-        this.endpoint = endpoint;
-    }
-
-    public String getAccessKeyId() {
-        return accessKeyId;
-    }
-
-    public void setAccessKeyId(String accessKeyId) {
-        this.accessKeyId = accessKeyId;
-    }
-
-    public String getAccessKeySecret() {
-        return accessKeySecret;
-    }
-
-    public void setAccessKeySecret(String accessKeySecret) {
-        this.accessKeySecret = accessKeySecret;
-    }
-
-    public String getBucketName() {
-        return bucketName;
-    }
-
-    public void setBucketName(String bucketName) {
-        this.bucketName = bucketName;
-    }
 
     /**
      * 获取阿里云OSS客户端对象
@@ -97,22 +64,6 @@ public class AliyunStorage implements Storage {
     @Override
     public Path load(String keyName) {
         return null;
-    }
-
-    @Override
-    public Resource loadAsResource(String keyName) {
-        try {
-            URL url = new URL(getBaseUrl() + keyName);
-            Resource resource = new UrlResource(url);
-            if (resource.exists() || resource.isReadable()) {
-                return resource;
-            } else {
-                return null;
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     @Override

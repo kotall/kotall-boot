@@ -1,15 +1,18 @@
 package com.kotall.rms.common.integration.storage;
 
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
 /**
  * 对象存储接口
  */
-public interface Storage {
+public abstract class Storage {
 
     /**
      * 存储一个文件对象
@@ -18,15 +21,28 @@ public interface Storage {
      * @param contentType 文件类型
      * @param keyName   文件名
      */
-    void store(InputStream inputStream, long contentLength, String contentType, String keyName);
+    public abstract void store(InputStream inputStream, long contentLength, String contentType, String keyName);
 
-    Stream<Path> loadAll();
+    public abstract Stream<Path> loadAll();
 
-    Path load(String keyName);
+    public abstract Path load(String keyName);
 
-    Resource loadAsResource(String keyName);
+    public Resource loadAsResource(String keyName) {
+        try {
+            URL url = new URL(generateUrl(keyName));
+            Resource resource = new UrlResource(url);
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                return null;
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-    void delete(String keyName);
+    public abstract void delete(String keyName);
 
-    String generateUrl(String keyName);
+    public abstract String generateUrl(String keyName);
 }
