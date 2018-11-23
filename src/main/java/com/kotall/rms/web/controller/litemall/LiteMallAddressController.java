@@ -36,7 +36,7 @@ public class LiteMallAddressController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallAddressEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallAddressService.listLiteMallAddress(params);
+		return liteMallAddressService.queryByPage(params);
 	}
 		
 	/**
@@ -47,7 +47,7 @@ public class LiteMallAddressController extends AbstractController {
 	@SysLog("新增收货地址表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallAddressEntity liteMallAddress) {
-	    int count = liteMallAddressService.saveLiteMallAddress(liteMallAddress);
+	    int count = liteMallAddressService.save(liteMallAddress);
 		return ResultKit.msg(count);
 	}
 	
@@ -58,7 +58,7 @@ public class LiteMallAddressController extends AbstractController {
 	 */
 	@RequestMapping("/info")
 	public Result getById(@RequestBody Integer id) {
-		LiteMallAddressEntity liteMallAddress = liteMallAddressService.getLiteMallAddressById(id);
+		LiteMallAddressEntity liteMallAddress = liteMallAddressService.getById(id);
 		return ResultKit.msg(liteMallAddress);
 	}
 	
@@ -70,7 +70,7 @@ public class LiteMallAddressController extends AbstractController {
 	@SysLog("修改收货地址表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallAddressEntity liteMallAddress) {
-        int count = liteMallAddressService.updateLiteMallAddress(liteMallAddress);
+        int count = liteMallAddressService.update(liteMallAddress);
 		return  ResultKit.msg(count);
 	}
 	
@@ -81,8 +81,8 @@ public class LiteMallAddressController extends AbstractController {
 	 */
 	@SysLog("删除收货地址表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallAddressService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+	    int count = liteMallAddressService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

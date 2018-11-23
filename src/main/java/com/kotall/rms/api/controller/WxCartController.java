@@ -431,7 +431,7 @@ public class WxCartController {
         // 收货地址
         LiteMallAddressEntity checkedAddress;
         if (addressId == null || addressId.equals(0)) {
-            checkedAddress = addressService.findDefault(userId);
+            checkedAddress = addressService.getDefault(userId);
             // 如果仍然没有地址，则是没有收获地址
             // 返回一个空的地址id=0，这样前端则会提醒添加地址
             if (checkedAddress == null) {
@@ -443,7 +443,7 @@ public class WxCartController {
             }
 
         } else {
-            checkedAddress = addressService.getLiteMallAddressById(addressId);
+            checkedAddress = addressService.getById(addressId);
             // 如果null, 则报错
             if (checkedAddress == null) {
                 return Result.badArgumentValue();

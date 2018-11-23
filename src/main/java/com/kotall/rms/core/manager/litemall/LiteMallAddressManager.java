@@ -15,19 +15,20 @@ import com.kotall.rms.common.entity.litemall.LiteMallAddressEntity;
  */
 public interface LiteMallAddressManager {
 
-	List<LiteMallAddressEntity> listLiteMallAddress(Page<LiteMallAddressEntity> page, Query search);
+	List<LiteMallAddressEntity> queryByPage(Page<LiteMallAddressEntity> page, Query search);
+
+	List<LiteMallAddressEntity> queryByList(Query query);
+
+	int save(LiteMallAddressEntity liteMallAddress);
 	
-	int saveLiteMallAddress(LiteMallAddressEntity liteMallAddress);
+	LiteMallAddressEntity getById(Integer id);
 	
-	LiteMallAddressEntity getLiteMallAddressById(Integer id);
+	int update(LiteMallAddressEntity liteMallAddress);
 	
-	int updateLiteMallAddress(LiteMallAddressEntity liteMallAddress);
-	
-	int batchRemove(Long[] id);
+	int deleteByIds(Integer[] id);
 
     List<LiteMallAddressEntity> queryByUserId(Integer userId);
 
 	void resetDefault(LiteMallAddressEntity address, Query query);
 
-    List<LiteMallAddressEntity> queryAddressList(Query query);
 }

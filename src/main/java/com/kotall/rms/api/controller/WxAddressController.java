@@ -49,7 +49,7 @@ public class WxAddressController {
         if(userId == null){
             return Result.unlogin();
         }
-        List<LiteMallAddressEntity> addressList = addressService.queryByUid(userId);
+        List<LiteMallAddressEntity> addressList = addressService.queryByUserId(userId);
         List<Map<String, Object>> addressVoList = new ArrayList<>(addressList.size());
         for(LiteMallAddressEntity address : addressList){
             Map<String, Object> addressVo = new HashMap<>();
@@ -104,7 +104,7 @@ public class WxAddressController {
             return Result.unlogin();
         }
 
-        LiteMallAddressEntity address = addressService.getLiteMallAddressById(id);
+        LiteMallAddressEntity address = addressService.getById(id);
         if(address == null){
             return Result.badArgumentValue();
         }
@@ -206,10 +206,10 @@ public class WxAddressController {
             address.setId(null);
             address.setStoreId(appConfig.getStoreId());
             address.setUserId(userId);
-            addressService.saveLiteMallAddress(address);
+            addressService.save(address);
         } else {
             address.setUserId(userId);
-            if(addressService.updateLiteMallAddress(address) == 0){
+            if(addressService.update(address) == 0){
                 return Result.updatedDataFailed();
             }
         }
@@ -235,7 +235,7 @@ public class WxAddressController {
             return Result.badArgument();
         }
 
-        addressService.batchRemove(new Long[]{new Long(id)});
+        addressService.deleteByIds(new Integer[]{id});
         return Result.ok();
     }
 }

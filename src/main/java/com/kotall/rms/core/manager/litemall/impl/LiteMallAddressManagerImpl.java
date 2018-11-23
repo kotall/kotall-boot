@@ -25,33 +25,33 @@ public class LiteMallAddressManagerImpl implements LiteMallAddressManager {
 	
 
 	@Override
-	public List<LiteMallAddressEntity> listLiteMallAddress(Page<LiteMallAddressEntity> page, Query search) {
+	public List<LiteMallAddressEntity> queryByPage(Page<LiteMallAddressEntity> page, Query search) {
 		return liteMallAddressMapper.listForPage(page, search);
 	}
 
 	@Override
-	public List<LiteMallAddressEntity> queryAddressList(Query query) {
+	public List<LiteMallAddressEntity> queryByList(Query query) {
 		return liteMallAddressMapper.list(query);
 	}
 
 	@Override
-	public int saveLiteMallAddress(LiteMallAddressEntity liteMallAddress) {
+	public int save(LiteMallAddressEntity liteMallAddress) {
 		return liteMallAddressMapper.save(liteMallAddress);
 	}
 
 	@Override
-	public LiteMallAddressEntity getLiteMallAddressById(Integer id) {
+	public LiteMallAddressEntity getById(Integer id) {
 		LiteMallAddressEntity liteMallAddress = liteMallAddressMapper.getObjectById(id);
 		return liteMallAddress;
 	}
 
 	@Override
-	public int updateLiteMallAddress(LiteMallAddressEntity liteMallAddress) {
+	public int update(LiteMallAddressEntity liteMallAddress) {
 		return liteMallAddressMapper.update(liteMallAddress);
 	}
 
 	@Override
-	public int batchRemove(Long[] id) {
+	public int deleteByIds(Integer[] id) {
 		int count = liteMallAddressMapper.batchRemove(id);
 		return count;
 	}

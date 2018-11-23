@@ -31,45 +31,45 @@ public class LiteMallAddressServiceImpl implements LiteMallAddressService {
 
 	@StoreFilter
 	@Override
-	public Page<LiteMallAddressEntity> listLiteMallAddress(Map<String, Object> params) {
+	public Page<LiteMallAddressEntity> queryByPage(Map<String, Object> params) {
 		Query query = new Query(params);
 		Page<LiteMallAddressEntity> page = new Page<>(query);
-		liteMallAddressManager.listLiteMallAddress(page, query);
+		liteMallAddressManager.queryByPage(page, query);
 		return page;
 	}
 
 	@Override
-	public List<LiteMallAddressEntity> queryAddressList(Map<String, Object> params) {
+	public List<LiteMallAddressEntity> queryByList(Map<String, Object> params) {
 		Query query = new Query(params);
-		return liteMallAddressManager.queryAddressList(query);
+		return liteMallAddressManager.queryByList(query);
 	}
 
 	@Override
-	public List<LiteMallAddressEntity> queryByUid(Integer userId) {
+	public List<LiteMallAddressEntity> queryByUserId(Integer userId) {
 		return this.liteMallAddressManager.queryByUserId(userId);
 	}
 
 	@Override
-	public int saveLiteMallAddress(LiteMallAddressEntity role) {
-		int count = liteMallAddressManager.saveLiteMallAddress(role);
+	public int save(LiteMallAddressEntity role) {
+		int count = liteMallAddressManager.save(role);
 		return count;
 	}
 
 	@Override
-	public LiteMallAddressEntity getLiteMallAddressById(Integer id) {
-		LiteMallAddressEntity liteMallAddress = liteMallAddressManager.getLiteMallAddressById(id);
+	public LiteMallAddressEntity getById(Integer id) {
+		LiteMallAddressEntity liteMallAddress = liteMallAddressManager.getById(id);
 		return liteMallAddress;
 	}
 
 	@Override
-	public int updateLiteMallAddress(LiteMallAddressEntity liteMallAddress) {
-		int count = liteMallAddressManager.updateLiteMallAddress(liteMallAddress);
+	public int update(LiteMallAddressEntity liteMallAddress) {
+		int count = liteMallAddressManager.update(liteMallAddress);
 		return count;
 	}
 
 	@Override
-	public int batchRemove(Long[] id) {
-		int count = liteMallAddressManager.batchRemove(id);
+	public int deleteByIds(Integer[] id) {
+		int count = liteMallAddressManager.deleteByIds(id);
 		return count;
 	}
 
@@ -86,12 +86,12 @@ public class LiteMallAddressServiceImpl implements LiteMallAddressService {
 	}
 
 	@Override
-	public LiteMallAddressEntity findDefault(Integer userId) {
+	public LiteMallAddressEntity getDefault(Integer userId) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("userId", userId);
 		params.put("isDefault", 1);
 		params.put("deleted", 0);
-		List<LiteMallAddressEntity> list = this.queryAddressList(params);
+		List<LiteMallAddressEntity> list = this.queryByList(params);
 		return CollectionUtils.isEmpty(list) ? null : list.get(0);
 	}
 }
