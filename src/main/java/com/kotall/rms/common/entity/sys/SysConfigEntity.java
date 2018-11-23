@@ -1,5 +1,7 @@
 package com.kotall.rms.common.entity.sys;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @author kotall
  * @date 2018年11月12日 下午9:18:45
  */
+@Data
 public class SysConfigEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -15,7 +18,7 @@ public class SysConfigEntity implements Serializable {
 	/**
 	 * 
 	 */
-	private Long id;
+	private Integer id;
 	
 	/**
 	 * key
@@ -36,50 +39,5 @@ public class SysConfigEntity implements Serializable {
 	 * 备注
 	 */
 	private String remark;
-	
-
-	public SysConfigEntity() {
-		super();
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setParamKey(String paramKey) {
-		this.paramKey = paramKey;
-	}
-	
-	public String getParamKey() {
-		return paramKey;
-	}
-	
-	public void setParamValue(String paramValue) {
-		this.paramValue = paramValue;
-	}
-	
-	public String getParamValue() {
-		return paramValue;
-	}
-	
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-	
-	public Integer getStatus() {
-		return status;
-	}
-	
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-	
-	public String getRemark() {
-		return remark;
-	}
 	
 }

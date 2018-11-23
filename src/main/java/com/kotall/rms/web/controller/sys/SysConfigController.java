@@ -34,7 +34,7 @@ public class SysConfigController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<SysConfigEntity> list(@RequestBody Map<String, Object> params) {
-		return sysConfigService.listSysConfig(params);
+		return sysConfigService.queryByPage(params);
 	}
 		
 	/**
@@ -45,7 +45,7 @@ public class SysConfigController extends AbstractController {
 	@SysLog("新增系统配置信息表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody SysConfigEntity sysConfig) {
-	    int count = sysConfigService.saveSysConfig(sysConfig);
+	    boolean count = sysConfigService.save(sysConfig);
 		return ResultKit.msg(count);
 	}
 	
@@ -55,8 +55,8 @@ public class SysConfigController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		SysConfigEntity sysConfig = sysConfigService.getSysConfigById(id);
+	public Result getById(@RequestBody Integer id) {
+		SysConfigEntity sysConfig = sysConfigService.getById(id);
 		return ResultKit.msg(sysConfig);
 	}
 	
@@ -68,7 +68,7 @@ public class SysConfigController extends AbstractController {
 	@SysLog("修改系统配置信息表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody SysConfigEntity sysConfig) {
-        int count = sysConfigService.updateSysConfig(sysConfig);
+		boolean count = sysConfigService.update(sysConfig);
 		return  ResultKit.msg(count);
 	}
 	
@@ -79,8 +79,8 @@ public class SysConfigController extends AbstractController {
 	 */
 	@SysLog("删除系统配置信息表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = sysConfigService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = sysConfigService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	
