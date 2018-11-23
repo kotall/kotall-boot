@@ -41,10 +41,10 @@ public interface BaseService<T> {
 
     /**
      * 根据ID更新
-     * @param id
+     * @param t
      * @return
      */
-    boolean updateById(Integer id);
+    boolean updateById(T t);
     /**
      * 更新
      * @param t

@@ -9,14 +9,14 @@ import java.util.List;
  * @author zpwang
  * @version 1.0.0
  */
-public interface IManager<T> {
+public interface BaseManager<T> {
 
     /**
      * 分页查询
      * @param query
      * @return
      */
-    Page<T> queryByPage(Query query);
+    Page<T> queryByPage(Page<T> page, Query query);
 
     /**
      * 列表查询
@@ -41,10 +41,11 @@ public interface IManager<T> {
 
     /**
      * 根据ID更新
-     * @param id
+     * @param t
      * @return
      */
-    boolean updateById(Integer id);
+    boolean updateById(T t);
+
     /**
      * 更新
      * @param t

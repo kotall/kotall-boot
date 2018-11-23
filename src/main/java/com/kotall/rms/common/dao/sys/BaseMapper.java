@@ -47,7 +47,14 @@ public interface BaseMapper<T> {
 	 * @return
 	 */
 	T getObjectById(Object id);
-	
+
+	/**
+	 * 根据ID更新
+	 * @param t
+	 * @return
+	 */
+	int updateById(T t);
+
 	/**
 	 * 更新
 	 * @param t
