@@ -78,6 +78,18 @@ public class ResultKit {
 		}
 		return Result.error(ResultKit.MSG_OPERATION_FAILED);
 	}
+
+	/**
+	 * 新增，修改提示
+	 * @param flag
+	 * @return
+	 */
+	public static Result msg(boolean flag) {
+		if(flag){
+			return Result.ok(ResultKit.MSG_OPERATION_SUCCESS);
+		}
+		return Result.error(ResultKit.MSG_OPERATION_FAILED);
+	}
 	
 	/**
 	 * 查询详情提示
