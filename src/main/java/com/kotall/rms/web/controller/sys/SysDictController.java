@@ -1,18 +1,17 @@
 package com.kotall.rms.web.controller.sys;
 
-import java.util.List;
-
+import com.kotall.rms.common.entity.sys.SysDictEntity;
 import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.core.RmsException;
+import com.kotall.rms.core.annotation.SysLog;
+import com.kotall.rms.core.service.sys.SysDictService;
 import com.kotall.rms.web.util.ResultKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kotall.rms.core.annotation.SysLog;
-import com.kotall.rms.common.entity.sys.SysDictEntity;
-import com.kotall.rms.core.service.sys.SysDictService;
+import java.util.List;
 
 /**
  * 通用字典
@@ -42,7 +41,7 @@ public class SysDictController extends AbstractController {
 	 */
 	@RequestMapping("/select")
 	public List<SysDictEntity> select() {
-		return sysDictService.listNotMacro();
+		return sysDictService.listNotDict();
 	}
 	
 	/**
@@ -53,7 +52,7 @@ public class SysDictController extends AbstractController {
 	@SysLog("新增字典")
 	@RequestMapping("/save")
 	public Result save(@RequestBody SysDictEntity macro) {
-		int count = sysDictService.saveDict(macro);
+		boolean count = sysDictService.save(macro);
 		return ResultKit.msg(count);
 	}
 	
@@ -63,8 +62,8 @@ public class SysDictController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result info(@RequestBody Long id) {
-		SysDictEntity dict = sysDictService.getObjectById(id);
+	public Result info(@RequestBody Integer id) {
+		SysDictEntity dict = sysDictService.getById(id);
 		return ResultKit.msg(dict);
 	}
 	
@@ -76,7 +75,7 @@ public class SysDictController extends AbstractController {
 	@SysLog("修改字典")
 	@RequestMapping("/update")
 	public Result update(@RequestBody SysDictEntity macro) {
-		int count = sysDictService.updateDict(macro);
+		boolean count = sysDictService.update(macro);
 		return ResultKit.msg(count);
 	}
 	
@@ -87,10 +86,10 @@ public class SysDictController extends AbstractController {
 	 */
 	@SysLog("删除字典")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
+	public Result batchRemove(@RequestBody Integer[] id) {
 		try {
-			int count = sysDictService.batchRemove(id);
-			return ResultKit.msg(id, count);
+			boolean count = sysDictService.removeByIds(id);
+			return ResultKit.msg(count);
 		} catch (RmsException e) {
 			return Result.error(e.getMsg());
 		}

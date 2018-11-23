@@ -3,6 +3,7 @@ package com.kotall.rms.core.manager.sys;
 import java.util.List;
 
 import com.kotall.rms.common.entity.sys.SysDictEntity;
+import com.kotall.rms.core.manager.BaseManager;
 
 
 /**
@@ -11,20 +12,12 @@ import com.kotall.rms.common.entity.sys.SysDictEntity;
  * @author aracwong
  * @date 2017年8月15日 下午12:49:14
  */
-public interface SysDictManager {
+public interface SysDictManager extends BaseManager<SysDictEntity> {
 
-	List<SysDictEntity> listMacro();
+	List<SysDictEntity> listDict();
+
+	List<SysDictEntity> listNotDict();
 	
-	List<SysDictEntity> listNotMacro();
-	
-	int saveMacro(SysDictEntity macro);
-	
-	SysDictEntity getObjectById(Long id);
-	
-	int updateMacro(SysDictEntity macro);
-	
-	int batchRemove(Long[] id);
-	
-	boolean hasChildren(Long[] id);
+	boolean hasChildren(Integer[] id);
 	
 }

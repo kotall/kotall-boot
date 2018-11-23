@@ -17,6 +17,6 @@ public interface SysDictMapper extends BaseMapper<SysDictEntity> {
 
 	List<SysDictEntity> listNotDict();
 	
-	int countDictChildren(Long typeId);
+	int countDictChildren(Integer typeId);
 	
 }

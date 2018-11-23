@@ -1,6 +1,7 @@
 package com.kotall.rms.core.service.sys;
 
 import com.kotall.rms.common.entity.sys.SysDictEntity;
+import com.kotall.rms.core.service.BaseService;
 
 import java.util.List;
 
@@ -10,18 +11,12 @@ import java.util.List;
  * @author aracwong
  * @date 2017年8月15日 下午12:51:35
  */
-public interface SysDictService {
+public interface SysDictService extends BaseService<SysDictEntity> {
 
 	List<SysDictEntity> listDict();
 	
-	List<SysDictEntity> listNotMacro();
-	
-	int saveDict(SysDictEntity macro);
+	List<SysDictEntity> listNotDict();
 
-	SysDictEntity getObjectById(Long id);
-	
-	int updateDict(SysDictEntity macro);
-	
-	int batchRemove(Long[] id);
+	boolean removeByIds(Integer[] id);
 	
 }
