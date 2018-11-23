@@ -119,7 +119,7 @@ public class WxAuthController {
      * userInfo: xxx
      * }
      * }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("login_by_weixin")
     public Object loginByWeixin(@RequestBody WxLoginInfo wxLoginInfo, @AppConfig LiteMallAppEntity appConfig, HttpServletRequest request) {
@@ -157,6 +157,7 @@ public class WxAuthController {
             user.setGender(new Integer(userInfo.getGender()));
             user.setUserLevel(0);
             user.setStatus(0);
+            user.setDeleted(0);
             user.setLastLoginTime(new Date());
             user.setLastLoginIp(IpUtil.client(request));
 
