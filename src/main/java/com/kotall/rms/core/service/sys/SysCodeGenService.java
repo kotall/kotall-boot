@@ -1,11 +1,10 @@
 package com.kotall.rms.core.service.sys;
 
-import java.util.List;
-import java.util.Map;
-
-import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.entity.sys.SysGenColumnEntity;
 import com.kotall.rms.common.entity.sys.SysGenTableEntity;
+import com.kotall.rms.core.service.BaseService;
+
+import java.util.List;
 
 /**
  * 代码生成器
@@ -13,10 +12,8 @@ import com.kotall.rms.common.entity.sys.SysGenTableEntity;
  * @author aracwong
  * @date 2017年8月28日 下午8:55:29
  */
-public interface SysCodeGenService {
+public interface SysCodeGenService extends BaseService<SysGenTableEntity> {
 
-	Page<SysGenTableEntity> listTable(Map<String, Object> params);
-	
 
 	/**
 	 * 根据表名获取表实体
@@ -32,5 +29,5 @@ public interface SysCodeGenService {
 	 * @param tableName
 	 * @return
 	 */
-	List<SysGenColumnEntity> listColumn(String tableName);
+	List<SysGenColumnEntity> getColumnsForTable(String tableName);
 }

@@ -42,7 +42,7 @@ public class SysCodeGenController {
 	@RequestMapping("/list")
 	@ResponseBody
 	public Page<SysGenTableEntity> list(@RequestBody Map<String, Object> params) {
-		return sysCodeGenService.listTable(params);
+		return sysCodeGenService.queryByPage(params);
 	}
 	
 	/**
@@ -58,7 +58,7 @@ public class SysCodeGenController {
 		ZipOutputStream zip = new ZipOutputStream(out);
 		for(String table : params.getTables()) {
 			SysGenTableEntity sysGenTableEntity = sysCodeGenService.getTableByName(table);
-			List<SysGenColumnEntity> columns = sysCodeGenService.listColumn(table);
+			List<SysGenColumnEntity> columns = sysCodeGenService.getColumnsForTable(table);
 			GenUtils.generatorCode(sysGenTableEntity, columns, params, zip);
 		}
 
