@@ -25,7 +25,7 @@ public class BaseManagerImpl<M extends BaseMapper<T>, T> implements BaseManager<
 
     @Override
     public List<T> queryByList(Query query) {
-        return this.mapper.list();
+        return this.mapper.list(query);
     }
 
     @Override

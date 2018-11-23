@@ -2,8 +2,8 @@ package com.kotall.rms.core.manager.litemall.impl;
 
 import com.kotall.rms.common.dao.litemall.LiteMallAddressMapper;
 import com.kotall.rms.common.entity.litemall.LiteMallAddressEntity;
-import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Query;
+import com.kotall.rms.core.manager.BaseManagerImpl;
 import com.kotall.rms.core.manager.litemall.LiteMallAddressManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,43 +18,11 @@ import java.util.List;
  * @since 1.0.0
  */
 @Component("liteMallAddressManager")
-public class LiteMallAddressManagerImpl implements LiteMallAddressManager {
+public class LiteMallAddressManagerImpl extends BaseManagerImpl<LiteMallAddressMapper, LiteMallAddressEntity> implements LiteMallAddressManager {
 
 	@Autowired
 	private LiteMallAddressMapper liteMallAddressMapper;
 	
-
-	@Override
-	public List<LiteMallAddressEntity> queryByPage(Page<LiteMallAddressEntity> page, Query search) {
-		return liteMallAddressMapper.listForPage(page, search);
-	}
-
-	@Override
-	public List<LiteMallAddressEntity> queryByList(Query query) {
-		return liteMallAddressMapper.list(query);
-	}
-
-	@Override
-	public int save(LiteMallAddressEntity liteMallAddress) {
-		return liteMallAddressMapper.save(liteMallAddress);
-	}
-
-	@Override
-	public LiteMallAddressEntity getById(Integer id) {
-		LiteMallAddressEntity liteMallAddress = liteMallAddressMapper.getObjectById(id);
-		return liteMallAddress;
-	}
-
-	@Override
-	public int update(LiteMallAddressEntity liteMallAddress) {
-		return liteMallAddressMapper.update(liteMallAddress);
-	}
-
-	@Override
-	public int deleteByIds(Integer[] id) {
-		int count = liteMallAddressMapper.batchRemove(id);
-		return count;
-	}
 
 	@Override
 	public List<LiteMallAddressEntity> queryByUserId(Integer userId) {

@@ -1,20 +1,20 @@
 package com.kotall.rms.core.service.litemall.impl;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.kotall.rms.common.entity.litemall.LiteMallAddressEntity;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.annotation.StoreFilter;
+import com.kotall.rms.core.manager.litemall.LiteMallAddressManager;
+import com.kotall.rms.core.service.BaseServiceImpl;
+import com.kotall.rms.core.service.litemall.LiteMallAddressService;
 import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.entity.litemall.LiteMallAddressEntity;
-import com.kotall.rms.core.manager.litemall.LiteMallAddressManager;
-import com.kotall.rms.core.service.litemall.LiteMallAddressService;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 收货地址表
@@ -24,7 +24,7 @@ import com.kotall.rms.core.service.litemall.LiteMallAddressService;
  * @since 1.0.0
  */
 @Service("liteMallAddressService")
-public class LiteMallAddressServiceImpl implements LiteMallAddressService {
+public class LiteMallAddressServiceImpl extends BaseServiceImpl<LiteMallAddressManager, LiteMallAddressEntity> implements LiteMallAddressService {
 
 	@Autowired
 	private LiteMallAddressManager liteMallAddressManager;
@@ -39,38 +39,8 @@ public class LiteMallAddressServiceImpl implements LiteMallAddressService {
 	}
 
 	@Override
-	public List<LiteMallAddressEntity> queryByList(Map<String, Object> params) {
-		Query query = new Query(params);
-		return liteMallAddressManager.queryByList(query);
-	}
-
-	@Override
 	public List<LiteMallAddressEntity> queryByUserId(Integer userId) {
 		return this.liteMallAddressManager.queryByUserId(userId);
-	}
-
-	@Override
-	public int save(LiteMallAddressEntity role) {
-		int count = liteMallAddressManager.save(role);
-		return count;
-	}
-
-	@Override
-	public LiteMallAddressEntity getById(Integer id) {
-		LiteMallAddressEntity liteMallAddress = liteMallAddressManager.getById(id);
-		return liteMallAddress;
-	}
-
-	@Override
-	public int update(LiteMallAddressEntity liteMallAddress) {
-		int count = liteMallAddressManager.update(liteMallAddress);
-		return count;
-	}
-
-	@Override
-	public int deleteByIds(Integer[] id) {
-		int count = liteMallAddressManager.deleteByIds(id);
-		return count;
 	}
 
 	@Override

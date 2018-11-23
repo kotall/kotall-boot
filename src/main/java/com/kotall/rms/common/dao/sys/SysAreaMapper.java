@@ -17,5 +17,5 @@ public interface SysAreaMapper extends BaseMapper<SysAreaEntity> {
 
 	List<SysAreaEntity> listAreaByParentCode(Query query);
 	
-	int countAreaChildren(Long areaId);
+	int countAreaChildren(Integer areaId);
 }

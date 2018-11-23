@@ -57,9 +57,9 @@ public class WxAddressController {
             addressVo.put("name", address.getName());
             addressVo.put("mobile", address.getMobile());
             addressVo.put("isDefault", address.getIsDefault());
-            String province = regionService.getAreaById(new Long(address.getProvinceId())).getName();
-            String city = regionService.getAreaById(new Long(address.getCityId())).getName();
-            String area = regionService.getAreaById(new Long(address.getAreaId())).getName();
+            String province = regionService.getById(address.getProvinceId()).getName();
+            String city = regionService.getById(address.getCityId()).getName();
+            String area = regionService.getById(address.getAreaId()).getName();
             String addr = address.getAddress();
             String detailedAddress = province + city + area + " " + addr;
             addressVo.put("detailedAddress", detailedAddress);
@@ -118,11 +118,11 @@ public class WxAddressController {
         data.put("mobile", address.getMobile());
         data.put("address", address.getAddress());
         data.put("isDefault", address.getIsDefault());
-        String pname = regionService.getAreaById(new Long(address.getProvinceId())).getName();
+        String pname = regionService.getById(address.getProvinceId()).getName();
         data.put("provinceName", pname);
-        String cname = regionService.getAreaById(new Long(address.getCityId())).getName();
+        String cname = regionService.getById(address.getCityId()).getName();
         data.put("cityName", cname);
-        String dname = regionService.getAreaById(new Long(address.getAreaId())).getName();
+        String dname = regionService.getById(address.getAreaId()).getName();
         data.put("areaName", dname);
         return Result.ok().put("data", data);
     }
@@ -146,7 +146,7 @@ public class WxAddressController {
         if(pid == null){
             return Result.badArgument();
         }
-        if(regionService.getAreaById(new Long(pid)) == null){
+        if(regionService.getById(pid) == null){
             return Result.badArgumentValue();
         }
 
@@ -154,7 +154,7 @@ public class WxAddressController {
         if(cid == null){
             return Result.badArgument();
         }
-        if(regionService.getAreaById(new Long(cid)) == null){
+        if(regionService.getById(cid) == null){
             return Result.badArgumentValue();
         }
 
@@ -162,7 +162,7 @@ public class WxAddressController {
         if(aid == null){
             return Result.badArgument();
         }
-        if(regionService.getAreaById(new Long(aid)) == null){
+        if(regionService.getById(aid) == null){
             return Result.badArgumentValue();
         }
 
@@ -209,7 +209,7 @@ public class WxAddressController {
             addressService.save(address);
         } else {
             address.setUserId(userId);
-            if(addressService.update(address) == 0){
+            if(addressService.update(address)){
                 return Result.updatedDataFailed();
             }
         }

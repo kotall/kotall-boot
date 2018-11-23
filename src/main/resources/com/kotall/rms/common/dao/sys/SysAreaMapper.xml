@@ -19,7 +19,7 @@
 			)
 	</select>
 	
-	<select id="listAreaByParentCode" resultType="com.kotall.rms.common.entity.sys.SysAreaEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.sys.SysAreaEntity">
 		SELECT
 			a.area_id,
 			a.area_code,

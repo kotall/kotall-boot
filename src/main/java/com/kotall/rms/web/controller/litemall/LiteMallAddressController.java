@@ -47,7 +47,7 @@ public class LiteMallAddressController extends AbstractController {
 	@SysLog("新增收货地址表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallAddressEntity liteMallAddress) {
-	    int count = liteMallAddressService.save(liteMallAddress);
+	    boolean count = liteMallAddressService.save(liteMallAddress);
 		return ResultKit.msg(count);
 	}
 	
@@ -70,7 +70,7 @@ public class LiteMallAddressController extends AbstractController {
 	@SysLog("修改收货地址表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallAddressEntity liteMallAddress) {
-        int count = liteMallAddressService.update(liteMallAddress);
+		boolean count = liteMallAddressService.update(liteMallAddress);
 		return  ResultKit.msg(count);
 	}
 	
@@ -82,7 +82,7 @@ public class LiteMallAddressController extends AbstractController {
 	@SysLog("删除收货地址表")
 	@RequestMapping("/remove")
 	public Result batchRemove(@RequestBody Integer[] id) {
-	    int count = liteMallAddressService.deleteByIds(id);
+		boolean count = liteMallAddressService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

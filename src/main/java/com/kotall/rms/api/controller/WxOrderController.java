@@ -97,9 +97,9 @@ public class WxOrderController {
         Integer provinceId = litemallAddress.getProvinceId();
         Integer cityId = litemallAddress.getCityId();
         Integer areaId = litemallAddress.getAreaId();
-        String provinceName = regionService.getAreaById(new Long(provinceId)).getName();
-        String cityName = regionService.getAreaById(new Long(cityId)).getName();
-        String areaName = regionService.getAreaById(new Long(areaId)).getName();
+        String provinceName = regionService.getById(provinceId).getName();
+        String cityName = regionService.getById(cityId).getName();
+        String areaName = regionService.getById(areaId).getName();
         String fullRegion = provinceName + " " + cityName + " " + areaName;
         return fullRegion + " " + litemallAddress.getAddress();
     }

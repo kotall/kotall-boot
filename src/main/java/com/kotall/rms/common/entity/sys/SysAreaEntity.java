@@ -25,7 +25,7 @@ public class SysAreaEntity implements Serializable {
 	/**
 	 * 区域id
 	 */
-	private Long areaId;
+	private Integer areaId;
 	
 	/**
 	 * 区域代码

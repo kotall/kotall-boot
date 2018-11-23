@@ -1,9 +1,7 @@
 package com.kotall.rms.core.manager.sys;
 
-import java.util.List;
-
-import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.entity.sys.SysAreaEntity;
+import com.kotall.rms.core.manager.BaseManager;
 
 /**
  * 行政区域
@@ -11,18 +9,8 @@ import com.kotall.rms.common.entity.sys.SysAreaEntity;
  * @author aracwong
  * @date 2017年8月18日 下午3:39:00
  */
-public interface SysAreaManager {
+public interface SysAreaManager extends BaseManager<SysAreaEntity> {
 
-	List<SysAreaEntity> listAreaByParentCode(Query query);
-	
-	int saveArea(SysAreaEntity area);
-	
-	SysAreaEntity getAreaById(Long areaId);
-	
-	int updateArea(SysAreaEntity area);
-	
-	int batchRemoveArea(Long[] id);
-	
-	boolean hasChildren(Long[] id);
+	boolean hasChildren(Integer[] id);
 
 }

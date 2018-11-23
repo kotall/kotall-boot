@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.core.RmsException;
 import com.kotall.rms.web.util.ResultKit;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,7 +39,7 @@ public class SysAreaController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Result list(@RequestBody Map<String, Object> params) {
-		List<SysAreaEntity> areas = sysAreaService.listAreaByParentCode(params);
+		List<SysAreaEntity> areas = sysAreaService.queryByList(params);
 		return ResultKit.msg(areas);
 	}
 	
@@ -59,7 +60,7 @@ public class SysAreaController extends AbstractController {
 	@SysLog("新增区域")
 	@RequestMapping("/save")
 	public Result save(@RequestBody SysAreaEntity area) {
-		int  count = sysAreaService.saveArea(area);
+		boolean  count = sysAreaService.save(area);
 		return ResultKit.msg(count);
 	}
 	
@@ -69,8 +70,8 @@ public class SysAreaController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result info(@RequestBody Long areaId) {
-		SysAreaEntity area = sysAreaService.getAreaById(areaId);
+	public Result info(@RequestBody Integer areaId) {
+		SysAreaEntity area = sysAreaService.getById(areaId);
 		return ResultKit.msg(area);
 	}
 	
@@ -82,21 +83,21 @@ public class SysAreaController extends AbstractController {
 	@SysLog("修改区域")
 	@RequestMapping("/update")
 	public Result update(@RequestBody SysAreaEntity area) {
-		int count = sysAreaService.updateArea(area);
+		boolean count = sysAreaService.update(area);
 		return ResultKit.msg(count);
 	}
 	
 	/**
 	 * 删除区域
-	 * @param id
+	 * @param ids
 	 * @return
 	 */
 	@SysLog("删除区域")
 	@RequestMapping("/remove")
-	public Result remove(@RequestBody Long[] id) {
+	public Result remove(@RequestBody Integer[] ids) {
 		try {
-			int count = sysAreaService.batchRemoveArea(id);
-			return ResultKit.msg(id, count);
+			boolean count = sysAreaService.removeByIds(ids);
+			return ResultKit.msg(count);
 		} catch (RmsException e) {
 			log.error("", e);
 			return Result.error(e.getMsg());
