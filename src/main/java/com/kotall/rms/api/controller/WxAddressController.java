@@ -104,7 +104,7 @@ public class WxAddressController {
             return Result.unlogin();
         }
 
-        LiteMallAddressEntity address = addressService.getLiteMallAddressById(new Long(id));
+        LiteMallAddressEntity address = addressService.getLiteMallAddressById(id);
         if(address == null){
             return Result.badArgumentValue();
         }

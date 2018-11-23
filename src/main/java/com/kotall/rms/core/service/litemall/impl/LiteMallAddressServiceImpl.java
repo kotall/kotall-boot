@@ -1,6 +1,5 @@
 package com.kotall.rms.core.service.litemall.impl;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +56,7 @@ public class LiteMallAddressServiceImpl implements LiteMallAddressService {
 	}
 
 	@Override
-	public LiteMallAddressEntity getLiteMallAddressById(Long id) {
+	public LiteMallAddressEntity getLiteMallAddressById(Integer id) {
 		LiteMallAddressEntity liteMallAddress = liteMallAddressManager.getLiteMallAddressById(id);
 		return liteMallAddress;
 	}

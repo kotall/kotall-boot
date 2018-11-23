@@ -39,7 +39,7 @@ public class ${className}ServiceImpl implements ${className}Service {
 	}
 
 	@Override
-	public ${className}Entity get${className}ById(Long id) {
+	public ${className}Entity get${className}ById(Integer id) {
 		${className}Entity ${objName} = ${objName}Manager.get${className}ById(id);
 		return ${objName};
 	}

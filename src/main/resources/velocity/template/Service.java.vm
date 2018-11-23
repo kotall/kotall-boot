@@ -19,7 +19,7 @@ public interface ${className}Service {
 
     int save${className}(${className}Entity ${objName});
 
-    ${className}Entity get${className}ById(Long id);
+    ${className}Entity get${className}ById(Integer id);
 
     int update${className}(${className}Entity ${objName});
 

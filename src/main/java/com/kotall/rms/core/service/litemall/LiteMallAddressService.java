@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.common.entity.litemall.LiteMallAddressEntity;
 
 /**
@@ -22,7 +21,7 @@ public interface LiteMallAddressService {
 
     int saveLiteMallAddress(LiteMallAddressEntity liteMallAddress);
 
-    LiteMallAddressEntity getLiteMallAddressById(Long id);
+    LiteMallAddressEntity getLiteMallAddressById(Integer id);
 
     int updateLiteMallAddress(LiteMallAddressEntity liteMallAddress);
 

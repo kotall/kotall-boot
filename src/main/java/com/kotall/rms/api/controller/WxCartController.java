@@ -443,7 +443,7 @@ public class WxCartController {
             }
 
         } else {
-            checkedAddress = addressService.getLiteMallAddressById(new Long(addressId));
+            checkedAddress = addressService.getLiteMallAddressById(addressId);
             // 如果null, 则报错
             if (checkedAddress == null) {
                 return Result.badArgumentValue();

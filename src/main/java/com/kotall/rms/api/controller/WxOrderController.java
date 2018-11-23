@@ -311,7 +311,7 @@ public class WxOrderController {
         }
 
         // 收货地址
-        LiteMallAddressEntity checkedAddress = addressService.getLiteMallAddressById(new Long(addressId));
+        LiteMallAddressEntity checkedAddress = addressService.getLiteMallAddressById(addressId);
         if(checkedAddress == null){
             return Result.badArgument();
         }

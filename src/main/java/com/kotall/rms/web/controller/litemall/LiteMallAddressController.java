@@ -57,7 +57,7 @@ public class LiteMallAddressController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
+	public Result getById(@RequestBody Integer id) {
 		LiteMallAddressEntity liteMallAddress = liteMallAddressService.getLiteMallAddressById(id);
 		return ResultKit.msg(liteMallAddress);
 	}

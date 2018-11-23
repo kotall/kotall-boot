@@ -19,7 +19,7 @@ public interface LiteMallAddressManager {
 	
 	int saveLiteMallAddress(LiteMallAddressEntity liteMallAddress);
 	
-	LiteMallAddressEntity getLiteMallAddressById(Long id);
+	LiteMallAddressEntity getLiteMallAddressById(Integer id);
 	
 	int updateLiteMallAddress(LiteMallAddressEntity liteMallAddress);
 	

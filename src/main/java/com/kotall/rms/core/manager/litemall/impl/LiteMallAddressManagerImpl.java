@@ -40,7 +40,7 @@ public class LiteMallAddressManagerImpl implements LiteMallAddressManager {
 	}
 
 	@Override
-	public LiteMallAddressEntity getLiteMallAddressById(Long id) {
+	public LiteMallAddressEntity getLiteMallAddressById(Integer id) {
 		LiteMallAddressEntity liteMallAddress = liteMallAddressMapper.getObjectById(id);
 		return liteMallAddress;
 	}

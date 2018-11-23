@@ -57,7 +57,7 @@ public class ${className}Controller extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
+	public Result getById(@RequestBody Integer id) {
 		${className}Entity ${objName} = ${objName}Service.get${className}ById(id);
 		return ResultKit.msg(${objName});
 	}
@@ -81,7 +81,7 @@ public class ${className}Controller extends AbstractController {
 	 */
 	@SysLog("删除${comments}")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
+	public Result batchRemove(@RequestBody Integer[] id) {
 	    int count = ${objName}Service.batchRemove(id);
 		return ResultKit.msg(count);
 	}

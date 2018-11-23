@@ -35,7 +35,7 @@ public class ${className}ManagerImpl implements ${className}Manager {
 	}
 
 	@Override
-	public ${className}Entity get${className}ById(Long id) {
+	public ${className}Entity get${className}ById(Integer id) {
 		${className}Entity ${objName} = ${objName}Mapper.getObjectById(id);
 		return ${objName};
 	}
