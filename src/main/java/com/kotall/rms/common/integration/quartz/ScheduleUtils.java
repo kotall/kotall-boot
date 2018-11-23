@@ -25,7 +25,7 @@ public class ScheduleUtils {
      * @param jobId
      * @return
      */
-    public static TriggerKey getTriggerKey(Long jobId) {
+    public static TriggerKey getTriggerKey(Integer jobId) {
         return TriggerKey.triggerKey(JOB_NAME + jobId);
     }
     
@@ -34,7 +34,7 @@ public class ScheduleUtils {
      * @param jobId
      * @return
      */
-    public static JobKey getJobKey(Long jobId) {
+    public static JobKey getJobKey(Integer jobId) {
         return JobKey.jobKey(JOB_NAME + jobId);
     }
 
@@ -43,7 +43,7 @@ public class ScheduleUtils {
      * @param jobId
      * @return
      */
-    public static CronTrigger getCronTrigger(Long jobId) {
+    public static CronTrigger getCronTrigger(Integer jobId) {
         try {
             return (CronTrigger) scheduler.getTrigger(getTriggerKey(jobId));
         } catch (SchedulerException e) {
@@ -133,7 +133,7 @@ public class ScheduleUtils {
      * 暂停任务
      * @param jobId
      */
-    public static void pauseJob(Long jobId) {
+    public static void pauseJob(Integer jobId) {
         try {
             scheduler.pauseJob(getJobKey(jobId));
         } catch (SchedulerException e) {
@@ -145,7 +145,7 @@ public class ScheduleUtils {
      * 恢复任务
      * @param jobId
      */
-    public static void resumeJob(Long jobId) {
+    public static void resumeJob(Integer jobId) {
         try {
             scheduler.resumeJob(getJobKey(jobId));
         } catch (SchedulerException e) {
@@ -157,7 +157,7 @@ public class ScheduleUtils {
      * 删除定时任务
      * @param jobId
      */
-    public static void deleteScheduleJob(Long jobId) {
+    public static void deleteScheduleJob(Integer jobId) {
         try {
             scheduler.deleteJob(getJobKey(jobId));
         } catch (SchedulerException e) {

@@ -20,12 +20,11 @@ import java.sql.Timestamp;
 public class SysJobEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
 
 	/**
 	 * 任务id
 	 */
-	private Long jobId;
+	private Integer jobId;
 	
 	/**
 	 * spring bean 名称

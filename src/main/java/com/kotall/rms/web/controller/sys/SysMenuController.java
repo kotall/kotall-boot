@@ -1,10 +1,10 @@
 package com.kotall.rms.web.controller.sys;
 
-import com.kotall.rms.core.annotation.SysLog;
-import com.kotall.rms.common.utils.Result;
-import com.kotall.rms.web.util.ResultKit;
 import com.kotall.rms.common.entity.sys.SysMenuEntity;
+import com.kotall.rms.common.utils.Result;
+import com.kotall.rms.core.annotation.SysLog;
 import com.kotall.rms.core.service.sys.SysMenuService;
+import com.kotall.rms.web.util.ResultKit;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,7 +45,7 @@ public class SysMenuController extends AbstractController {
 	@RequestMapping("/list")
 	public List<SysMenuEntity> listMenu(@RequestParam Map<String, Object> params) {
 		// 数据权限控制
-		return sysMenuService.listMenu(params);
+		return sysMenuService.queryByList(params);
 	}
 	
 	/**
@@ -66,7 +66,7 @@ public class SysMenuController extends AbstractController {
 	@SysLog("新增菜单")
 	@RequestMapping("/save")
 	public Result save(@RequestBody SysMenuEntity menu) {
-		int count = sysMenuService.saveMenu(menu);
+		boolean count = sysMenuService.save(menu);
 		return ResultKit.msg(count);
 	}
 
@@ -76,8 +76,8 @@ public class SysMenuController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result info(@RequestBody Long id) {
-		SysMenuEntity menu = sysMenuService.getMenuById(id);
+	public Result info(@RequestBody Integer id) {
+		SysMenuEntity menu = sysMenuService.getById(id);
 		return ResultKit.msg(menu);
 	}
 	
@@ -89,7 +89,7 @@ public class SysMenuController extends AbstractController {
 	@SysLog("修改菜单")
 	@RequestMapping("/update")
 	public Result update(@RequestBody SysMenuEntity menu) {
-		int count = sysMenuService.updateMenu(menu);
+		boolean count = sysMenuService.update(menu);
 		return ResultKit.msg(count);
 	}
 	

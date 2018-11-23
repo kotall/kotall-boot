@@ -24,12 +24,12 @@ public class SysJobLogEntity implements Serializable {
 	/**
 	 * 记录id
 	 */
-	private Long logId;
+	private Integer logId;
 	
 	/**
 	 * 任务id
 	 */
-	private Long jobId;
+	private Integer jobId;
 	
 	/**
 	 * spring bean 名称

@@ -1,10 +1,9 @@
 package com.kotall.rms.core.manager.sys;
 
-import java.util.List;
-
-import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.entity.sys.SysJobEntity;
+import com.kotall.rms.core.manager.BaseManager;
+
+import java.util.List;
 
 /**
  * 定时任务
@@ -12,20 +11,10 @@ import com.kotall.rms.common.entity.sys.SysJobEntity;
  * @author aracwong
  * @date 2017年8月20日 下午11:46:30
  */
-public interface SysJobManager {
+public interface SysJobManager extends BaseManager<SysJobEntity> {
 
-	List<SysJobEntity> listForPage(Page<SysJobEntity> page, Query query);
-	
 	List<SysJobEntity> listNormalJob();
-	
-	int saveQuartzJob(SysJobEntity job);
-	
-	SysJobEntity getQuartzJobById(Long jobId);
-	
-	int updateQuartzJob(SysJobEntity job);
-	
-	int batchRemoveQuartzJob(Long[] id);
-	
-	int batchUpdate(Long[] jobId, Integer status);
+
+	int batchUpdate(Integer[] jobId, Integer status);
 	
 }

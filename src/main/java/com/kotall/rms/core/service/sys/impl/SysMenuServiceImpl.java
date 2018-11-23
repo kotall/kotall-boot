@@ -1,17 +1,15 @@
 package com.kotall.rms.core.service.sys.impl;
 
-import com.kotall.rms.common.utils.IdKit;
-import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.core.RmsException;
 import com.kotall.rms.common.entity.sys.SysMenuEntity;
-import com.kotall.rms.core.annotation.DataFilter;
+import com.kotall.rms.common.utils.IdKit;
+import com.kotall.rms.core.RmsException;
 import com.kotall.rms.core.manager.sys.SysMenuManager;
+import com.kotall.rms.core.service.BaseServiceImpl;
 import com.kotall.rms.core.service.sys.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 系统菜单
@@ -20,7 +18,7 @@ import java.util.Map;
  * @date 2017年8月10日 上午10:36:31
  */
 @Service("sysMenuService")
-public class SysMenuServiceImpl implements SysMenuService {
+public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuManager, SysMenuEntity> implements SysMenuService {
 
 	@Autowired
 	private SysMenuManager sysMenuManager;
@@ -28,14 +26,6 @@ public class SysMenuServiceImpl implements SysMenuService {
 	@Override
 	public List<SysMenuEntity> listUserMenu(Long userId) {
 		List<SysMenuEntity> menuList = sysMenuManager.listUserMenu(userId);
-		return menuList;
-	}
-
-	//@DataFilter(subDept = true, user = false)
-	@Override
-	public List<SysMenuEntity> listMenu(Map<String, Object> params) {
-		Query query = new Query(params);
-		List<SysMenuEntity> menuList = sysMenuManager.listMenu(query);
 		return menuList;
 	}
 
@@ -52,22 +42,10 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public int saveMenu(SysMenuEntity menu) {
+	public boolean save(SysMenuEntity menu) {
 		long id = IdKit.getId(menu.getCode());
 		menu.setMenuId(id);
-		int count = sysMenuManager.saveMenu(menu);
-		return count;
-	}
-
-	@Override
-	public SysMenuEntity getMenuById(Long id) {
-		SysMenuEntity menu = sysMenuManager.getMenuById(id);
-		return menu;
-	}
-
-	@Override
-	public int updateMenu(SysMenuEntity menu) {
-		int count = sysMenuManager.updateMenu(menu);
+		boolean count = sysMenuManager.save(menu);
 		return count;
 	}
 

@@ -34,7 +34,7 @@ public class SysLogController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<SysLogEntity> listLog(@RequestBody Map<String, Object> params) {
-		return sysLogService.listLog(params);
+		return sysLogService.queryByPage(params);
 	}
 	
 	/**
@@ -44,9 +44,9 @@ public class SysLogController extends AbstractController {
 	 */
 	@SysLog("删除日志")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-		int count = sysLogService.batchRemove(id);
-		return ResultKit.msg(id, count);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = sysLogService.deleteByIds(id);
+		return ResultKit.msg(count);
 	}
 	
 	/**
@@ -56,7 +56,7 @@ public class SysLogController extends AbstractController {
 	@SysLog("清空日志")
 	@RequestMapping("/clear")
 	public Result batchRemoveAll() {
-		int count = sysLogService.batchRemoveAll();
+		boolean count = sysLogService.deleteAll();
 		return ResultKit.msg(count);
 	}
 	

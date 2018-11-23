@@ -1,9 +1,9 @@
 package com.kotall.rms.core.manager.sys;
 
-import java.util.List;
-
-import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.entity.sys.SysMenuEntity;
+import com.kotall.rms.core.manager.BaseManager;
+
+import java.util.List;
 
 /**
  * 系统菜单
@@ -11,22 +11,14 @@ import com.kotall.rms.common.entity.sys.SysMenuEntity;
  * @author aracwong
  * @date 2017年8月10日 上午10:34:59
  */
-public interface SysMenuManager {
-	
+public interface SysMenuManager extends BaseManager<SysMenuEntity> {
+
 	List<SysMenuEntity> listUserMenu(Long userId);
 	
 	List<SysMenuEntity> listParentId(Long parentId, List<Long> menuIdList);
-	
-	List<SysMenuEntity> listMenu(Query search);
-	
-	List<SysMenuEntity> listNotButton();
-	
-	int saveMenu(SysMenuEntity menu);
 
-	SysMenuEntity getMenuById(Long id);
-	
-	int updateMenu(SysMenuEntity menu);
-	
+	List<SysMenuEntity> listNotButton();
+
 	int batchRemove(Long[] id);
 	
 	boolean hasChildren(Long[] id);

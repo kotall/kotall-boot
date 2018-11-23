@@ -1,19 +1,18 @@
 package com.kotall.rms.core.manager.sys.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import com.kotall.rms.core.enums.MenuType;
-import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.dao.sys.SysMenuMapper;
 import com.kotall.rms.common.dao.sys.SysRoleMenuMapper;
 import com.kotall.rms.common.dao.sys.SysUserMapper;
 import com.kotall.rms.common.entity.sys.SysMenuEntity;
+import com.kotall.rms.core.enums.MenuType;
+import com.kotall.rms.core.manager.BaseManagerImpl;
 import com.kotall.rms.core.manager.sys.SysMenuManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 系统菜单
@@ -22,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2017年8月10日 上午10:35:24
  */
 @Component("sysMenuManager")
-public class SysMenuManagerImpl implements SysMenuManager {
+public class SysMenuManagerImpl extends BaseManagerImpl<SysMenuMapper, SysMenuEntity> implements SysMenuManager {
 
 	@Autowired
 	private SysUserMapper sysUserMapper;
@@ -86,28 +85,8 @@ public class SysMenuManagerImpl implements SysMenuManager {
 	}
 
 	@Override
-	public List<SysMenuEntity> listMenu(Query search) {
-		return sysMenuMapper.list(search);
-	}
-
-	@Override
 	public List<SysMenuEntity> listNotButton() {
 		return sysMenuMapper.listNotButton();
-	}
-
-	@Override
-	public int saveMenu(SysMenuEntity menu) {
-		return sysMenuMapper.save(menu);
-	}
-
-	@Override
-	public SysMenuEntity getMenuById(Long id) {
-		return sysMenuMapper.getObjectById(id);
-	}
-
-	@Override
-	public int updateMenu(SysMenuEntity menu) {
-		return sysMenuMapper.update(menu);
 	}
 
 	@Override

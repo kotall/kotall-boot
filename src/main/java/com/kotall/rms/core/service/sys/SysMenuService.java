@@ -1,9 +1,9 @@
 package com.kotall.rms.core.service.sys;
 
 import com.kotall.rms.common.entity.sys.SysMenuEntity;
+import com.kotall.rms.core.service.BaseService;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 系统菜单
@@ -11,20 +11,12 @@ import java.util.Map;
  * @author aracwong
  * @date 2017年8月10日 上午10:35:58
  */
-public interface SysMenuService {
+public interface SysMenuService extends BaseService<SysMenuEntity> {
 
 	List<SysMenuEntity> listUserMenu(Long userId);
-	
-	List<SysMenuEntity> listMenu(Map<String, Object> params);
 
 	List<SysMenuEntity> listNotButton();
-	
-	int saveMenu(SysMenuEntity menu);
 
-	SysMenuEntity getMenuById(Long id);
-	
-	int updateMenu(SysMenuEntity menu);
-	
 	int batchRemove(Long[] id);
 
 }

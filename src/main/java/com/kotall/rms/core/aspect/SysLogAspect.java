@@ -94,7 +94,7 @@ public class SysLogAspect {
 		}
 		sysLog.setTime(time);
 		//保存系统日志
-		sysLogManager.saveLog(sysLog);
+		sysLogManager.save(sysLog);
 	}
 	
 }

@@ -1,11 +1,10 @@
 package com.kotall.rms.core.service.sys.impl;
 
+import com.kotall.rms.common.entity.sys.SysJobEntity;
 import com.kotall.rms.common.integration.quartz.ScheduleUtils;
 import com.kotall.rms.core.enums.ScheduleStatus;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.common.entity.sys.SysJobEntity;
 import com.kotall.rms.core.manager.sys.SysJobManager;
+import com.kotall.rms.core.service.BaseServiceImpl;
 import com.kotall.rms.core.service.sys.SysJobService;
 import org.quartz.CronTrigger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 定时任务
@@ -22,7 +20,7 @@ import java.util.Map;
  * @date 2017年8月20日 下午11:49:18
  */
 @Service("quartzJobService")
-public class SysJobServiceImpl implements SysJobService {
+public class SysJobServiceImpl extends BaseServiceImpl<SysJobManager, SysJobEntity>  implements SysJobService {
 	
 	@Autowired
 	private SysJobManager sysJobManager;
@@ -45,54 +43,40 @@ public class SysJobServiceImpl implements SysJobService {
 	}
 
 	@Override
-	public Page<SysJobEntity> list(Map<String, Object> params) {
-		Query query = new Query(params);
-		Page<SysJobEntity> page = new Page<>(query);
-		sysJobManager.listForPage(page, query);
-		return page;
-	}
-
-	@Override
-	public int saveQuartzJob(SysJobEntity job) {
+	public boolean saveQuartzJob(SysJobEntity job) {
 		job.setStatus(ScheduleStatus.NORMAL.getValue());
-		int count = sysJobManager.saveQuartzJob(job);
+		boolean count = sysJobManager.save(job);
 		ScheduleUtils.createScheduleJob(job);
 		return count;
 	}
 
 	@Override
-	public SysJobEntity getQuartzJobById(Long jobId) {
-		SysJobEntity job = sysJobManager.getQuartzJobById(jobId);
-		return job;
-	}
-
-	@Override
-	public int updateQuartzJob(SysJobEntity job) {
-		int count = sysJobManager.updateQuartzJob(job);
+	public boolean updateQuartzJob(SysJobEntity job) {
+		boolean count = sysJobManager.update(job);
 		ScheduleUtils.updateScheduleJob(job);
 		return count;
 	}
 
 	@Override
-	public int batchRemoveQuartzJob(Long[] id) {
-		for(Long jobId : id) {
+	public boolean batchRemoveQuartzJob(Integer[] id) {
+		for(Integer jobId : id) {
 			ScheduleUtils.deleteScheduleJob(jobId);
 		}
-		int count = sysJobManager.batchRemoveQuartzJob(id);
+		boolean count = sysJobManager.deleteByIds(id);
 		return count;
 	}
 	
 	@Override
-	public int run(Long[] id) {
-		for(Long jobId : id) {
-			ScheduleUtils.run(sysJobManager.getQuartzJobById(jobId));
+	public int run(Integer[] id) {
+		for(Integer jobId : id) {
+			ScheduleUtils.run(sysJobManager.getById(jobId));
 		}
 		return 1;
 	}
 	
 	@Override
-	public int pause(Long[] id) {
-		for(Long jobId : id) {
+	public int pause(Integer[] id) {
+		for(Integer jobId : id) {
 			ScheduleUtils.pauseJob(jobId);
 		}
 		int count = sysJobManager.batchUpdate(id, ScheduleStatus.PAUSE.getValue());
@@ -100,8 +84,8 @@ public class SysJobServiceImpl implements SysJobService {
 	}
 	
 	@Override
-	public int resume(Long[] id) {
-		for(Long jobId : id) {
+	public int resume(Integer[] id) {
+		for(Integer jobId : id) {
 			ScheduleUtils.resumeJob(jobId);
 		}
 		int count = sysJobManager.batchUpdate(id, ScheduleStatus.NORMAL.getValue());
