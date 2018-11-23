@@ -33,19 +33,19 @@ public class SysJobLogController {
 	 */
 	@RequestMapping("/list")
 	public Page<SysJobLogEntity> list(@RequestBody Map<String, Object> params) {
-		return sysJobLogService.listForPage(params);
+		return sysJobLogService.queryByPage(params);
 	}
 	
 	/**
 	 * 删除
-	 * @param id
+	 * @param ids
 	 * @return
 	 */
 	@SysLog("删除定时任务日志")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-		int count = sysJobLogService.batchRemove(id);
-		return ResultKit.msg(id, count);
+	public Result batchRemove(@RequestBody Integer[] ids) {
+		boolean count = sysJobLogService.deleteByIds(ids);
+		return ResultKit.msg(count);
 	}
 	
 	/**
@@ -55,7 +55,7 @@ public class SysJobLogController {
 	@SysLog("清空定时任务日志")
 	@RequestMapping("/clear")
 	public Result batchRemoveAll() {
-		int count = sysJobLogService.batchRemoveAll();
+		int count = sysJobLogService.deleteAll();
 		return ResultKit.msg(count);
 	}
 	
