@@ -3,7 +3,7 @@
 
 <mapper namespace="${package}.common.dao.${module}.${className}Mapper">
 	
-	<select id="listForPage" resultType="${package}.common.entity.${module}.${className}Entity">
+	<select id="list" resultType="${package}.common.entity.${module}.${className}Entity">
 		SELECT
 #foreach($column in $columns)
 			`$column.columnName`#if($velocityCount != $columns.size()), 
@@ -14,8 +14,15 @@
 		ORDER BY
 			${pk.columnName} DESC
 	</select>
+
+    <select id="countTotal" resultType="int">
+        SELECT
+		    COUNT(1)
+        FROM
+		    ${tableName}
+    </select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO ${tableName} (
 #foreach($column in $columns)
 #if($column.columnName != $pk.columnName || $pk.extra != 'auto_increment')
@@ -34,7 +41,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="${package}.common.entity.${module}.${className}Entity">
+	<select id="getById" resultType="${package}.common.entity.${module}.${className}Entity">
 		SELECT
 #foreach($column in $columns)
 			`$column.columnName`#if($velocityCount != $columns.size()), 
@@ -46,7 +53,7 @@
 			${pk.columnName} = #{${pk.fieldName}}
 	</select>
 	
-	<update id="update">
+	<update id="updateById">
 		UPDATE ${tableName}
 	 	<set>
 #foreach($column in $columns)
@@ -58,8 +65,34 @@
 		WHERE
 			${pk.columnName} = #{${pk.fieldName}}
 	</update>
-	
-	<delete id="batchRemove">
+
+    <update id="update">
+        UPDATE ${tableName}
+        <set>
+#foreach($column in $columns)
+	#if($column.columnName != $pk.columnName)
+		<if test="$column.fieldName != null">`$column.columnName` = #{$column.fieldName}#if($velocityCount != $columns.size()), #end</if>
+	#end
+#end
+        </set>
+        <where>
+#foreach($column in $columns)
+	#if($column.columnName != $pk.columnName)
+		<if test="$column.fieldName != null"> and `$column.columnName` = #{$column.fieldName}#if($velocityCount != $columns.size()) #end</if>
+	#end
+#end
+		</where>
+    </update>
+
+    <delete id="deleteById">
+        DELETE
+        FROM
+		    ${tableName}
+        WHERE
+		    ${pk.columnName} = #{${pk.fieldName}}
+    </delete>
+
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			${tableName}
@@ -69,5 +102,6 @@
 			#{id}
 		</foreach>
 	</delete>
+
 
 </mapper>
