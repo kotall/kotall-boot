@@ -38,8 +38,8 @@ litemall:
   # 开发者应该设置成自己的wx相关信息
   wx:
     app-id: wx0496a4b4c5811cde
-    app-secret: b7fd5848d694dbec5b94322bfe48e6a4
-    mch-id: 1504975671
+    app-secret: b7fd5848d694dbec5d94322bfe48e6a4
+    mch-id: 1504975771
     mch-key: payweixinqqcom123456789101112131
     notify-url: http://kotall.s1.natapp.cc/wx/order/pay-notify
 
@@ -129,8 +129,8 @@ litemall:
     # 阿里云对象存储配置信息
     aliyun:
       endpoint: oss-cn-hangzhou.aliyuncs.com
-      accessKeyId: LTAI4PIXMHXrBISU
-      accessKeySecret: GEa0eqj4I6exprJrOUjzN6i24NfUOt
+      accessKeyId: LTAI5PIXMHXrBISU
+      accessKeySecret: GEa0fqj4I6exprJrOUjzN6i24NfUOt
       bucketName: kotallmall
     # 腾讯对象存储配置信息
     # 请参考 https://cloud.tencent.com/document/product/436/6249
