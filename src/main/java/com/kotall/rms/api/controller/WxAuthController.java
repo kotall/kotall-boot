@@ -161,11 +161,11 @@ public class WxAuthController {
             user.setLastLoginTime(new Date());
             user.setLastLoginIp(IpUtil.client(request));
 
-            userService.saveLiteMallUser(user);
+            userService.save(user);
         } else {
             user.setLastLoginTime(new Date());
             user.setLastLoginIp(IpUtil.client(request));
-            if (userService.updateLiteMallUser(user) == 0) {
+            if (userService.update(user)) {
                 return Result.updatedDataFailed();
             }
         }
@@ -305,7 +305,7 @@ public class WxAuthController {
         user.setStatus(0);
         user.setLastLoginTime(new Date());
         user.setLastLoginIp(IpUtil.client(request));
-        userService.saveLiteMallUser(user);
+        userService.save(user);
 
         // userInfo
         UserInfo userInfo = new UserInfo();
@@ -366,7 +366,7 @@ public class WxAuthController {
         String encodedPassword = encoder.encode(password);
         user.setPassword(encodedPassword);
 
-        if (userService.updateLiteMallUser(user) == 0) {
+        if (userService.update(user)) {
             return Result.updatedDataFailed();
         }
 
@@ -380,9 +380,9 @@ public class WxAuthController {
         String iv = JacksonUtil.parseString(body, "iv");
         WxMaPhoneNumberInfo phoneNumberInfo = this.wxService.getUserService().getPhoneNoInfo(sessionKey, encryptedData, iv);
         String phone = phoneNumberInfo.getPhoneNumber();
-        LiteMallUserEntity user = userService.getLiteMallUserById(new Long(userId));
+        LiteMallUserEntity user = userService.getById(userId);
         user.setMobile(phone);
-        if (userService.updateLiteMallUser(user) == 0) {
+        if (userService.update(user)) {
             return Result.updatedDataFailed();
         }
         return Result.ok();

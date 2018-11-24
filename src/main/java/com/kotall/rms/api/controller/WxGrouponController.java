@@ -93,18 +93,18 @@ public class WxGrouponController {
             return Result.unlogin();
         }
 
-        LiteMallGrouponEntity groupon = grouponService.getLiteMallGrouponById(new Long(grouponId));
+        LiteMallGrouponEntity groupon = grouponService.getById(grouponId);
         if (groupon == null) {
             return Result.badArgumentValue();
         }
 
-        LiteMallGrouponRulesEntity rules = rulesService.getLiteMallGrouponRulesById(new Long(groupon.getRulesId()));
+        LiteMallGrouponRulesEntity rules = rulesService.getById(groupon.getRulesId());
         if (rules == null) {
             return Result.badArgumentValue();
         }
 
         // 订单信息
-        LiteMallOrderEntity order = orderService.getLiteMallOrderById(new Long(groupon.getOrderId()));
+        LiteMallOrderEntity order = orderService.getById(groupon.getOrderId());
         if (null == order) {
             return Result.error(403, "订单不存在");
         }
@@ -156,7 +156,7 @@ public class WxGrouponController {
             result.put("expressInfo", ei);
         }
 
-        LiteMallUserEntity creator = userService.getLiteMallUserById(new Long(groupon.getCreatorUserId()));
+        LiteMallUserEntity creator = userService.getById(groupon.getCreatorUserId());
         List<LiteMallUserEntity> joiners = new ArrayList<>();
         joiners.add(creator);
         int linkGrouponId;
@@ -175,7 +175,7 @@ public class WxGrouponController {
 
         LiteMallUserEntity joiner;
         for (LiteMallGrouponEntity grouponItem : groupons) {
-            joiner = userService.getLiteMallUserById(new Long(grouponItem.getUserId()));
+            joiner = userService.getById(grouponItem.getUserId());
             joiners.add(joiner);
         }
 
@@ -189,17 +189,17 @@ public class WxGrouponController {
 
     @GetMapping("join")
     public Object join(@NotNull Integer grouponId) {
-        LiteMallGrouponEntity groupon = grouponService.getLiteMallGrouponById(new Long(grouponId));
+        LiteMallGrouponEntity groupon = grouponService.getById(grouponId);
         if (groupon == null) {
             return Result.badArgumentValue();
         }
 
-        LiteMallGrouponRulesEntity rules = rulesService.getLiteMallGrouponRulesById(new Long(groupon.getRulesId()));
+        LiteMallGrouponRulesEntity rules = rulesService.getById(groupon.getRulesId());
         if (rules == null) {
             return Result.badArgumentValue();
         }
 
-        LiteMallGoodsEntity goods = goodsService.getLiteMallGoodsById(new Long(rules.getGoodsId()));
+        LiteMallGoodsEntity goods = goodsService.getById(rules.getGoodsId());
         if (goods == null) {
             return Result.badArgumentValue();
         }
@@ -244,9 +244,9 @@ public class WxGrouponController {
         LiteMallGrouponRulesEntity rules;
         LiteMallUserEntity creator;
         for (LiteMallGrouponEntity groupon : myGroupons) {
-            order = orderService.getLiteMallOrderById(new Long(groupon.getOrderId()));
-            rules = rulesService.getLiteMallGrouponRulesById(new Long(groupon.getRulesId()));
-            creator = userService.getLiteMallUserById(new Long(groupon.getCreatorUserId()));
+            order = orderService.getById(groupon.getOrderId());
+            rules = rulesService.getById(groupon.getRulesId());
+            creator = userService.getById(groupon.getCreatorUserId());
 
             Map<String, Object> grouponVo = new HashMap<>();
             //填充团购信息
@@ -306,7 +306,7 @@ public class WxGrouponController {
 
     @GetMapping("query")
     public Object query(@NotNull Integer goodsId) {
-        LiteMallGoodsEntity goods = goodsService.getLiteMallGoodsById(new Long(goodsId));
+        LiteMallGoodsEntity goods = goodsService.getById(goodsId);
         if (goods == null) {
             return Result.error(-1, "未找到对应的商品");
         }

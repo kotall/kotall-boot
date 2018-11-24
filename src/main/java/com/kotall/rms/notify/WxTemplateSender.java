@@ -66,7 +66,7 @@ public class WxTemplateSender {
 
         try {
             wxMaService.getMsgService().sendTemplateMsg(msg);
-            if(formIdService.updateUserFormId(userFormid) == 0){
+            if(formIdService.updateUserFormId(userFormid)){
                 log.warn("更新数据已失效");
             }
         } catch (Exception e) {

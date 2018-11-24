@@ -1,17 +1,15 @@
 package com.kotall.rms.core.service.litemall.impl;
 
-import java.util.List;
-import java.util.Map;
-
+import com.kotall.rms.common.entity.litemall.LiteMallIssueEntity;
+import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.core.annotation.StoreFilter;
+import com.kotall.rms.core.manager.litemall.LiteMallIssueManager;
+import com.kotall.rms.core.service.BaseServiceImpl;
+import com.kotall.rms.core.service.litemall.LiteMallIssueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.entity.litemall.LiteMallIssueEntity;
-import com.kotall.rms.core.manager.litemall.LiteMallIssueManager;
-import com.kotall.rms.core.service.litemall.LiteMallIssueService;
+import java.util.Map;
 
 /**
  * 常见问题表
@@ -21,48 +19,14 @@ import com.kotall.rms.core.service.litemall.LiteMallIssueService;
  * @since 1.0.0
  */
 @Service("liteMallIssueService")
-public class LiteMallIssueServiceImpl implements LiteMallIssueService {
+public class LiteMallIssueServiceImpl extends BaseServiceImpl<LiteMallIssueManager, LiteMallIssueEntity> implements LiteMallIssueService {
 
 	@Autowired
 	private LiteMallIssueManager liteMallIssueManager;
 
 	@StoreFilter
 	@Override
-	public Page<LiteMallIssueEntity> listLiteMallIssue(Map<String, Object> params) {
-		Query query = new Query(params);
-		Page<LiteMallIssueEntity> page = new Page<>(query);
-		liteMallIssueManager.listLiteMallIssue(page, query);
-		return page;
+	public Page<LiteMallIssueEntity> queryIssueByPage(Map<String, Object> params) {
+		return super.queryByPage(params);
 	}
-
-	@Override
-	public List<LiteMallIssueEntity> queryIssueList(Map<String, Object> params) {
-		Query query = new Query(params);
-		return liteMallIssueManager.queryIssueList(query);
-	}
-
-	@Override
-	public int saveLiteMallIssue(LiteMallIssueEntity role) {
-		int count = liteMallIssueManager.saveLiteMallIssue(role);
-		return count;
-	}
-
-	@Override
-	public LiteMallIssueEntity getLiteMallIssueById(Long id) {
-		LiteMallIssueEntity liteMallIssue = liteMallIssueManager.getLiteMallIssueById(id);
-		return liteMallIssue;
-	}
-
-	@Override
-	public int updateLiteMallIssue(LiteMallIssueEntity liteMallIssue) {
-		int count = liteMallIssueManager.updateLiteMallIssue(liteMallIssue);
-		return count;
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
-		int count = liteMallIssueManager.batchRemove(id);
-		return count;
-	}
-
 }

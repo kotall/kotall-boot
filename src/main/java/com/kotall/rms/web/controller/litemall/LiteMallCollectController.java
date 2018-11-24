@@ -36,7 +36,7 @@ public class LiteMallCollectController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallCollectEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallCollectService.listLiteMallCollect(params);
+		return liteMallCollectService.queryCollectListByPage(params);
 	}
 		
 	/**
@@ -47,7 +47,7 @@ public class LiteMallCollectController extends AbstractController {
 	@SysLog("新增收藏表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallCollectEntity liteMallCollect) {
-	    int count = liteMallCollectService.saveLiteMallCollect(liteMallCollect);
+	    boolean count = liteMallCollectService.save(liteMallCollect);
 		return ResultKit.msg(count);
 	}
 	
@@ -57,8 +57,8 @@ public class LiteMallCollectController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallCollectEntity liteMallCollect = liteMallCollectService.getLiteMallCollectById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallCollectEntity liteMallCollect = liteMallCollectService.getById(id);
 		return ResultKit.msg(liteMallCollect);
 	}
 	
@@ -70,7 +70,7 @@ public class LiteMallCollectController extends AbstractController {
 	@SysLog("修改收藏表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallCollectEntity liteMallCollect) {
-        int count = liteMallCollectService.updateLiteMallCollect(liteMallCollect);
+		boolean count = liteMallCollectService.update(liteMallCollect);
 		return  ResultKit.msg(count);
 	}
 	
@@ -81,8 +81,8 @@ public class LiteMallCollectController extends AbstractController {
 	 */
 	@SysLog("删除收藏表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallCollectService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallCollectService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

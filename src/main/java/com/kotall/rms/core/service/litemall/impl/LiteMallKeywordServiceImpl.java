@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kotall.rms.core.annotation.StoreFilter;
+import com.kotall.rms.core.service.BaseServiceImpl;
 import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,68 +24,38 @@ import com.kotall.rms.core.service.litemall.LiteMallKeywordService;
  * @since 1.0.0
  */
 @Service("liteMallKeywordService")
-public class LiteMallKeywordServiceImpl implements LiteMallKeywordService {
+public class LiteMallKeywordServiceImpl extends BaseServiceImpl<LiteMallKeywordManager, LiteMallKeywordEntity> implements LiteMallKeywordService {
 
 	@Autowired
 	private LiteMallKeywordManager liteMallKeywordManager;
 
 	@StoreFilter
 	@Override
-	public Page<LiteMallKeywordEntity> listLiteMallKeyword(Map<String, Object> params) {
+	public Page<LiteMallKeywordEntity> queryKeywordByPage(Map<String, Object> params) {
 		Query query = new Query(params);
 		Page<LiteMallKeywordEntity> page = new Page<>(query);
-		liteMallKeywordManager.listLiteMallKeyword(page, query);
-		return page;
+		liteMallKeywordManager.queryByPage(page, query);
+		return super.queryByPage(params);
 	}
 
 	@Override
-	public List<LiteMallKeywordEntity> queryKeywordList(Map<String, Object> params) {
-		Query query = new Query(params);
-		return liteMallKeywordManager.queryKeywordList(query);
-	}
-
-	@Override
-	public int saveLiteMallKeyword(LiteMallKeywordEntity role) {
-		int count = liteMallKeywordManager.saveLiteMallKeyword(role);
-		return count;
-	}
-
-	@Override
-	public LiteMallKeywordEntity getLiteMallKeywordById(Long id) {
-		LiteMallKeywordEntity liteMallKeyword = liteMallKeywordManager.getLiteMallKeywordById(id);
-		return liteMallKeyword;
-	}
-
-	@Override
-	public int updateLiteMallKeyword(LiteMallKeywordEntity liteMallKeyword) {
-		int count = liteMallKeywordManager.updateLiteMallKeyword(liteMallKeyword);
-		return count;
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
-		int count = liteMallKeywordManager.batchRemove(id);
-		return count;
-	}
-
-	@Override
-	public LiteMallKeywordEntity queryDefault(Long storeId) {
+	public LiteMallKeywordEntity queryDefault(Integer storeId) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("storeId", storeId);
 		params.put("isDefault", 1);
 		params.put("deleted", 0);
 
-		List<LiteMallKeywordEntity> list = this.queryKeywordList(params);
+		List<LiteMallKeywordEntity> list = this.queryByList(params);
 		return CollectionUtils.isEmpty(list) ? null : list.get(0);
 	}
 
 	@Override
-	public List<LiteMallKeywordEntity> queryHots(Long storeId) {
+	public List<LiteMallKeywordEntity> queryHots(Integer storeId) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("storeId", storeId);
 		params.put("isHot", 1);
 		params.put("deleted", 0);
 
-		return this.queryKeywordList(params);
+		return this.queryByList(params);
 	}
 }

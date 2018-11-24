@@ -5,7 +5,6 @@ import com.kotall.rms.common.entity.litemall.LiteMallStorageEntity;
 import com.kotall.rms.common.integration.storage.StorageService;
 import com.kotall.rms.api.SystemConfig;
 import com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity;
-import com.kotall.rms.common.utils.FileKit;
 import com.kotall.rms.core.service.litemall.LiteMallStorageService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,7 @@ public class QCodeService {
             storageInfo.setType("image/jpeg");
             storageInfo.setKey(null);
             storageInfo.setUrl(url);
-            liteMallStorageService.saveLiteMallStorage(storageInfo);
+            liteMallStorageService.save(storageInfo);
             return url;
         } catch (WxErrorException e) {
             e.printStackTrace();
@@ -87,7 +86,7 @@ public class QCodeService {
             storageInfo.setType("image/jpeg");
             storageInfo.setKey(null);
             storageInfo.setUrl(url);
-            liteMallStorageService.saveLiteMallStorage(storageInfo);
+            liteMallStorageService.save(storageInfo);
 
             return url;
         } catch (WxErrorException e) {

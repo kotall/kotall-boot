@@ -1,14 +1,11 @@
 package com.kotall.rms.core.manager.litemall.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.dao.litemall.LiteMallIssueMapper;
 import com.kotall.rms.common.entity.litemall.LiteMallIssueEntity;
+import com.kotall.rms.core.manager.BaseManagerImpl;
 import com.kotall.rms.core.manager.litemall.LiteMallIssueManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 常见问题表
@@ -18,42 +15,8 @@ import com.kotall.rms.core.manager.litemall.LiteMallIssueManager;
  * @since 1.0.0
  */
 @Component("liteMallIssueManager")
-public class LiteMallIssueManagerImpl implements LiteMallIssueManager {
+public class LiteMallIssueManagerImpl extends BaseManagerImpl<LiteMallIssueMapper, LiteMallIssueEntity> implements LiteMallIssueManager {
 
 	@Autowired
 	private LiteMallIssueMapper liteMallIssueMapper;
-	
-
-	@Override
-	public List<LiteMallIssueEntity> listLiteMallIssue(Page<LiteMallIssueEntity> page, Query search) {
-		return liteMallIssueMapper.listForPage(page, search);
-	}
-
-	@Override
-	public List<LiteMallIssueEntity> queryIssueList(Query query) {
-		return liteMallIssueMapper.list(query);
-	}
-
-	@Override
-	public int saveLiteMallIssue(LiteMallIssueEntity liteMallIssue) {
-		return liteMallIssueMapper.save(liteMallIssue);
-	}
-
-	@Override
-	public LiteMallIssueEntity getLiteMallIssueById(Long id) {
-		LiteMallIssueEntity liteMallIssue = liteMallIssueMapper.getObjectById(id);
-		return liteMallIssue;
-	}
-
-	@Override
-	public int updateLiteMallIssue(LiteMallIssueEntity liteMallIssue) {
-		return liteMallIssueMapper.update(liteMallIssue);
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
-		int count = liteMallIssueMapper.batchRemove(id);
-		return count;
-	}
-	
 }

@@ -1,10 +1,10 @@
 package com.kotall.rms.core.service.litemall;
 
-import java.util.Map;
-
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.common.entity.litemall.LiteMallFootprintEntity;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.core.service.BaseService;
+
+import java.util.Map;
 
 /**
  * 用户浏览足迹表
@@ -13,16 +13,8 @@ import com.kotall.rms.common.entity.litemall.LiteMallFootprintEntity;
  * @date 2018年11月13日 下午2:10:19
  * @since 1.0.0
  */
-public interface LiteMallFootprintService {
+public interface LiteMallFootprintService extends BaseService<LiteMallFootprintEntity> {
 
-	Page<LiteMallFootprintEntity> listLiteMallFootprint(Map<String, Object> params);
+    Page<LiteMallFootprintEntity> queryFootprintByPage(Map<String, Object> params);
 
-    int saveLiteMallFootprint(LiteMallFootprintEntity liteMallFootprint);
-
-    LiteMallFootprintEntity getLiteMallFootprintById(Long id);
-
-    int updateLiteMallFootprint(LiteMallFootprintEntity liteMallFootprint);
-
-    int batchRemove(Long[] id);
-	
 }

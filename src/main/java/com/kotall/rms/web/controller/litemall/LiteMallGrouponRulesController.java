@@ -36,7 +36,7 @@ public class LiteMallGrouponRulesController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallGrouponRulesEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallGrouponRulesService.listLiteMallGrouponRules(params);
+		return liteMallGrouponRulesService.queryGrouponRulesByPage(params);
 	}
 		
 	/**
@@ -47,7 +47,7 @@ public class LiteMallGrouponRulesController extends AbstractController {
 	@SysLog("新增")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallGrouponRulesEntity liteMallGrouponRules) {
-	    int count = liteMallGrouponRulesService.saveLiteMallGrouponRules(liteMallGrouponRules);
+	    boolean count = liteMallGrouponRulesService.save(liteMallGrouponRules);
 		return ResultKit.msg(count);
 	}
 	
@@ -57,8 +57,8 @@ public class LiteMallGrouponRulesController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallGrouponRulesEntity liteMallGrouponRules = liteMallGrouponRulesService.getLiteMallGrouponRulesById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallGrouponRulesEntity liteMallGrouponRules = liteMallGrouponRulesService.getById(id);
 		return ResultKit.msg(liteMallGrouponRules);
 	}
 	
@@ -70,7 +70,7 @@ public class LiteMallGrouponRulesController extends AbstractController {
 	@SysLog("修改")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallGrouponRulesEntity liteMallGrouponRules) {
-        int count = liteMallGrouponRulesService.updateLiteMallGrouponRules(liteMallGrouponRules);
+		boolean count = liteMallGrouponRulesService.update(liteMallGrouponRules);
 		return  ResultKit.msg(count);
 	}
 	
@@ -81,8 +81,8 @@ public class LiteMallGrouponRulesController extends AbstractController {
 	 */
 	@SysLog("删除")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallGrouponRulesService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallGrouponRulesService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

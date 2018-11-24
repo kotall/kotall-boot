@@ -1,7 +1,7 @@
 package com.kotall.rms.core.service.litemall;
 
 import com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity;
-import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.core.service.BaseService;
 
 import java.util.List;
 import java.util.Map;
@@ -13,19 +13,7 @@ import java.util.Map;
  * @date 2018年11月13日 下午4:12:36
  * @since 1.0.0
  */
-public interface LiteMallCategoryService {
-
-	Page<LiteMallCategoryEntity> listLiteMallCategory(Map<String, Object> params);
-
-    List<LiteMallCategoryEntity> queryCategoryList(Map<String, Object> params);
-
-    int saveLiteMallCategory(LiteMallCategoryEntity liteMallCategory);
-
-    LiteMallCategoryEntity getLiteMallCategoryById(Long id);
-
-    int updateLiteMallCategory(LiteMallCategoryEntity liteMallCategory);
-
-    int batchRemove(Long[] id);
+public interface LiteMallCategoryService extends BaseService<LiteMallCategoryEntity> {
 
     /**
      * 查询栏目
@@ -50,7 +38,7 @@ public interface LiteMallCategoryService {
 
     List<LiteMallCategoryEntity> getSecondCategory();
 
-    List<LiteMallCategoryEntity> queryL1(Long storeId);
+    List<LiteMallCategoryEntity> queryL1(Integer storeId);
 
     List<LiteMallCategoryEntity> queryL2ByIds(Map<String, Object> params);
 }

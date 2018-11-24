@@ -1,12 +1,12 @@
 package com.kotall.rms.core.service.litemall.impl;
 
-import com.kotall.rms.common.dao.litemall.LiteMallGoodsMapper;
 import com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallGrouponRulesEntity;
 import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.annotation.StoreFilter;
+import com.kotall.rms.core.manager.litemall.LiteMallGoodsManager;
 import com.kotall.rms.core.manager.litemall.LiteMallGrouponRulesManager;
+import com.kotall.rms.core.service.BaseServiceImpl;
 import com.kotall.rms.core.service.litemall.LiteMallGrouponRulesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,39 +21,29 @@ import java.util.*;
  * @since 1.0.0
  */
 @Service("liteMallGrouponRulesService")
-public class LiteMallGrouponRulesServiceImpl implements LiteMallGrouponRulesService {
+public class LiteMallGrouponRulesServiceImpl extends BaseServiceImpl<LiteMallGrouponRulesManager, LiteMallGrouponRulesEntity> implements LiteMallGrouponRulesService {
 
 	@Autowired
 	private LiteMallGrouponRulesManager liteMallGrouponRulesManager;
 	@Autowired
-	private LiteMallGoodsMapper liteMallGoodsMapper;
+	private LiteMallGoodsManager liteMallGoodsManager;
 
 	@StoreFilter
 	@Override
-	public Page<LiteMallGrouponRulesEntity> listLiteMallGrouponRules(Map<String, Object> params) {
-		Query query = new Query(params);
-		Page<LiteMallGrouponRulesEntity> page = new Page<>(query);
-		liteMallGrouponRulesManager.listLiteMallGrouponRules(page, query);
-		return page;
+	public Page<LiteMallGrouponRulesEntity> queryGrouponRulesByPage(Map<String, Object> params) {
+		return super.queryByPage(params);
 	}
 
-	@Override
-	public List<LiteMallGrouponRulesEntity> queryLiteMallGrouponRules(Map<String, Object> params) {
-		Query query = new Query(params);
-		return liteMallGrouponRulesManager.queryGrouponRules(query);
-	}
 
 	@Override
 	public Page<Map<String, Object>> queryGroupOnList(Map<String, Object> params) {
 		params.put("deleted", 0);
-		Query query = new Query(params);
-		Page<LiteMallGrouponRulesEntity> page = new Page<>(query);
-		liteMallGrouponRulesManager.listLiteMallGrouponRules(page, query);
+		Page<LiteMallGrouponRulesEntity> page = super.queryByPage(params);
 		List<LiteMallGrouponRulesEntity> grouponRules = page.getRows();
 		List<Map<String, Object>> grouponList =  new ArrayList<>(grouponRules.size());
 		for (LiteMallGrouponRulesEntity rule : grouponRules) {
 			Integer goodsId = rule.getGoodsId();
-			LiteMallGoodsEntity goods = liteMallGoodsMapper.getObjectById(goodsId);
+			LiteMallGoodsEntity goods = liteMallGoodsManager.getById(goodsId);
 			if (goods == null)
 				continue;
 
@@ -71,32 +61,8 @@ public class LiteMallGrouponRulesServiceImpl implements LiteMallGrouponRulesServ
 	}
 
 	@Override
-	public int saveLiteMallGrouponRules(LiteMallGrouponRulesEntity role) {
-		int count = liteMallGrouponRulesManager.saveLiteMallGrouponRules(role);
-		return count;
-	}
-
-	@Override
-	public LiteMallGrouponRulesEntity getLiteMallGrouponRulesById(Long id) {
-		LiteMallGrouponRulesEntity liteMallGrouponRules = liteMallGrouponRulesManager.getLiteMallGrouponRulesById(id);
-		return liteMallGrouponRules;
-	}
-
-	@Override
-	public int updateLiteMallGrouponRules(LiteMallGrouponRulesEntity liteMallGrouponRules) {
-		int count = liteMallGrouponRulesManager.updateLiteMallGrouponRules(liteMallGrouponRules);
-		return count;
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
-		int count = liteMallGrouponRulesManager.batchRemove(id);
-		return count;
-	}
-
-	@Override
 	public List<LiteMallGrouponRulesEntity> queryByGoodsId(Map<String, Object> params) {
-		return this.queryLiteMallGrouponRules(params);
+		return this.queryByList(params);
 	}
 
 	/**

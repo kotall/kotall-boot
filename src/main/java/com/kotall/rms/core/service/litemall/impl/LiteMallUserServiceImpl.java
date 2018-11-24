@@ -1,18 +1,18 @@
 package com.kotall.rms.core.service.litemall.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.kotall.rms.common.entity.litemall.LiteMallUserEntity;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.annotation.StoreFilter;
+import com.kotall.rms.core.manager.litemall.LiteMallUserManager;
+import com.kotall.rms.core.service.BaseServiceImpl;
+import com.kotall.rms.core.service.litemall.LiteMallUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.entity.litemall.LiteMallUserEntity;
-import com.kotall.rms.core.manager.litemall.LiteMallUserManager;
-import com.kotall.rms.core.service.litemall.LiteMallUserService;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 用户表
@@ -22,62 +22,35 @@ import com.kotall.rms.core.service.litemall.LiteMallUserService;
  * @since 1.0.0
  */
 @Service("liteMallUserService")
-public class LiteMallUserServiceImpl implements LiteMallUserService {
+public class LiteMallUserServiceImpl extends BaseServiceImpl<LiteMallUserManager, LiteMallUserEntity> implements LiteMallUserService {
 
 	@Autowired
 	private LiteMallUserManager liteMallUserManager;
 
 	@StoreFilter
 	@Override
-	public Page<LiteMallUserEntity> listLiteMallUser(Map<String, Object> params) {
-		Query query = new Query(params);
-		Page<LiteMallUserEntity> page = new Page<>(query);
-		liteMallUserManager.listLiteMallUser(page, query);
-		return page;
+	public Page<LiteMallUserEntity> queryUserByPage(Map<String, Object> params) {
+		return super.queryByPage(params);
 	}
 
 	@Override
-	public int saveLiteMallUser(LiteMallUserEntity role) {
-		int count = liteMallUserManager.saveLiteMallUser(role);
-		return count;
-	}
-
-	@Override
-	public LiteMallUserEntity getLiteMallUserById(Long id) {
-		LiteMallUserEntity liteMallUser = liteMallUserManager.getLiteMallUserById(id);
-		return liteMallUser;
-	}
-
-	@Override
-	public int updateLiteMallUser(LiteMallUserEntity liteMallUser) {
-		int count = liteMallUserManager.updateLiteMallUser(liteMallUser);
-		return count;
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
-		int count = liteMallUserManager.batchRemove(id);
-		return count;
-	}
-
-	@Override
-	public List<LiteMallUserEntity> queryByUsername(Long storeId, String username) {
+	public List<LiteMallUserEntity> queryByUsername(Integer storeId, String username) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("storeId", storeId);
 		params.put("username", username);
 		params.put("deleted", 0);
 
-		return this.queryUserList(params);
+		return this.queryByList(params);
 	}
 
 	@Override
-	public List<LiteMallUserEntity> queryByOpenId(Long storeId, String openId) {
+	public List<LiteMallUserEntity> queryByOpenId(Integer storeId, String openId) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("storeId", storeId);
 		params.put("weixinOpenid", openId);
 		params.put("deleted", 0);
 
-		return this.queryUserList(params);
+		return this.queryByList(params);
 	}
 
 	@Override
@@ -86,12 +59,12 @@ public class LiteMallUserServiceImpl implements LiteMallUserService {
 		params.put("mobile", mobile);
 		params.put("deleted", 0);
 
-		return this.queryUserList(params);
+		return this.queryByList(params);
 	}
 
 	@Override
-	public List<LiteMallUserEntity> queryUserList(Map<String, Object> params) {
+	public List<LiteMallUserEntity> queryByList(Map<String, Object> params) {
 		Query query = new Query(params);
-		return this.liteMallUserManager.queryUserList(query);
+		return this.liteMallUserManager.queryByList(query);
 	}
 }

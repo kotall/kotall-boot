@@ -36,7 +36,7 @@ public class LiteMallFeedbackController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallFeedbackEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallFeedbackService.listLiteMallFeedback(params);
+		return liteMallFeedbackService.queryFeedbackByPage(params);
 	}
 		
 	/**
@@ -47,7 +47,7 @@ public class LiteMallFeedbackController extends AbstractController {
 	@SysLog("新增意见反馈表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallFeedbackEntity liteMallFeedback) {
-	    int count = liteMallFeedbackService.saveLiteMallFeedback(liteMallFeedback);
+	    boolean count = liteMallFeedbackService.save(liteMallFeedback);
 		return ResultKit.msg(count);
 	}
 	
@@ -57,8 +57,8 @@ public class LiteMallFeedbackController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallFeedbackEntity liteMallFeedback = liteMallFeedbackService.getLiteMallFeedbackById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallFeedbackEntity liteMallFeedback = liteMallFeedbackService.getById(id);
 		return ResultKit.msg(liteMallFeedback);
 	}
 	
@@ -70,7 +70,7 @@ public class LiteMallFeedbackController extends AbstractController {
 	@SysLog("修改意见反馈表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallFeedbackEntity liteMallFeedback) {
-        int count = liteMallFeedbackService.updateLiteMallFeedback(liteMallFeedback);
+		boolean count = liteMallFeedbackService.update(liteMallFeedback);
 		return  ResultKit.msg(count);
 	}
 	
@@ -81,8 +81,8 @@ public class LiteMallFeedbackController extends AbstractController {
 	 */
 	@SysLog("删除意见反馈表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallFeedbackService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallFeedbackService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

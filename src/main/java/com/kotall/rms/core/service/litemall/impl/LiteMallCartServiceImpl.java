@@ -1,19 +1,18 @@
 package com.kotall.rms.core.service.litemall.impl;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.kotall.rms.common.entity.litemall.LiteMallCartEntity;
+import com.kotall.rms.common.utils.Query;
+import com.kotall.rms.core.manager.litemall.LiteMallCartManager;
+import com.kotall.rms.core.service.BaseServiceImpl;
+import com.kotall.rms.core.service.litemall.LiteMallCartService;
 import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.entity.litemall.LiteMallCartEntity;
-import com.kotall.rms.core.manager.litemall.LiteMallCartManager;
-import com.kotall.rms.core.service.litemall.LiteMallCartService;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 购物车商品表
@@ -23,65 +22,27 @@ import com.kotall.rms.core.service.litemall.LiteMallCartService;
  * @since 1.0.0
  */
 @Service("liteMallCartService")
-public class LiteMallCartServiceImpl implements LiteMallCartService {
+public class LiteMallCartServiceImpl extends BaseServiceImpl<LiteMallCartManager, LiteMallCartEntity> implements LiteMallCartService {
 
 	@Autowired
 	private LiteMallCartManager liteMallCartManager;
 
 	@Override
-	public Page<LiteMallCartEntity> listLiteMallCart(Map<String, Object> params) {
-		Query query = new Query(params);
-		Page<LiteMallCartEntity> page = new Page<>(query);
-		liteMallCartManager.listLiteMallCart(page, query);
-		return page;
-	}
-
-	@Override
-	public List<LiteMallCartEntity> queryCartList(Map<String, Object> params) {
-		Query query = new Query(params);
-		return this.liteMallCartManager.queryCartList(query);
-	}
-
-	@Override
-	public int saveLiteMallCart(LiteMallCartEntity role) {
-		int count = liteMallCartManager.saveLiteMallCart(role);
-		return count;
-	}
-
-	@Override
-	public LiteMallCartEntity getLiteMallCartById(Long id) {
-		LiteMallCartEntity liteMallCart = liteMallCartManager.getLiteMallCartById(id);
-		return liteMallCart;
-	}
-
-	@Override
-	public int updateLiteMallCart(LiteMallCartEntity liteMallCart) {
-		int count = liteMallCartManager.updateLiteMallCart(liteMallCart);
-		return count;
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
-		int count = liteMallCartManager.batchRemove(id);
-		return count;
-	}
-
-	@Override
-	public List<LiteMallCartEntity> queryByUserId(Long storeId, Integer userId) {
+	public List<LiteMallCartEntity> queryByUserId(Integer storeId, Integer userId) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("storeId", storeId);
 		params.put("userId", userId);
-		return this.queryCartList(params);
+		return this.queryByList(params);
 	}
 
 	@Override
-	public LiteMallCartEntity queryExist(Long storeId, Integer goodsId, Integer productId, Integer userId) {
+	public LiteMallCartEntity queryExist(Integer storeId, Integer goodsId, Integer productId, Integer userId) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("storeId", storeId);
 		params.put("userId", userId);
 		params.put("goodsId", goodsId);
 		params.put("productId", productId);
-		List<LiteMallCartEntity> list = this.queryCartList(params);
+		List<LiteMallCartEntity> list = this.queryByList(params);
 		return CollectionUtils.isEmpty(list) ? null : list.get(0);
 	}
 
@@ -92,7 +53,7 @@ public class LiteMallCartServiceImpl implements LiteMallCartService {
 		params.put("userId", userId);
 		params.put("deleted", 0);
 		params.put("checked", 1);
-		return this.queryCartList(params);
+		return this.queryByList(params);
 	}
 
 	@Override

@@ -1,20 +1,19 @@
 package com.kotall.rms.web.controller.litemall;
 
-import java.util.List;
-import java.util.Map;
-
+import com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.common.utils.Result;
+import com.kotall.rms.core.annotation.SysLog;
+import com.kotall.rms.core.service.litemall.LiteMallCategoryService;
+import com.kotall.rms.web.controller.sys.AbstractController;
+import com.kotall.rms.web.util.ResultKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kotall.rms.core.annotation.SysLog;
-import com.kotall.rms.web.controller.sys.AbstractController;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
-        import com.kotall.rms.web.util.ResultKit;
-import com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity;
-import com.kotall.rms.core.service.litemall.LiteMallCategoryService;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 类目表
@@ -37,7 +36,7 @@ public class LiteMallCategoryController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallCategoryEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallCategoryService.listLiteMallCategory(params);
+		return liteMallCategoryService.queryByPage(params);
 	}
 		
 	/**
@@ -48,7 +47,7 @@ public class LiteMallCategoryController extends AbstractController {
 	@SysLog("新增类目表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallCategoryEntity liteMallCategory) {
-	    int count = liteMallCategoryService.saveLiteMallCategory(liteMallCategory);
+	    boolean count = liteMallCategoryService.save(liteMallCategory);
 		return ResultKit.msg(count);
 	}
 	
@@ -58,8 +57,8 @@ public class LiteMallCategoryController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallCategoryEntity liteMallCategory = liteMallCategoryService.getLiteMallCategoryById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallCategoryEntity liteMallCategory = liteMallCategoryService.getById(id);
 		return ResultKit.msg(liteMallCategory);
 	}
 
@@ -81,7 +80,7 @@ public class LiteMallCategoryController extends AbstractController {
 	@SysLog("修改类目表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallCategoryEntity liteMallCategory) {
-        int count = liteMallCategoryService.updateLiteMallCategory(liteMallCategory);
+		boolean count = liteMallCategoryService.update(liteMallCategory);
 		return  ResultKit.msg(count);
 	}
 	
@@ -92,8 +91,8 @@ public class LiteMallCategoryController extends AbstractController {
 	 */
 	@SysLog("删除类目表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallCategoryService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallCategoryService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

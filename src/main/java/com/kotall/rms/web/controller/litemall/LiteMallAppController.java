@@ -36,7 +36,7 @@ public class LiteMallAppController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallAppEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallAppService.listLiteMallApp(params);
+		return liteMallAppService.queryByPage(params);
 	}
 		
 	/**
@@ -47,7 +47,7 @@ public class LiteMallAppController extends AbstractController {
 	@SysLog("新增app配置表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallAppEntity liteMallApp) {
-	    int count = liteMallAppService.saveLiteMallApp(liteMallApp);
+	    boolean count = liteMallAppService.save(liteMallApp);
 		return ResultKit.msg(count);
 	}
 	
@@ -57,8 +57,8 @@ public class LiteMallAppController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallAppEntity liteMallApp = liteMallAppService.getLiteMallAppById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallAppEntity liteMallApp = liteMallAppService.getById(id);
 		return ResultKit.msg(liteMallApp);
 	}
 	
@@ -70,7 +70,7 @@ public class LiteMallAppController extends AbstractController {
 	@SysLog("修改app配置表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallAppEntity liteMallApp) {
-        int count = liteMallAppService.updateLiteMallApp(liteMallApp);
+		boolean count = liteMallAppService.update(liteMallApp);
 		return  ResultKit.msg(count);
 	}
 	
@@ -81,8 +81,8 @@ public class LiteMallAppController extends AbstractController {
 	 */
 	@SysLog("删除app配置表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallAppService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallAppService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

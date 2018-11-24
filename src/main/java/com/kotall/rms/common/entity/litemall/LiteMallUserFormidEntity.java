@@ -27,7 +27,7 @@ public class LiteMallUserFormidEntity implements Serializable {
 	/**
 	 * 店铺ID
 	 */
-	private Long storeId;
+	private Integer storeId;
 	
 	/**
 	 * 缓存的FormId

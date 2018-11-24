@@ -36,7 +36,7 @@ public class LiteMallGoodsProductController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallGoodsProductEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallGoodsProductService.listLiteMallGoodsProduct(params);
+		return liteMallGoodsProductService.queryByPage(params);
 	}
 		
 	/**
@@ -47,7 +47,7 @@ public class LiteMallGoodsProductController extends AbstractController {
 	@SysLog("新增商品货品表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallGoodsProductEntity liteMallGoodsProduct) {
-	    int count = liteMallGoodsProductService.saveLiteMallGoodsProduct(liteMallGoodsProduct);
+		boolean count = liteMallGoodsProductService.save(liteMallGoodsProduct);
 		return ResultKit.msg(count);
 	}
 	
@@ -57,8 +57,8 @@ public class LiteMallGoodsProductController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallGoodsProductEntity liteMallGoodsProduct = liteMallGoodsProductService.getLiteMallGoodsProductById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallGoodsProductEntity liteMallGoodsProduct = liteMallGoodsProductService.getById(id);
 		return ResultKit.msg(liteMallGoodsProduct);
 	}
 	
@@ -70,7 +70,7 @@ public class LiteMallGoodsProductController extends AbstractController {
 	@SysLog("修改商品货品表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallGoodsProductEntity liteMallGoodsProduct) {
-        int count = liteMallGoodsProductService.updateLiteMallGoodsProduct(liteMallGoodsProduct);
+		boolean count = liteMallGoodsProductService.update(liteMallGoodsProduct);
 		return  ResultKit.msg(count);
 	}
 	
@@ -81,8 +81,8 @@ public class LiteMallGoodsProductController extends AbstractController {
 	 */
 	@SysLog("删除商品货品表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallGoodsProductService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallGoodsProductService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

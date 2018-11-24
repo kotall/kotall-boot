@@ -1,18 +1,17 @@
 package com.kotall.rms.core.service.litemall.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.kotall.rms.common.entity.litemall.LiteMallCommentEntity;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.annotation.StoreFilter;
+import com.kotall.rms.core.manager.litemall.LiteMallCommentManager;
+import com.kotall.rms.core.service.BaseServiceImpl;
+import com.kotall.rms.core.service.litemall.LiteMallCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.entity.litemall.LiteMallCommentEntity;
-import com.kotall.rms.core.manager.litemall.LiteMallCommentManager;
-import com.kotall.rms.core.service.litemall.LiteMallCommentService;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 评论表
@@ -22,23 +21,15 @@ import com.kotall.rms.core.service.litemall.LiteMallCommentService;
  * @since 1.0.0
  */
 @Service("liteMallCommentService")
-public class LiteMallCommentServiceImpl implements LiteMallCommentService {
+public class LiteMallCommentServiceImpl extends BaseServiceImpl<LiteMallCommentManager, LiteMallCommentEntity> implements LiteMallCommentService {
 
 	@Autowired
 	private LiteMallCommentManager liteMallCommentManager;
 
 	@StoreFilter
 	@Override
-	public Page<LiteMallCommentEntity> listLiteMallComment(Map<String, Object> params) {
-		return this.queryCommentListByPage(params);
-	}
-
-	@Override
-	public Page<LiteMallCommentEntity> queryCommentListByPage(Map<String, Object> params) {
-		Query query = new Query(params);
-		Page<LiteMallCommentEntity> page = new Page<>(query);
-		liteMallCommentManager.listLiteMallComment(page, query);
-		return page;
+	public Page<LiteMallCommentEntity> queryCommentByPage(Map<String, Object> params) {
+		return super.queryByPage(params);
 	}
 
 	@Override
@@ -51,49 +42,11 @@ public class LiteMallCommentServiceImpl implements LiteMallCommentService {
 		else{
 			throw new RuntimeException("showType不支持");
 		}
-		Query query = new Query(params);
-		Page<LiteMallCommentEntity> page = new Page<>(query);
-		this.liteMallCommentManager.listLiteMallComment(page, query);
-		return page;
+		return super.queryByPage(params);
 	}
 
 	@Override
-	public List<LiteMallCommentEntity> queryCommentList(Map<String, Object> params) {
-		Query query = new Query(params);
-		return this.liteMallCommentManager.queryCommentList(query);
-	}
-
-	@Override
-	public List<LiteMallCommentEntity> queryGoodsByGid(Map<String, Object> params) {
-		return this.queryCommentList(params);
-	}
-
-	@Override
-	public int saveLiteMallComment(LiteMallCommentEntity role) {
-		int count = liteMallCommentManager.saveLiteMallComment(role);
-		return count;
-	}
-
-	@Override
-	public LiteMallCommentEntity getLiteMallCommentById(Long id) {
-		LiteMallCommentEntity liteMallComment = liteMallCommentManager.getLiteMallCommentById(id);
-		return liteMallComment;
-	}
-
-	@Override
-	public int updateLiteMallComment(LiteMallCommentEntity liteMallComment) {
-		int count = liteMallCommentManager.updateLiteMallComment(liteMallComment);
-		return count;
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
-		int count = liteMallCommentManager.batchRemove(id);
-		return count;
-	}
-
-	@Override
-	public int count(Long storeId, int showType, int type, int valueId) {
+	public int count(Integer storeId, int showType, int type, int valueId) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("storeId", storeId);
 		params.put("type", type);

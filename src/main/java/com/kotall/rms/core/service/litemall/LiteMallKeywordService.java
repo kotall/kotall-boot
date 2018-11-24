@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.entity.litemall.LiteMallKeywordEntity;
+import com.kotall.rms.core.service.BaseService;
 
 /**
  * 关键字表
@@ -13,21 +14,12 @@ import com.kotall.rms.common.entity.litemall.LiteMallKeywordEntity;
  * @date 2018年11月13日 下午4:34:40
  * @since 1.0.0
  */
-public interface LiteMallKeywordService {
+public interface LiteMallKeywordService extends BaseService<LiteMallKeywordEntity> {
 
-	Page<LiteMallKeywordEntity> listLiteMallKeyword(Map<String, Object> params);
+	Page<LiteMallKeywordEntity> queryKeywordByPage(Map<String, Object> params);
 
-    int saveLiteMallKeyword(LiteMallKeywordEntity liteMallKeyword);
 
-    LiteMallKeywordEntity getLiteMallKeywordById(Long id);
+    LiteMallKeywordEntity queryDefault(Integer storeId);
 
-    int updateLiteMallKeyword(LiteMallKeywordEntity liteMallKeyword);
-
-    int batchRemove(Long[] id);
-
-    List<LiteMallKeywordEntity> queryKeywordList(Map<String, Object> params);
-
-    LiteMallKeywordEntity queryDefault(Long storeId);
-
-    List<LiteMallKeywordEntity> queryHots(Long storeId);
+    List<LiteMallKeywordEntity> queryHots(Integer storeId);
 }

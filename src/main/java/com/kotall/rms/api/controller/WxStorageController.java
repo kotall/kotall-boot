@@ -45,7 +45,7 @@ public class WxStorageController {
         storageInfo.setKey(null);
         storageInfo.setUrl(url);
         storageInfo.setStoreId(appConfig.getStoreId());
-        this.liteMallStorageService.saveLiteMallStorage(storageInfo);
+        this.liteMallStorageService.save(storageInfo);
 
         Map<String, Object> data = new HashMap<>();
         data.put("url", url);

@@ -36,7 +36,7 @@ public class LiteMallGoodsAttributeController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallGoodsAttributeEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallGoodsAttributeService.listLiteMallGoodsAttribute(params);
+		return liteMallGoodsAttributeService.queryByPage(params);
 	}
 		
 	/**
@@ -47,7 +47,7 @@ public class LiteMallGoodsAttributeController extends AbstractController {
 	@SysLog("新增商品参数表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallGoodsAttributeEntity liteMallGoodsAttribute) {
-	    int count = liteMallGoodsAttributeService.saveLiteMallGoodsAttribute(liteMallGoodsAttribute);
+	    boolean count = liteMallGoodsAttributeService.save(liteMallGoodsAttribute);
 		return ResultKit.msg(count);
 	}
 	
@@ -57,8 +57,8 @@ public class LiteMallGoodsAttributeController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallGoodsAttributeEntity liteMallGoodsAttribute = liteMallGoodsAttributeService.getLiteMallGoodsAttributeById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallGoodsAttributeEntity liteMallGoodsAttribute = liteMallGoodsAttributeService.getById(id);
 		return ResultKit.msg(liteMallGoodsAttribute);
 	}
 	
@@ -70,7 +70,7 @@ public class LiteMallGoodsAttributeController extends AbstractController {
 	@SysLog("修改商品参数表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallGoodsAttributeEntity liteMallGoodsAttribute) {
-        int count = liteMallGoodsAttributeService.updateLiteMallGoodsAttribute(liteMallGoodsAttribute);
+		boolean count = liteMallGoodsAttributeService.update(liteMallGoodsAttribute);
 		return  ResultKit.msg(count);
 	}
 	
@@ -81,8 +81,8 @@ public class LiteMallGoodsAttributeController extends AbstractController {
 	 */
 	@SysLog("删除商品参数表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallGoodsAttributeService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallGoodsAttributeService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

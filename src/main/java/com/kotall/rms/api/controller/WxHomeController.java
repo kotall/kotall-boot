@@ -114,7 +114,7 @@ public class WxHomeController {
         params.put("deleted", 0);
         params.put("pageNumber", 1);
         params.put("pageSize", SystemConfig.getBrandLimit());
-        Page<LiteMallBrandEntity> page = brandService.queryBrandList(params);
+        Page<LiteMallBrandEntity> page = brandService.queryByPage(params);
         data.put("brandList", page.getRows());
 
         // ---------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ public class WxHomeController {
         params.put("store_id", appConfig.getStoreId());
         params.put("pageNumber", 1);
         params.put("pageSize", SystemConfig.getTopicLimit());
-        List<LiteMallTopicEntity> topicList = topicService.queryTopicList(params);
+        List<LiteMallTopicEntity> topicList = topicService.queryByList(params);
         data.put("topicList", topicList);
 
         // 团购专区 ---------------------------------------------------------------------------------------

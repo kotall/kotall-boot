@@ -80,7 +80,7 @@ public class WxCollectController {
             c.put("type", collect.getType());
             c.put("valueId", collect.getValueId());
 
-            LiteMallGoodsEntity goods = goodsService.getLiteMallGoodsById(new Long(collect.getValueId()));
+            LiteMallGoodsEntity goods = goodsService.getById(collect.getValueId());
             c.put("name", goods.getName());
             c.put("brief", goods.getBrief());
             c.put("picUrl", goods.getPicUrl());
@@ -136,7 +136,7 @@ public class WxCollectController {
         String handleType;
         if(collect != null){
             handleType = "delete";
-            collectService.batchRemove(new Long[]{new Long(collect.getId())});
+            collectService.deleteByIds(new Integer[]{collect.getId()});
         }
         else{
             handleType = "add";
@@ -145,7 +145,7 @@ public class WxCollectController {
             collect.setUserId(userId);
             collect.setValueId(valueId);
             collect.setType(new Integer(type));
-            collectService.saveLiteMallCollect(collect);
+            collectService.save(collect);
         }
 
         Map<String, Object> data = new HashMap<>();

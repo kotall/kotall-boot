@@ -1,11 +1,11 @@
 package com.kotall.rms.core.service.litemall;
 
+import com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.core.service.BaseService;
+
 import java.util.List;
 import java.util.Map;
-
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
-import com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity;
 
 /**
  * 商品基本信息表
@@ -14,19 +14,9 @@ import com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity;
  * @date 2018年11月19日 下午3:03:30
  * @since 1.0.0
  */
-public interface LiteMallGoodsService {
+public interface LiteMallGoodsService extends BaseService<LiteMallGoodsEntity> {
 
-	Page<LiteMallGoodsEntity> listLiteMallGoods(Map<String, Object> params);
-
-    Page<LiteMallGoodsEntity> queryGoodsListByPage(Map<String, Object> params);
-
-    int saveLiteMallGoods(LiteMallGoodsEntity liteMallGoods);
-
-    LiteMallGoodsEntity getLiteMallGoodsById(Long id);
-
-    int updateLiteMallGoods(LiteMallGoodsEntity liteMallGoods);
-
-    int batchRemove(Long[] id);
+    Page<LiteMallGoodsEntity> queryGoodsByPage(Map<String, Object> params);
 
     /**
      * 查询最新商品列表

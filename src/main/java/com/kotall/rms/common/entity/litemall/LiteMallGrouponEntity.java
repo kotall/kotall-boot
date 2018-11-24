@@ -77,6 +77,6 @@ public class LiteMallGrouponEntity implements Serializable {
 	/**
 	 * 店铺ID
 	 */
-	private Long storeId;
+	private Integer storeId;
 	
 }

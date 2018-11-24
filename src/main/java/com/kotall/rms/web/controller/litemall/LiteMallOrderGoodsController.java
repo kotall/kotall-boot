@@ -36,7 +36,7 @@ public class LiteMallOrderGoodsController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallOrderGoodsEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallOrderGoodsService.listLiteMallOrderGoods(params);
+		return liteMallOrderGoodsService.queryOrderGoodsByPage(params);
 	}
 		
 	/**
@@ -47,7 +47,7 @@ public class LiteMallOrderGoodsController extends AbstractController {
 	@SysLog("新增订单商品表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallOrderGoodsEntity liteMallOrderGoods) {
-	    int count = liteMallOrderGoodsService.saveLiteMallOrderGoods(liteMallOrderGoods);
+		boolean count = liteMallOrderGoodsService.save(liteMallOrderGoods);
 		return ResultKit.msg(count);
 	}
 	
@@ -57,8 +57,8 @@ public class LiteMallOrderGoodsController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallOrderGoodsEntity liteMallOrderGoods = liteMallOrderGoodsService.getLiteMallOrderGoodsById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallOrderGoodsEntity liteMallOrderGoods = liteMallOrderGoodsService.getById(id);
 		return ResultKit.msg(liteMallOrderGoods);
 	}
 	
@@ -70,7 +70,7 @@ public class LiteMallOrderGoodsController extends AbstractController {
 	@SysLog("修改订单商品表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallOrderGoodsEntity liteMallOrderGoods) {
-        int count = liteMallOrderGoodsService.updateLiteMallOrderGoods(liteMallOrderGoods);
+		boolean count = liteMallOrderGoodsService.update(liteMallOrderGoods);
 		return  ResultKit.msg(count);
 	}
 	
@@ -81,8 +81,8 @@ public class LiteMallOrderGoodsController extends AbstractController {
 	 */
 	@SysLog("删除订单商品表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallOrderGoodsService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallOrderGoodsService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

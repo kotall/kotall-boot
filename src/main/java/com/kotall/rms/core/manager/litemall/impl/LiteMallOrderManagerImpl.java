@@ -1,14 +1,12 @@
 package com.kotall.rms.core.manager.litemall.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.dao.litemall.LiteMallOrderMapper;
 import com.kotall.rms.common.entity.litemall.LiteMallOrderEntity;
+import com.kotall.rms.common.utils.Query;
+import com.kotall.rms.core.manager.BaseManagerImpl;
 import com.kotall.rms.core.manager.litemall.LiteMallOrderManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 订单表
@@ -18,44 +16,11 @@ import com.kotall.rms.core.manager.litemall.LiteMallOrderManager;
  * @since 1.0.0
  */
 @Component("liteMallOrderManager")
-public class LiteMallOrderManagerImpl implements LiteMallOrderManager {
+public class LiteMallOrderManagerImpl extends BaseManagerImpl<LiteMallOrderMapper, LiteMallOrderEntity> implements LiteMallOrderManager {
 
 	@Autowired
 	private LiteMallOrderMapper liteMallOrderMapper;
 	
-
-	@Override
-	public List<LiteMallOrderEntity> listLiteMallOrder(Page<LiteMallOrderEntity> page, Query search) {
-		return liteMallOrderMapper.listForPage(page, search);
-	}
-
-	@Override
-	public List<LiteMallOrderEntity> queryOrderList(Query query) {
-		return liteMallOrderMapper.list(query);
-	}
-
-	@Override
-	public int saveLiteMallOrder(LiteMallOrderEntity liteMallOrder) {
-		return liteMallOrderMapper.save(liteMallOrder);
-	}
-
-	@Override
-	public LiteMallOrderEntity getLiteMallOrderById(Long id) {
-		LiteMallOrderEntity liteMallOrder = liteMallOrderMapper.getObjectById(id);
-		return liteMallOrder;
-	}
-
-	@Override
-	public int updateLiteMallOrder(LiteMallOrderEntity liteMallOrder) {
-		return liteMallOrderMapper.update(liteMallOrder);
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
-		int count = liteMallOrderMapper.batchRemove(id);
-		return count;
-	}
-
 	@Override
 	public int countTotal(Query query) {
 		return this.liteMallOrderMapper.countTotal(query);

@@ -1,20 +1,16 @@
 package com.kotall.rms.core.service.litemall.impl;
 
-import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
+import com.kotall.rms.common.entity.litemall.LiteMallUserFormidEntity;
+import com.kotall.rms.core.manager.litemall.LiteMallUserFormidManager;
+import com.kotall.rms.core.service.BaseServiceImpl;
+import com.kotall.rms.core.service.litemall.LiteMallUserFormidService;
 import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.entity.litemall.LiteMallUserFormidEntity;
-import com.kotall.rms.core.manager.litemall.LiteMallUserFormidManager;
-import com.kotall.rms.core.service.litemall.LiteMallUserFormidService;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -24,52 +20,14 @@ import com.kotall.rms.core.service.litemall.LiteMallUserFormidService;
  * @since 1.0.0
  */
 @Service("liteMallUserFormidService")
-public class LiteMallUserFormidServiceImpl implements LiteMallUserFormidService {
+public class LiteMallUserFormidServiceImpl extends BaseServiceImpl<LiteMallUserFormidManager, LiteMallUserFormidEntity> implements LiteMallUserFormidService {
 
 	@Autowired
 	private LiteMallUserFormidManager liteMallUserFormidManager;
 
 	@Override
-	public Page<LiteMallUserFormidEntity> listLiteMallUserFormid(Map<String, Object> params) {
-		Query query = new Query(params);
-		Page<LiteMallUserFormidEntity> page = new Page<>(query);
-		liteMallUserFormidManager.listLiteMallUserFormid(page, query);
-		return page;
-	}
-
-	@Override
-	public List<LiteMallUserFormidEntity> queryUserFormid(Map<String, Object> params) {
-		Query query = new Query(params);
-		return liteMallUserFormidManager.queryUserFormId(query);
-	}
-
-	@Override
-	public int saveLiteMallUserFormid(LiteMallUserFormidEntity role) {
-		int count = liteMallUserFormidManager.saveLiteMallUserFormid(role);
-		return count;
-	}
-
-	@Override
-	public LiteMallUserFormidEntity getLiteMallUserFormidById(Long id) {
-		LiteMallUserFormidEntity liteMallUserFormid = liteMallUserFormidManager.getLiteMallUserFormidById(id);
-		return liteMallUserFormid;
-	}
-
-	@Override
-	public int updateLiteMallUserFormid(LiteMallUserFormidEntity liteMallUserFormid) {
-		int count = liteMallUserFormidManager.updateLiteMallUserFormid(liteMallUserFormid);
-		return count;
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
-		int count = liteMallUserFormidManager.batchRemove(id);
-		return count;
-	}
-
-	@Override
 	public LiteMallUserFormidEntity queryByOpenId(Map<String, Object> params) {
-		List<LiteMallUserFormidEntity> list = this.queryUserFormid(params);
+		List<LiteMallUserFormidEntity> list = this.queryByList(params);
 		if (CollectionUtils.isEmpty(list)) {
 			return null;
 		}
@@ -82,14 +40,14 @@ public class LiteMallUserFormidServiceImpl implements LiteMallUserFormidService 
 	}
 
 	@Override
-	public int updateUserFormId(LiteMallUserFormidEntity userFormid) {
-		//更新或者删除缓存
+	public boolean updateUserFormId(LiteMallUserFormidEntity userFormid) {
+		// 更新或者删除缓存
 		if (userFormid.getIsprepay() == 1 && userFormid.getUseamount() > 1) {
 			userFormid.setUseamount(userFormid.getUseamount() - 1);
 			userFormid.setUpdateTime(new Date());
-			return liteMallUserFormidManager.updateLiteMallUserFormid(userFormid);
+			return liteMallUserFormidManager.update(userFormid);
 		} else {
-			return liteMallUserFormidManager.batchRemove(new Long[] {new Long(userFormid.getId())});
+			return liteMallUserFormidManager.deleteByIds(new Integer[] {userFormid.getId()});
 		}
 	}
 }

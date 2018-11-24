@@ -95,7 +95,7 @@ public class WxSearchController {
         params.put("keyword", keyword);
         params.put("pageNumber", page);
         params.put("pageSize", size);
-        List<LiteMallKeywordEntity> keywordsList = keywordsService.queryKeywordList(params);
+        List<LiteMallKeywordEntity> keywordsList = keywordsService.queryByList(params);
         String[] keys = new String[keywordsList.size()];
         int index = 0;
         for (LiteMallKeywordEntity key : keywordsList) {

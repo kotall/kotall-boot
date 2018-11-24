@@ -2,6 +2,7 @@ package com.kotall.rms.web.controller.litemall;
 
 import java.util.Map;
 
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +37,7 @@ public class LiteMallKeywordController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallKeywordEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallKeywordService.listLiteMallKeyword(params);
+		return liteMallKeywordService.queryKeywordByPage(params);
 	}
 		
 	/**
@@ -47,7 +48,7 @@ public class LiteMallKeywordController extends AbstractController {
 	@SysLog("新增关键字表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallKeywordEntity liteMallKeyword) {
-	    int count = liteMallKeywordService.saveLiteMallKeyword(liteMallKeyword);
+		boolean count = liteMallKeywordService.save(liteMallKeyword);
 		return ResultKit.msg(count);
 	}
 	
@@ -57,8 +58,8 @@ public class LiteMallKeywordController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallKeywordEntity liteMallKeyword = liteMallKeywordService.getLiteMallKeywordById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallKeywordEntity liteMallKeyword = liteMallKeywordService.getById(id);
 		return ResultKit.msg(liteMallKeyword);
 	}
 	
@@ -70,7 +71,7 @@ public class LiteMallKeywordController extends AbstractController {
 	@SysLog("修改关键字表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallKeywordEntity liteMallKeyword) {
-        int count = liteMallKeywordService.updateLiteMallKeyword(liteMallKeyword);
+		boolean count = liteMallKeywordService.update(liteMallKeyword);
 		return  ResultKit.msg(count);
 	}
 	
@@ -81,8 +82,8 @@ public class LiteMallKeywordController extends AbstractController {
 	 */
 	@SysLog("删除关键字表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallKeywordService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallKeywordService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

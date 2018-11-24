@@ -36,7 +36,7 @@ public class LiteMallGrouponController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallGrouponEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallGrouponService.listLiteMallGroupon(params);
+		return liteMallGrouponService.queryGroupOnByPage(params);
 	}
 		
 	/**
@@ -47,7 +47,7 @@ public class LiteMallGrouponController extends AbstractController {
 	@SysLog("新增")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallGrouponEntity liteMallGroupon) {
-	    int count = liteMallGrouponService.saveLiteMallGroupon(liteMallGroupon);
+	    boolean count = liteMallGrouponService.save(liteMallGroupon);
 		return ResultKit.msg(count);
 	}
 	
@@ -57,8 +57,8 @@ public class LiteMallGrouponController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallGrouponEntity liteMallGroupon = liteMallGrouponService.getLiteMallGrouponById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallGrouponEntity liteMallGroupon = liteMallGrouponService.getById(id);
 		return ResultKit.msg(liteMallGroupon);
 	}
 	
@@ -70,7 +70,7 @@ public class LiteMallGrouponController extends AbstractController {
 	@SysLog("修改")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallGrouponEntity liteMallGroupon) {
-        int count = liteMallGrouponService.updateLiteMallGroupon(liteMallGroupon);
+		boolean count = liteMallGrouponService.update(liteMallGroupon);
 		return  ResultKit.msg(count);
 	}
 	
@@ -81,8 +81,8 @@ public class LiteMallGrouponController extends AbstractController {
 	 */
 	@SysLog("删除")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallGrouponService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallGrouponService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

@@ -51,7 +51,7 @@ public class WxBrandController {
         params.put("deleted", 0);
         params.put("pageNumber", page);
         params.put("pageSize", size);
-        Page<LiteMallBrandEntity> pages = brandService.queryBrandList(params);
+        Page<LiteMallBrandEntity> pages = brandService.queryByPage(params);
 
         Map<String, Object> data = new HashMap<>();
         data.put("brandList", pages.getRows());
@@ -77,7 +77,7 @@ public class WxBrandController {
      */
     @GetMapping("detail")
     public Object detail(@NotNull Integer id) {
-        LiteMallBrandEntity entity = brandService.getLiteMallBrandById(new Long(id));
+        LiteMallBrandEntity entity = brandService.getById(id);
         if (entity == null) {
             return Result.badArgumentValue();
         }

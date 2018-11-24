@@ -27,7 +27,7 @@ public class LiteMallStorageEntity implements Serializable {
 	/**
 	 * 店铺ID
 	 */
-	private Long storeId;
+	private Integer storeId;
 	
 	/**
 	 * 文件的唯一索引

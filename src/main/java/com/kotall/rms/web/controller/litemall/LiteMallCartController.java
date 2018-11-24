@@ -36,7 +36,7 @@ public class LiteMallCartController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallCartEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallCartService.listLiteMallCart(params);
+		return liteMallCartService.queryByPage(params);
 	}
 		
 	/**
@@ -47,7 +47,7 @@ public class LiteMallCartController extends AbstractController {
 	@SysLog("新增购物车商品表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallCartEntity liteMallCart) {
-	    int count = liteMallCartService.saveLiteMallCart(liteMallCart);
+	    boolean count = liteMallCartService.save(liteMallCart);
 		return ResultKit.msg(count);
 	}
 	
@@ -57,8 +57,8 @@ public class LiteMallCartController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallCartEntity liteMallCart = liteMallCartService.getLiteMallCartById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallCartEntity liteMallCart = liteMallCartService.getById(id);
 		return ResultKit.msg(liteMallCart);
 	}
 	
@@ -70,7 +70,7 @@ public class LiteMallCartController extends AbstractController {
 	@SysLog("修改购物车商品表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallCartEntity liteMallCart) {
-        int count = liteMallCartService.updateLiteMallCart(liteMallCart);
+		boolean count = liteMallCartService.update(liteMallCart);
 		return  ResultKit.msg(count);
 	}
 	
@@ -81,8 +81,8 @@ public class LiteMallCartController extends AbstractController {
 	 */
 	@SysLog("删除购物车商品表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallCartService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallCartService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

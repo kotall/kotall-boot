@@ -53,7 +53,7 @@ public class WxFootprintController {
         if(footprintId == null){
             return Result.badArgument();
         }
-        LiteMallFootprintEntity footprint = footprintService.getLiteMallFootprintById(new Long(footprintId));
+        LiteMallFootprintEntity footprint = footprintService.getById(footprintId);
 
         if(footprint == null){
             return Result.badArgumentValue();
@@ -62,7 +62,7 @@ public class WxFootprintController {
             return Result.badArgumentValue();
         }
 
-        footprintService.batchRemove(new Long[]{new Long(footprintId)});
+        footprintService.deleteByIds(new Integer[]{footprintId});
         return Result.ok();
     }
 
@@ -98,7 +98,7 @@ public class WxFootprintController {
         params.put("userId", userId);
         params.put("pageNumber", page);
         params.put("pageSize", size);
-        Page<LiteMallFootprintEntity> pages = footprintService.listLiteMallFootprint(params);
+        Page<LiteMallFootprintEntity> pages = footprintService.queryByPage(params);
 
         List<Object> footprintVoList = new ArrayList<>(pages.getRows().size());
         for(LiteMallFootprintEntity footprint : pages.getRows()){
@@ -107,7 +107,7 @@ public class WxFootprintController {
             c.put("goodsId", footprint.getGoodsId());
             c.put("addTime", footprint.getAddTime());
 
-            LiteMallGoodsEntity goods = goodsService.getLiteMallGoodsById(new Long(footprint.getGoodsId()));
+            LiteMallGoodsEntity goods = goodsService.getById(footprint.getGoodsId());
             c.put("name", goods.getName());
             c.put("brief", goods.getBrief());
             c.put("picUrl", goods.getPicUrl());

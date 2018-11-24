@@ -40,7 +40,7 @@ public class LiteMallStorageController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallStorageEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallStorageService.listLiteMallStorage(params);
+		return liteMallStorageService.queryByPage(params);
 	}
 		
 	/**
@@ -51,7 +51,7 @@ public class LiteMallStorageController extends AbstractController {
 	@SysLog("新增文件存储表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallStorageEntity liteMallStorage) {
-	    int count = liteMallStorageService.saveLiteMallStorage(liteMallStorage);
+		boolean count = liteMallStorageService.save(liteMallStorage);
 		return ResultKit.msg(count);
 	}
 
@@ -67,7 +67,7 @@ public class LiteMallStorageController extends AbstractController {
 		storageInfo.setType(file.getContentType());
 		storageInfo.setKey(null);
 		storageInfo.setUrl(url);
-		liteMallStorageService.saveLiteMallStorage(storageInfo);
+		liteMallStorageService.save(storageInfo);
 
 		Map<String, Object> data = new HashMap<>();
 		data.put("url", url);
@@ -80,8 +80,8 @@ public class LiteMallStorageController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallStorageEntity liteMallStorage = liteMallStorageService.getLiteMallStorageById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallStorageEntity liteMallStorage = liteMallStorageService.getById(id);
 		return ResultKit.msg(liteMallStorage);
 	}
 	
@@ -93,7 +93,7 @@ public class LiteMallStorageController extends AbstractController {
 	@SysLog("修改文件存储表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallStorageEntity liteMallStorage) {
-        int count = liteMallStorageService.updateLiteMallStorage(liteMallStorage);
+		boolean count = liteMallStorageService.update(liteMallStorage);
 		return  ResultKit.msg(count);
 	}
 	
@@ -104,8 +104,8 @@ public class LiteMallStorageController extends AbstractController {
 	 */
 	@SysLog("删除文件存储表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallStorageService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallStorageService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

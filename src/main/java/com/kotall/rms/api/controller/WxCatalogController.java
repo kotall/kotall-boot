@@ -62,7 +62,7 @@ public class WxCatalogController {
         // 当前一级分类目录
         LiteMallCategoryEntity currentCategory;
         if (id != null) {
-            currentCategory = categoryService.getLiteMallCategoryById(new Long(id));
+            currentCategory = categoryService.getById(id);
         } else {
             currentCategory = l1CatList.get(0);
         }
@@ -144,7 +144,7 @@ public class WxCatalogController {
     @GetMapping("current")
     public Object current(@NotNull Integer id) {
         // 当前分类
-        LiteMallCategoryEntity currentCategory = categoryService.getLiteMallCategoryById(new Long(id));
+        LiteMallCategoryEntity currentCategory = categoryService.getById(id);
         List<LiteMallCategoryEntity> currentSubCategory = categoryService.queryByPid(currentCategory.getId());
 
         Map<String, Object> data = new HashMap<>();

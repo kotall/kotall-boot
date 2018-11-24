@@ -1,19 +1,18 @@
 package com.kotall.rms.web.controller.litemall;
 
-import java.util.Map;
-
+import com.kotall.rms.common.entity.litemall.LiteMallAdEntity;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.common.utils.Result;
+import com.kotall.rms.core.annotation.SysLog;
+import com.kotall.rms.core.service.litemall.LiteMallAdService;
+import com.kotall.rms.web.controller.sys.AbstractController;
+import com.kotall.rms.web.util.ResultKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kotall.rms.core.annotation.SysLog;
-import com.kotall.rms.web.controller.sys.AbstractController;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
-        import com.kotall.rms.web.util.ResultKit;
-import com.kotall.rms.common.entity.litemall.LiteMallAdEntity;
-import com.kotall.rms.core.service.litemall.LiteMallAdService;
+import java.util.Map;
 
 /**
  * 广告表
@@ -36,7 +35,7 @@ public class LiteMallAdController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallAdEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallAdService.listLiteMallAd(params);
+		return liteMallAdService.queryByPage(params);
 	}
 		
 	/**
@@ -47,7 +46,7 @@ public class LiteMallAdController extends AbstractController {
 	@SysLog("新增广告表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallAdEntity liteMallAd) {
-	    int count = liteMallAdService.saveLiteMallAd(liteMallAd);
+	    boolean count = liteMallAdService.save(liteMallAd);
 		return ResultKit.msg(count);
 	}
 	
@@ -57,8 +56,8 @@ public class LiteMallAdController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallAdEntity liteMallAd = liteMallAdService.getLiteMallAdById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallAdEntity liteMallAd = liteMallAdService.getById(id);
 		return ResultKit.msg(liteMallAd);
 	}
 	
@@ -70,7 +69,7 @@ public class LiteMallAdController extends AbstractController {
 	@SysLog("修改广告表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallAdEntity liteMallAd) {
-        int count = liteMallAdService.updateLiteMallAd(liteMallAd);
+		boolean count = liteMallAdService.update(liteMallAd);
 		return  ResultKit.msg(count);
 	}
 	
@@ -81,8 +80,8 @@ public class LiteMallAdController extends AbstractController {
 	 */
 	@SysLog("删除广告表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallAdService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallAdService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

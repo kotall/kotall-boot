@@ -71,14 +71,14 @@ public class WxFeedbackController {
             return error;
         }
 
-        LiteMallUserEntity user = userService.getLiteMallUserById(new Long(userId));
+        LiteMallUserEntity user = userService.getById(userId);
         String username = user.getUsername();
         feedback.setId(null);
         feedback.setUserId(userId);
         feedback.setUsername(username);
         // 状态默认是0，1表示状态已发生变化
         feedback.setStatus(1);
-        feedbackService.saveLiteMallFeedback(feedback);
+        feedbackService.save(feedback);
 
         return Result.ok();
     }

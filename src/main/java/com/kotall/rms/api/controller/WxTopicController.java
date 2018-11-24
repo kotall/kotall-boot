@@ -61,7 +61,7 @@ public class WxTopicController {
         params.put("storeId", appConfig.getStoreId());
         params.put("pageNumber", page);
         params.put("pageSize", size);
-        Page<LiteMallTopicEntity> pages = topicService.queryListByPage(params);
+        Page<LiteMallTopicEntity> pages = topicService.queryByPage(params);
         Map<String, Object> data = new HashMap<>();
         data.put("data", pages.getRows());
         data.put("count", pages.getTotal());
@@ -84,11 +84,11 @@ public class WxTopicController {
     @GetMapping("detail")
     public Object detail(@NotNull Integer id) {
         Map<String, Object> data = new HashMap<>();
-        LiteMallTopicEntity topic = topicService.getLiteMallTopicById(new Long(id));
+        LiteMallTopicEntity topic = topicService.getById(id);
         data.put("topic", topic);
         List<LiteMallGoodsEntity> goods = new ArrayList<>();
         for (String goodsId : topic.getGoods().split(",")) {
-            LiteMallGoodsEntity good = goodsService.getLiteMallGoodsById(new Long(goodsId));
+            LiteMallGoodsEntity good = goodsService.getById(Integer.parseInt(goodsId));
             if (null != good)
                 goods.add(good);
         }

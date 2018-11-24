@@ -36,7 +36,7 @@ public class LiteMallUserFormidController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallUserFormidEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallUserFormidService.listLiteMallUserFormid(params);
+		return liteMallUserFormidService.queryByPage(params);
 	}
 		
 	/**
@@ -47,7 +47,7 @@ public class LiteMallUserFormidController extends AbstractController {
 	@SysLog("新增")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallUserFormidEntity liteMallUserFormid) {
-	    int count = liteMallUserFormidService.saveLiteMallUserFormid(liteMallUserFormid);
+		boolean count = liteMallUserFormidService.save(liteMallUserFormid);
 		return ResultKit.msg(count);
 	}
 	
@@ -57,8 +57,8 @@ public class LiteMallUserFormidController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallUserFormidEntity liteMallUserFormid = liteMallUserFormidService.getLiteMallUserFormidById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallUserFormidEntity liteMallUserFormid = liteMallUserFormidService.getById(id);
 		return ResultKit.msg(liteMallUserFormid);
 	}
 	
@@ -70,7 +70,7 @@ public class LiteMallUserFormidController extends AbstractController {
 	@SysLog("修改")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallUserFormidEntity liteMallUserFormid) {
-        int count = liteMallUserFormidService.updateLiteMallUserFormid(liteMallUserFormid);
+		boolean count = liteMallUserFormidService.update(liteMallUserFormid);
 		return  ResultKit.msg(count);
 	}
 	
@@ -81,8 +81,8 @@ public class LiteMallUserFormidController extends AbstractController {
 	 */
 	@SysLog("删除")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallUserFormidService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallUserFormidService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

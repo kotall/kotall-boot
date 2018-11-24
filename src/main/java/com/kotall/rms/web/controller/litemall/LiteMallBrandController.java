@@ -1,19 +1,18 @@
 package com.kotall.rms.web.controller.litemall;
 
-import java.util.Map;
-
+import com.kotall.rms.common.entity.litemall.LiteMallBrandEntity;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.common.utils.Result;
+import com.kotall.rms.core.annotation.SysLog;
+import com.kotall.rms.core.service.litemall.LiteMallBrandService;
+import com.kotall.rms.web.controller.sys.AbstractController;
+import com.kotall.rms.web.util.ResultKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kotall.rms.core.annotation.SysLog;
-import com.kotall.rms.web.controller.sys.AbstractController;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
-        import com.kotall.rms.web.util.ResultKit;
-import com.kotall.rms.common.entity.litemall.LiteMallBrandEntity;
-import com.kotall.rms.core.service.litemall.LiteMallBrandService;
+import java.util.Map;
 
 /**
  * 品牌商表
@@ -36,7 +35,7 @@ public class LiteMallBrandController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallBrandEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallBrandService.listLiteMallBrand(params);
+		return liteMallBrandService.queryByPage(params);
 	}
 		
 	/**
@@ -47,7 +46,7 @@ public class LiteMallBrandController extends AbstractController {
 	@SysLog("新增品牌商表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody LiteMallBrandEntity liteMallBrand) {
-	    int count = liteMallBrandService.saveLiteMallBrand(liteMallBrand);
+	    boolean count = liteMallBrandService.save(liteMallBrand);
 		return ResultKit.msg(count);
 	}
 	
@@ -57,8 +56,8 @@ public class LiteMallBrandController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		LiteMallBrandEntity liteMallBrand = liteMallBrandService.getLiteMallBrandById(id);
+	public Result getById(@RequestBody Integer id) {
+		LiteMallBrandEntity liteMallBrand = liteMallBrandService.getById(id);
 		return ResultKit.msg(liteMallBrand);
 	}
 	
@@ -70,7 +69,7 @@ public class LiteMallBrandController extends AbstractController {
 	@SysLog("修改品牌商表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody LiteMallBrandEntity liteMallBrand) {
-        int count = liteMallBrandService.updateLiteMallBrand(liteMallBrand);
+		boolean count = liteMallBrandService.update(liteMallBrand);
 		return  ResultKit.msg(count);
 	}
 	
@@ -81,8 +80,8 @@ public class LiteMallBrandController extends AbstractController {
 	 */
 	@SysLog("删除品牌商表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-	    int count = liteMallBrandService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = liteMallBrandService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	

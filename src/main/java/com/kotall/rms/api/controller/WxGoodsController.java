@@ -86,20 +86,20 @@ public class WxGoodsController {
     @GetMapping("detail")
     public Object detail(@LoginUser Integer userId, @NotNull Integer id, @AppConfig LiteMallAppEntity appConfig) {
         // 商品信息
-        LiteMallGoodsEntity info = goodsService.getLiteMallGoodsById(new Long(id));
+        LiteMallGoodsEntity info = goodsService.getById(id);
 
         // 商品属性
         Map<String, Object> params = new HashMap<>();
         //params.put("storeId", storeId);
         params.put("goodsId", id);
         params.put("deleted", 0);
-        List<LiteMallGoodsAttributeEntity> goodsAttributeList = goodsAttributeService.queryByGid(params);
+        List<LiteMallGoodsAttributeEntity> goodsAttributeList = goodsAttributeService.queryByGoodsId(params);
 
         // 商品规格
         // 返回的是定制的GoodsSpecificationVo
         params = new HashMap<>();
         params.put("goodsId", id);
-        List<LiteMallGoodsSpecificationEntity> list = goodsSpecificationService.querySpecificationList(params);
+        List<LiteMallGoodsSpecificationEntity> list = goodsSpecificationService.queryByList(params);
         List<GoodsSpecificationVO> specificationList = this.convertToGoodsSpecificationVO(list);
 
         // 商品规格对应的数量和价格
@@ -113,7 +113,7 @@ public class WxGoodsController {
         params = new HashMap<>();
         params.put("storeId", appConfig.getStoreId());
         params.put("deleted", 0);
-        List<LiteMallIssueEntity> issue = goodsIssueService.queryIssueList(params);
+        List<LiteMallIssueEntity> issue = goodsIssueService.queryByList(params);
 
         // 商品品牌商
         Integer brandId = info.getBrandId();
@@ -122,7 +122,7 @@ public class WxGoodsController {
             brand = new LiteMallBrandEntity();
         }
         else {
-            brand = brandService.getLiteMallBrandById(new Long(info.getBrandId()));
+            brand = brandService.getById(info.getBrandId());
         }
 
         // 评论
@@ -132,14 +132,14 @@ public class WxGoodsController {
         params.put("goodsId", id);
         params.put("pageNumber", 1);
         params.put("pageSize", 2);
-        Page<LiteMallCommentEntity> pages = commentService.queryCommentListByPage(params);
+        Page<LiteMallCommentEntity> pages = commentService.queryByPage(params);
         List<Map<String, Object>> commentsVo = new ArrayList<>(pages.getRows().size());
         for (LiteMallCommentEntity comment : pages.getRows()) {
             Map<String, Object> c = new HashMap<>();
             c.put("id", comment.getId());
             c.put("addTime", comment.getAddTime());
             c.put("content", comment.getContent());
-            LiteMallUserEntity user = userService.getLiteMallUserById(new Long(comment.getUserId()));
+            LiteMallUserEntity user = userService.getById(comment.getUserId());
             c.put("nickname", user.getNickname());
             c.put("avatar", user.getAvatar());
             c.put("picList", comment.getPicUrls());
@@ -170,7 +170,7 @@ public class WxGoodsController {
             LiteMallFootprintEntity footprint = new LiteMallFootprintEntity();
             footprint.setUserId(userId);
             footprint.setGoodsId(id);
-            footprintService.saveLiteMallFootprint(footprint);
+            footprintService.save(footprint);
         }
 
         Map<String, Object> data = new HashMap<>();
@@ -235,7 +235,7 @@ public class WxGoodsController {
      */
     @GetMapping("category")
     public Object category(@NotNull Integer id) {
-        LiteMallCategoryEntity cur = categoryService.getLiteMallCategoryById(new Long(id));
+        LiteMallCategoryEntity cur = categoryService.getById(id);
         LiteMallCategoryEntity parent = null;
         List<LiteMallCategoryEntity> children = null;
 
@@ -244,7 +244,7 @@ public class WxGoodsController {
             children = categoryService.queryByPid(cur.getId());
             cur = children.size() > 0 ? children.get(0) : cur;
         } else {
-            parent = categoryService.getLiteMallCategoryById(new Long(cur.getPid()));
+            parent = categoryService.getById(cur.getPid());
             children = categoryService.queryByPid(cur.getPid());
         }
         Map<String, Object> data = new HashMap<>();
@@ -300,7 +300,7 @@ public class WxGoodsController {
             searchHistoryVo.setStoreId(appConfig.getStoreId());
             searchHistoryVo.setUserId(userId);
             searchHistoryVo.setFrom("wx");
-            searchHistoryService.saveLiteMallSearchHistory(searchHistoryVo);
+            searchHistoryService.save(searchHistoryVo);
         }
 
         // 查询列表数据
@@ -315,7 +315,7 @@ public class WxGoodsController {
         params.put("pageSize", size);
         params.put("deleted", 0);
 
-        Page<LiteMallGoodsEntity> pages = goodsService.queryGoodsListByPage(params);
+        Page<LiteMallGoodsEntity> pages = goodsService.queryByPage(params);
 
         // 查询商品所属类目列表。
         params = new HashMap<>();
@@ -420,7 +420,7 @@ public class WxGoodsController {
      */
     @GetMapping("related")
     public Object related(@NotNull Integer id, @AppConfig LiteMallAppEntity appConfig) {
-        LiteMallGoodsEntity goods = goodsService.getLiteMallGoodsById(new Long(id));
+        LiteMallGoodsEntity goods = goodsService.getById(id);
         if (goods == null) {
             return Result.badArgumentValue();
         }

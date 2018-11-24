@@ -1,11 +1,10 @@
 package com.kotall.rms.core.service.litemall;
 
-import java.util.List;
-import java.util.Map;
-
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.common.entity.litemall.LiteMallIssueEntity;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.core.service.BaseService;
+
+import java.util.Map;
 
 /**
  * 常见问题表
@@ -14,17 +13,7 @@ import com.kotall.rms.common.entity.litemall.LiteMallIssueEntity;
  * @date 2018年11月13日 下午4:29:37
  * @since 1.0.0
  */
-public interface LiteMallIssueService {
+public interface LiteMallIssueService extends BaseService<LiteMallIssueEntity> {
 
-	Page<LiteMallIssueEntity> listLiteMallIssue(Map<String, Object> params);
-
-    int saveLiteMallIssue(LiteMallIssueEntity liteMallIssue);
-
-    LiteMallIssueEntity getLiteMallIssueById(Long id);
-
-    int updateLiteMallIssue(LiteMallIssueEntity liteMallIssue);
-
-    int batchRemove(Long[] id);
-
-    List<LiteMallIssueEntity> queryIssueList(Map<String, Object> params);
+    Page<LiteMallIssueEntity> queryIssueByPage(Map<String, Object> params);
 }

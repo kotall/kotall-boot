@@ -1,18 +1,17 @@
 package com.kotall.rms.core.service.litemall.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.kotall.rms.common.entity.litemall.LiteMallSearchHistoryEntity;
+import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.core.annotation.StoreFilter;
+import com.kotall.rms.core.manager.litemall.LiteMallSearchHistoryManager;
+import com.kotall.rms.core.service.BaseServiceImpl;
+import com.kotall.rms.core.service.litemall.LiteMallSearchHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.entity.litemall.LiteMallSearchHistoryEntity;
-import com.kotall.rms.core.manager.litemall.LiteMallSearchHistoryManager;
-import com.kotall.rms.core.service.litemall.LiteMallSearchHistoryService;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 搜索历史表
@@ -22,48 +21,15 @@ import com.kotall.rms.core.service.litemall.LiteMallSearchHistoryService;
  * @since 1.0.0
  */
 @Service("liteMallSearchHistoryService")
-public class LiteMallSearchHistoryServiceImpl implements LiteMallSearchHistoryService {
+public class LiteMallSearchHistoryServiceImpl extends BaseServiceImpl<LiteMallSearchHistoryManager, LiteMallSearchHistoryEntity> implements LiteMallSearchHistoryService {
 
 	@Autowired
 	private LiteMallSearchHistoryManager liteMallSearchHistoryManager;
 
 	@StoreFilter
 	@Override
-	public Page<LiteMallSearchHistoryEntity> listLiteMallSearchHistory(Map<String, Object> params) {
-		Query query = new Query(params);
-		Page<LiteMallSearchHistoryEntity> page = new Page<>(query);
-		liteMallSearchHistoryManager.listLiteMallSearchHistory(page, query);
-		return page;
-	}
-
-	@Override
-	public List<LiteMallSearchHistoryEntity> querySearchHistoryList(Map<String, Object> params) {
-		Query query = new Query(params);
-		return liteMallSearchHistoryManager.querySearchHistoryList(query);
-	}
-
-	@Override
-	public int saveLiteMallSearchHistory(LiteMallSearchHistoryEntity role) {
-		int count = liteMallSearchHistoryManager.saveLiteMallSearchHistory(role);
-		return count;
-	}
-
-	@Override
-	public LiteMallSearchHistoryEntity getLiteMallSearchHistoryById(Long id) {
-		LiteMallSearchHistoryEntity liteMallSearchHistory = liteMallSearchHistoryManager.getLiteMallSearchHistoryById(id);
-		return liteMallSearchHistory;
-	}
-
-	@Override
-	public int updateLiteMallSearchHistory(LiteMallSearchHistoryEntity liteMallSearchHistory) {
-		int count = liteMallSearchHistoryManager.updateLiteMallSearchHistory(liteMallSearchHistory);
-		return count;
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
-		int count = liteMallSearchHistoryManager.batchRemove(id);
-		return count;
+	public Page<LiteMallSearchHistoryEntity> querySearchHistoryByPage(Map<String, Object> params) {
+		return super.queryByPage(params);
 	}
 
 	@Override
@@ -74,9 +40,8 @@ public class LiteMallSearchHistoryServiceImpl implements LiteMallSearchHistorySe
 	@Override
 	public List<LiteMallSearchHistoryEntity> queryByUserId(Integer userId) {
 		Map<String, Object> params = new HashMap<>();
-		//params.put("storeId", storeId);
 		params.put("userId", userId);
 		params.put("deleted", 0);
-		return this.querySearchHistoryList(params);
+		return this.queryByList(params);
 	}
 }

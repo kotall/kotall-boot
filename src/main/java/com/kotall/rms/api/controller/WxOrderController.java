@@ -146,7 +146,7 @@ public class WxOrderController {
         params.put("orderStatus", orderStatus);
         params.put("deleted", 0);
 
-        Page<LiteMallOrderEntity> pages = orderService.queryOrderListByPage(params);
+        Page<LiteMallOrderEntity> pages = orderService.queryByPage(params);
 
         List<Map<String, Object>> orderVoList = new ArrayList<>(pages.getRows().size());
         for (LiteMallOrderEntity order : pages.getRows()) {
@@ -220,7 +220,7 @@ public class WxOrderController {
         }
 
         // 订单信息
-        LiteMallOrderEntity order = orderService.getLiteMallOrderById(new Long(orderId));
+        LiteMallOrderEntity order = orderService.getById(orderId);
         if (null == order) {
             return Result.error(403, "订单不存在");
         }
@@ -295,7 +295,7 @@ public class WxOrderController {
 
         //如果是团购项目,验证活动是否有效
         if (grouponRulesId != null && grouponRulesId > 0) {
-            LiteMallGrouponRulesEntity rules = grouponRulesService.getLiteMallGrouponRulesById(new Long(grouponRulesId));
+            LiteMallGrouponRulesEntity rules = grouponRulesService.getById(grouponRulesId);
             //找不到记录
             if (rules == null) {
                 return Result.badArgument();
@@ -322,7 +322,7 @@ public class WxOrderController {
 
         // 团购优惠
         BigDecimal grouponPrice = new BigDecimal(0.00);
-        LiteMallGrouponRulesEntity grouponRules = grouponRulesService.getLiteMallGrouponRulesById(new Long(grouponRulesId));
+        LiteMallGrouponRulesEntity grouponRules = grouponRulesService.getById(grouponRulesId);
         if (grouponRules != null) {
             grouponPrice = grouponRules.getDiscount();
         }
@@ -334,9 +334,9 @@ public class WxOrderController {
             params.put("storeId", appConfig.getStoreId());
             params.put("userId", userId);
             params.put("deleted", 0);
-            checkedGoodsList = cartService.queryCartList(params);
+            checkedGoodsList = cartService.queryByList(params);
         } else {
-            LiteMallCartEntity cart = cartService.getLiteMallCartById(new Long(cartId));
+            LiteMallCartEntity cart = cartService.getById(cartId);
             checkedGoodsList = new ArrayList<>(1);
             checkedGoodsList.add(cart);
         }
@@ -399,7 +399,7 @@ public class WxOrderController {
             }
 
             // 添加订单表项
-            orderService.saveLiteMallOrder(order);
+            orderService.save(order);
             orderId = order.getId();
 
             for (LiteMallCartEntity cartGoods : checkedGoodsList) {
@@ -417,7 +417,7 @@ public class WxOrderController {
                 orderGoods.setAddTime(new Date());
 
                 // 添加订单商品表项
-                orderGoodsService.saveLiteMallOrderGoods(orderGoods);
+                orderGoodsService.save(orderGoods);
             }
 
             // 删除购物车里面的商品信息
@@ -428,14 +428,14 @@ public class WxOrderController {
             // 商品货品数量减少
             for (LiteMallCartEntity checkGoods : checkedGoodsList) {
                 Integer productId = checkGoods.getProductId();
-                LiteMallGoodsProductEntity product = productService.getLiteMallGoodsProductById(new Long(productId));
+                LiteMallGoodsProductEntity product = productService.getById(productId);
 
                 Integer remainNumber = product.getNumber() - checkGoods.getNumber();
                 if (remainNumber < 0) {
                     throw new RuntimeException("下单的商品货品数量大于库存量");
                 }
                 product.setNumber(remainNumber);
-                if(productService.updateLiteMallGoodsProduct(product) == 0){
+                if(productService.update(product)){
                     throw new Exception("更新数据失败");
                 }
             }
@@ -452,7 +452,7 @@ public class WxOrderController {
                 //参与者
                 if (grouponLinkId != null && grouponLinkId > 0) {
                     //参与的团购记录
-                    LiteMallGrouponEntity baseGroupon = grouponService.getLiteMallGrouponById(new Long(grouponLinkId));
+                    LiteMallGrouponEntity baseGroupon = grouponService.getById(grouponLinkId);
                     groupon.setCreatorUserId(baseGroupon.getCreatorUserId());
                     groupon.setGrouponId(grouponLinkId);
                     groupon.setShareUrl(baseGroupon.getShareUrl());
@@ -461,7 +461,7 @@ public class WxOrderController {
                     groupon.setGrouponId(0);
                 }
 
-                grouponService.saveLiteMallGroupon(groupon);
+                grouponService.save(groupon);
             }
         } catch (Exception ex) {
             txManager.rollback(status);
@@ -499,7 +499,7 @@ public class WxOrderController {
             return Result.badArgument();
         }
 
-        LiteMallOrderEntity order = orderService.getLiteMallOrderById(new Long(orderId));
+        LiteMallOrderEntity order = orderService.getById(orderId);
         if (order == null) {
             return Result.badArgumentValue();
         }
@@ -522,7 +522,7 @@ public class WxOrderController {
             // 设置订单已取消状态
             order.setOrderStatus(new Integer(OrderUtil.STATUS_CANCEL));
             order.setEndTime(new Date());
-            if(orderService.updateLiteMallOrder(order) == 0){
+            if(orderService.update(order)){
                 throw new Exception("更新数据已失效");
             }
 
@@ -533,10 +533,10 @@ public class WxOrderController {
             List<LiteMallOrderGoodsEntity> orderGoodsList = orderGoodsService.queryByOrderId(params);
             for (LiteMallOrderGoodsEntity orderGoods : orderGoodsList) {
                 Integer productId = orderGoods.getProductId();
-                LiteMallGoodsProductEntity product = productService.getLiteMallGoodsProductById(new Long(productId));
+                LiteMallGoodsProductEntity product = productService.getById(productId);
                 Integer number = product.getNumber() + orderGoods.getNumber();
                 product.setNumber(number);
-                if(productService.updateLiteMallGoodsProduct(product) == 0){
+                if(productService.update(product)){
                     throw new Exception("更新数据失败");
                 }
             }
@@ -576,7 +576,7 @@ public class WxOrderController {
             return Result.badArgument();
         }
 
-        LiteMallOrderEntity order = orderService.getLiteMallOrderById(new Long(orderId));
+        LiteMallOrderEntity order = orderService.getById(orderId);
         if (order == null) {
             return Result.badArgumentValue();
         }
@@ -590,7 +590,7 @@ public class WxOrderController {
             return Result.error(403, "订单不能支付");
         }
 
-        LiteMallUserEntity user = userService.getLiteMallUserById(new Long(userId));
+        LiteMallUserEntity user = userService.getById(userId);
         String openid = user.getWeixinOpenid();
         if (openid == null) {
             return Result.error(403, "订单不能支付");
@@ -624,14 +624,14 @@ public class WxOrderController {
             calendar.add(Calendar.DAY_OF_MONTH, 7);
 
             userFormid.setExpireTime(calendar.getTime());
-            formIdService.saveLiteMallUserFormid(userFormid);
+            formIdService.save(userFormid);
 
         } catch (Exception e) {
             e.printStackTrace();
             return Result.error(403, "订单不能支付");
         }
 
-        if(orderService.updateLiteMallOrder(order) == 0){
+        if(orderService.update(order)){
             return Result.updatedDateExpired();
         }
         return Result.ok().put("data", result);
@@ -697,7 +697,7 @@ public class WxOrderController {
         order.setPayId(payId);
         order.setPayTime(new Date());
         order.setOrderStatus(new Integer(OrderUtil.STATUS_PAY));
-        if (orderService.updateLiteMallOrder(order) == 0) {
+        if (orderService.update(order)) {
             // 这里可能存在这样一个问题，用户支付和系统自动取消订单发生在同时
             // 如果数据库首先因为系统自动取消订单而更新了订单状态；
             // 此时用户支付完成回调这里也要更新数据库，而由于乐观锁机制这里的更新会失败
@@ -706,16 +706,16 @@ public class WxOrderController {
             //params.put("storeId", storeId);
             params.put("orderSn", orderSn);
             order = orderService.findOrderBySn(params);
-            int updated = 0;
+            boolean updated = false;
             if(OrderUtil.isAutoCancelStatus(order)){
                 order.setPayId(payId);
                 order.setPayTime(new Date());
                 order.setOrderStatus(new Integer(OrderUtil.STATUS_PAY));
-                updated = orderService.updateLiteMallOrder(order);
+                updated = orderService.update(order);
             }
 
             // 如果updated是0，那么数据库更新失败
-            if(updated == 0) {
+            if(!updated) {
                 return WxPayNotifyResponse.fail("更新数据已失效");
             }
         }
@@ -726,7 +726,7 @@ public class WxOrderController {
         params.put("orderId", order.getId());
         LiteMallGrouponEntity groupon = grouponService.queryByOrderId(params);
         if (groupon != null) {
-            LiteMallGrouponRulesEntity grouponRules = grouponRulesService.getLiteMallGrouponRulesById(new Long(groupon.getRulesId()));
+            LiteMallGrouponRulesEntity grouponRules = grouponRulesService.getById(groupon.getRulesId());
 
             //仅当发起者才创建分享图片
             if (groupon.getGrouponId() == 0) {
@@ -734,7 +734,7 @@ public class WxOrderController {
                 groupon.setShareUrl(url);
             }
             groupon.setPayed(1);
-            if (grouponService.updateLiteMallGroupon(groupon) == 0) {
+            if (grouponService.update(groupon)) {
                 return WxPayNotifyResponse.fail("更新数据已失效");
             }
         }
@@ -783,7 +783,7 @@ public class WxOrderController {
             return Result.badArgument();
         }
 
-        LiteMallOrderEntity order = orderService.getLiteMallOrderById(new Long(orderId));
+        LiteMallOrderEntity order = orderService.getById(orderId);
         if (order == null) {
             return Result.badArgument();
         }
@@ -798,7 +798,7 @@ public class WxOrderController {
 
         // 设置订单申请退款状态
         order.setOrderStatus(new Integer(OrderUtil.STATUS_REFUND));
-        if(orderService.updateLiteMallOrder(order) == 0){
+        if(orderService.update(order)){
             return Result.updatedDateExpired();
         }
 
@@ -832,7 +832,7 @@ public class WxOrderController {
             return Result.badArgument();
         }
 
-        LiteMallOrderEntity order = orderService.getLiteMallOrderById(new Long(orderId));
+        LiteMallOrderEntity order = orderService.getById(orderId);
         if (order == null) {
             return Result.badArgument();
         }
@@ -854,7 +854,7 @@ public class WxOrderController {
 
         order.setOrderStatus(new Integer(OrderUtil.STATUS_CONFIRM));
         order.setConfirmTime(new Date());
-        if(orderService.updateLiteMallOrder(order) == 0){
+        if(orderService.update(order)){
             return Result.updatedDateExpired();
         }
         return Result.ok();
@@ -881,7 +881,7 @@ public class WxOrderController {
             return Result.badArgument();
         }
 
-        LiteMallOrderEntity order = orderService.getLiteMallOrderById(new Long(orderId));
+        LiteMallOrderEntity order = orderService.getById(orderId);
         if (order == null) {
             return Result.badArgument();
         }
@@ -924,7 +924,7 @@ public class WxOrderController {
 		params.put("storeId", appConfig.getStoreId());
 		params.put("orderId", orderId);
 		params.put("goodsId", goodsId);
-        List<LiteMallOrderGoodsEntity> orderGoodsList = orderGoodsService.queryOrderGoodsList(params);
+        List<LiteMallOrderGoodsEntity> orderGoodsList = orderGoodsService.queryByList(params);
         int size = orderGoodsList.size();
 
         Assert.state(size < 2, "存在多个符合条件的订单商品");
@@ -957,12 +957,12 @@ public class WxOrderController {
         if(orderGoodsId == null){
             return Result.badArgument();
         }
-        LiteMallOrderGoodsEntity orderGoods = orderGoodsService.getLiteMallOrderGoodsById(new Long(orderGoodsId));
+        LiteMallOrderGoodsEntity orderGoods = orderGoodsService.getById(orderGoodsId);
         if(orderGoods == null){
             return Result.badArgumentValue();
         }
         Integer orderId =  orderGoods.getOrderId();
-        LiteMallOrderEntity order = orderService.getLiteMallOrderById(new Long(orderId));
+        LiteMallOrderEntity order = orderService.getById(orderId);
         if(order == null){
             return Result.badArgumentValue();
         }
@@ -1000,11 +1000,11 @@ public class WxOrderController {
         comment.setContent(content);
         comment.setHasPicture(hasPicture ? 1 : 0);
         //comment.setPicUrls(picUrls.toArray(new String[]));
-        commentService.saveLiteMallComment(comment);
+        commentService.save(comment);
 
         // 2. 更新订单商品的评价列表
         orderGoods.setComment(comment.getId());
-        orderGoodsService.updateLiteMallOrderGoods(orderGoods);
+        orderGoodsService.update(orderGoods);
 
         // 3. 更新订单中未评价的订单商品可评价数量
         Integer commentCount = order.getComments();
@@ -1012,7 +1012,7 @@ public class WxOrderController {
             commentCount--;
         }
         order.setComments(commentCount);
-        orderService.updateLiteMallOrder(order);
+        orderService.update(order);
 
         return Result.ok();
     }

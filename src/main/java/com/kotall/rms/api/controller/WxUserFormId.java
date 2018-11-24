@@ -37,7 +37,7 @@ public class WxUserFormId {
             return Result.unlogin();
         }
 
-        LiteMallUserEntity user = userService.getLiteMallUserById(new Long(userId));
+        LiteMallUserEntity user = userService.getById(userId);
         LiteMallUserFormidEntity userFormid = new LiteMallUserFormidEntity();
         userFormid.setStoreId(appConfig.getStoreId());
         userFormid.setOpenid(user.getWeixinOpenid());
@@ -48,7 +48,7 @@ public class WxUserFormId {
         calendar.setTime(new Date());
         calendar.add(Calendar.DAY_OF_MONTH, 7);
         userFormid.setExpireTime(calendar.getTime());
-        formIdService.saveLiteMallUserFormid(userFormid);
+        formIdService.save(userFormid);
 
         return Result.ok();
     }

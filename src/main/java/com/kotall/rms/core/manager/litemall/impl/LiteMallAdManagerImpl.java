@@ -1,15 +1,11 @@
 package com.kotall.rms.core.manager.litemall.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.dao.litemall.LiteMallAdMapper;
 import com.kotall.rms.common.entity.litemall.LiteMallAdEntity;
+import com.kotall.rms.core.manager.BaseManagerImpl;
 import com.kotall.rms.core.manager.litemall.LiteMallAdManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 广告表
@@ -19,42 +15,9 @@ import com.kotall.rms.core.manager.litemall.LiteMallAdManager;
  * @since 1.0.0
  */
 @Component("liteMallAdManager")
-public class LiteMallAdManagerImpl implements LiteMallAdManager {
+public class LiteMallAdManagerImpl extends BaseManagerImpl<LiteMallAdMapper, LiteMallAdEntity> implements LiteMallAdManager {
 
 	@Autowired
 	private LiteMallAdMapper liteMallAdMapper;
-	
-
-	@Override
-	public List<LiteMallAdEntity> listLiteMallAd(Page<LiteMallAdEntity> page, Query search) {
-		return liteMallAdMapper.listForPage(page, search);
-	}
-
-	@Override
-	public List<LiteMallAdEntity> queryAdList(Query search) {
-		return liteMallAdMapper.list(search);
-	}
-
-	@Override
-	public int saveLiteMallAd(LiteMallAdEntity liteMallAd) {
-		return liteMallAdMapper.save(liteMallAd);
-	}
-
-	@Override
-	public LiteMallAdEntity getLiteMallAdById(Long id) {
-		LiteMallAdEntity liteMallAd = liteMallAdMapper.getObjectById(id);
-		return liteMallAd;
-	}
-
-	@Override
-	public int updateLiteMallAd(LiteMallAdEntity liteMallAd) {
-		return liteMallAdMapper.update(liteMallAd);
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
-		int count = liteMallAdMapper.batchRemove(id);
-		return count;
-	}
 	
 }

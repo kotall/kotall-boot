@@ -1,14 +1,11 @@
 package com.kotall.rms.core.manager.litemall.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.dao.litemall.LiteMallKeywordMapper;
 import com.kotall.rms.common.entity.litemall.LiteMallKeywordEntity;
+import com.kotall.rms.core.manager.BaseManagerImpl;
 import com.kotall.rms.core.manager.litemall.LiteMallKeywordManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 关键字表
@@ -18,42 +15,8 @@ import com.kotall.rms.core.manager.litemall.LiteMallKeywordManager;
  * @since 1.0.0
  */
 @Component("liteMallKeywordManager")
-public class LiteMallKeywordManagerImpl implements LiteMallKeywordManager {
+public class LiteMallKeywordManagerImpl extends BaseManagerImpl<LiteMallKeywordMapper, LiteMallKeywordEntity> implements LiteMallKeywordManager {
 
 	@Autowired
 	private LiteMallKeywordMapper liteMallKeywordMapper;
-	
-
-	@Override
-	public List<LiteMallKeywordEntity> listLiteMallKeyword(Page<LiteMallKeywordEntity> page, Query search) {
-		return liteMallKeywordMapper.listForPage(page, search);
-	}
-
-	@Override
-	public List<LiteMallKeywordEntity> queryKeywordList(Query query) {
-		return liteMallKeywordMapper.list(query);
-	}
-
-	@Override
-	public int saveLiteMallKeyword(LiteMallKeywordEntity liteMallKeyword) {
-		return liteMallKeywordMapper.save(liteMallKeyword);
-	}
-
-	@Override
-	public LiteMallKeywordEntity getLiteMallKeywordById(Long id) {
-		LiteMallKeywordEntity liteMallKeyword = liteMallKeywordMapper.getObjectById(id);
-		return liteMallKeyword;
-	}
-
-	@Override
-	public int updateLiteMallKeyword(LiteMallKeywordEntity liteMallKeyword) {
-		return liteMallKeywordMapper.update(liteMallKeyword);
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
-		int count = liteMallKeywordMapper.batchRemove(id);
-		return count;
-	}
-	
 }

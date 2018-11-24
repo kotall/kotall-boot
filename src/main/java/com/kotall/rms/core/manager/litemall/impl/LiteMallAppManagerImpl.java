@@ -1,14 +1,11 @@
 package com.kotall.rms.core.manager.litemall.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.dao.litemall.LiteMallAppMapper;
 import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
+import com.kotall.rms.core.manager.BaseManagerImpl;
 import com.kotall.rms.core.manager.litemall.LiteMallAppManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * app配置表
@@ -18,41 +15,13 @@ import com.kotall.rms.core.manager.litemall.LiteMallAppManager;
  * @since 1.0.0
  */
 @Component("liteMallAppManager")
-public class LiteMallAppManagerImpl implements LiteMallAppManager {
+public class LiteMallAppManagerImpl extends BaseManagerImpl<LiteMallAppMapper, LiteMallAppEntity> implements LiteMallAppManager {
 
 	@Autowired
 	private LiteMallAppMapper liteMallAppMapper;
 	
-
 	@Override
-	public List<LiteMallAppEntity> listLiteMallApp(Page<LiteMallAppEntity> page, Query search) {
-		return liteMallAppMapper.listForPage(page, search);
-	}
-
-	@Override
-	public int saveLiteMallApp(LiteMallAppEntity liteMallApp) {
-		return liteMallAppMapper.save(liteMallApp);
-	}
-
-	@Override
-	public LiteMallAppEntity getLiteMallAppById(Long id) {
-		LiteMallAppEntity liteMallApp = liteMallAppMapper.getObjectById(id);
-		return liteMallApp;
-	}
-
-	@Override
-	public int updateLiteMallApp(LiteMallAppEntity liteMallApp) {
-		return liteMallAppMapper.update(liteMallApp);
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
-		int count = liteMallAppMapper.batchRemove(id);
-		return count;
-	}
-
-	@Override
-	public LiteMallAppEntity getLiteMallAppByAppId(String appId) {
+	public LiteMallAppEntity getByAppId(String appId) {
 		return this.liteMallAppMapper.getObjectByAppId(appId);
 	}
 }

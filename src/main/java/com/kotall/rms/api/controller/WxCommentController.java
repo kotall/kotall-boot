@@ -58,12 +58,12 @@ public class WxCommentController {
             return Result.badArgument();
         }
         if(type == 0){
-            if(goodsService.getLiteMallGoodsById(new Long(valueId))  == null){
+            if(goodsService.getById(valueId)  == null){
                 return Result.badArgumentValue();
           }
         }
         else if(type == 1){
-            if(topicService.getLiteMallTopicById(new Long(valueId)) == null){
+            if(topicService.getById(valueId) == null){
                 return Result.badArgumentValue();
             }
         }
@@ -103,7 +103,7 @@ public class WxCommentController {
 
         comment.setStoreId(appConfig.getStoreId());
         comment.setUserId(userId);
-        commentService.saveLiteMallComment(comment);
+        commentService.save(comment);
         return Result.ok().put("data", comment);
     }
 

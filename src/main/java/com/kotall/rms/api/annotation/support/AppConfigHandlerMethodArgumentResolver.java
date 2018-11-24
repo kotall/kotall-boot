@@ -35,6 +35,6 @@ public class AppConfigHandlerMethodArgumentResolver implements HandlerMethodArgu
             return null;
         }
 
-        return this.appService.getLiteMallAppByAppId(appId);
+        return this.appService.getByAppId(appId);
     }
 }

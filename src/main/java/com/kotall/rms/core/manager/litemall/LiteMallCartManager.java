@@ -1,10 +1,8 @@
 package com.kotall.rms.core.manager.litemall;
 
-import java.util.List;
-
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.entity.litemall.LiteMallCartEntity;
+import com.kotall.rms.common.utils.Query;
+import com.kotall.rms.core.manager.BaseManager;
 
 /**
  * 购物车商品表
@@ -13,19 +11,7 @@ import com.kotall.rms.common.entity.litemall.LiteMallCartEntity;
  * @date 2018年11月20日 下午12:39:39
  * @since 1.0.0
  */
-public interface LiteMallCartManager {
-
-	List<LiteMallCartEntity> listLiteMallCart(Page<LiteMallCartEntity> page, Query search);
-	
-	int saveLiteMallCart(LiteMallCartEntity liteMallCart);
-	
-	LiteMallCartEntity getLiteMallCartById(Long id);
-	
-	int updateLiteMallCart(LiteMallCartEntity liteMallCart);
-	
-	int batchRemove(Long[] id);
-
-    List<LiteMallCartEntity> queryCartList(Query query);
+public interface LiteMallCartManager extends BaseManager<LiteMallCartEntity> {
 
 	void updateCartByCause(LiteMallCartEntity cart, Query query);
 

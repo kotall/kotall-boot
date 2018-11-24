@@ -1,10 +1,9 @@
 package com.kotall.rms.core.service.litemall;
 
-import java.util.List;
-import java.util.Map;
-
-import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.entity.litemall.LiteMallCartEntity;
+import com.kotall.rms.core.service.BaseService;
+
+import java.util.List;
 
 /**
  * 购物车商品表
@@ -13,23 +12,11 @@ import com.kotall.rms.common.entity.litemall.LiteMallCartEntity;
  * @date 2018年11月20日 下午12:39:39
  * @since 1.0.0
  */
-public interface LiteMallCartService {
+public interface LiteMallCartService extends BaseService<LiteMallCartEntity> {
 
-	Page<LiteMallCartEntity> listLiteMallCart(Map<String, Object> params);
+    List<LiteMallCartEntity> queryByUserId(Integer storeId, Integer userId);
 
-    List<LiteMallCartEntity> queryCartList(Map<String, Object> params);
-
-    int saveLiteMallCart(LiteMallCartEntity liteMallCart);
-
-    LiteMallCartEntity getLiteMallCartById(Long id);
-
-    int updateLiteMallCart(LiteMallCartEntity liteMallCart);
-
-    int batchRemove(Long[] id);
-
-    List<LiteMallCartEntity> queryByUserId(Long storeId, Integer userId);
-
-    LiteMallCartEntity queryExist(Long storeId, Integer goodsId, Integer productId, Integer userId);
+    LiteMallCartEntity queryExist(Integer storeId, Integer goodsId, Integer productId, Integer userId);
 
     List<LiteMallCartEntity> queryByUserIdAndChecked(Integer userId);
 
