@@ -1,6 +1,5 @@
 package ${package}.core.manager.${module};
 
-import java.util.List;
 import com.kotall.rms.core.manager.BaseManager;
 import ${package}.common.entity.${module}.${className}Entity;
 

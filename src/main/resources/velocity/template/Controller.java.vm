@@ -36,7 +36,7 @@ public class ${className}Controller extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<${className}Entity> list(@RequestBody Map<String, Object> params) {
-		return ${objName}Service.list${className}(params);
+		return ${objName}Service.queryByPage(params);
 	}
 		
 	/**
@@ -47,8 +47,8 @@ public class ${className}Controller extends AbstractController {
 	@SysLog("新增${comments}")
 	@RequestMapping("/save")
 	public Result save(@RequestBody ${className}Entity ${objName}) {
-	    int count = ${objName}Service.save${className}(${objName});
-		return ResultKit.msg(count);
+	    boolean isSaved = ${objName}Service.save(${objName});
+		return ResultKit.msg(isSaved);
 	}
 	
 	/**
@@ -58,7 +58,7 @@ public class ${className}Controller extends AbstractController {
 	 */
 	@RequestMapping("/info")
 	public Result getById(@RequestBody Integer id) {
-		${className}Entity ${objName} = ${objName}Service.get${className}ById(id);
+		${className}Entity ${objName} = ${objName}Service.getById(id);
 		return ResultKit.msg(${objName});
 	}
 	
@@ -70,20 +70,20 @@ public class ${className}Controller extends AbstractController {
 	@SysLog("修改${comments}")
 	@RequestMapping("/update")
 	public Result update(@RequestBody ${className}Entity ${objName}) {
-        int count = ${objName}Service.update${className}(${objName});
-		return  ResultKit.msg(count);
+        boolean isUpdated = ${objName}Service.update(${objName});
+		return  ResultKit.msg(isUpdated);
 	}
 	
 	/**
 	 * 删除
-	 * @param id
+	 * @param ids
 	 * @return
 	 */
 	@SysLog("删除${comments}")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Integer[] id) {
-	    int count = ${objName}Service.batchRemove(id);
-		return ResultKit.msg(count);
+	public Result batchRemove(@RequestBody Integer[] ids) {
+	    boolean isDeleted = ${objName}Service.deleteByIds(ids);
+		return ResultKit.msg(isDeleted);
 	}
 	
 }
