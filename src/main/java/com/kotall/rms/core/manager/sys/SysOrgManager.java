@@ -1,10 +1,9 @@
 package com.kotall.rms.core.manager.sys;
 
-import java.util.List;
-import java.util.Map;
-
 import com.kotall.rms.common.entity.sys.SysOrgEntity;
-import com.kotall.rms.common.utils.Query;
+import com.kotall.rms.core.manager.BaseManager;
+
+import java.util.List;
 
 /**
  * 组织机构
@@ -13,24 +12,16 @@ import com.kotall.rms.common.utils.Query;
  * @date 2017年8月17日 上午11:31:59
  * @since 1.0.0
  */
-public interface SysOrgManager {
+public interface SysOrgManager extends BaseManager<SysOrgEntity> {
 
-	List<SysOrgEntity> listOrg(Query query);
+	int batchRemoveOrg(Integer[] id);
 	
-	int saveOrg(SysOrgEntity org);
-	
-	SysOrgEntity getOrg(Long orgId);
-	
-	int updateOrg(SysOrgEntity org);
-	
-	int batchRemoveOrg(Long[] id);
-	
-	boolean hasChildren(Long[] id);
+	boolean hasChildren(Integer[] id);
 
 	/**
 	 * 根据 parentId 查询下级机构 ID
 	 * @param parentId
 	 * @return
 	 */
-    List<Long> queryOrgIdList(Long parentId);
+    List<Integer> queryOrgIdList(Integer parentId);
 }

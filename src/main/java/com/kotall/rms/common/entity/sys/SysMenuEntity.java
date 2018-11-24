@@ -25,12 +25,12 @@ public class SysMenuEntity implements Serializable {
 	/**
 	 * 菜单id
 	 */
-	private Long menuId;
+	private Integer menuId;
 	
 	/**
 	 * 父级id，一级菜单为0
 	 */
-	private Long parentId;
+	private Integer parentId;
 
 	/**
 	 * 菜单编码

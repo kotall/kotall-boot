@@ -1,10 +1,9 @@
 package com.kotall.rms.core.manager.sys;
 
-import java.util.List;
-
-import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.entity.sys.SysRoleEntity;
+import com.kotall.rms.core.manager.BaseManager;
+
+import java.util.List;
 
 /**
  * 系统角色
@@ -12,19 +11,13 @@ import com.kotall.rms.common.entity.sys.SysRoleEntity;
  * @author aracwong
  * @date 2017年8月12日 上午12:39:07
  */
-public interface SysRoleManager {
+public interface SysRoleManager extends BaseManager<SysRoleEntity> {
 
-	List<SysRoleEntity> listRole(Page<SysRoleEntity> page, Query search);
+	SysRoleEntity getRoleById(Integer id);
 	
-	int saveRole(SysRoleEntity role);
+	int batchRemove(Integer[] id);
 	
-	SysRoleEntity getRoleById(Long id);
-	
-	int updateRole(SysRoleEntity role);
-	
-	int batchRemove(Long[] id);
-	
-	List<SysRoleEntity> listRole();
+	List<SysRoleEntity> queryAll();
 	
 	int updateRoleOptAuthorization(SysRoleEntity role);
 

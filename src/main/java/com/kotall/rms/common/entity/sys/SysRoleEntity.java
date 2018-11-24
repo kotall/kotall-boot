@@ -26,12 +26,12 @@ public class SysRoleEntity implements Serializable {
 	/**
 	 * 角色id
 	 */
-	private Long roleId;
+	private Integer roleId;
 	
 	/**
 	 * 机构id
 	 */
-	private Long orgId;
+	private Integer orgId;
 	
 	/**
 	 * 机构名称
@@ -56,11 +56,11 @@ public class SysRoleEntity implements Serializable {
 	/**
 	 * 创建者id
 	 */
-	private Long userIdCreate;
+	private Integer userIdCreate;
 	
-	private List<Long> menuIdList;
+	private List<Integer> menuIdList;
 	
-	private List<Long> orgIdList;
+	private List<Integer> orgIdList;
 	
 	/**
 	 * 创建时间

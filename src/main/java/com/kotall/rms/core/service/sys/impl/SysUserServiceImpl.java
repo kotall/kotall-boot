@@ -1,19 +1,17 @@
 package com.kotall.rms.core.service.sys.impl;
 
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Query;
-import com.kotall.rms.core.RmsException;
-import com.kotall.rms.common.utils.MD5Utils;
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.common.entity.sys.SysUserTokenEntity;
-import com.kotall.rms.core.annotation.DataFilter;
+import com.kotall.rms.common.utils.MD5Utils;
+import com.kotall.rms.common.utils.Query;
+import com.kotall.rms.core.RmsException;
 import com.kotall.rms.core.constants.Constant;
 import com.kotall.rms.core.manager.sys.SysUserManager;
+import com.kotall.rms.core.service.BaseServiceImpl;
 import com.kotall.rms.core.service.sys.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -23,31 +21,16 @@ import java.util.Set;
  * @date 2017年8月11日 上午11:47:17
  */
 @Service("sysUserService")
-public class SysUserServiceImpl implements SysUserService {
+public class SysUserServiceImpl extends BaseServiceImpl<SysUserManager, SysUserEntity> implements SysUserService {
 
 	@Autowired
 	private SysUserManager sysUserManager;
 
-	//@DataFilter(subDept = true, user = false)
 	@Override
-	public Page<SysUserEntity> listUser(Map<String, Object> params) {
-		Query query = new Query(params);
-		Page<SysUserEntity> page = new Page<>(query);
-		sysUserManager.listUser(page, query);
-		return page;
-	}
-
-	@Override
-	public int saveUser(SysUserEntity user) {
+	public boolean save(SysUserEntity user) {
 		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
-		int count = sysUserManager.saveUser(user);
+		boolean count = sysUserManager.saveUser(user);
 		return count;
-	}
-
-	@Override
-	public SysUserEntity getUserById(Long userId) {
-		SysUserEntity user = sysUserManager.getById(userId);
-		return user;
 	}
 
 	@Override
@@ -56,19 +39,7 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public int updateUser(SysUserEntity user) {
-		int count = sysUserManager.updateUser(user);
-		return count;
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
-		int count = sysUserManager.batchRemove(id);
-		return count;
-	}
-
-	@Override
-	public Set<String> listUserPerms(Long userId) {
+	public Set<String> listUserPerms(Integer userId) {
 		Set<String> perms;
 		if (Constant.SUPER_ADMIN == userId) {
 			perms = sysUserManager.listUserPerms(null);
@@ -97,33 +68,33 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public int updateUserEnable(Long[] id) {
+	public int updateUserEnable(Integer[] id) {
 		int count = sysUserManager.updateUserEnable(id);
 		return count;
 	}
 
 	@Override
-	public int updateUserDisable(Long[] id) {
+	public int updateUserDisable(Integer[] id) {
 		int count = sysUserManager.updateUserDisable(id);
 		return count;
 	}
 
 	@Override
 	public int updatePwd(SysUserEntity user) {
-		SysUserEntity currUser = sysUserManager.getUserById(user.getUserId());
+		SysUserEntity currUser = sysUserManager.getById(user.getUserId());
 		user.setPassword(MD5Utils.encrypt(currUser.getUsername(), user.getPassword()));
 		int count = sysUserManager.updatePwd(user);
 		return count;
 	}
 
 	@Override
-	public SysUserTokenEntity saveUserToken(Long userId) {
+	public SysUserTokenEntity saveUserToken(Integer userId) {
 		SysUserTokenEntity token = sysUserManager.saveUserToken(userId);
 		return token;
 	}
 
 	@Override
-	public int updateUserToken(Long userId) {
+	public int updateUserToken(Integer userId) {
 		int count = sysUserManager.updateUserToken(userId);
 		return count;
 	}
@@ -134,7 +105,7 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public Set<String> listUserRoles(Long userId) {
+	public Set<String> listUserRoles(Integer userId) {
 		return this.sysUserManager.listUserRoles(userId);
 	}
 }

@@ -15,7 +15,7 @@ import java.util.List;
 @Mapper
 public interface SysOrgMapper extends BaseMapper<SysOrgEntity> {
 
-	int countOrgChildren(Long parentId);
+	int countOrgChildren(Integer parentId);
 
-	List<Long> queryOrgIdList(Long parentId);
+	List<Integer> queryOrgIdList(Integer parentId);
 }

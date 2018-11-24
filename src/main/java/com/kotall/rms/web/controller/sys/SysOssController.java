@@ -47,7 +47,7 @@ public class SysOssController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<SysOssEntity> list(@RequestBody Map<String, Object> params) {
-		return sysOssService.listSysOss(params);
+		return sysOssService.queryByPage(params);
 	}
 		
 	/**
@@ -58,7 +58,7 @@ public class SysOssController extends AbstractController {
 	@SysLog("新增文件上传")
 	@RequestMapping("/save")
 	public Result save(@RequestBody SysOssEntity sysOss) {
-	    int count = sysOssService.saveSysOss(sysOss);
+	    boolean count = sysOssService.save(sysOss);
 		return ResultKit.msg(count);
 	}
 	
@@ -68,8 +68,8 @@ public class SysOssController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
-		SysOssEntity sysOss = sysOssService.getSysOssById(id);
+	public Result getById(@RequestBody Integer id) {
+		SysOssEntity sysOss = sysOssService.getById(id);
 		return ResultKit.msg(sysOss);
 	}
 	
@@ -81,7 +81,7 @@ public class SysOssController extends AbstractController {
 	@SysLog("修改文件上传")
 	@RequestMapping("/update")
 	public Result update(@RequestBody SysOssEntity sysOss) {
-        int count = sysOssService.updateSysOss(sysOss);
+		boolean count = sysOssService.update(sysOss);
 		return  ResultKit.msg(count);
 	}
 	
@@ -92,9 +92,9 @@ public class SysOssController extends AbstractController {
 	 */
 	@SysLog("删除文件上传")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
+	public Result batchRemove(@RequestBody Integer[] id) {
 		//TODO 先删除OSS中的文件
-	    int count = sysOssService.batchRemove(id);
+		boolean count = sysOssService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 
@@ -119,7 +119,7 @@ public class SysOssController extends AbstractController {
 		ossEntity.setKey(null);
 		ossEntity.setUrl(url);
 		ossEntity.setCreateTime(new Date());
-		sysOssService.saveSysOss(ossEntity);
+		sysOssService.save(ossEntity);
 
 		return Result.ok().put("url", url);
 	}

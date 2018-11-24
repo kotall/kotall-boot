@@ -14,12 +14,12 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysRoleOrgMapper extends BaseMapper<SysRoleOrgEntity> {
 
-	List<Long> listOrgId(Long roleId);
+	List<Integer> listOrgId(Integer roleId);
 	
-	int batchRemoveByOrgId(Long[] id);
+	int batchRemoveByOrgId(Integer[] id);
 	
-	int batchRemoveByRoleId(Long[] id);
+	int batchRemoveByRoleId(Integer[] id);
 
 
-    List<Long> queryOrgIdList(Long[] roleIds);
+    List<Integer> queryOrgIdList(Integer[] roleIds);
 }

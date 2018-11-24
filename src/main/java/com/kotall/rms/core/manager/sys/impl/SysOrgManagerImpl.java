@@ -1,17 +1,15 @@
 package com.kotall.rms.core.manager.sys.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import com.kotall.rms.common.utils.Query;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.kotall.rms.common.dao.sys.SysOrgMapper;
 import com.kotall.rms.common.dao.sys.SysRoleOrgMapper;
 import com.kotall.rms.common.entity.sys.SysOrgEntity;
+import com.kotall.rms.core.manager.BaseManagerImpl;
 import com.kotall.rms.core.manager.sys.SysOrgManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 组织架构
@@ -20,45 +18,25 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2017年8月17日 上午11:32:15
  */
 @Component("sysOrgManager")
-public class SysOrgManagerImpl implements SysOrgManager {
+public class SysOrgManagerImpl extends BaseManagerImpl<SysOrgMapper, SysOrgEntity> implements SysOrgManager {
 
 	@Autowired
 	private SysOrgMapper sysOrgMapper;
 	
 	@Autowired
 	private SysRoleOrgMapper sysRoleOrgMapper;
-	
-	@Override
-	public List<SysOrgEntity> listOrg(Query query) {
-		return sysOrgMapper.list(query);
-	}
-
-	@Override
-	public int saveOrg(SysOrgEntity org) {
-		return sysOrgMapper.save(org);
-	}
-
-	@Override
-	public SysOrgEntity getOrg(Long orgId) {
-		return sysOrgMapper.getObjectById(orgId);
-	}
-
-	@Override
-	public int updateOrg(SysOrgEntity org) {
-		return sysOrgMapper.update(org);
-	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public int batchRemoveOrg(Long[] id) {
+	public int batchRemoveOrg(Integer[] id) {
 		int count = sysOrgMapper.batchRemove(id);
 		sysRoleOrgMapper.batchRemoveByOrgId(id);
 		return count;
 	}
 
 	@Override
-	public boolean hasChildren(Long[] id) {
-		for(Long parentId : id) {
+	public boolean hasChildren(Integer[] id) {
+		for(Integer parentId : id) {
 			int count = sysOrgMapper.countOrgChildren(parentId);
 			if(count > 0) {
 				return true;
@@ -68,7 +46,7 @@ public class SysOrgManagerImpl implements SysOrgManager {
 	}
 
 	@Override
-	public List<Long> queryOrgIdList(Long parentId) {
+	public List<Integer> queryOrgIdList(Integer parentId) {
 		return this.sysOrgMapper.queryOrgIdList(parentId);
 	}
 }

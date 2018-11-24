@@ -15,14 +15,14 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysMenuMapper extends BaseMapper<SysMenuEntity> {
 	
-	List<SysMenuEntity> listParentId(Long parentId);
+	List<SysMenuEntity> listParentId(Integer parentId);
 	
 	List<SysMenuEntity> listNotButton();
 	
-	List<String> listUserPerms(Long userId);
+	List<String> listUserPerms(Integer userId);
 
 	List<String> listAllPerms();
 	
-	int countMenuChildren(Long parentId);
+	int countMenuChildren(Integer parentId);
 
 }

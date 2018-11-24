@@ -14,10 +14,10 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysUserRoleMapper extends BaseMapper<SysUserRoleEntity> {
 
-	List<Long> queryRoleIdList(Long userId);
+	List<Integer> queryRoleIdList(Integer userId);
 	
-	int batchRemoveByUserId(Long[] id);
+	int batchRemoveByUserId(Integer[] id);
 	
-	int batchRemoveByRoleId(Long[] id);
+	int batchRemoveByRoleId(Integer[] id);
 
 }

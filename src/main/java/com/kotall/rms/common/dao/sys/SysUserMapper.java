@@ -17,7 +17,7 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
 
 	SysUserEntity getByUserName(String username);
 	
-	List<Long> listAllMenuId(Long userId);
+	List<Integer> listAllMenuId(Integer userId);
 	
 	int updatePasswordByUser(Query query);
 	

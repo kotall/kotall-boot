@@ -1,10 +1,9 @@
 package com.kotall.rms.core.service.sys;
 
-import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.common.entity.sys.SysUserTokenEntity;
+import com.kotall.rms.core.service.BaseService;
 
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -13,40 +12,25 @@ import java.util.Set;
  * @author aracwong
  * @date 2017年8月11日 上午11:45:42
  */
-public interface SysUserService {
+public interface SysUserService extends BaseService<SysUserEntity> {
 
-	/**
-	 * 应根据当前用户所属的机构
-	 * @param params
-	 * @return
-	 */
-	Page<SysUserEntity> listUser(Map<String, Object> params);
-	
-	int saveUser(SysUserEntity user);
-
-	SysUserEntity getUserById(Long userId);
+	Set<String> listUserPerms(Integer userId);
 
 	SysUserTokenEntity getUserTokenInfoByToken(String token);
 
-	int updateUser(SysUserEntity user);
-	
-	int batchRemove(Long[] id);
-
-	Set<String> listUserPerms(Long userId);
-	
 	int updatePwdByUser(SysUserEntity user);
 	
-	int updateUserEnable(Long[] id);
+	int updateUserEnable(Integer[] id);
 	
-	int updateUserDisable(Long[] id);
+	int updateUserDisable(Integer[] id);
 	
 	int updatePwd(SysUserEntity user);
 
-	SysUserTokenEntity saveUserToken(Long userId);
+	SysUserTokenEntity saveUserToken(Integer userId);
 	
-	int updateUserToken(Long userId);
+	int updateUserToken(Integer userId);
 	
 	SysUserEntity getByUserName(String username);
 
-	Set<String> listUserRoles(Long userId);
+	Set<String> listUserRoles(Integer userId);
 }

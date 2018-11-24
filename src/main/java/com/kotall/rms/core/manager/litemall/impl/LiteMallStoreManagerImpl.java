@@ -52,7 +52,7 @@ public class LiteMallStoreManagerImpl implements LiteMallStoreManager {
 	}
 
 	@Override
-	public List<Integer> queryStoreIdListByUserId(Long userId) {
+	public List<Integer> queryStoreIdListByUserId(Integer userId) {
 		return this.liteMallStoreMapper.queryStoreIdListByUserId(userId);
 	}
 }

@@ -25,12 +25,12 @@ public class SysUserEntity implements Serializable {
 	/**
 	 * 用户id
 	 */
-	private Long userId;
+	private Integer userId;
 	
 	/**
 	 * 机构id
 	 */
-	private Long orgId;
+	private Integer orgId;
 	
 	/**
 	 * 机构名称
@@ -65,7 +65,7 @@ public class SysUserEntity implements Serializable {
 	/**
 	 * 创建用户id
 	 */
-	private Long userIdCreate;
+	private Integer userIdCreate;
 	
 	/**
 	 * 备注
@@ -86,6 +86,6 @@ public class SysUserEntity implements Serializable {
 	/**
 	 * 角色id列表
 	 */
-	private List<Long> roleIdList;
+	private List<Integer> roleIdList;
 
 }

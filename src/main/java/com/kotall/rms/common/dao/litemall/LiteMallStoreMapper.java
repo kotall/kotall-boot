@@ -17,6 +17,6 @@ import java.util.List;
 @Mapper
 public interface LiteMallStoreMapper extends BaseMapper<LiteMallStoreEntity> {
 
-    List<Integer> queryStoreIdListByUserId(Long userId);
+    List<Integer> queryStoreIdListByUserId(Integer userId);
 
 }

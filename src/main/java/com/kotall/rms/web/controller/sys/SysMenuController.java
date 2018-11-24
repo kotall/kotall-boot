@@ -100,7 +100,7 @@ public class SysMenuController extends AbstractController {
 	 */
 	@SysLog("删除菜单")
 	@RequestMapping("/remove")
-	public Result remove(@RequestBody Long[] id) {
+	public Result remove(@RequestBody Integer[] id) {
 		int count = sysMenuService.batchRemove(id);
 		return ResultKit.msg(id, count);
 	}

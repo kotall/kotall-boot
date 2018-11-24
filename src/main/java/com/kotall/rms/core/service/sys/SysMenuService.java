@@ -13,10 +13,10 @@ import java.util.List;
  */
 public interface SysMenuService extends BaseService<SysMenuEntity> {
 
-	List<SysMenuEntity> listUserMenu(Long userId);
+	List<SysMenuEntity> listUserMenu(Integer userId);
 
 	List<SysMenuEntity> listNotButton();
 
-	int batchRemove(Long[] id);
+	int batchRemove(Integer[] id);
 
 }

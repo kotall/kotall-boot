@@ -1,12 +1,11 @@
 package com.kotall.rms.core.service.sys.impl;
 
-import com.kotall.rms.common.entity.sys.SysUserEntity;
-import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.common.entity.sys.SysOrgEntity;
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.RmsException;
-import com.kotall.rms.common.entity.sys.SysOrgEntity;
 import com.kotall.rms.core.annotation.DataFilter;
 import com.kotall.rms.core.manager.sys.SysOrgManager;
+import com.kotall.rms.core.service.BaseServiceImpl;
 import com.kotall.rms.core.service.sys.SysOrgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,39 +21,21 @@ import java.util.Map;
  * @date 2017年8月17日 上午11:33:28
  */
 @Service("sysOrgService")
-public class SysOrgServiceImpl implements SysOrgService {
+public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgManager, SysOrgEntity> implements SysOrgService {
 
 	@Autowired
 	private SysOrgManager sysOrgManager;
 
 	@DataFilter(subDept = true, user = false)
 	@Override
-	public List<SysOrgEntity> queryList(Map<String, Object> params) {
+	public List<SysOrgEntity> queryByList(Map<String, Object> params) {
 		Query form = new Query(params);
-		List<SysOrgEntity> sysOrgList = sysOrgManager.listOrg(form);
+		List<SysOrgEntity> sysOrgList = sysOrgManager.queryByList(form);
 		return sysOrgList;
 	}
 
 	@Override
-	public int saveOrg(SysOrgEntity org) {
-		int count = sysOrgManager.saveOrg(org);
-		return count;
-	}
-
-	@Override
-	public SysOrgEntity getOrg(Long orgId) {
-		SysOrgEntity org = sysOrgManager.getOrg(orgId);
-		return org;
-	}
-
-	@Override
-	public int updateOrg(SysOrgEntity org) {
-		int count = sysOrgManager.updateOrg(org);
-		return count;
-	}
-
-	@Override
-	public int batchRemoveOrg(Long[] id) {
+	public int batchRemoveOrg(Integer[] id) {
 		boolean children = sysOrgManager.hasChildren(id);
 		if(children) {
 			throw RmsException.HAS_CHILD_EXCEPTION;
@@ -64,17 +45,17 @@ public class SysOrgServiceImpl implements SysOrgService {
 	}
 
 	@Override
-	public List<Long> queryOrgIdList(Long parentId) {
+	public List<Integer> queryOrgIdList(Integer parentId) {
 		return sysOrgManager.queryOrgIdList(parentId);
 	}
 
 	@Override
-	public List<Long> getSubOrgIdList(Long deptId){
+	public List<Integer> getSubOrgIdList(Integer deptId){
 		// 部门及子部门ID列表
-		List<Long> deptIdList = new ArrayList<>();
+		List<Integer> deptIdList = new ArrayList<>();
 
 		// 获取子部门ID
-		List<Long> subIdList = queryOrgIdList(deptId);
+		List<Integer> subIdList = queryOrgIdList(deptId);
 		getDeptTreeList(subIdList, deptIdList);
 
 		return deptIdList;
@@ -83,9 +64,9 @@ public class SysOrgServiceImpl implements SysOrgService {
 	/**
 	 * 递归
 	 */
-	private void getDeptTreeList(List<Long> subIdList, List<Long> deptIdList){
-		for(Long deptId : subIdList){
-			List<Long> list = queryOrgIdList(deptId);
+	private void getDeptTreeList(List<Integer> subIdList, List<Integer> deptIdList){
+		for(Integer deptId : subIdList){
+			List<Integer> list = queryOrgIdList(deptId);
 			if(list.size() > 0){
 				getDeptTreeList(list, deptIdList);
 			}

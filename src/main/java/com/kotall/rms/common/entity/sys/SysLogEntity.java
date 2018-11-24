@@ -25,12 +25,12 @@ public class SysLogEntity implements Serializable {
 	/**
 	 * 日志id
 	 */
-	private Long id;
+	private Integer id;
 	
 	/**
 	 * 操作用户id
 	 */
-	private Long userId;
+	private Integer userId;
 	
 	/**
 	 * 操作用户

@@ -67,7 +67,7 @@ public class LiteMallStoreEntity implements Serializable {
 	/**
 	 * 店主ID
 	 */
-	private Long userId;
+	private Integer userId;
 
 	/**
 	 * 店主用户名称

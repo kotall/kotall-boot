@@ -18,7 +18,7 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
     private SysUserRoleMapper sysUserRoleMapper;
 
     @Override
-    public List<Long> queryRoleIdList(Long userId) {
+    public List<Integer> queryRoleIdList(Integer userId) {
         return this.sysUserRoleMapper.queryRoleIdList(userId);
     }
 }

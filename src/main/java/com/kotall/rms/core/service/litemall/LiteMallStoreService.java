@@ -31,5 +31,5 @@ public interface LiteMallStoreService {
      * @param userId
      * @return
      */
-    List<Integer> queryStoreIdListByUserId(Long userId);
+    List<Integer> queryStoreIdListByUserId(Integer userId);
 }

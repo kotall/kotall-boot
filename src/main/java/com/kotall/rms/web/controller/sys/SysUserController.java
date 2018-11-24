@@ -1,12 +1,12 @@
 package com.kotall.rms.web.controller.sys;
 
-import com.kotall.rms.core.annotation.DataFilter;
-import com.kotall.rms.core.annotation.SysLog;
+import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Result;
-import com.kotall.rms.web.util.ResultKit;
-import com.kotall.rms.common.entity.sys.SysUserEntity;
+import com.kotall.rms.core.annotation.DataFilter;
+import com.kotall.rms.core.annotation.SysLog;
 import com.kotall.rms.core.service.sys.SysUserService;
+import com.kotall.rms.web.util.ResultKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +37,7 @@ public class SysUserController extends AbstractController {
 	@DataFilter(subDept = true, user = false)
 	public Page<SysUserEntity> list(@RequestBody Map<String, Object> params) {
 		params.put("userId", getUserId());
-		return sysUserService.listUser(params);
+		return sysUserService.queryByPage(params);
 	}
 	
 	/**
@@ -67,7 +67,7 @@ public class SysUserController extends AbstractController {
 	@RequestMapping("/save")
 	public Result save(@RequestBody SysUserEntity user) {
 		user.setUserIdCreate(getUserId());
-		int count = sysUserService.saveUser(user);
+		boolean count = sysUserService.save(user);
 		return ResultKit.msg(count);
 	}
 	
@@ -77,8 +77,8 @@ public class SysUserController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/infoUser")
-	public Result getById(@RequestBody Long userId) {
-		SysUserEntity user = sysUserService.getUserById(userId);
+	public Result getById(@RequestBody Integer userId) {
+		SysUserEntity user = sysUserService.getById(userId);
 		return ResultKit.msg(user);
 	}
 	
@@ -90,7 +90,7 @@ public class SysUserController extends AbstractController {
 	@SysLog("修改用户")
 	@RequestMapping("/update")
 	public Result update(@RequestBody SysUserEntity user) {
-		int count = sysUserService.updateUser(user);
+		boolean count = sysUserService.update(user);
 		return ResultKit.msg(count);
 	}
 	
@@ -101,8 +101,8 @@ public class SysUserController extends AbstractController {
 	 */
 	@SysLog("删除用户")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
-		int count = sysUserService.batchRemove(id);
+	public Result batchRemove(@RequestBody Integer[] id) {
+		boolean count = sysUserService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
 	
@@ -131,7 +131,7 @@ public class SysUserController extends AbstractController {
 	 */
 	@SysLog("启用账户")
 	@RequestMapping("/enable")
-	public Result updateUserEnable(@RequestBody Long[] id) {
+	public Result updateUserEnable(@RequestBody Integer[] id) {
 		int count = sysUserService.updateUserEnable(id);
 		return ResultKit.msg(id, count);
 	}
@@ -143,7 +143,7 @@ public class SysUserController extends AbstractController {
 	 */
 	@SysLog("禁用账户")
 	@RequestMapping("/disable")
-	public Result updateUserDisable(@RequestBody Long[] id) {
+	public Result updateUserDisable(@RequestBody Integer[] id) {
 		int count = sysUserService.updateUserDisable(id);
 		return ResultKit.msg(id, count);
 	}

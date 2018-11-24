@@ -15,10 +15,10 @@ import com.kotall.rms.common.entity.sys.SysRoleMenuEntity;
 @Mapper
 public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenuEntity> {
 
-	int batchRemoveByMenuId(Long[] id);
+	int batchRemoveByMenuId(Integer[] id);
 	
-	int batchRemoveByRoleId(Long[] id);
+	int batchRemoveByRoleId(Integer[] id);
 	
-	List<Long> listMenuId(Long id);
+	List<Integer> listMenuId(Integer id);
 	
 }

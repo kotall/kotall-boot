@@ -75,18 +75,18 @@ public class DataFilterAspect {
         }
 
         // 部门ID列表
-        Set<Long> deptIdList = new HashSet<>();
+        Set<Integer> deptIdList = new HashSet<>();
 
         // 用户角色对应的部门ID列表
-        List<Long> roleIdList = sysUserRoleService.queryRoleIdList(user.getUserId());
+        List<Integer> roleIdList = sysUserRoleService.queryRoleIdList(user.getUserId());
         if(roleIdList.size() > 0){
-            List<Long> userOrgIdList = sysRoleOrgService.queryOrgIdList(roleIdList.toArray(new Long[roleIdList.size()]));
+            List<Integer> userOrgIdList = sysRoleOrgService.queryOrgIdListByRoleIds(roleIdList.toArray(new Integer[roleIdList.size()]));
             deptIdList.addAll(userOrgIdList);
         }
 
         // 用户子部门ID列表
         if(dataFilter.subDept()){
-            List<Long> subOrgIdList = sysOrgService.getSubOrgIdList(user.getOrgId());
+            List<Integer> subOrgIdList = sysOrgService.getSubOrgIdList(user.getOrgId());
             deptIdList.addAll(subOrgIdList);
         }
 

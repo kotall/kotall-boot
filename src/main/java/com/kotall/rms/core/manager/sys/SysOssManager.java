@@ -1,10 +1,7 @@
 package com.kotall.rms.core.manager.sys;
 
-import java.util.List;
-
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.entity.sys.SysOssEntity;
+import com.kotall.rms.core.manager.BaseManager;
 
 /**
  * 文件上传
@@ -13,16 +10,7 @@ import com.kotall.rms.common.entity.sys.SysOssEntity;
  * @date 2018年11月12日 下午10:28:34
  * @since 1.0.0
  */
-public interface SysOssManager {
+public interface SysOssManager extends BaseManager<SysOssEntity> {
 
-	List<SysOssEntity> listSysOss(Page<SysOssEntity> page, Query search);
-	
-	int saveSysOss(SysOssEntity sysOss);
-	
-	SysOssEntity getSysOssById(Long id);
-	
-	int updateSysOss(SysOssEntity sysOss);
-	
-	int batchRemove(Long[] id);
-	
+
 }

@@ -18,7 +18,7 @@ public class SysRoleOrgServiceImpl implements SysRoleOrgService {
     private SysRoleOrgMapper sysRoleOrgMapper;
 
     @Override
-    public List<Long> queryOrgIdList(Long[] roleIds) {
+    public List<Integer> queryOrgIdListByRoleIds(Integer[] roleIds) {
         return this.sysRoleOrgMapper.queryOrgIdList(roleIds);
     }
 }

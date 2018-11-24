@@ -13,14 +13,14 @@ import java.util.List;
  */
 public interface SysMenuManager extends BaseManager<SysMenuEntity> {
 
-	List<SysMenuEntity> listUserMenu(Long userId);
+	List<SysMenuEntity> listUserMenu(Integer userId);
 	
-	List<SysMenuEntity> listParentId(Long parentId, List<Long> menuIdList);
+	List<SysMenuEntity> listParentId(Integer parentId, List<Integer> menuIdList);
 
 	List<SysMenuEntity> listNotButton();
 
-	int batchRemove(Long[] id);
+	int batchRemove(Integer[] id);
 	
-	boolean hasChildren(Long[] id);
+	boolean hasChildren(Integer[] id);
 	
 }

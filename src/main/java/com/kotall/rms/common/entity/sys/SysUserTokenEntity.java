@@ -24,7 +24,7 @@ public class SysUserTokenEntity implements Serializable {
 	/**
 	 * 用户id
 	 */
-	private Long userId;
+	private Integer userId;
 	
 	/**
 	 * token

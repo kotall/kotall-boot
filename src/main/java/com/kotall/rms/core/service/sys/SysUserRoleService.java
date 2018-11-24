@@ -8,5 +8,5 @@ import java.util.List;
  */
 public interface SysUserRoleService {
 
-    List<Long> queryRoleIdList(Long userId);
+    List<Integer> queryRoleIdList(Integer userId);
 }

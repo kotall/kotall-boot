@@ -24,7 +24,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuManager, SysMenuE
 	private SysMenuManager sysMenuManager;
 
 	@Override
-	public List<SysMenuEntity> listUserMenu(Long userId) {
+	public List<SysMenuEntity> listUserMenu(Integer userId) {
 		List<SysMenuEntity> menuList = sysMenuManager.listUserMenu(userId);
 		return menuList;
 	}
@@ -33,9 +33,9 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuManager, SysMenuE
 	public List<SysMenuEntity> listNotButton() {
 		List<SysMenuEntity> menuList = sysMenuManager.listNotButton();
 		SysMenuEntity root = new SysMenuEntity();
-		root.setMenuId(0L);
+		root.setMenuId(0);
 		root.setName("一级菜单");
-		root.setParentId(-1L);
+		root.setParentId(-1);
 		root.setOpen(true);
 		menuList.add(root);
 		return menuList;
@@ -43,14 +43,14 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuManager, SysMenuE
 
 	@Override
 	public boolean save(SysMenuEntity menu) {
-		long id = IdKit.getId(menu.getCode());
+		Integer id = IdKit.getId(menu.getCode());
 		menu.setMenuId(id);
 		boolean count = sysMenuManager.save(menu);
 		return count;
 	}
 
 	@Override
-	public int batchRemove(Long[] id) {
+	public int batchRemove(Integer[] id) {
 		boolean children = sysMenuManager.hasChildren(id);
 		if(children) {
 			throw RmsException.HAS_CHILD_EXCEPTION;

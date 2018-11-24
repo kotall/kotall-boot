@@ -3,7 +3,6 @@ package com.kotall.rms.web.auth;
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.common.entity.sys.SysUserTokenEntity;
 import com.kotall.rms.core.service.sys.SysUserService;
-import com.kotall.rms.web.auth.AuthToken;
 import com.kotall.rms.web.util.ShiroUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -39,7 +38,7 @@ public class AuthRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-    	Long userId = ShiroUtils.getUserId();
+    	Integer userId = ShiroUtils.getUserId();
 		// 用户角色
 		Set<String> rolesSet = sysUserService.listUserRoles(userId);
 		// 用户权限
@@ -65,7 +64,7 @@ public class AuthRealm extends AuthorizingRealm {
         }
 
         // 查询用户信息
-        SysUserEntity user = sysUserService.getUserById(tokenEntity.getUserId());
+        SysUserEntity user = sysUserService.getById(tokenEntity.getUserId());
         // 账号锁定
         if(user.getStatus() == 0){
             throw new LockedAccountException("账号已被锁定,请联系管理员");

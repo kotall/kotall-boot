@@ -1,16 +1,13 @@
 package com.kotall.rms.core.service.sys.impl;
 
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.entity.sys.SysRoleEntity;
-import com.kotall.rms.core.annotation.DataFilter;
 import com.kotall.rms.core.manager.sys.SysRoleManager;
+import com.kotall.rms.core.service.BaseServiceImpl;
 import com.kotall.rms.core.service.sys.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 系统角色
@@ -19,47 +16,27 @@ import java.util.Map;
  * @date 2017年8月12日 上午12:41:19
  */
 @Service("sysRoleService")
-public class SysRoleServiceImpl implements SysRoleService {
+public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleManager, SysRoleEntity> implements SysRoleService {
 
 	@Autowired
 	private SysRoleManager sysRoleManager;
 
-	@DataFilter(subDept = true, user = false)
-	@Override
-	public Page<SysRoleEntity> listRole(Map<String, Object> params) {
-		Query query = new Query(params);
-		Page<SysRoleEntity> page = new Page<>(query);
-		sysRoleManager.listRole(page, query);
-		return page;
-	}
 
 	@Override
-	public int saveRole(SysRoleEntity role) {
-		int count = sysRoleManager.saveRole(role);
-		return count;
-	}
-
-	@Override
-	public SysRoleEntity getRoleById(Long id) {
+	public SysRoleEntity getRoleById(Integer id) {
 		SysRoleEntity role = sysRoleManager.getRoleById(id);
 		return role;
 	}
 
 	@Override
-	public int updateRole(SysRoleEntity role) {
-		int count = sysRoleManager.updateRole(role);
-		return count;
-	}
-
-	@Override
-	public int batchRemove(Long[] id) {
+	public int batchRemove(Integer[] id) {
 		int count = sysRoleManager.batchRemove(id);
 		return count;
 	}
 
 	@Override
-	public List<SysRoleEntity> listRole() {
-		List<SysRoleEntity> roleList = sysRoleManager.listRole();
+	public List<SysRoleEntity> queryAll() {
+		List<SysRoleEntity> roleList = sysRoleManager.queryAll();
 		return roleList;
 	}
 

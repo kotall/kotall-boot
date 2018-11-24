@@ -14,6 +14,6 @@ public interface SysUserTokenMapper extends BaseMapper<SysUserTokenEntity> {
 
 	SysUserTokenEntity getByToken(String token);
 	
-	SysUserTokenEntity getByUserId(Long userId);
+	SysUserTokenEntity getByUserId(Integer userId);
 	
 }

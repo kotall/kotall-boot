@@ -82,10 +82,10 @@ public class SysLogAspect {
 		SysUserEntity currUser = ShiroUtils.getUserEntity();
 		if(Objects.isNull(currUser)) {
 			if(!StringUtils.isNotEmpty(sysLog.getParams())) {
-				sysLog.setUserId(-1L);
+				sysLog.setUserId(-1);
 				sysLog.setUsername(sysLog.getParams());
 			} else {
-				sysLog.setUserId(-1L);
+				sysLog.setUserId(-1);
 				sysLog.setUsername("获取用户信息为空");
 			}
 		} else {

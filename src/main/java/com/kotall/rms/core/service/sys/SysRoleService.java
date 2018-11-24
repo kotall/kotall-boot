@@ -1,10 +1,9 @@
 package com.kotall.rms.core.service.sys;
 
-import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.entity.sys.SysRoleEntity;
+import com.kotall.rms.core.service.BaseService;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 系统角色
@@ -12,22 +11,16 @@ import java.util.Map;
  * @author aracwong
  * @date 2017年8月12日 上午12:40:42
  */
-public interface SysRoleService {
+public interface SysRoleService extends BaseService<SysRoleEntity> {
 
-	Page<SysRoleEntity> listRole(Map<String, Object> params);
-	
-	int saveRole(SysRoleEntity role);
+	SysRoleEntity getRoleById(Integer id);
 
-	SysRoleEntity getRoleById(Long id);
-	
-	int updateRole(SysRoleEntity role);
-	
-	int batchRemove(Long[] id);
+	List<SysRoleEntity> queryAll();
 
-	List<SysRoleEntity> listRole();
-	
+	int batchRemove(Integer[] id);
+
 	int updateRoleOptAuthorization(SysRoleEntity role);
-	
+
 	int updateRoleDataAuthorization(SysRoleEntity role);
 	
 }

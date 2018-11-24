@@ -24,16 +24,16 @@ public class SysRoleOrgEntity implements Serializable {
 	/**
 	 * 记录id
 	 */
-	private Long id;
+	private Integer id;
 
 	/**
 	 * 角色ID
 	 */
-	private Long roleId;
+	private Integer roleId;
 
 	/**
 	 * 机构ID
 	 */
-	private Long orgId;
+	private Integer orgId;
 
 }

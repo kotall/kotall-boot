@@ -4,16 +4,13 @@ import com.kotall.rms.core.annotation.SysLog;
 import com.kotall.rms.common.utils.Result;
 import com.kotall.rms.core.constants.Constant;
 import com.kotall.rms.web.util.ResultKit;
-import com.kotall.rms.web.util.ShiroUtils;
 import com.kotall.rms.common.entity.sys.SysOrgEntity;
-import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.core.service.sys.SysOrgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,7 +37,7 @@ public class SysOrgController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public List<SysOrgEntity> list() {
-		List<SysOrgEntity> sysOrgList = this.sysOrgService.queryList(new HashMap<>());
+		List<SysOrgEntity> sysOrgList = this.sysOrgService.queryByList(new HashMap<>());
 		return sysOrgList;
 	}
 	
@@ -50,13 +47,13 @@ public class SysOrgController extends AbstractController {
 	 */
 	@RequestMapping("/select")
 	public List<SysOrgEntity> select() {
-		List<SysOrgEntity> sysOrgList = this.sysOrgService.queryList(new HashMap<String, Object>());
+		List<SysOrgEntity> sysOrgList = this.sysOrgService.queryByList(new HashMap<String, Object>());
 		// 添加一级部门
 		if(super.getUserId() == Constant.SUPER_ADMIN){
 			SysOrgEntity root = new SysOrgEntity();
-			root.setOrgId(0L);
+			root.setOrgId(0);
 			root.setName("一级部门");
-			root.setParentId(-1L);
+			root.setParentId(-1);
 			root.setOpen(true);
 			sysOrgList.add(root);
 		}
@@ -71,7 +68,7 @@ public class SysOrgController extends AbstractController {
 	@SysLog("新增机构")
 	@RequestMapping("/save")
 	public Result save(@RequestBody SysOrgEntity org) {
-		int count = sysOrgService.saveOrg(org);
+		boolean count = sysOrgService.save(org);
 		return ResultKit.msg(count);
 	}
 	
@@ -81,8 +78,8 @@ public class SysOrgController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result info(@RequestBody Long orgId) {
-		SysOrgEntity org = sysOrgService.getOrg(orgId);
+	public Result info(@RequestBody Integer orgId) {
+		SysOrgEntity org = sysOrgService.getById(orgId);
 		return ResultKit.msg(org);
 	}
 
@@ -94,8 +91,8 @@ public class SysOrgController extends AbstractController {
 	public Result rootInfo() {
 		long deptId = 0;
 		if(getUserId() != Constant.SUPER_ADMIN){
-			List<SysOrgEntity> deptList = sysOrgService.queryList(new HashMap<>());
-			Long parentId = null;
+			List<SysOrgEntity> deptList = sysOrgService.queryByList(new HashMap<>());
+			Integer parentId = null;
 			for(SysOrgEntity sysDeptEntity : deptList){
 				if(parentId == null){
 					parentId = sysDeptEntity.getParentId();
@@ -120,7 +117,7 @@ public class SysOrgController extends AbstractController {
 	@SysLog("修改机构")
 	@RequestMapping("/update")
 	public Result update(@RequestBody SysOrgEntity org) {
-		int count = sysOrgService.updateOrg(org);
+		boolean count = sysOrgService.update(org);
 		return ResultKit.msg(count);
 	}
 	
@@ -131,7 +128,7 @@ public class SysOrgController extends AbstractController {
 	 */
 	@SysLog("删除机构")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
+	public Result batchRemove(@RequestBody Integer[] id) {
 		int count = sysOrgService.batchRemoveOrg(id);
 		return ResultKit.msg(id, count);
 	}

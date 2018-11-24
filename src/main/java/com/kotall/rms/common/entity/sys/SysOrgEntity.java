@@ -26,12 +26,12 @@ public class SysOrgEntity implements Serializable {
 	/**
 	 * 机构id
 	 */
-	private Long orgId;
+	private Integer orgId;
 	
 	/**
 	 * 上级机构id，一级部门为0
 	 */
-	private Long parentId;
+	private Integer parentId;
 	
 	/**
 	 * 上级机构名称

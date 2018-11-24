@@ -14,6 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysRoleMapper extends BaseMapper<SysRoleEntity> {
 	
-	List<String> listUserRoles(Long userId);
+	List<String> listUserRoles(Integer userId);
 	
 }

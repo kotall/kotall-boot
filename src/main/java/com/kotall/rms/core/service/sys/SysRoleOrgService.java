@@ -13,5 +13,5 @@ public interface SysRoleOrgService {
      * @param roleIds
      * @return
      */
-    List<Long> queryOrgIdList(Long[] roleIds);
+    List<Integer> queryOrgIdListByRoleIds(Integer[] roleIds);
 }

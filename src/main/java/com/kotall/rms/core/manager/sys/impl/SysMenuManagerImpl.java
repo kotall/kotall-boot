@@ -33,20 +33,20 @@ public class SysMenuManagerImpl extends BaseManagerImpl<SysMenuMapper, SysMenuEn
 	private SysRoleMenuMapper sysRoleMenuMapper;
 	
 	@Override
-	public List<SysMenuEntity> listUserMenu(Long userId) {
+	public List<SysMenuEntity> listUserMenu(Integer userId) {
 		if (1L == userId) {
 			return getAllMenuList(null);
 		}
-		List<Long> menuIdList = sysUserMapper.listAllMenuId(userId);
+		List<Integer> menuIdList = sysUserMapper.listAllMenuId(userId);
 		return getAllMenuList(menuIdList);
 	}
 	
 	/**
 	 * 获取所有菜单列表
 	 */
-	private List<SysMenuEntity> getAllMenuList(List<Long> menuIdList){
+	private List<SysMenuEntity> getAllMenuList(List<Integer> menuIdList){
 		// 查询根菜单列表
-		List<SysMenuEntity> menuList = listParentId(0L, menuIdList);
+		List<SysMenuEntity> menuList = listParentId(0, menuIdList);
 		// 递归获取子菜单
 		getMenuTreeList(menuList, menuIdList);
 		
@@ -56,7 +56,7 @@ public class SysMenuManagerImpl extends BaseManagerImpl<SysMenuMapper, SysMenuEn
 	/**
 	 * 递归
 	 */
-	private List<SysMenuEntity> getMenuTreeList(List<SysMenuEntity> menuList, List<Long> menuIdList){
+	private List<SysMenuEntity> getMenuTreeList(List<SysMenuEntity> menuList, List<Integer> menuIdList){
 		List<SysMenuEntity> subMenuList = new ArrayList<>();
 		
 		for(SysMenuEntity entity : menuList){
@@ -69,7 +69,7 @@ public class SysMenuManagerImpl extends BaseManagerImpl<SysMenuMapper, SysMenuEn
 	}
 
 	@Override
-	public List<SysMenuEntity> listParentId(Long parentId, List<Long> menuIdList) {
+	public List<SysMenuEntity> listParentId(Integer parentId, List<Integer> menuIdList) {
 		List<SysMenuEntity> menuList = sysMenuMapper.listParentId(parentId);
 		if(menuIdList == null){
 			return menuList;
@@ -91,15 +91,15 @@ public class SysMenuManagerImpl extends BaseManagerImpl<SysMenuMapper, SysMenuEn
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public int batchRemove(Long[] id) {
+	public int batchRemove(Integer[] id) {
 		int count = sysMenuMapper.batchRemove(id);
 		sysRoleMenuMapper.batchRemoveByMenuId(id);
 		return count;
 	}
 
 	@Override
-	public boolean hasChildren(Long[] id) {
-		for(Long parentId : id) {
+	public boolean hasChildren(Integer[] id) {
+		for(Integer parentId : id) {
 			int count = sysMenuMapper.countMenuChildren(parentId);
 			if(count > 0) {
 				return true;

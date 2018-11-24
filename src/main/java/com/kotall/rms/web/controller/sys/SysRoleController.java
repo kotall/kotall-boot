@@ -1,19 +1,18 @@
 package com.kotall.rms.web.controller.sys;
 
-import java.util.List;
-import java.util.Map;
-
-import com.kotall.rms.core.annotation.SysLog;
+import com.kotall.rms.common.entity.sys.SysRoleEntity;
+import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Result;
+import com.kotall.rms.core.annotation.SysLog;
+import com.kotall.rms.core.service.sys.SysRoleService;
 import com.kotall.rms.web.util.ResultKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.entity.sys.SysRoleEntity;
-import com.kotall.rms.core.service.sys.SysRoleService;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 系统角色
@@ -36,7 +35,7 @@ public class SysRoleController extends AbstractController {
 	@RequestMapping("/list")
 	public Page<SysRoleEntity> list(@RequestBody Map<String, Object> params) {
 		params.put("userId", getUserId());
-		return sysRoleService.listRole(params);
+		return sysRoleService.queryByPage(params);
 	}
 	
 	/**
@@ -45,7 +44,7 @@ public class SysRoleController extends AbstractController {
 	 */
 	@RequestMapping("/select")
 	public Result listRole() {
-		List<SysRoleEntity> roleList = sysRoleService.listRole();
+		List<SysRoleEntity> roleList = sysRoleService.queryAll();
 		return ResultKit.msgNotCheckNull(roleList);
 	}
 	
@@ -58,7 +57,7 @@ public class SysRoleController extends AbstractController {
 	@RequestMapping("/save")
 	public Result saveRole(@RequestBody SysRoleEntity role) {
 		role.setUserIdCreate(getUserId());
-		int count = sysRoleService.saveRole(role);
+		boolean count = sysRoleService.save(role);
 		return ResultKit.msg(count);
 	}
 	
@@ -68,7 +67,7 @@ public class SysRoleController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getRoleById(@RequestBody Long id) {
+	public Result getRoleById(@RequestBody Integer id) {
 		SysRoleEntity role = sysRoleService.getRoleById(id);
 		return ResultKit.msg(role);
 	}
@@ -81,7 +80,7 @@ public class SysRoleController extends AbstractController {
 	@SysLog("修改角色")
 	@RequestMapping("/update")
 	public Result updateRole(@RequestBody SysRoleEntity role) {
-		int count = sysRoleService.updateRole(role);
+		boolean count = sysRoleService.update(role);
 		return ResultKit.msg(count);
 	}
 	
@@ -92,9 +91,9 @@ public class SysRoleController extends AbstractController {
 	 */
 	@SysLog("删除角色")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
+	public Result batchRemove(@RequestBody Integer[] id) {
 		int count = sysRoleService.batchRemove(id);
-		return ResultKit.msg(id, count);
+		return ResultKit.msg(count);
 	}
 	
 	/**
