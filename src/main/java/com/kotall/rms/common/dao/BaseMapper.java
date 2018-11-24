@@ -39,7 +39,7 @@ public interface BaseMapper<T> {
 	 * @param query
 	 * @return
 	 */
-	T getObject(Query query);
+	T findOne(Query query);
 	
 	/**
 	 * 根据id查询详情
@@ -56,14 +56,14 @@ public interface BaseMapper<T> {
 	int updateById(T t);
 
 	/**
-	 * 更新
+	 * 根据条件更新
 	 * @param t
 	 * @return
 	 */
 	int update(T t);
 	
 	/**
-	 * 更新
+	 * 根据条件更新
 	 * @param query
 	 * @return
 	 */

@@ -70,10 +70,12 @@ public class SysUserManagerImpl extends BaseManagerImpl<SysUserMapper, SysUserEn
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateUser(SysUserEntity user) {
-        int count = sysUserMapper.update(user);
+        int count = sysUserMapper.updateById(user);
         Integer userId = user.getUserId();
-        sysUserRoleMapper.deleteById(userId);
         Query query = new Query();
+        query.put("userId", userId);
+        sysUserRoleMapper.delete(query);
+        query = new Query();
         query.put("userId", userId);
         query.put("roleIdList", user.getRoleIdList());
         sysUserRoleMapper.insert(query);
@@ -169,7 +171,7 @@ public class SysUserManagerImpl extends BaseManagerImpl<SysUserMapper, SysUserEn
             userToken.setToken(token);
             userToken.setExpireTime(gmtExpire);
             userToken.setUpdateTime(now);
-            sysUserTokenMapper.update(userToken);
+            sysUserTokenMapper.updateById(userToken);
         }
         return userToken;
     }
@@ -180,7 +182,7 @@ public class SysUserManagerImpl extends BaseManagerImpl<SysUserMapper, SysUserEn
         SysUserTokenEntity userToken = new SysUserTokenEntity();
         userToken.setUserId(userId);
         userToken.setToken(token);
-        return sysUserTokenMapper.update(userToken);
+        return sysUserTokenMapper.updateById(userToken);
     }
 
 }
