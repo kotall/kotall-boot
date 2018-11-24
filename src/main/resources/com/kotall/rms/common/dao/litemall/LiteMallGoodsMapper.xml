@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallGoodsMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity">
 		SELECT
 			`id`, 
 			`store_id`, 
@@ -40,12 +40,13 @@
                    #{item}
 				</foreach>
 			</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter}</if>
 		</where>
 		ORDER BY
 			add_time DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_goods (
 			`store_id`, 
 			`goods_sn`, 
@@ -94,7 +95,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity">
 		SELECT
 			`id`, 
 			`store_id`, 
@@ -153,7 +154,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_goods

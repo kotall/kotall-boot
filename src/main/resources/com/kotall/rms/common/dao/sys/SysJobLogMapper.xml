@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.sys.SysJobLogMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.sys.SysJobLogEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.sys.SysJobLogEntity">
 		SELECT
 			log_id,
 			job_id,
@@ -25,7 +25,7 @@
 			create_time DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO quartz_job_log (
 			job_id,
 			bean_name,
@@ -48,7 +48,7 @@
 		)
 	</insert>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			quartz_job_log
@@ -59,10 +59,22 @@
 		</foreach>
 	</delete>
 	
-	<delete id="batchRemoveAll">
+	<delete id="batchDeleteAll">
 		DELETE
 		FROM
 			quartz_job_log
 	</delete>
+
+	<select id="countTotal" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			quartz_job_log
+		<where>
+			<if test="name != null and name.trim() != ''">
+				AND bean_name LIKE concat('%',#{name},'%')
+			</if>
+		</where>
+	</select>
 
 </mapper>

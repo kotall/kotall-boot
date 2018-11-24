@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.sys.SysOssMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.sys.SysOssEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.sys.SysOssEntity">
 		SELECT
 			`id`, 
 			`key`, 
@@ -20,7 +20,7 @@
 			id DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO sys_oss (
 			`key`, 
 			`name`, 
@@ -43,7 +43,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.sys.SysOssEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.sys.SysOssEntity">
 		SELECT
 			`id`, 
 			`key`, 
@@ -76,7 +76,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			sys_oss
@@ -86,5 +86,12 @@
 			#{id}
 		</foreach>
 	</delete>
+
+	<select id="countTotal" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			sys_oss
+	</select>
 
 </mapper>

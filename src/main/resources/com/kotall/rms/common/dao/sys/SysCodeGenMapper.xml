@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.sys.SysCodeGenMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.sys.SysGenTableEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.sys.SysGenTableEntity">
 		SELECT
 			table_name,
 			engine obj_name,

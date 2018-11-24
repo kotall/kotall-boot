@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallOrderMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallOrderEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallOrderEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -45,7 +45,7 @@
 			add_time DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_order (
 			`store_id`,
 			`user_id`,
@@ -104,7 +104,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallOrderEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallOrderEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -178,7 +178,7 @@
 		</where>
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_order
@@ -189,46 +189,6 @@
 		</foreach>
 	</delete>
 
-	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallOrderEntity">
-		SELECT
-			`id`,
-			`store_id`,
-			`user_id`,
-			`order_sn`,
-			`order_status`,
-			`consignee`,
-			`mobile`,
-			`address`,
-			`message`,
-			`goods_price`,
-			`freight_price`,
-			`coupon_price`,
-			`integral_price`,
-			`groupon_price`,
-			`order_price`,
-			`actual_price`,
-			`pay_id`,
-			`pay_time`,
-			`ship_sn`,
-			`ship_channel`,
-			`ship_time`,
-			`confirm_time`,
-			`comments`,
-			`end_time`,
-			`add_time`,
-			`update_time`,
-			`deleted`
-		FROM
-			lite_mall_order
-		<where>
-            <if test=" storeId != null">`store_id` = #{storeId}</if>
-            <if test=" userId != null"> and `user_id` = #{userId}</if>
-            <if test=" orderStatus != null"> and `order_status` = #{orderStatus}</if>
-            <if test=" deleted != null"> and `deleted` = #{deleted}</if>
-		</where>
-		ORDER BY
-			add_time DESC
-	</select>
 
 	<select id="countTotal" resultType="int">
 		SELECT

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallKeywordMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallKeywordEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallKeywordEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -17,14 +17,14 @@
 			`deleted`
 		FROM
 			lite_mall_keyword
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter}</if>
+		</where>
 		ORDER BY
 			id DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_keyword (
 			`store_id`,
 			`keyword`,
@@ -49,7 +49,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallKeywordEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallKeywordEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -84,7 +84,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_keyword
@@ -94,32 +94,5 @@
 			#{id}
 		</foreach>
 	</delete>
-
-	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallKeywordEntity">
-		SELECT
-			`id`,
-			`store_id`,
-			`keyword`,
-			`url`,
-			`is_hot`,
-			`is_default`,
-			`sort_order`,
-			`add_time`,
-			`update_time`,
-			`deleted`
-		FROM
-			lite_mall_keyword
-		<where>
-			<if test="storeId != null">`store_id` = #{storeId}</if>
-			<if test="keyword != null"> and `keyword` = #{keyword}</if>
-			<if test="url != null">and `url` = #{url}</if>
-			<if test="isHot != null">and `is_hot` = #{isHot}</if>
-			<if test="isDefault != null">and `is_default` = #{isDefault}</if>
-			<if test="sortOrder != null">and `sort_order` = #{sortOrder}</if>
-			<if test="deleted != null">and `deleted` = #{deleted}</if>
-		</where>
-		ORDER BY
-			add_time DESC
-	</select>
 
 </mapper>

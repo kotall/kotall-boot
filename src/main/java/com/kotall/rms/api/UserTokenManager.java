@@ -35,8 +35,8 @@ public class UserTokenManager {
 
 //        userToken = idMap.get(id);
 //        if(userToken != null) {
-//            tokenMap.remove(userToken.getToken());
-//            idMap.remove(id);
+//            tokenMap.delete(userToken.getToken());
+//            idMap.delete(id);
 //        }
 
         String token = CharUtil.getRandomString(32);

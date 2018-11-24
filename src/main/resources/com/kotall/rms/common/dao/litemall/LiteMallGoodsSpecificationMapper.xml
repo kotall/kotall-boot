@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallGoodsSpecificationMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsSpecificationEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsSpecificationEntity">
 		SELECT
 			`id`, 
 			`store_id`, 
@@ -27,7 +27,7 @@
 			add_time DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_goods_specification (
 			`store_id`, 
 			`goods_id`, 
@@ -50,7 +50,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsSpecificationEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsSpecificationEntity">
 		SELECT
 			`id`, 
 			`store_id`, 
@@ -83,7 +83,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_goods_specification
@@ -93,28 +93,5 @@
 			#{id}
 		</foreach>
 	</delete>
-
-	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsSpecificationEntity">
-		SELECT
-			`id`,
-			`store_id`,
-			`goods_id`,
-			`specification`,
-			`value`,
-			`pic_url`,
-			`add_time`,
-			`update_time`,
-			`deleted`
-		FROM
-			lite_mall_goods_specification
-		<where>
-			<if test="storeId != null"> `store_id` = #{storeId}</if>
-			<if test="goodsId != null"> and `goods_id` = #{goodsId}</if>
-			<if test="specification != null"> and `specification` = #{specification}</if>
-			<if test="deleted != null"> and `deleted` = #{deleted}</if>
-		</where>
-		ORDER BY
-			add_time DESC
-	</select>
 
 </mapper>

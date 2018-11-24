@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallStoreMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallStoreEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallStoreEntity">
 		SELECT
 			`id`, 
 			`user_id`,
@@ -29,14 +29,14 @@
 			`UPDATE_TIME`
 		FROM
 			lite_mall_store s
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter}</if>
+		</where>
 		ORDER BY
 			id DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_store (
 			`name`,
 			`status`,
@@ -69,7 +69,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallStoreEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallStoreEntity">
 		SELECT
 			`id`, 
 			`user_id`,
@@ -120,7 +120,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_store

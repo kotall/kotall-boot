@@ -18,7 +18,7 @@ public class BaseManagerImpl<M extends BaseMapper<T>, T> implements BaseManager<
 
     @Override
     public Page<T> queryByPage(Page<T> page, Query query) {
-        List<T> rows = this.mapper.listForPage(page, query);
+        List<T> rows = this.mapper.list(query,page);
         page.setRows(rows);
         return page;
     }
@@ -30,12 +30,12 @@ public class BaseManagerImpl<M extends BaseMapper<T>, T> implements BaseManager<
 
     @Override
     public boolean save(T t) {
-        return this.mapper.save(t) == 1;
+        return this.mapper.insert(t) == 1;
     }
 
     @Override
     public T getById(Integer id) {
-        return this.mapper.getObjectById(id);
+        return this.mapper.getById(id);
     }
 
     @Override
@@ -50,11 +50,11 @@ public class BaseManagerImpl<M extends BaseMapper<T>, T> implements BaseManager<
 
     @Override
     public boolean deleteById(Integer id) {
-        return this.mapper.remove(id) == 1;
+        return this.mapper.deleteById(id) == 1;
     }
 
     @Override
     public boolean deleteByIds(Integer[] ids) {
-        return this.mapper.batchRemove(ids) == ids.length;
+        return this.mapper.batchDelete(ids) == ids.length;
     }
 }

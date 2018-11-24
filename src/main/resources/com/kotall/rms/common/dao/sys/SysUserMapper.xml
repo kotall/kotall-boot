@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.sys.SysUserMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.sys.SysUserEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.sys.SysUserEntity">
 		SELECT
 			u.user_id,
 			u.org_id,
@@ -64,7 +64,7 @@
 			ur.user_id = #{userId}
 	</select>
 	
-	<insert id="save" parameterType="com.kotall.rms.common.entity.sys.SysUserEntity" useGeneratedKeys="true" keyProperty="userId">
+	<insert id="insert" parameterType="com.kotall.rms.common.entity.sys.SysUserEntity" useGeneratedKeys="true" keyProperty="userId">
 		INSERT INTO sys_user (
 			username,
 			password,
@@ -87,7 +87,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.sys.SysUserEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.sys.SysUserEntity">
 		SELECT
 			u.user_id,
 			u.org_id,
@@ -125,7 +125,7 @@
 		where user_id = #{userId}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			sys_user
@@ -162,5 +162,25 @@
 		WHERE
 			user_id = #{userId}
 	</update>
+
+	<select id="countTotal" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			sys_user u
+		<where>
+			<if test="userIdCreate != null">
+				AND u.user_id_create = #{userIdCreate}
+			</if>
+			<if test="username != null and username.trim() != ''">
+				AND u.username LIKE concat('%',#{username},'%')
+				OR u.email LIKE concat('%',#{username},'%')
+				OR u.mobile LIKE concat('%',#{username},'%')
+			</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' ">
+				AND ${sql_filter}
+			</if>
+		</where>
+	</select>
 
 </mapper>

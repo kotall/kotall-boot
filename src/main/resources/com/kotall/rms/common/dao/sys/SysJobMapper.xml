@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.sys.SysJobMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.sys.SysJobEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.sys.SysJobEntity">
 		SELECT
 			job_id,
 			bean_name,
@@ -24,19 +24,7 @@
 		    create_time DESC
 	</select>
 	
-	<select id="list" resultType="com.kotall.rms.common.entity.sys.SysJobEntity">
-		SELECT
-			job_id,
-			bean_name,
-			method_name,
-			params,
-			cron_expression,
-			status
-		FROM
-			quartz_job
-	</select>
-	
-	<insert id="save" parameterType="com.kotall.rms.common.entity.sys.SysJobEntity" useGeneratedKeys="true" keyProperty="jobId">
+	<insert id="insert" parameterType="com.kotall.rms.common.entity.sys.SysJobEntity" useGeneratedKeys="true" keyProperty="jobId">
 		INSERT INTO quartz_job (
 			bean_name,
 			method_name,
@@ -57,7 +45,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.sys.SysJobEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.sys.SysJobEntity">
 		SELECT
 			job_id,
 			bean_name,
@@ -98,7 +86,7 @@
 		</foreach> 
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			quartz_job
@@ -107,6 +95,18 @@
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
-	</delete>	
+	</delete>
+
+	<select id="countTotal" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			quartz_job
+		<where>
+			<if test="name != null and name.trim() != ''">
+				AND bean_name LIKE concat('%',#{name},'%')
+			</if>
+		</where>
+	</select>
 
 </mapper>

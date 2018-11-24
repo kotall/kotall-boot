@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallGrouponMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -19,14 +19,16 @@
 			`deleted`
 		FROM
 			lite_mall_groupon
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="storeId != null"> `store_id` = #{storeId}</if>
+			<if test="deleted != null"> and `deleted` = #{deleted}</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter}</if>
+		</where>
 		ORDER BY
 			id DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_groupon (
 			`store_id`,
 			`order_id`,
@@ -55,7 +57,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -94,7 +96,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_groupon
@@ -104,33 +106,6 @@
 			#{id}
 		</foreach>
 	</delete>
-
-	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponEntity">
-		SELECT
-			`id`,
-			`store_id`,
-			`order_id`,
-			`groupon_id`,
-			`rules_id`,
-			`user_id`,
-			`creator_user_id`,
-			`add_time`,
-			`update_time`,
-			`share_url`,
-			`payed`,
-			`deleted`
-		FROM
-			lite_mall_groupon
-		<where>
-			<if test="storeId != null" > `store_id` = #{storeId}</if>
-			<if test="orderId != null" > and `order_id` = #{orderId}</if>
-			<if test="grouponId != null" > and `groupon_id` = #{grouponId}</if>
-			<if test="payed != null" > and `payed` = #{payed}</if>
-			<if test="deleted != null" > and `deleted` = #{deleted}</if>
-		</where>
-		ORDER BY
-			id DESC
-	</select>
 
 	<select id="countTotal" resultType="int">
 		SELECT
@@ -144,7 +119,5 @@
 			<if test="payed != null" > and `payed` = #{payed}</if>
 			<if test="deleted != null" > and `deleted` = #{deleted}</if>
 		</where>
-		ORDER BY
-		id DESC
 	</select>
 </mapper>

@@ -29,7 +29,7 @@ public class SysOrgManagerImpl extends BaseManagerImpl<SysOrgMapper, SysOrgEntit
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public int batchRemoveOrg(Integer[] id) {
-		int count = sysOrgMapper.batchRemove(id);
+		int count = sysOrgMapper.batchDelete(id);
 		sysRoleOrgMapper.batchRemoveByOrgId(id);
 		return count;
 	}

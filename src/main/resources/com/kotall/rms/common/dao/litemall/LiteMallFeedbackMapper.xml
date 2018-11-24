@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallFeedbackMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallFeedbackEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallFeedbackEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -20,14 +20,15 @@
 			`deleted`
 		FROM
 			lite_mall_feedback
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="storeId != null "> `store_id` = #{storeId}</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter} </if>
+		</where>
 		ORDER BY
 			id DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_feedback (
 			`store_id`,
 			`user_id`,
@@ -58,7 +59,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallFeedbackEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallFeedbackEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -99,7 +100,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_feedback

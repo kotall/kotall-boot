@@ -21,7 +21,7 @@ public class SysJobLogManagerImpl extends BaseManagerImpl<SysJobLogMapper, SysJo
 
 	@Override
 	public int deleteAll() {
-		return sysJobLogMapper.batchRemoveAll();
+		return sysJobLogMapper.batchDeleteAll();
 	}
 
 }

@@ -21,7 +21,7 @@ public class SysLogManagerImpl extends BaseManagerImpl<SysLogMapper,SysLogEntity
 	
 	@Override
 	public boolean deleteAll() {
-		return sysLogMapper.batchRemoveAll() > 0;
+		return sysLogMapper.batchDeleteAll() > 0;
 	}
 
 }

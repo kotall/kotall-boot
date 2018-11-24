@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.sys.SysLogMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.sys.SysLogEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.sys.SysLogEntity">
 		SELECT
 			id,
 			user_id,
@@ -26,7 +26,7 @@
 		    create_time DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO sys_log (
 			user_id,
 			username,
@@ -49,7 +49,7 @@
 		)
 	</insert>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			sys_log
@@ -60,10 +60,23 @@
 		</foreach>
 	</delete>
 	
-	<delete id="batchRemoveAll">
+	<delete id="batchDeleteAll">
 		DELETE
 		FROM
 			sys_log
 	</delete>
+
+	<select id="countTotal" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			sys_log
+		<where>
+			<if test="username != null and username.trim() != ''">
+				AND username LIKE concat('%',#{username},'%')
+				OR operation LIKE concat('%',#{username},'%')
+			</if>
+		</where>
+	</select>
 
 </mapper>

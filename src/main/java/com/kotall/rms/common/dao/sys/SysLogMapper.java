@@ -14,6 +14,6 @@ import com.kotall.rms.common.entity.sys.SysLogEntity;
 @Mapper
 public interface SysLogMapper extends BaseMapper<SysLogEntity> {
 
-	int batchRemoveAll();
+	int batchDeleteAll();
 	
 }

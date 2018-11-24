@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallBrandMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallBrandEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallBrandEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -25,7 +25,7 @@
 			id DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_brand (
 			`store_id`,
 			`name`,
@@ -50,7 +50,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallBrandEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallBrandEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -85,7 +85,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_brand

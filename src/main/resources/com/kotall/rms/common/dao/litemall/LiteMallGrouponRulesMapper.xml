@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallGrouponRulesMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponRulesEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponRulesEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -21,15 +21,13 @@
 		<where>
 			<if test="storeId != null "> `store_id` = #{storeId}</if>
 			<if test="deleted != null "> and `deleted` = #{deleted}</if>
-			<if test="sql_filter != null and sql_filter.trim() !='' ">
-				and ${sql_filter}
-			</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter} </if>
 		</where>
 		ORDER BY
 			add_time DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_groupon_rules (
 			`store_id`,
 			`goods_id`,
@@ -56,7 +54,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponRulesEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponRulesEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -93,7 +91,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_groupon_rules
@@ -104,27 +102,5 @@
 		</foreach>
 	</delete>
 
-	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallGrouponRulesEntity">
-		SELECT
-			`id`,
-			`store_id`,
-			`goods_id`,
-			`goods_name`,
-			`pic_url`,
-			`discount`,
-			`discount_member`,
-			`add_time`,
-			`update_time`,
-			`expire_time`,
-			`deleted`
-		FROM
-			lite_mall_groupon_rules
-		<where>
-			<if test="storeId != null "> `store_id` = #{storeId}</if>
-			<if test="deleted != null "> and `deleted` = #{deleted}</if>
-		</where>
-		ORDER BY
-			add_time DESC
-	</select>
 
 </mapper>

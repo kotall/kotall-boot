@@ -3,15 +3,6 @@
 
 <mapper namespace="com.kotall.rms.common.dao.sys.SysDictMapper">
 	
-	<select id="countMacroChildren" resultType="int">
-		SELECT
-			COUNT(*)
-		FROM
-			sys_dict
-		WHERE
-			type_id = #{value}
-	</select>
-	
 	<select id="list" resultType="com.kotall.rms.common.entity.sys.SysDictEntity">
 		SELECT
 			m.dict_id,
@@ -50,7 +41,7 @@
 			order_num ASC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO sys_dict (
 			type_id,
 			name,
@@ -73,7 +64,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.sys.SysDictEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.sys.SysDictEntity">
 		SELECT
 			m.dict_id,
 			m.type_id,
@@ -94,7 +85,7 @@
 		FROM
 			sys_dict m
 		WHERE
-			m.dict_id = #{macroId}
+			m.dict_id = #{dictId}
 	</select>
 	
 	<update id="update">
@@ -113,7 +104,7 @@
 			dict_id = #{macroId}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			sys_dict
@@ -123,5 +114,21 @@
 			#{id}
 		</foreach>
 	</delete>
+
+	<select id="countMacroChildren" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			sys_dict
+		WHERE
+			type_id = #{value}
+	</select>
+
+	<select id="countTotal" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			sys_dict m
+	</select>
 
 </mapper>

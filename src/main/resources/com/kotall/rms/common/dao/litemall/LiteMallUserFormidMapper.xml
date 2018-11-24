@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallUserFormidMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserFormidEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserFormidEntity">
 		SELECT
 			`id`, 
 			`store_id`, 
@@ -28,7 +28,7 @@
 			add_time DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_user_formid (
 			`store_id`, 
 			`formId`, 
@@ -53,7 +53,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserFormidEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserFormidEntity">
 		SELECT
 			`id`, 
 			`store_id`, 
@@ -88,7 +88,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_user_formid
@@ -99,29 +99,5 @@
 		</foreach>
 	</delete>
 
-	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserFormidEntity">
-		SELECT
-			`id`,
-			`store_id`,
-			`formId`,
-			`isprepay`,
-			`useAmount`,
-			`expire_time`,
-			`openId`,
-			`add_time`,
-			`update_time`,
-			`deleted`
-		FROM
-			lite_mall_user_formid
-		<where>
-			<if test="storeId != null"> `store_id` = #{storeId}</if>
-			<if test="formId != null"> and `formId` = #{formId}</if>
-			<if test="isprepay != null"> and `isprepay` = #{isprepay}</if>
-			<if test="openId != null"> and `openid` = #{openId}</if>
-			<if test="deleted != null"> and `deleted` = #{deleted}</if>
-		</where>
-		ORDER BY
-			add_time DESC
-	</select>
 
 </mapper>

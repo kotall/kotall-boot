@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallCategoryMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -20,14 +20,24 @@
 			`deleted`
 		FROM
 			lite_mall_category
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="storeId != null and storeId !='' ">`store_id` = #{storeId}</if>
+			<if test="deleted != null and deleted !='' "> and `deleted` = #{deleted}</if>
+			<if test="level != null and level !='' "> and `level` = #{level}</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter} </if>
+			<if test="ids != null and ids.size()>0 ">
+				and id in
+				<foreach collection="ids" item="id" separator="," open="(" close=")">
+					#{id}
+				</foreach>
+
+			</if>
+		</where>
 		ORDER BY
-			id DESC
+			add_time DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_category (
 			`store_id`,
 			`name`,
@@ -58,7 +68,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -120,7 +130,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_category
@@ -130,39 +140,6 @@
 			#{id}
 		</foreach>
 	</delete>
-
-	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity">
-		SELECT
-			`id`,
-			`store_id`,
-			`name`,
-			`keywords`,
-			`desc`,
-			`pid`,
-			`icon_url`,
-			`pic_url`,
-			`level`,
-			`sort_order`,
-			`add_time`,
-			`update_time`,
-			`deleted`
-		FROM
-			lite_mall_category
-		<where>
-			<if test="storeId != null and storeId !='' ">`store_id` = #{storeId}</if>
-			<if test="deleted != null and deleted !='' "> and `deleted` = #{deleted}</if>
-			<if test="level != null and level !='' "> and `level` = #{level}</if>
-			<if test="ids != null and ids.size()>0 ">
-				and id in
-				<foreach collection="ids" item="id" separator="," open="(" close=")">
-					#{id}
-				</foreach>
-
-			</if>
-		</where>
-		ORDER BY
-			id DESC
-	</select>
 
 	<select id="listByPid" resultType="com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity">
 		SELECT

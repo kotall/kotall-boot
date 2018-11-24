@@ -2,6 +2,7 @@ package com.kotall.rms.core.manager.sys.impl;
 
 import com.kotall.rms.common.dao.sys.SysDictMapper;
 import com.kotall.rms.common.entity.sys.SysDictEntity;
+import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.manager.BaseManagerImpl;
 import com.kotall.rms.core.manager.sys.SysDictManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class SysDictManagerImpl extends BaseManagerImpl<SysDictMapper, SysDictEn
 	
 	@Override
 	public List<SysDictEntity> listDict() {
-		return sysDictMapper.list();
+		return sysDictMapper.list(new Query());
 	}
 
 	@Override

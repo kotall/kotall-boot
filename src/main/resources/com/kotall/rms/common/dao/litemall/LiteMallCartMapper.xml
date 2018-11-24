@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallCartMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallCartEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallCartEntity">
 		SELECT
 			`id`, 
 			`store_id`, 
@@ -26,7 +26,7 @@
 			add_time DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_cart (
 			`store_id`, 
 			`user_id`, 
@@ -61,7 +61,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallCartEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallCartEntity">
 		SELECT
 			`id`, 
 			`store_id`, 
@@ -106,7 +106,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_cart
@@ -116,39 +116,6 @@
 			#{id}
 		</foreach>
 	</delete>
-
-	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallCartEntity">
-		SELECT
-			`id`,
-			`store_id`,
-			`user_id`,
-			`goods_id`,
-			`goods_sn`,
-			`goods_name`,
-			`product_id`,
-			`price`,
-			`number`,
-			`specifications`,
-			`checked`,
-			`pic_url`,
-			`add_time`,
-			`update_time`,
-			`deleted`
-		FROM
-			lite_mall_cart
-		<where>
-			<if test="storeId != null" >`store_id` = #{storeId}</if>
-			<if test="userId != null" >`user_id` = #{userId}</if>
-			<if test="goodsId != null" >`goods_id` = #{goodsId}</if>
-			<if test="goodsSn != null" >`goods_sn` = #{goodsSn}</if>
-			<if test="goodsName != null" >`goods_name` = #{goodsName}</if>
-			<if test="productId != null" >`product_id` = #{productId}</if>
-			<if test="checked != null" >`checked` = #{checked}</if>
-			<if test="deleted != null" >`deleted` = #{deleted}</if>
-		</where>
-		ORDER BY
-			add_time DESC
-	</select>
 
 	<update id="updateCart">
 		UPDATE lite_mall_cart

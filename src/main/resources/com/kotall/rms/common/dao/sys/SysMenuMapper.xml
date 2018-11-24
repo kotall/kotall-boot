@@ -3,15 +3,6 @@
 
 <mapper namespace="com.kotall.rms.common.dao.sys.SysMenuMapper">
 	
-	<select id="countMenuChildren" resultType="int">
-		SELECT
-			COUNT(*)
-		FROM
-			sys_menu
-		WHERE
-			parent_id = #{value}
-	</select>
-	
 	<select id="list" resultType="com.kotall.rms.common.entity.sys.SysMenuEntity">
 		SELECT
 			m.menu_id,
@@ -33,9 +24,9 @@
 			m.order_num
 		FROM
 			sys_menu m
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter} </if>
+		</where>
 		ORDER BY
 			m.order_num ASC
 	</select>
@@ -70,7 +61,7 @@
 			parent_id = #{parentId} order by order_num asc
 	</select>
 	
-	<insert id="save" parameterType="com.kotall.rms.common.entity.sys.SysMenuEntity">
+	<insert id="insert" parameterType="com.kotall.rms.common.entity.sys.SysMenuEntity">
 		INSERT INTO sys_menu (
 		    menu_id,
 			parent_id,
@@ -97,7 +88,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.sys.SysMenuEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.sys.SysMenuEntity">
 		SELECT
 			m.menu_id,
 			m.parent_id,
@@ -137,7 +128,7 @@
 		where menu_id = #{menuId}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			sys_menu
@@ -170,4 +161,23 @@
 		m.order_num ASC
 	</select>
 
+	<select id="countMenuChildren" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM
+		sys_menu
+		WHERE
+		parent_id = #{value}
+	</select>
+
+	<select id="countTotal" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+		sys_menu m
+		<where>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter} </if>
+		</where>
+
+	</select>
 </mapper>

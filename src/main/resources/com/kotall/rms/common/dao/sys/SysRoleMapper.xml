@@ -5,16 +5,6 @@
 	
 	<select id="list" resultType="com.kotall.rms.common.entity.sys.SysRoleEntity">
 		SELECT
-			role_id,
-			role_name
-		FROM
-			sys_role
-		ORDER BY
-			role_id ASC
-	</select>
-	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.sys.SysRoleEntity">
-		SELECT
 			result.role_id,
 			result.org_id,
 			(
@@ -46,7 +36,7 @@
 			result.role_id ASC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO sys_role (
 			role_name,
 			role_sign,
@@ -65,7 +55,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.sys.SysRoleEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.sys.SysRoleEntity">
 		SELECT
 			result.role_id,
 			result.org_id,
@@ -99,7 +89,7 @@
 			role_id = #{roleId}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			sys_role
@@ -119,6 +109,24 @@
 		LEFT JOIN sys_user u ON ur.user_id = u.user_id
 		WHERE
 			u.user_id = #{role}
+	</select>
+
+	<select id="countTotal" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			sys_role result
+		<where>
+			<if test="userIdCreate != null">
+				and result.user_id_create = #{userIdCreate}
+			</if>
+			<if test="roleName != null and roleName.trim() != ''">
+				AND result.role_name LIKE concat('%',#{roleName},'%')
+			</if>
+			<if test="sql_filter != null and sql_filter.trim() !='' ">
+				AND ${sql_filter}
+			</if>
+		</where>
 	</select>
 
 </mapper>

@@ -18,35 +18,35 @@ public interface BaseMapper<T> {
 	 * @param t
 	 * @return
 	 */
-	int save(T t);
+	int insert(T t);
 	
 	/**
 	 * 新增
 	 * @param query
 	 * @return
 	 */
-	int save(Query query);
+	int insert(Query query);
 	
 	/**
 	 * 批量新增
 	 * @param items
 	 * @return
 	 */
-	int batchSave(List<T> items);
+	int batchInsert(List<T> items);
 	
 	/**
 	 * 查询详情
-	 * @param t
+	 * @param query
 	 * @return
 	 */
-	T getObject(T t);
+	T getObject(Query query);
 	
 	/**
 	 * 根据id查询详情
 	 * @param id
 	 * @return
 	 */
-	T getObjectById(Object id);
+	T getById(Object id);
 
 	/**
 	 * 根据ID更新
@@ -75,62 +75,45 @@ public interface BaseMapper<T> {
 	 * @return
 	 */
 	int batchUpdate(Query query);
-	
+
+
+	/**
+	 * 根据ID删除
+	 * @param id
+	 * @return
+	 */
+	int deleteById(Object id);
+
 	/**
 	 * 删除
-	 * @param id
+	 * @param query
 	 * @return
 	 */
-	int remove(Object id);
+	int delete(Query query);
 	
-	/**
-	 * 逻辑删除
-	 * @param id
-	 * @return
-	 */
-	int removeLogic(Object id);
-	
+
 	/**
 	 * 批量删除
 	 * @param id
 	 * @return
 	 */
-	int batchRemove(Object[] id);
-	
-	/**
-	 * 批量逻辑删除
-	 * @param id
-	 * @return
-	 */
-	int batchRemoveLogic(Object[] id);
-	
-	/**
-	 * 分页查询列表
-	 * @param page
-	 * @param query
-	 * @return
-	 */
-	List<T> listForPage(Page<T> page, Query query);
-	
+	int batchDelete(Object[] id);
+
 	/**
 	 * 查询列表
 	 * @param query
 	 * @return
 	 */
 	List<T> list(Query query);
-	
+
 	/**
-	 * 查询列表
+	 * 分页查询列表
+	 * @param query
+	 * @param page
 	 * @return
 	 */
-	List<T> list();
-	
-	/**
-	 * 统计
-	 * @return
-	 */
-	int countTotal();
-	
+	List<T> list(Query query, Page<T> page);
+
 	/**
 	 * 统计
 	 * @param query

@@ -92,7 +92,7 @@ public class SysMenuManagerImpl extends BaseManagerImpl<SysMenuMapper, SysMenuEn
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public int batchRemove(Integer[] id) {
-		int count = sysMenuMapper.batchRemove(id);
+		int count = sysMenuMapper.batchDelete(id);
 		sysRoleMenuMapper.batchRemoveByMenuId(id);
 		return count;
 	}

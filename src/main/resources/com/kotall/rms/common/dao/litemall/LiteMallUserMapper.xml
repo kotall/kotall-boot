@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallUserMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -38,7 +38,7 @@
 			add_time DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_user (
 			`store_id`,
 			`username`,
@@ -77,7 +77,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -126,7 +126,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_user
@@ -137,40 +137,5 @@
 		</foreach>
 	</delete>
 
-	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallUserEntity">
-		SELECT
-			`id`,
-			`store_id`,
-			`username`,
-			`password`,
-			`gender`,
-			`birthday`,
-			`last_login_time`,
-			`last_login_ip`,
-			`user_level`,
-			`nickname`,
-			`mobile`,
-			`avatar`,
-			`weixin_openid`,
-			`status`,
-			`add_time`,
-			`update_time`,
-			`deleted`
-		FROM
-			lite_mall_user
-		<where>
-			<if test="storeId != null"> `store_id` = #{storeId}</if>
-			<if test="weixinOpenid != null"> and `weixin_openid` = #{weixinOpenid}</if>
-			<if test="username != null"> and `username` = #{username}</if>
-			<if test="nickname != null"> and `nickname` = #{nickname}</if>
-			<if test="userLevel != null"> and `user_level` = #{userLevel}</if>
-			<if test="gender != null"> and `gender` = #{gender}</if>
-			<if test="deleted != null"> and `deleted` = #{deleted}</if>
-			<if test="mobile != null"> and `mobile` = #{mobile}</if>
-			<if test="status != null"> and `status` = #{status}</if>
-		</where>
-		ORDER BY
-			add_time DESC
-	</select>
 
 </mapper>

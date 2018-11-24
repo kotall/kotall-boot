@@ -78,7 +78,7 @@ public class ScheduleJob extends QuartzJobBean {
 			log.setError(StringUtils.substring(e.toString(), 0, 2000));
 			
 		} finally {
-			sysJobLogMapper.save(log);
+			sysJobLogMapper.insert(log);
 		}
     }
 }

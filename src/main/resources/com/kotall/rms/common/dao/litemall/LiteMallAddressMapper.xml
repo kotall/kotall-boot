@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallAddressMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallAddressEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallAddressEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -32,7 +32,7 @@
 			add_time DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_address (
 			`store_id`,
 			`name`,
@@ -63,7 +63,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallAddressEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallAddressEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -104,7 +104,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_address
@@ -145,33 +145,4 @@
 			userId = #{query.userId}
 		AND deleted = #{query.deleted}
 	</update>
-
-	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallAddressEntity">
-		SELECT
-			`id`,
-			`store_id`,
-			`name`,
-			`user_id`,
-			`province_id`,
-			`city_id`,
-			`area_id`,
-			`address`,
-			`mobile`,
-			`is_default`,
-			`add_time`,
-			`update_time`,
-			`deleted`
-		FROM
-			lite_mall_address
-		<where>
-			<if test="storeId != null "> `store_id` = #{storeId}</if>
-			<if test="userId != null "> and `user_id` = #{userId}</if>
-			<if test="isDefault != null "> and `is_default` = #{isDefault}</if>
-			<if test="deleted != null "> and `deleted` = #{deleted}</if>
-			<if test="mobile != null "> and `mobile` = #{mobile}</if>
-		</where>
-		ORDER BY
-			id DESC
-	</select>
-
 </mapper>

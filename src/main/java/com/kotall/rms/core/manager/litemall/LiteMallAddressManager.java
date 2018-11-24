@@ -20,7 +20,7 @@ public interface LiteMallAddressManager extends BaseManager<LiteMallAddressEntit
 //
 //	List<LiteMallAddressEntity> queryByList(Query query);
 //
-//	int save(LiteMallAddressEntity liteMallAddress);
+//	int insert(LiteMallAddressEntity liteMallAddress);
 //
 //	LiteMallAddressEntity getById(Integer id);
 //

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.litemall.LiteMallSearchHistoryMapper">
 	
-	<select id="listForPage" resultType="com.kotall.rms.common.entity.litemall.LiteMallSearchHistoryEntity">
+	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallSearchHistoryEntity">
 		SELECT
 			`id`, 
 			`store_id`,
@@ -29,7 +29,7 @@
 			add_time DESC
 	</select>
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO lite_mall_search_history (
 			`store_id`,
 			`user_id`,
@@ -50,7 +50,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.litemall.LiteMallSearchHistoryEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallSearchHistoryEntity">
 		SELECT
 			`store_id`,
 			`id`,
@@ -81,7 +81,7 @@
 			id = #{id}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			lite_mall_search_history
@@ -107,29 +107,5 @@
 		</where>
 	</delete>
 
-	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallSearchHistoryEntity">
-		SELECT
-			`id`,
-			`store_id`,
-			`user_id`,
-			`keyword`,
-			`from`,
-			`add_time`,
-			`update_time`,
-			`deleted`
-		FROM
-			lite_mall_search_history
-		<where>
-			<if test="storeId != null">`store_id` = #{storeId}</if>
-			<if test="userId != null"> and `user_id` = #{userId}</if>
-			<if test="keyword != null"> and `keyword` = #{keyword}</if>
-			<if test="from != null"> and `from` = #{from}</if>
-			<if test="addTime != null"> and `add_time` = #{addTime}</if>
-			<if test="updateTime != null"> and `update_time` = #{updateTime}</if>
-			<if test="deleted != null"> and `deleted` = #{deleted}</if>
-		</where>
-		ORDER BY
-			add_time DESC
-	</select>
 
 </mapper>

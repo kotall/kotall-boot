@@ -38,7 +38,7 @@ public class SysRoleManagerImpl extends BaseManagerImpl<SysRoleMapper, SysRoleEn
 
 	@Override
 	public SysRoleEntity getRoleById(Integer id) {
-		SysRoleEntity role = sysRoleMapper.getObjectById(id);
+		SysRoleEntity role = sysRoleMapper.getById(id);
 		List<Integer> menuId = sysRoleMenuMapper.listMenuId(id);
 		List<Integer> orgId = sysRoleOrgMapper.listOrgId(id);
 		role.setMenuIdList(menuId);
@@ -49,7 +49,7 @@ public class SysRoleManagerImpl extends BaseManagerImpl<SysRoleMapper, SysRoleEn
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public int batchRemove(Integer[] id) {
-		int count = sysRoleMapper.batchRemove(id);
+		int count = sysRoleMapper.batchDelete(id);
 		sysUserRoleMapper.batchRemoveByRoleId(id);
 		sysRoleMenuMapper.batchRemoveByRoleId(id);
 		sysRoleOrgMapper.batchRemoveByRoleId(id);
@@ -58,19 +58,19 @@ public class SysRoleManagerImpl extends BaseManagerImpl<SysRoleMapper, SysRoleEn
 
 	@Override
 	public List<SysRoleEntity> queryAll() {
-		return sysRoleMapper.list();
+		return sysRoleMapper.list(new Query());
 	}
 
 	@Override
 	public int updateRoleOptAuthorization(SysRoleEntity role) {
 		Integer roleId = role.getRoleId();
-		int count = sysRoleMenuMapper.remove(roleId);
+		int count = sysRoleMenuMapper.deleteById(roleId);
 		Query query = new Query();
 		query.put("roleId", roleId);
 		List<Integer> menuId = role.getMenuIdList();
 		if(menuId.size() > 0) {
 			query.put("menuIdList", role.getMenuIdList());
-			count = sysRoleMenuMapper.save(query);
+			count = sysRoleMenuMapper.insert(query);
 		}
 		return count;
 	}
@@ -79,13 +79,13 @@ public class SysRoleManagerImpl extends BaseManagerImpl<SysRoleMapper, SysRoleEn
 	@Transactional(rollbackFor = Exception.class)
 	public int updateRoleDataAuthorization(SysRoleEntity role) {
 		Integer roleId = role.getRoleId();
-		int count = sysRoleOrgMapper.remove(roleId);
+		int count = sysRoleOrgMapper.deleteById(roleId);
 		Query query = new Query();
 		query.put("roleId", roleId);
 		List<Integer> orgId = role.getOrgIdList();
 		if(orgId.size() > 0) {
 			query.put("orgIdList", role.getOrgIdList());
-			count = sysRoleOrgMapper.save(query);
+			count = sysRoleOrgMapper.insert(query);
 		}
 		return count;
 	}

@@ -3,15 +3,6 @@
 
 <mapper namespace="com.kotall.rms.common.dao.sys.SysOrgMapper">
 	
-	<select id="countOrgChildren" resultType="int">
-		SELECT
-			COUNT(*)
-		FROM
-			sys_org
-		WHERE
-			parent_id = #{value}
-	</select>
-	
 	<select id="list" resultType="com.kotall.rms.common.entity.sys.SysOrgEntity">
 		SELECT
 			o.org_id,
@@ -30,14 +21,14 @@
 			o.order_num
 		FROM
 			sys_org o
-		<if test="sql_filter != null and sql_filter.trim() !='' ">
-			WHERE ${sql_filter}
-		</if>
+		<where>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter}</if>
+		</where>
 		ORDER BY
 			o.order_num ASC
 	</select>	
 		
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO sys_org (
 			org_id,
 			parent_id,
@@ -58,7 +49,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="com.kotall.rms.common.entity.sys.SysOrgEntity">
+	<select id="getById" resultType="com.kotall.rms.common.entity.sys.SysOrgEntity">
 		SELECT
 			o.org_id,
 			o.parent_id,
@@ -93,7 +84,7 @@
 		where org_id = #{orgId}
 	</update>
 	
-	<delete id="batchRemove">
+	<delete id="batchDelete">
 		DELETE
 		FROM
 			sys_org
@@ -112,6 +103,25 @@
 		WHERE o.parent_id = #{id}
 		ORDER BY
 			o.order_num ASC
+	</select>
+
+	<select id="countOrgChildren" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			sys_org
+		WHERE
+			parent_id = #{value}
+	</select>
+
+	<select id="countTotal" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			sys_org o
+		<where>
+			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter}</if>
+		</where>
 	</select>
 
 </mapper>

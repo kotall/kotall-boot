@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.sys.SysUserRoleMapper">
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO sys_user_role (`user_id`, `role_id`)
 		VALUES
 		<foreach collection="roleIdList" item="item" index="index" separator="," >
@@ -14,7 +14,7 @@
 		</foreach>
 	</insert>
 	
-	<delete id="remove">
+	<delete id="delete">
 		DELETE
 		FROM
 			sys_user_role

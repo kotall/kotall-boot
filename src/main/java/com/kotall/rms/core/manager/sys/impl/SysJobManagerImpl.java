@@ -24,7 +24,7 @@ public class SysJobManagerImpl extends BaseManagerImpl<SysJobMapper, SysJobEntit
 	
 	@Override
 	public List<SysJobEntity> listNormalJob() {
-		return sysJobMapper.list();
+		return sysJobMapper.list(new Query());
 	}
 
 	@Override

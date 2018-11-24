@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kotall.rms.common.dao.sys.SysRoleOrgMapper">
 	
-	<insert id="save">
+	<insert id="insert">
 		INSERT INTO sys_role_org (
 			role_id,
 			org_id
@@ -48,7 +48,7 @@
 		</foreach>
 	</delete>
 
-	<delete id="remove">
+	<delete id="delete">
 		DELETE
 		FROM 
 			sys_role_org
