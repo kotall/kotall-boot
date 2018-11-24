@@ -1,4 +1,4 @@
-package com.kotall.rms.common.dao.sys;
+package com.kotall.rms.common.dao;
 
 import java.util.List;
 

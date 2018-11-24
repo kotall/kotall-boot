@@ -2,6 +2,7 @@ package com.kotall.rms.common.dao.sys;
 
 import java.util.List;
 
+import com.kotall.rms.common.dao.BaseMapper;
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import org.apache.ibatis.annotations.Mapper;

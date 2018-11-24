@@ -4,7 +4,7 @@ import com.kotall.rms.common.utils.Query;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.kotall.rms.common.entity.litemall.LiteMallCartEntity;
-import com.kotall.rms.common.dao.sys.BaseMapper;
+import com.kotall.rms.common.dao.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 /**

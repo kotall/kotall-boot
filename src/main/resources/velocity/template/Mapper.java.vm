@@ -3,7 +3,7 @@ package ${package}.common.dao.${module};
 import org.apache.ibatis.annotations.Mapper;
 
 import ${package}.common.entity.${module}.${className}Entity;
-import com.kotall.rms.common.dao.sys.BaseMapper;
+import com.kotall.rms.common.dao.BaseMapper;
 
 /**
  * ${comments}

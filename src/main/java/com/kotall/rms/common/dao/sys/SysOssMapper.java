@@ -2,6 +2,7 @@
 package com.kotall.rms.common.dao.sys;
 
 
+import com.kotall.rms.common.dao.BaseMapper;
 import com.kotall.rms.common.entity.sys.SysOssEntity;
 import org.apache.ibatis.annotations.Mapper;
 

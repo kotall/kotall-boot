@@ -1,7 +1,7 @@
 package com.kotall.rms.common.dao.litemall;
 
 
-import com.kotall.rms.common.dao.sys.BaseMapper;
+import com.kotall.rms.common.dao.BaseMapper;
 import com.kotall.rms.common.entity.litemall.LiteMallStorageEntity;
 import com.kotall.rms.common.entity.litemall.LitemallStorageExample;
 import org.apache.ibatis.annotations.Mapper;

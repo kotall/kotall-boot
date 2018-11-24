@@ -1,6 +1,6 @@
 package com.kotall.rms.core.manager;
 
-import com.kotall.rms.common.dao.sys.BaseMapper;
+import com.kotall.rms.common.dao.BaseMapper;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Query;
 import org.springframework.beans.factory.annotation.Autowired;

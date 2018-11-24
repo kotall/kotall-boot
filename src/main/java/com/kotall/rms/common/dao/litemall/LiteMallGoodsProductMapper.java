@@ -3,7 +3,7 @@ package com.kotall.rms.common.dao.litemall;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.kotall.rms.common.entity.litemall.LiteMallGoodsProductEntity;
-import com.kotall.rms.common.dao.sys.BaseMapper;
+import com.kotall.rms.common.dao.BaseMapper;
 
 /**
  * 商品货品表
