@@ -48,12 +48,20 @@
 		</foreach>
 	</delete>
 
-	<delete id="delete">
+	<delete id="deleteById">
+		DELETE
+		FROM
+			sys_role_org
+		WHERE
+			id = #{value}
+	</delete>
+
+	<delete id="deleteByRoleId">
 		DELETE
 		FROM 
 			sys_role_org
 		WHERE 
-			role_id = #{value}
+			role_id = #{roleId}
 	</delete>
 
 	<select id="queryOrgIdList" resultType="int">

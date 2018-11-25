@@ -23,4 +23,6 @@ public interface SysRoleOrgMapper extends BaseMapper<SysRoleOrgEntity> {
 
 
     List<Integer> queryOrgIdList(Integer[] roleIds);
+
+	int deleteByRoleId(Integer roleId);
 }

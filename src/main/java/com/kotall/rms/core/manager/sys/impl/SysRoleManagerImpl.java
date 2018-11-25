@@ -79,7 +79,7 @@ public class SysRoleManagerImpl extends BaseManagerImpl<SysRoleMapper, SysRoleEn
 	@Transactional(rollbackFor = Exception.class)
 	public int updateRoleDataAuthorization(SysRoleEntity role) {
 		Integer roleId = role.getRoleId();
-		int count = sysRoleOrgMapper.deleteById(roleId);
+		int count = sysRoleOrgMapper.deleteByRoleId(roleId);
 		Query query = new Query();
 		query.put("roleId", roleId);
 		List<Integer> orgId = role.getOrgIdList();
