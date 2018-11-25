@@ -42,7 +42,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="updateById">
 		UPDATE sys_user_token
 	 	<set> 
 			<if test="token != null">token = #{token}, </if>
