@@ -1,11 +1,11 @@
 package com.kotall.rms.web.controller.sys;
 
-import com.kotall.rms.core.annotation.SysLog;
-import com.kotall.rms.common.utils.Result;
-import com.kotall.rms.core.constants.Constant;
-import com.kotall.rms.web.util.ResultKit;
 import com.kotall.rms.common.entity.sys.SysOrgEntity;
+import com.kotall.rms.common.utils.Result;
+import com.kotall.rms.core.annotation.SysLog;
+import com.kotall.rms.core.constants.Constant;
 import com.kotall.rms.core.service.sys.SysOrgService;
+import com.kotall.rms.web.util.ResultKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -88,21 +88,10 @@ public class SysOrgController extends AbstractController {
 	 */
 	@RequestMapping("/rootInfo")
 	public Result rootInfo() {
-		long deptId = 0;
+		int deptId = 0;
 		if(getUserId() != Constant.SUPER_ADMIN){
-			List<SysOrgEntity> deptList = sysOrgService.queryByList(new HashMap<>());
-			Integer parentId = null;
-			for(SysOrgEntity sysDeptEntity : deptList){
-				if(parentId == null){
-					parentId = sysDeptEntity.getParentId();
-					continue;
-				}
-
-				if(parentId > sysDeptEntity.getParentId().longValue()){
-					parentId = sysDeptEntity.getParentId();
-				}
-			}
-			deptId = parentId;
+			List<SysOrgEntity> deptList = sysOrgService.queryDeptByList(new HashMap<>());
+			deptId = this.sysOrgService.getRootDeptId(deptList);
 		}
 
 		return Result.ok().put("orgId", deptId);

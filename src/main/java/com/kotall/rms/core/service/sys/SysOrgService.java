@@ -22,4 +22,11 @@ public interface SysOrgService extends BaseService<SysOrgEntity> {
 
 	List<Integer> getSubOrgIdList(Integer orgId);
 
+	/**
+	 * 根据机构列表， 分析出根机构ID
+	 * @param deptList
+	 * @return
+	 */
+	Integer getRootDeptId(List<SysOrgEntity> deptList);
+
 }

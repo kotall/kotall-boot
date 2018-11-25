@@ -72,4 +72,21 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgManager, SysOrgEnti
 		}
 	}
 
+	@Override
+	public Integer getRootDeptId(List<SysOrgEntity> deptList) {
+		Integer deptId;
+		Integer parentId = null;
+		for(SysOrgEntity sysDeptEntity : deptList){
+			if(parentId == null){
+				parentId = sysDeptEntity.getParentId();
+				continue;
+			}
+
+			if(parentId > sysDeptEntity.getParentId()){
+				parentId = sysDeptEntity.getParentId();
+			}
+		}
+		deptId = parentId;
+		return deptId;
+	}
 }
