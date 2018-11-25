@@ -25,7 +25,7 @@ function getGrid() {
 			{checkbox: true},
 			{field : "name", title : "类目名称", width : "100px"}, 
 			{field : "keywords", title : "类目关键字", width : "100px"},
-			{field : "desc", title : "类目广告语介绍", width : "100px"}, 
+			/*{field : "desc", title : "类目广告语介绍", width : "100px"}, */
 			{field : "pid", title : "父类目ID", width : "100px"}, 
 			{field : "iconUrl", title : "类目图标", width : "100px",
                 formatter : function(value, row, index) {
@@ -35,7 +35,15 @@ function getGrid() {
                 formatter : function(value, row, index) {
                     return '<img  src="'+value+'" class="img-rounded" width="80px">';
                 }},
-			{field : "level", title : "", width : "100px"}, 
+			{field : "level", title : "级别", width : "100px",
+                formatter : function(value, row, index) {
+				  if (value == 'L1'){
+                      return '<div class="cell"><span >一级类目</span></div>';
+				  }else{
+                      return '<div class="cell"><span >二级类目</span></div>';
+				  }
+
+                }},
 			{field : "sortOrder", title : "排序", width : "100px"}, 
 			{field : "addTime", title : "创建时间", width : "100px"}
 		]
