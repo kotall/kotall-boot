@@ -46,7 +46,7 @@
 			order_num ASC
 	</select>
 	
-	<select id="listParentId" resultType="com.kotall.rms.common.entity.sys.SysMenuEntity">
+	<select id="listByParentId" resultType="com.kotall.rms.common.entity.sys.SysMenuEntity">
 		SELECT
 			menu_id,
 			parent_id,

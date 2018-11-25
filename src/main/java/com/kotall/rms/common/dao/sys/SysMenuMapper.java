@@ -16,7 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysMenuMapper extends BaseMapper<SysMenuEntity> {
 	
-	List<SysMenuEntity> listParentId(Integer parentId);
+	List<SysMenuEntity> listByParentId(Integer parentId);
 	
 	List<SysMenuEntity> listNotButton();
 	

@@ -54,7 +54,7 @@
 			username = #{username}
 	</select>
 	
-	<select id="listAllMenuId" resultType="long">
+	<select id="listAllMenuId" resultType="int">
 		SELECT DISTINCT
 			rm.menu_id
 		FROM

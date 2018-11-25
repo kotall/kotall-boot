@@ -4,6 +4,7 @@ import com.kotall.rms.common.dao.sys.SysMenuMapper;
 import com.kotall.rms.common.dao.sys.SysRoleMenuMapper;
 import com.kotall.rms.common.dao.sys.SysUserMapper;
 import com.kotall.rms.common.entity.sys.SysMenuEntity;
+import com.kotall.rms.core.constants.Constant;
 import com.kotall.rms.core.enums.MenuType;
 import com.kotall.rms.core.manager.BaseManagerImpl;
 import com.kotall.rms.core.manager.sys.SysMenuManager;
@@ -34,7 +35,7 @@ public class SysMenuManagerImpl extends BaseManagerImpl<SysMenuMapper, SysMenuEn
 	
 	@Override
 	public List<SysMenuEntity> listUserMenu(Integer userId) {
-		if (1L == userId) {
+		if (Constant.SUPER_ADMIN == userId) {
 			return getAllMenuList(null);
 		}
 		List<Integer> menuIdList = sysUserMapper.listAllMenuId(userId);
@@ -46,11 +47,27 @@ public class SysMenuManagerImpl extends BaseManagerImpl<SysMenuMapper, SysMenuEn
 	 */
 	private List<SysMenuEntity> getAllMenuList(List<Integer> menuIdList){
 		// 查询根菜单列表
-		List<SysMenuEntity> menuList = listParentId(0, menuIdList);
+		List<SysMenuEntity> menuList = queryUserAuthParentMenuList(0, menuIdList);
 		// 递归获取子菜单
 		getMenuTreeList(menuList, menuIdList);
 		
 		return menuList;
+	}
+
+	@Override
+	public List<SysMenuEntity> queryUserAuthParentMenuList(Integer parentId, List<Integer> menuIdList) {
+		List<SysMenuEntity> menuList = sysMenuMapper.listByParentId(parentId);
+		if(menuIdList == null){
+			return menuList;
+		}
+
+		List<SysMenuEntity> userMenuList = new ArrayList<>();
+		for(SysMenuEntity menu : menuList){
+			if(menuIdList.contains(menu.getMenuId())){
+				userMenuList.add(menu);
+			}
+		}
+		return userMenuList;
 	}
 
 	/**
@@ -61,27 +78,11 @@ public class SysMenuManagerImpl extends BaseManagerImpl<SysMenuMapper, SysMenuEn
 		
 		for(SysMenuEntity entity : menuList){
 			if(entity.getType() == MenuType.CATALOG.getValue()){//目录
-				entity.setList(getMenuTreeList(listParentId(entity.getMenuId(), menuIdList), menuIdList));
+				entity.setList(getMenuTreeList(queryUserAuthParentMenuList(entity.getMenuId(), menuIdList), menuIdList));
 			}
 			subMenuList.add(entity);
 		}
 		return subMenuList;
-	}
-
-	@Override
-	public List<SysMenuEntity> listParentId(Integer parentId, List<Integer> menuIdList) {
-		List<SysMenuEntity> menuList = sysMenuMapper.listParentId(parentId);
-		if(menuIdList == null){
-			return menuList;
-		}
-		
-		List<SysMenuEntity> userMenuList = new ArrayList<>();
-		for(SysMenuEntity menu : menuList){
-			if(menuIdList.contains(menu.getMenuId())){
-				userMenuList.add(menu);
-			}
-		}
-		return userMenuList;
 	}
 
 	@Override

@@ -13,9 +13,20 @@ import java.util.List;
  */
 public interface SysMenuManager extends BaseManager<SysMenuEntity> {
 
+	/**
+	 * 查询出用户所拥有的菜单列表
+	 * @param userId
+	 * @return
+	 */
 	List<SysMenuEntity> listUserMenu(Integer userId);
-	
-	List<SysMenuEntity> listParentId(Integer parentId, List<Integer> menuIdList);
+
+	/**
+	 * 根据已授权的菜单中筛选出根菜单
+	 * @param parentId
+	 * @param menuIdList
+	 * @return
+	 */
+	List<SysMenuEntity> queryUserAuthParentMenuList(Integer parentId, List<Integer> menuIdList);
 
 	List<SysMenuEntity> listNotButton();
 
