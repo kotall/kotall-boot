@@ -4,6 +4,7 @@ import com.kotall.rms.common.entity.sys.SysOrgEntity;
 import com.kotall.rms.core.service.BaseService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 组织机构
@@ -13,10 +14,12 @@ import java.util.List;
  */
 public interface SysOrgService extends BaseService<SysOrgEntity> {
 
+	List<SysOrgEntity> queryDeptByList(Map<String, Object> params);
 
 	int batchRemoveOrg(Integer[] id);
 
 	List<Integer> queryOrgIdList(Integer parentId);
 
 	List<Integer> getSubOrgIdList(Integer orgId);
+
 }

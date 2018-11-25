@@ -31,13 +31,12 @@ public class SysOrgController extends AbstractController {
 	/**
 	 * 机构列表
 	 * 根据用户所属的机构查询下级机构列表
-	 * 方法一： 用户点击子机构列表的时候去后台查询
-	 * 方法二： 一次性查询所有机构，应用中计算属性关系， 目前采用这种方法
+	 * 一次性查询所有机构，前端属性组件应用中计算属性关系
 	 * @return
 	 */
 	@RequestMapping("/list")
 	public List<SysOrgEntity> list() {
-		List<SysOrgEntity> sysOrgList = this.sysOrgService.queryByList(new HashMap<>());
+		List<SysOrgEntity> sysOrgList = this.sysOrgService.queryDeptByList(new HashMap<>());
 		return sysOrgList;
 	}
 	

@@ -17,7 +17,7 @@
 		</foreach>
 	</insert>
 	
-	<select id="listOrgId" resultType="long">
+	<select id="listOrgId" resultType="int">
 		SELECT
 			org_id
 		FROM
@@ -56,7 +56,7 @@
 			role_id = #{value}
 	</delete>
 
-	<select id="queryOrgIdList" resultType="long">
+	<select id="queryOrgIdList" resultType="int">
 		select
 			distinct(org_id)
 		from

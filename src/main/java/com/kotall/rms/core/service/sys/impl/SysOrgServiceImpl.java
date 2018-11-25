@@ -28,10 +28,8 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgManager, SysOrgEnti
 
 	@DeptFilter(subDept = true, user = false)
 	@Override
-	public List<SysOrgEntity> queryByList(Map<String, Object> params) {
-		Query form = new Query(params);
-		List<SysOrgEntity> sysOrgList = sysOrgManager.queryByList(form);
-		return sysOrgList;
+	public List<SysOrgEntity> queryDeptByList(Map<String, Object> params) {
+		return super.queryByList(params);
 	}
 
 	@Override

@@ -2,8 +2,10 @@ package com.kotall.rms.core.service.sys;
 
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.common.entity.sys.SysUserTokenEntity;
+import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.core.service.BaseService;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -13,6 +15,8 @@ import java.util.Set;
  * @date 2017年8月11日 上午11:45:42
  */
 public interface SysUserService extends BaseService<SysUserEntity> {
+
+	Page<SysUserEntity> queryUserByPage(Map<String, Object> params);
 
 	Set<String> listUserPerms(Integer userId);
 
@@ -33,4 +37,5 @@ public interface SysUserService extends BaseService<SysUserEntity> {
 	SysUserEntity getByUserName(String username);
 
 	Set<String> listUserRoles(Integer userId);
+
 }

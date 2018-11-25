@@ -34,7 +34,7 @@ import java.util.Set;
 @Aspect
 @Order(value = -1)
 @Component
-public class DataFilterAspect {
+public class DeptFilterAspect {
 
     @Autowired
     private SysOrgService sysOrgService;

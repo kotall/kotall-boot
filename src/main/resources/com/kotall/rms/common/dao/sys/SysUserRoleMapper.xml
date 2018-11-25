@@ -52,7 +52,7 @@
 		</foreach>
 	</delete>
 	
-	<select id="queryRoleIdList" resultType="long">
+	<select id="queryRoleIdList" resultType="int">
 		SELECT
 			role_id
 		FROM

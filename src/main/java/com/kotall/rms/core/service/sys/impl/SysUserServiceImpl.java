@@ -3,8 +3,10 @@ package com.kotall.rms.core.service.sys.impl;
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.common.entity.sys.SysUserTokenEntity;
 import com.kotall.rms.common.utils.MD5Utils;
+import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.RmsException;
+import com.kotall.rms.core.annotation.DeptFilter;
 import com.kotall.rms.core.constants.Constant;
 import com.kotall.rms.core.manager.sys.SysUserManager;
 import com.kotall.rms.core.service.BaseServiceImpl;
@@ -12,6 +14,7 @@ import com.kotall.rms.core.service.sys.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -25,6 +28,12 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserManager, SysUserE
 
 	@Autowired
 	private SysUserManager sysUserManager;
+
+	@DeptFilter(subDept = true, user = false)
+	@Override
+	public Page<SysUserEntity> queryUserByPage(Map<String, Object> params) {
+		return super.queryByPage(params);
+	}
 
 	@Override
 	public boolean save(SysUserEntity user) {

@@ -95,7 +95,7 @@
 		</foreach>
 	</delete>
 
-	<select id="queryOrgIdList" resultType="long">
+	<select id="queryOrgIdList" resultType="int">
 		SELECT
 			distinct(o.org_id)
 		FROM
