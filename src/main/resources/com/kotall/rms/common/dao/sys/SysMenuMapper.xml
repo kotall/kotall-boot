@@ -139,7 +139,7 @@
 		</foreach>
 	</delete>
 	
-	<select id="listUserPerms" parameterType="long" resultType="string">
+	<select id="listUserPerms" parameterType="integer" resultType="string">
 		SELECT DISTINCT
 			m.perms
 		FROM
