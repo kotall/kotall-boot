@@ -43,7 +43,7 @@ public class WxFootprintController {
     @PostMapping("delete")
     public Object delete(@LoginUser Integer userId, @RequestBody String body) {
         if(userId == null){
-            return Result.unlogin();
+            return Result.unLogin();
         }
         if(body == null){
             return Result.badArgument();
@@ -90,7 +90,7 @@ public class WxFootprintController {
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer size) {
         if(userId == null){
-            return Result.unlogin();
+            return Result.unLogin();
         }
 
         Map<String, Object> params = new HashMap<>();

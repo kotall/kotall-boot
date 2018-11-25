@@ -3,7 +3,7 @@ package com.kotall.rms.core.annotation;
 import java.lang.annotation.*;
 
 /**
- * 数据过滤
+ * 机构数据过滤
  *
  * @author zpwang
  * @version 1.0.0
@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface DataFilter {
+public @interface DeptFilter {
 
     /**  表的别名 */
     String tableAlias() default "";

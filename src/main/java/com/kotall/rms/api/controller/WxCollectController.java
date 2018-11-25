@@ -61,7 +61,7 @@ public class WxCollectController {
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer size) {
         if(userId == null){
-            return Result.unlogin();
+            return Result.unLogin();
         }
 
         Map<String, Object> params = new HashMap<>();
@@ -115,7 +115,7 @@ public class WxCollectController {
     @PostMapping("addordelete")
     public Object addordelete(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody String body) {
         if(userId == null){
-            return Result.unlogin();
+            return Result.unLogin();
         }
         if(body == null){
             return Result.badArgument();

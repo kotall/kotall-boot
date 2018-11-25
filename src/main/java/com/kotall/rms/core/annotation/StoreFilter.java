@@ -3,7 +3,7 @@ package com.kotall.rms.core.annotation;
 import java.lang.annotation.*;
 
 /**
- * litemall 数据过滤
+ * liteMall 店铺数据过滤
  *
  * @author zpwang
  * @version 1.0.0

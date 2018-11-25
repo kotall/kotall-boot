@@ -1,10 +1,10 @@
 
-package com.kotall.rms.core.aspect;
+package com.kotall.rms.core.annotation.support;
 
 
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.core.RmsException;
-import com.kotall.rms.core.annotation.DataFilter;
+import com.kotall.rms.core.annotation.DeptFilter;
 import com.kotall.rms.core.constants.Constant;
 import com.kotall.rms.core.service.sys.SysOrgService;
 import com.kotall.rms.core.service.sys.SysRoleOrgService;
@@ -43,7 +43,7 @@ public class DataFilterAspect {
     @Autowired
     private SysRoleOrgService sysRoleOrgService;
 
-    @Pointcut("@annotation(com.kotall.rms.core.annotation.DataFilter)")
+    @Pointcut("@annotation(com.kotall.rms.core.annotation.DeptFilter)")
     public void dataFilterCut() {
     }
 
@@ -67,7 +67,7 @@ public class DataFilterAspect {
      */
     private String getSQLFilter(SysUserEntity user, JoinPoint point){
         MethodSignature signature = (MethodSignature) point.getSignature();
-        DataFilter dataFilter = signature.getMethod().getAnnotation(DataFilter.class);
+        DeptFilter dataFilter = signature.getMethod().getAnnotation(DeptFilter.class);
         // 获取表的别名
         String tableAlias = dataFilter.tableAlias();
         if(StringUtils.isNotBlank(tableAlias)){

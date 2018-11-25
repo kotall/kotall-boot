@@ -46,7 +46,7 @@ public class LiteMallAddressServiceImpl extends BaseServiceImpl<LiteMallAddressM
 	@Override
 	public void resetDefault(Integer userId) {
 		LiteMallAddressEntity address = new LiteMallAddressEntity();
-		address.setIsDefault(0);
+		address.setIsDefault(false);
 		address.setUpdateTime(new Date());
 		Map<String, Object> params = new HashMap<>();
 		params.put("userId", userId);

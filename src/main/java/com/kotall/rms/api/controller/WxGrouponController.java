@@ -90,7 +90,7 @@ public class WxGrouponController {
                          @NotNull Integer grouponId,
                          @AppConfig LiteMallAppEntity appConfig) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
 
         LiteMallGrouponEntity groupon = grouponService.getById(grouponId);
@@ -216,7 +216,7 @@ public class WxGrouponController {
                      @AppConfig LiteMallAppEntity appConfig,
                      @RequestParam(defaultValue = "0") Integer showType) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
 
         List<LiteMallGrouponEntity> myGroupons;

@@ -34,7 +34,7 @@ public class WxUserFormId {
                          @NotNull String formId,
                          @AppConfig LiteMallAppEntity appConfig) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
 
         LiteMallUserEntity user = userService.getById(userId);

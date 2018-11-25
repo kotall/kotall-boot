@@ -56,7 +56,7 @@ public class WxCartController {
     @GetMapping("index")
     public Object index(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
 
         List<LiteMallCartEntity> cartList = cartService.queryByUserId(appConfig.getStoreId(), userId);
@@ -104,7 +104,7 @@ public class WxCartController {
     @PostMapping("add")
     public Object add(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody LiteMallCartEntity cart) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
         if (cart == null) {
             return Result.badArgument();
@@ -177,7 +177,7 @@ public class WxCartController {
     @PostMapping("fastadd")
     public Object fastadd(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig,@RequestBody LiteMallCartEntity cart) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
         if (cart == null) {
             return Result.badArgument();
@@ -242,7 +242,7 @@ public class WxCartController {
     @PostMapping("update")
     public Object update(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody LiteMallCartEntity cart) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
         if (cart == null) {
             return Result.badArgument();
@@ -307,7 +307,7 @@ public class WxCartController {
     @PostMapping("checked")
     public Object checked(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody String body) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
         if (body == null) {
             return Result.badArgument();
@@ -345,7 +345,7 @@ public class WxCartController {
     @PostMapping("delete")
     public Object delete(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody String body) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
         if (body == null) {
             return Result.badArgument();
@@ -425,7 +425,7 @@ public class WxCartController {
     @GetMapping("checkout")
     public Object checkout(@LoginUser Integer userId, Integer cartId, Integer addressId, Integer couponId, Integer grouponRulesId) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
 
         // 收货地址
@@ -530,8 +530,8 @@ public class WxCartController {
     @GetMapping("checkedCouponList")
     public Object checkedCouponList(@LoginUser Integer userId) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
-        return Result.unsupport();
+        return Result.unSupport();
     }
 }

@@ -3,7 +3,7 @@ package com.kotall.rms.web.controller.sys;
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Result;
-import com.kotall.rms.core.annotation.DataFilter;
+import com.kotall.rms.core.annotation.DeptFilter;
 import com.kotall.rms.core.annotation.SysLog;
 import com.kotall.rms.core.service.sys.SysUserService;
 import com.kotall.rms.web.util.ResultKit;
@@ -34,7 +34,7 @@ public class SysUserController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/list")
-	@DataFilter(subDept = true, user = false)
+	@DeptFilter(subDept = true, user = false)
 	public Page<SysUserEntity> list(@RequestBody Map<String, Object> params) {
 		params.put("userId", getUserId());
 		return sysUserService.queryByPage(params);

@@ -40,7 +40,7 @@ public class WxUserController {
     @GetMapping("index")
     public Object list(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig) {
         if(userId == null){
-            return Result.unlogin();
+            return Result.unLogin();
         }
 
         Map<Object, Object> data = new HashMap<>();

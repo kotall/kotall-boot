@@ -117,7 +117,7 @@ public class WxSearchController {
     @PostMapping("clearhistory")
     public Object clearhistory(@LoginUser Integer userId) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
         searchHistoryService.deleteByUserId(userId);
         return Result.ok();

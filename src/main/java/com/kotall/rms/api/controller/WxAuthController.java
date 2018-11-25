@@ -391,7 +391,7 @@ public class WxAuthController {
     @PostMapping("logout")
     public Object logout(@LoginUser Integer userId) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
         UserTokenManager.removeToken(userId);
         return Result.ok();

@@ -71,7 +71,7 @@ public class Result extends HashMap<String, Object> {
 		return error(404, "更新数据失败");
 	}
 
-	public static Object unlogin(){
+	public static Object unLogin(){
 		return error(501, "请登录");
 	}
 
@@ -79,7 +79,7 @@ public class Result extends HashMap<String, Object> {
 		return error(502, "系统内部错误");
 	}
 
-	public static Object unsupport(){
+	public static Object unSupport(){
 		return error(503, "业务不支持");
 	}
 }

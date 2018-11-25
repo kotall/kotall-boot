@@ -1,4 +1,4 @@
-package com.kotall.rms.core.aspect;
+package com.kotall.rms.core.annotation.support;
 
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.core.RmsException;

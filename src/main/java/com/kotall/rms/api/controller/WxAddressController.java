@@ -2,6 +2,7 @@ package com.kotall.rms.api.controller;
 
 import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.api.annotation.LoginUser;
+import com.kotall.rms.api.vo.AddressVO;
 import com.kotall.rms.common.entity.litemall.LiteMallAddressEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
 import com.kotall.rms.common.utils.RegexUtil;
@@ -16,9 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/wx/address")
@@ -47,23 +46,21 @@ public class WxAddressController {
     @GetMapping("list")
     public Object list(@LoginUser Integer userId) {
         if(userId == null){
-            return Result.unlogin();
+            return Result.unLogin();
         }
         List<LiteMallAddressEntity> addressList = addressService.queryByUserId(userId);
-        List<Map<String, Object>> addressVoList = new ArrayList<>(addressList.size());
+        List<AddressVO> addressVoList = new ArrayList<>(addressList.size());
         for(LiteMallAddressEntity address : addressList){
-            Map<String, Object> addressVo = new HashMap<>();
-            addressVo.put("id", address.getId());
-            addressVo.put("name", address.getName());
-            addressVo.put("mobile", address.getMobile());
-            addressVo.put("isDefault", address.getIsDefault());
-            String province = regionService.getById(address.getProvinceId()).getName();
-            String city = regionService.getById(address.getCityId()).getName();
-            String area = regionService.getById(address.getAreaId()).getName();
-            String addr = address.getAddress();
-            String detailedAddress = province + city + area + " " + addr;
-            addressVo.put("detailedAddress", detailedAddress);
-
+            AddressVO addressVo = new AddressVO();
+            addressVo.setId(address.getId());
+            addressVo.setName(address.getName());
+            addressVo.setMobile(address.getMobile());
+            addressVo.setIsDefault(address.getIsDefault());
+            String provinceName = regionService.getById(address.getProvinceId()).getName();
+            String cityName = regionService.getById(address.getCityId()).getName();
+            String areaName = regionService.getById(address.getAreaId()).getName();
+            String detailAddress = provinceName.concat(cityName).concat(areaName).concat(" ").concat(address.getAddress());
+            addressVo.setAddress(detailAddress);
             addressVoList.add(addressVo);
         }
         return Result.ok().put("data", addressVoList);
@@ -101,7 +98,7 @@ public class WxAddressController {
     public Object detail(@LoginUser Integer userId, @NotNull Integer id) {
 
         if(userId == null){
-            return Result.unlogin();
+            return Result.unLogin();
         }
 
         LiteMallAddressEntity address = addressService.getById(id);
@@ -109,25 +106,25 @@ public class WxAddressController {
             return Result.badArgumentValue();
         }
 
-        Map<Object, Object> data = new HashMap<>();
-        data.put("id", address.getId());
-        data.put("name", address.getName());
-        data.put("provinceId", address.getProvinceId());
-        data.put("cityId", address.getCityId());
-        data.put("areaId", address.getAreaId());
-        data.put("mobile", address.getMobile());
-        data.put("address", address.getAddress());
-        data.put("isDefault", address.getIsDefault());
-        String pname = regionService.getById(address.getProvinceId()).getName();
-        data.put("provinceName", pname);
-        String cname = regionService.getById(address.getCityId()).getName();
-        data.put("cityName", cname);
-        String dname = regionService.getById(address.getAreaId()).getName();
-        data.put("areaName", dname);
+        AddressVO data = new AddressVO();
+        data.setId(address.getId());
+        data.setName(address.getName());
+        data.setProvinceId(address.getProvinceId());
+        data.setCityId(address.getCityId());
+        data.setAreaId(address.getAreaId());
+        data.setMobile(address.getMobile());
+        data.setAddress(address.getAddress());
+        data.setIsDefault(address.getIsDefault());
+        String provinceName = regionService.getById(address.getProvinceId()).getName();
+        data.setProvinceName(provinceName);
+        String cityName = regionService.getById(address.getCityId()).getName();
+        data.setCityName(cityName);
+        String areaName = regionService.getById(address.getAreaId()).getName();
+        data.setAreaName(areaName);
         return Result.ok().put("data", data);
     }
 
-    private Object validate(LiteMallAddressEntity address) {
+    private Object validate(AddressVO address) {
         String name = address.getName();
         if(StringUtils.isEmpty(name)){
             return Result.badArgument();
@@ -171,7 +168,7 @@ public class WxAddressController {
             return Result.badArgument();
         }
 
-        Integer isDefault = address.getIsDefault();
+        Boolean isDefault = address.getIsDefault();
         if(isDefault == null){
             return Result.badArgument();
         }
@@ -188,28 +185,28 @@ public class WxAddressController {
      *   失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("save")
-    public Object save(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody LiteMallAddressEntity address) {
+    public Object save(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody AddressVO address) {
         if(userId == null){
-            return Result.unlogin();
+            return Result.unLogin();
         }
         Object error = validate(address);
         if(error != null){
             return error;
         }
 
-        if(address.getIsDefault() == 1){
+        if(address.getIsDefault()){
             // 重置其他收获地址的默认选项
             addressService.resetDefault(userId);
         }
 
         if (address.getId() == null || address.getId().equals(0)) {
             address.setId(null);
-            address.setStoreId(appConfig.getStoreId());
+            // address.setStoreId(appConfig.getStoreId());
             address.setUserId(userId);
-            addressService.save(address);
+            addressService.save(address.convertToEntity());
         } else {
             address.setUserId(userId);
-            if(addressService.update(address)){
+            if(addressService.update(address.convertToEntity())){
                 return Result.updatedDataFailed();
             }
         }
@@ -228,7 +225,7 @@ public class WxAddressController {
     @PostMapping("delete")
     public Object delete(@LoginUser Integer userId, @RequestBody LiteMallAddressEntity address) {
         if(userId == null){
-            return Result.unlogin();
+            return Result.unLogin();
         }
         Integer id = address.getId();
         if(id == null){

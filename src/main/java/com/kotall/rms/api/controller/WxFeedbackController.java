@@ -64,7 +64,7 @@ public class WxFeedbackController {
     @PostMapping("submit")
     public Object submit(@LoginUser Integer userId, @RequestBody LiteMallFeedbackEntity feedback) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
         Object error = validate(feedback);
         if(error != null){

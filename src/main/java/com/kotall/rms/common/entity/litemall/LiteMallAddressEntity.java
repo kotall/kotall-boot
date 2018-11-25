@@ -62,7 +62,7 @@ public class LiteMallAddressEntity implements Serializable {
 	/**
 	 * 是否默认地址
 	 */
-	private Integer isDefault;
+	private Boolean isDefault;
 	
 	/**
 	 * 创建时间

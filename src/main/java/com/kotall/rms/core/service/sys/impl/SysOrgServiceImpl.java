@@ -3,7 +3,7 @@ package com.kotall.rms.core.service.sys.impl;
 import com.kotall.rms.common.entity.sys.SysOrgEntity;
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.RmsException;
-import com.kotall.rms.core.annotation.DataFilter;
+import com.kotall.rms.core.annotation.DeptFilter;
 import com.kotall.rms.core.manager.sys.SysOrgManager;
 import com.kotall.rms.core.service.BaseServiceImpl;
 import com.kotall.rms.core.service.sys.SysOrgService;
@@ -26,7 +26,7 @@ public class SysOrgServiceImpl extends BaseServiceImpl<SysOrgManager, SysOrgEnti
 	@Autowired
 	private SysOrgManager sysOrgManager;
 
-	@DataFilter(subDept = true, user = false)
+	@DeptFilter(subDept = true, user = false)
 	@Override
 	public List<SysOrgEntity> queryByList(Map<String, Object> params) {
 		Query form = new Query(params);

@@ -136,7 +136,7 @@ public class WxOrderController {
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer size) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
 
         List<Short> orderStatus = OrderUtil.orderStatus(showType);
@@ -216,7 +216,7 @@ public class WxOrderController {
     @GetMapping("detail")
     public Object detail(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig,@NotNull Integer orderId) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
 
         // 订单信息
@@ -281,7 +281,7 @@ public class WxOrderController {
                          @AppConfig LiteMallAppEntity appConfig,
                          @RequestBody String body) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
         if (body == null) {
             return Result.badArgument();
@@ -492,7 +492,7 @@ public class WxOrderController {
                          @AppConfig LiteMallAppEntity appConfig,
                          @RequestBody String body) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
         Integer orderId = JacksonUtil.parseInteger(body, "orderId");
         if (orderId == null) {
@@ -569,7 +569,7 @@ public class WxOrderController {
                          @RequestBody String body,
                          HttpServletRequest request) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
         Integer orderId = JacksonUtil.parseInteger(body, "orderId");
         if (orderId == null) {
@@ -776,7 +776,7 @@ public class WxOrderController {
                          @AppConfig LiteMallAppEntity appConfig,
                          @RequestBody String body) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
         Integer orderId = JacksonUtil.parseInteger(body, "orderId");
         if (orderId == null) {
@@ -825,7 +825,7 @@ public class WxOrderController {
                           @AppConfig LiteMallAppEntity appConfig,
                           @RequestBody String body) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
         Integer orderId = JacksonUtil.parseInteger(body, "orderId");
         if (orderId == null) {
@@ -874,7 +874,7 @@ public class WxOrderController {
     @PostMapping("delete")
     public Object delete(@LoginUser Integer userId, @RequestBody String body) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
         Integer orderId = JacksonUtil.parseInteger(body, "orderId");
         if (orderId == null) {
@@ -917,7 +917,7 @@ public class WxOrderController {
                         @NotNull Integer orderId,
                         @NotNull Integer goodsId) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
 
         Map<String, Object> params = new HashMap<>();
@@ -950,7 +950,7 @@ public class WxOrderController {
     @PostMapping("comment")
     public Object comment(@LoginUser Integer userId, @RequestBody String body) {
         if (userId == null) {
-            return Result.unlogin();
+            return Result.unLogin();
         }
 
         Integer orderGoodsId = JacksonUtil.parseInteger(body, "orderGoodsId");

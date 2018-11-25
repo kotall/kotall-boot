@@ -94,7 +94,7 @@ public class WxCommentController {
     @PostMapping("post")
     public Object post(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody LiteMallCommentEntity comment) {
         if(userId == null){
-            return Result.unlogin();
+            return Result.unLogin();
         }
         Object error = validate(comment);
         if(error != null){
