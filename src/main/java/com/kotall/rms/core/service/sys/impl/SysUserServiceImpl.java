@@ -34,6 +34,13 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserManager, SysUserE
 	}
 
 	@Override
+	public boolean update(SysUserEntity user) {
+		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
+		boolean count = sysUserManager.updateUser(user);
+		return count;
+	}
+
+	@Override
 	public SysUserTokenEntity getUserTokenInfoByToken(String token) {
 		return this.sysUserManager.getByToken(token);
 	}

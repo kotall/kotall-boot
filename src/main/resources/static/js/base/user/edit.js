@@ -15,6 +15,7 @@ var vm = new Vue({
 	methods : {
 		getRoleList: function(){
 			$.get('../../sys/role/select?_' + $.now(), function(r){
+				debugger
 				vm.roleList = r.rows;
 			});
 		},

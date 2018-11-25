@@ -70,7 +70,7 @@ public class SysUserManagerImpl extends BaseManagerImpl<SysUserMapper, SysUserEn
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateUser(SysUserEntity user) {
-        int count = sysUserMapper.updateById(user);
+        int count = sysUserMapper.update(user);
         Integer userId = user.getUserId();
         Query query = new Query();
         query.put("userId", userId);

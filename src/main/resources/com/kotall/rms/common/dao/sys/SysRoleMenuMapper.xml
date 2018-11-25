@@ -27,14 +27,22 @@
 	</select>
 	
 	<delete id="batchRemoveByMenuId">
+	DELETE
+	FROM
+	sys_role_menu
+	WHERE
+	menu_id IN
+	<foreach item="id" collection="array" open="(" separator="," close=")">
+		#{id}
+	</foreach>
+</delete>
+
+	<delete id="deleteById">
 		DELETE
 		FROM
-			sys_role_menu
+		sys_role_menu
 		WHERE
-			menu_id IN 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
-		</foreach>
+		role_id = #{roleId}
 	</delete>
 	
 	<delete id="batchRemoveByRoleId">
