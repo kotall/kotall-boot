@@ -1,6 +1,8 @@
 package com.kotall.rms.core.service.sys.impl;
 
 import com.kotall.rms.common.entity.sys.SysRoleEntity;
+import com.kotall.rms.common.utils.Page;
+import com.kotall.rms.core.annotation.DeptFilter;
 import com.kotall.rms.core.manager.sys.SysRoleManager;
 import com.kotall.rms.core.service.BaseServiceImpl;
 import com.kotall.rms.core.service.sys.SysRoleService;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 系统角色
@@ -21,6 +24,11 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleManager, SysRoleE
 	@Autowired
 	private SysRoleManager sysRoleManager;
 
+	@DeptFilter(subDept = true, user = false)
+	@Override
+	public Page<SysRoleEntity> queryRoleByPage(Map<String, Object> params) {
+		return super.queryByPage(params);
+	}
 
 	@Override
 	public SysRoleEntity getRoleById(Integer id) {

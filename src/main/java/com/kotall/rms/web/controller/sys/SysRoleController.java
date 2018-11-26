@@ -34,8 +34,7 @@ public class SysRoleController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<SysRoleEntity> list(@RequestBody Map<String, Object> params) {
-		params.put("userId", getUserId());
-		return sysRoleService.queryByPage(params);
+		return sysRoleService.queryRoleByPage(params);
 	}
 	
 	/**
