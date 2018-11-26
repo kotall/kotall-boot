@@ -56,9 +56,9 @@ public class WxAddressController {
             addressVo.setName(address.getName());
             addressVo.setMobile(address.getMobile());
             addressVo.setIsDefault(address.getIsDefault());
-            String provinceName = regionService.getById(address.getProvinceId()).getName();
-            String cityName = regionService.getById(address.getCityId()).getName();
-            String areaName = regionService.getById(address.getAreaId()).getName();
+            String provinceName = regionService.getByAreaCode(address.getProvinceId()).getName();
+            String cityName = regionService.getByAreaCode(address.getCityId()).getName();
+            String areaName = regionService.getByAreaCode(address.getAreaId()).getName();
             String detailAddress = provinceName.concat(cityName).concat(areaName).concat(" ").concat(address.getAddress());
             addressVo.setAddress(detailAddress);
             addressVoList.add(addressVo);
@@ -115,11 +115,11 @@ public class WxAddressController {
         data.setMobile(address.getMobile());
         data.setAddress(address.getAddress());
         data.setIsDefault(address.getIsDefault());
-        String provinceName = regionService.getById(address.getProvinceId()).getName();
+        String provinceName = regionService.getByAreaCode(address.getProvinceId()).getName();
         data.setProvinceName(provinceName);
-        String cityName = regionService.getById(address.getCityId()).getName();
+        String cityName = regionService.getByAreaCode(address.getCityId()).getName();
         data.setCityName(cityName);
-        String areaName = regionService.getById(address.getAreaId()).getName();
+        String areaName = regionService.getByAreaCode(address.getAreaId()).getName();
         data.setAreaName(areaName);
         return Result.ok().put("data", data);
     }

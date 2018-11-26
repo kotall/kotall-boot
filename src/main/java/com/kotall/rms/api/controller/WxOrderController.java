@@ -97,9 +97,9 @@ public class WxOrderController {
         Integer provinceId = litemallAddress.getProvinceId();
         Integer cityId = litemallAddress.getCityId();
         Integer areaId = litemallAddress.getAreaId();
-        String provinceName = regionService.getById(provinceId).getName();
-        String cityName = regionService.getById(cityId).getName();
-        String areaName = regionService.getById(areaId).getName();
+        String provinceName = regionService.getByAreaCode(provinceId).getName();
+        String cityName = regionService.getByAreaCode(cityId).getName();
+        String areaName = regionService.getByAreaCode(areaId).getName();
         String fullRegion = provinceName + " " + cityName + " " + areaName;
         return fullRegion + " " + litemallAddress.getAddress();
     }
@@ -415,7 +415,7 @@ public class WxOrderController {
                 orderGoods.setNumber(cartGoods.getNumber());
                 orderGoods.setSpecifications(cartGoods.getSpecifications());
                 orderGoods.setAddTime(new Date());
-
+                orderGoods.setStoreId(appConfig.getStoreId());
                 // 添加订单商品表项
                 orderGoodsService.save(orderGoods);
             }
