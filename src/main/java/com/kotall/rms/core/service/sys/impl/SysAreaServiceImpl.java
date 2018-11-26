@@ -43,4 +43,8 @@ public class SysAreaServiceImpl extends BaseServiceImpl<SysAreaManager, SysAreaE
 		return sysAreaManager.deleteByIds(ids);
 	}
 
+	@Override
+	public SysAreaEntity getByAreaCode(Integer areaCode) {
+		return this.sysAreaManager.getByAreaCode(areaCode);
+	}
 }

@@ -32,7 +32,10 @@
 			add_time DESC
 	</select>
 	
-	<insert id="insert">
+	<insert id="insert" parameterType="com.kotall.rms.common.entity.litemall.LiteMallAddressEntity">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 		INSERT INTO lite_mall_address (
 			`store_id`,
 			`name`,
@@ -138,11 +141,11 @@
 	<update id="resetDefault">
 		UPDATE lite_mall_address
 		<set>
-			<if test="isDefault != null">`is_default` = #{address.isDefault}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="address.isDefault != null">`is_default` = #{address.isDefault}, </if>
+			<if test="address.updateTime != null">`update_time` = #{address.updateTime}, </if>
 		</set>
 		WHERE
-			userId = #{query.userId}
+			user_id = #{query.userId}
 		AND deleted = #{query.deleted}
 	</update>
 </mapper>

@@ -143,7 +143,7 @@ public class WxAddressController {
         if(pid == null){
             return Result.badArgument();
         }
-        if(regionService.getById(pid) == null){
+        if(regionService.getByAreaCode(pid) == null){
             return Result.badArgumentValue();
         }
 
@@ -151,7 +151,7 @@ public class WxAddressController {
         if(cid == null){
             return Result.badArgument();
         }
-        if(regionService.getById(cid) == null){
+        if(regionService.getByAreaCode(cid) == null){
             return Result.badArgumentValue();
         }
 
@@ -159,7 +159,7 @@ public class WxAddressController {
         if(aid == null){
             return Result.badArgument();
         }
-        if(regionService.getById(aid) == null){
+        if(regionService.getByAreaCode(aid) == null){
             return Result.badArgumentValue();
         }
 
@@ -199,18 +199,21 @@ public class WxAddressController {
             addressService.resetDefault(userId);
         }
 
+        Integer addressId = null;
         if (address.getId() == null || address.getId().equals(0)) {
             address.setId(null);
             address.setStoreId(appConfig.getStoreId());
             address.setUserId(userId);
-            addressService.save(address.convertToEntity());
+            LiteMallAddressEntity entity = address.convertToEntity();
+            addressService.save(entity);
+            addressId = entity.getId();
         } else {
             address.setUserId(userId);
             if(addressService.update(address.convertToEntity())){
                 return Result.updatedDataFailed();
             }
         }
-        return Result.ok().put("data", address.getId());
+        return Result.ok().put("data", addressId);
     }
 
     /**

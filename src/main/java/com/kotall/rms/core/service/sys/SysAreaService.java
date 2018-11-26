@@ -18,5 +18,5 @@ public interface SysAreaService extends BaseService<SysAreaEntity> {
 
 	boolean removeByIds(Integer[] ids) throws RmsException;
 
-
+	SysAreaEntity getByAreaCode(Integer areaCode);
 }

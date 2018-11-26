@@ -28,7 +28,7 @@ public class WxRegionController {
      * 根据父区域ID，返回子区域数据。
      * 如果父区域ID是0，则返回省级区域数据；
      *
-     * @param pid 父区域ID
+     * @param areaCode 父区域ID
      * @return 区域数据
      *   成功则
      *  {
@@ -36,7 +36,7 @@ public class WxRegionController {
      *      errmsg: '成功',
      *      data: xxx
      *  }
-     *   失败则 { errno: XXX, errmsg: XXX }
+     *   失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("list")
     public Object list(@NotNull String areaCode) {

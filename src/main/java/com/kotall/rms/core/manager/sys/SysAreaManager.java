@@ -13,4 +13,5 @@ public interface SysAreaManager extends BaseManager<SysAreaEntity> {
 
 	boolean hasChildren(Integer[] id);
 
+    SysAreaEntity getByAreaCode(Integer areaCode);
 }

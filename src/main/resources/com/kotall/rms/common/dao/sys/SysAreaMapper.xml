@@ -83,6 +83,30 @@
 		WHERE
 			a.area_id = #{areaId}
 	</select>
+
+	<select id="getByAreaCode" resultType="com.kotall.rms.common.entity.sys.SysAreaEntity">
+		SELECT
+			a.area_id,
+			a.area_code,
+			a.name,
+			a.layer,
+			a.status,
+			a.remark,
+			a.order_num,
+			a.parent_code,
+			(
+			SELECT
+				p. NAME
+			FROM
+				sys_area p
+			WHERE
+				p.area_code = a.parent_code
+			) AS parentName
+		FROM
+			sys_area a
+		WHERE
+			a.area_code = #{areaCode}
+	</select>
 	
 	<update id="update">
 		UPDATE sys_area

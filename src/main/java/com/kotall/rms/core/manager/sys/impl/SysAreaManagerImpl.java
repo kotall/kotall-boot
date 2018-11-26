@@ -29,4 +29,9 @@ public class SysAreaManagerImpl extends BaseManagerImpl<SysAreaMapper,SysAreaEnt
 		}
 		return false;
 	}
+
+	@Override
+	public SysAreaEntity getByAreaCode(Integer areaCode) {
+		return sysAreaMapper.getByAreaCode(areaCode);
+	}
 }
