@@ -35,7 +35,7 @@ public class StoreFilterAspect {
     private LiteMallStoreService liteMallStoreService;
 
     @Pointcut("@annotation(com.kotall.rms.core.annotation.StoreFilter)")
-    public void dataFilterCut() {
+    public void storeFilterCut() {
     }
 
     /**
@@ -43,8 +43,8 @@ public class StoreFilterAspect {
      * @param point
      * @throws Throwable
      */
-    @Before("dataFilterCut()")
-    public void dataFilter(JoinPoint point) throws Throwable {
+    @Before("storeFilterCut()")
+    public void storeDataFilter(JoinPoint point) throws Throwable {
         Object  param = point.getArgs()[0];
         if (null != param && param instanceof Map) {
             SysUserEntity user = ShiroUtils.getUserEntity();

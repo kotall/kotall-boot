@@ -44,11 +44,11 @@ public class DeptFilterAspect {
     private SysRoleOrgService sysRoleOrgService;
 
     @Pointcut("@annotation(com.kotall.rms.core.annotation.DeptFilter)")
-    public void dataFilterCut() {
+    public void deptFilterCut() {
     }
 
-    @Before("dataFilterCut()")
-    public void dataFilter(JoinPoint point) throws Throwable {
+    @Before("deptFilterCut()")
+    public void deptDataFilter(JoinPoint point) throws Throwable {
         Object params = point.getArgs()[0];
         if(params != null && params instanceof Map){
             SysUserEntity user = ShiroUtils.getUserEntity();
