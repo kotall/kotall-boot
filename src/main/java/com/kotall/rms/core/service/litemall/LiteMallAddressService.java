@@ -1,9 +1,11 @@
 package com.kotall.rms.core.service.litemall;
 
 import com.kotall.rms.common.entity.litemall.LiteMallAddressEntity;
+import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.core.service.BaseService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 收货地址表
@@ -13,6 +15,8 @@ import java.util.List;
  * @since 1.0.0
  */
 public interface LiteMallAddressService extends BaseService<LiteMallAddressEntity> {
+
+    Page<LiteMallAddressEntity> queryAddressByPage(Map<String, Object> params);
 
     /**
      * 根据用户ID查询地址信息
@@ -24,4 +28,5 @@ public interface LiteMallAddressService extends BaseService<LiteMallAddressEntit
     void resetDefault(Integer userId);
 
     LiteMallAddressEntity getDefault(Integer userId);
+
 }

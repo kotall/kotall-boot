@@ -236,7 +236,7 @@ public class WxAuthController {
      * userInfo: xxx
      * }
      * }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("register")
     public Object register(@RequestBody String body, @AppConfig LiteMallAppEntity appConfig,HttpServletRequest request) {
@@ -274,7 +274,7 @@ public class WxAuthController {
             WxMaJscode2SessionResult result = this.wxService.getUserService().getSessionInfo(code);
             openId = result.getOpenid();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("获取openid失败", e);
             return Result.error(403, "openid 获取失败");
         }
         userList = userService.queryByOpenId(appConfig.getStoreId(), openId);
@@ -334,8 +334,8 @@ public class WxAuthController {
      *                其中code是手机验证码，目前还不支持手机短信验证码
      * @param request 请求对象
      * @return 登录结果
-     * 成功则 { errno: 0, errmsg: '成功' }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 成功则 { code: 0, msg: '成功' }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("reset")
     public Object reset(@RequestBody String body, HttpServletRequest request) {
@@ -347,7 +347,7 @@ public class WxAuthController {
             return Result.badArgument();
         }
 
-        //判断验证码是否正确
+        // 判断验证码是否正确
         String cacheCode = CaptchaCodeManager.getCachedCaptcha(mobile);
         if (cacheCode == null || cacheCode.isEmpty() || !cacheCode.equals(code))
             return Result.error(403, "验证码错误");

@@ -15,6 +15,8 @@ import java.io.Serializable;
 @ToString
 public class AddressVO implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private String version;
 
     private Integer userId;
@@ -61,6 +63,8 @@ public class AddressVO implements Serializable {
      * 地址详情
      */
     private String address;
+
+    private Integer storeId;
 
     public LiteMallAddressEntity convertToEntity() {
         LiteMallAddressEntity entity = new LiteMallAddressEntity();

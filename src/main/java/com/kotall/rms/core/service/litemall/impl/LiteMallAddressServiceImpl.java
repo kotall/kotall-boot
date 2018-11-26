@@ -31,11 +31,8 @@ public class LiteMallAddressServiceImpl extends BaseServiceImpl<LiteMallAddressM
 
 	@StoreFilter
 	@Override
-	public Page<LiteMallAddressEntity> queryByPage(Map<String, Object> params) {
-		Query query = new Query(params);
-		Page<LiteMallAddressEntity> page = new Page<>(query);
-		liteMallAddressManager.queryByPage(page, query);
-		return page;
+	public Page<LiteMallAddressEntity> queryAddressByPage(Map<String, Object> params) {
+		return super.queryByPage(params);
 	}
 
 	@Override

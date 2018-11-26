@@ -1,5 +1,6 @@
 package com.kotall.rms.api.controller;
 
+import com.kotall.rms.api.vo.BrandVO;
 import com.kotall.rms.common.entity.litemall.LiteMallBrandEntity;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Result;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -52,9 +54,9 @@ public class WxBrandController {
         params.put("pageNumber", page);
         params.put("pageSize", size);
         Page<LiteMallBrandEntity> pages = brandService.queryByPage(params);
-
+        List<BrandVO> brandList = BrandVO.fromBrandEntity(pages.getRows());
         Map<String, Object> data = new HashMap<>();
-        data.put("brandList", pages.getRows());
+        data.put("brandList", brandList);
         data.put("totalPages", pages.getTotalPages());
         return Result.ok().put("data", data);
     }

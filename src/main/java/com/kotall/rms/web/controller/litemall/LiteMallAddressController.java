@@ -36,7 +36,7 @@ public class LiteMallAddressController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	public Page<LiteMallAddressEntity> list(@RequestBody Map<String, Object> params) {
-		return liteMallAddressService.queryByPage(params);
+		return liteMallAddressService.queryAddressByPage(params);
 	}
 		
 	/**

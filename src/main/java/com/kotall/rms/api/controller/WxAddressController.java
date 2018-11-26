@@ -201,7 +201,7 @@ public class WxAddressController {
 
         if (address.getId() == null || address.getId().equals(0)) {
             address.setId(null);
-            // address.setStoreId(appConfig.getStoreId());
+            address.setStoreId(appConfig.getStoreId());
             address.setUserId(userId);
             addressService.save(address.convertToEntity());
         } else {
