@@ -101,7 +101,7 @@
 			update_time = NOW()
 		</set>
 		WHERE
-			dict_id = #{macroId}
+			dict_id = #{dictId}
 	</update>
 	
 	<delete id="batchDelete">
