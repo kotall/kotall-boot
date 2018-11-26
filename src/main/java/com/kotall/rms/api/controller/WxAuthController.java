@@ -136,7 +136,7 @@ public class WxAuthController {
             sessionKey = result.getSessionKey();
             openId = result.getOpenid();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("", e);
         }
 
         if (sessionKey == null || openId == null) {
@@ -165,7 +165,7 @@ public class WxAuthController {
         } else {
             user.setLastLoginTime(new Date());
             user.setLastLoginIp(IpUtil.client(request));
-            if (userService.update(user)) {
+            if (!userService.update(user)) {
                 return Result.updatedDataFailed();
             }
         }

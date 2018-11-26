@@ -39,8 +39,8 @@ public class WxRegionController {
      *   失败则 { errno: XXX, errmsg: XXX }
      */
     @GetMapping("list")
-    public Object list(@NotNull Integer pid) {
-        List<SysAreaEntity> regionList = regionService.listAreaByParentCode(pid + "");
+    public Object list(@NotNull String areaCode) {
+        List<SysAreaEntity> regionList = regionService.listAreaByParentCode(areaCode);
         return Result.ok().put("data", regionList);
     }
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.kotall.rms.api.annotation.support.AppConfigHandlerMethodArgumentResolver;
+import com.kotall.rms.api.annotation.support.LoginUserHandlerMethodArgumentResolver;
 import com.kotall.rms.core.service.litemall.LiteMallAppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,7 @@ public class ApiConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(new LoginUserHandlerMethodArgumentResolver());
         argumentResolvers.add(new AppConfigHandlerMethodArgumentResolver(this.appService));
     }
     /**
