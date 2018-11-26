@@ -2,6 +2,7 @@ package com.kotall.rms.web.auth;
 
 import com.kotall.rms.common.entity.sys.SysUserEntity;
 import com.kotall.rms.common.entity.sys.SysUserTokenEntity;
+import com.kotall.rms.core.manager.sys.SysUserManager;
 import com.kotall.rms.core.service.sys.SysUserService;
 import com.kotall.rms.web.util.ShiroUtils;
 import org.apache.shiro.authc.*;
@@ -22,11 +23,10 @@ import java.util.Set;
  * @date 2017年9月3日 上午3:24:29
  * @since 1.0.0
  */
-@Component
 public class AuthRealm extends AuthorizingRealm {
-	
-	@Autowired
-	private SysUserService sysUserService;
+
+    @Autowired
+    private SysUserManager sysUserManager;
 
     @Override
     public boolean supports(AuthenticationToken token) {
@@ -40,9 +40,9 @@ public class AuthRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
     	Integer userId = ShiroUtils.getUserId();
 		// 用户角色
-		Set<String> rolesSet = sysUserService.listUserRoles(userId);
+		Set<String> rolesSet = sysUserManager.listUserRoles(userId);
 		// 用户权限
-        Set<String> permsSet = sysUserService.listUserPerms(userId);
+        Set<String> permsSet = sysUserManager.listUserPerms(userId);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		info.setRoles(rolesSet);
 		info.setStringPermissions(permsSet);
@@ -57,14 +57,14 @@ public class AuthRealm extends AuthorizingRealm {
         String accessToken = (String) token.getPrincipal();
 
         // 根据accessToken，查询用户信息
-        SysUserTokenEntity tokenEntity = sysUserService.getUserTokenInfoByToken(accessToken);
+        SysUserTokenEntity tokenEntity = sysUserManager.getByToken(accessToken);
         // token失效
         if(tokenEntity == null || tokenEntity.getExpireTime().getTime() < System.currentTimeMillis()){
             throw new IncorrectCredentialsException("token失效，请重新登录");
         }
 
         // 查询用户信息
-        SysUserEntity user = sysUserService.getById(tokenEntity.getUserId());
+        SysUserEntity user = sysUserManager.getById(tokenEntity.getUserId());
         // 账号锁定
         if(user.getStatus() == 0){
             throw new LockedAccountException("账号已被锁定,请联系管理员");

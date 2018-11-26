@@ -35,9 +35,9 @@ public class ShiroConfig {
     }
 
     @Bean("securityManager")
-    public SecurityManager securityManager(AuthRealm authRealm, SessionManager sessionManager) {
+    public SecurityManager securityManager(SessionManager sessionManager) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(authRealm);
+        securityManager.setRealm(authRealm());
         securityManager.setSessionManager(sessionManager);
 
         return securityManager;
@@ -94,6 +94,11 @@ public class ShiroConfig {
         AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
         advisor.setSecurityManager(securityManager);
         return advisor;
+    }
+
+    @Bean
+    public AuthRealm authRealm() {
+        return new AuthRealm();
     }
 
 }

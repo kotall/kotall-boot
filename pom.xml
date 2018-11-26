@@ -143,16 +143,16 @@
 			<artifactId>commons-configuration</artifactId>
 			<version>${commons-configuration-version}</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
-			<version>${aspect-version}</version><!--$NO-MVN-MAN-VER$-->
-		</dependency>
-		<dependency>
+			<version>${aspect-version}</version>&lt;!&ndash;$NO-MVN-MAN-VER$&ndash;&gt;
+		</dependency>-->
+		<!--<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>${aspect-version}</version><!--$NO-MVN-MAN-VER$-->
-		</dependency>
+			<version>${aspect-version}</version>&lt;!&ndash;$NO-MVN-MAN-VER$&ndash;&gt;
+		</dependency>-->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
