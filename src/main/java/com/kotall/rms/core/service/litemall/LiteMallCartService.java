@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface LiteMallCartService extends BaseService<LiteMallCartEntity> {
 
-    List<LiteMallCartEntity> queryByUserId(Integer storeId, Integer userId);
+    List<LiteMallCartEntity> queryByUserId(Integer userId);
 
-    LiteMallCartEntity queryExist(Integer storeId, Integer goodsId, Integer productId, Integer userId);
+    LiteMallCartEntity queryExist(Integer userId, Integer goodsId, Integer productId);
 
     List<LiteMallCartEntity> queryByUserIdAndChecked(Integer userId);
 
@@ -25,4 +25,20 @@ public interface LiteMallCartService extends BaseService<LiteMallCartEntity> {
     void delete(List<Integer> productIds, Integer userId);
 
     void clearGoods(Integer userId);
+
+    /**
+     * 添加购物车功能
+     * @param isFastAddCart
+     *       是否是直接添加
+     * @param cart
+     *       购物车条目
+     */
+    void saveOrUpdateCart(Boolean isFastAddCart, LiteMallCartEntity cart);
+
+    /**
+     * 统计购物车商品数量
+     * @param userId
+     * @return
+     */
+    Integer countGoodsInCart(Integer userId);
 }

@@ -127,7 +127,7 @@ public class WxOrderController {
      * count: xxx
      * }
      * }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("list")
     public Object list(@AppConfig LiteMallAppEntity appConfig,
@@ -203,15 +203,15 @@ public class WxOrderController {
      * @return 订单操作结果
      * 成功则
      * {
-     * errno: 0,
-     * errmsg: '成功',
+     * code: 0,
+     * msg: '成功',
      * data:
      * {
      * orderInfo: xxx ,
      * orderGoods: xxx
      * }
      * }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("detail")
     public Object detail(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig,@NotNull Integer orderId) {
@@ -227,7 +227,7 @@ public class WxOrderController {
         if (!order.getUserId().equals(userId)) {
             return Result.error(403, "不是当前用户的订单");
         }
-        Map<String, Object> orderVo = new HashMap<String, Object>();
+        Map<String, Object> orderVo = new HashMap<>();
         orderVo.put("id", order.getId());
         orderVo.put("orderSn", order.getOrderSn());
         orderVo.put("addTime", order.getAddTime());
@@ -253,7 +253,7 @@ public class WxOrderController {
         result.put("orderGoods", orderGoodsList);
 
         // 订单状态为已发货且物流信息不为空
-        //"YTO", "800669400640887922"
+        // "YTO", "800669400640887922"
         if (order.getOrderStatus().equals(OrderUtil.STATUS_SHIP)) {
             ExpressInfo ei = expressService.getExpressInfo(order.getShipChannel(), order.getShipSn());
             result.put("expressInfo", ei);
@@ -273,8 +273,8 @@ public class WxOrderController {
      * @param userId 用户ID
      * @param body   订单信息，{ cartId：xxx, addressId: xxx, couponId: xxx }
      * @return 订单操作结果
-     * 成功则 { errno: 0, errmsg: '成功', data: { orderId: xxx } }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 成功则 { code: 0, msg: '成功', data: { orderId: xxx } }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("submit")
     public Object submit(@LoginUser Integer userId,

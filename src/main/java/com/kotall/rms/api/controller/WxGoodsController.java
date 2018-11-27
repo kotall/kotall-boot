@@ -81,7 +81,7 @@ public class WxGoodsController {
      * brand: xxx
      * }
      * }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("detail")
     public Object detail(@LoginUser Integer userId, @NotNull Integer id, @AppConfig LiteMallAppEntity appConfig) {
@@ -117,7 +117,7 @@ public class WxGoodsController {
 
         // 商品品牌商
         Integer brandId = info.getBrandId();
-        LiteMallBrandEntity brand = null;
+        LiteMallBrandEntity brand;
         if(brandId == 0){
             brand = new LiteMallBrandEntity();
         }
@@ -170,6 +170,7 @@ public class WxGoodsController {
             LiteMallFootprintEntity footprint = new LiteMallFootprintEntity();
             footprint.setUserId(userId);
             footprint.setGoodsId(id);
+            footprint.setStoreId(appConfig.getStoreId());
             footprintService.save(footprint);
         }
 

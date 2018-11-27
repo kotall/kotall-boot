@@ -136,12 +136,12 @@
 			<if test="cart.deleted != null">`deleted` = #{cart.deleted}</if>
 		</set>
 		<where>
-			<if test="userId != null " > `user_id` = #{query.userId}</if>
-			<if test="deleted != null " > and `deleted` = #{query.deleted}</if>
-			<if test="productId != null " > and `product_id` = #{query.productId}</if>
-			<if test="productIds != null " >
+			<if test="query.userId != null " > `user_id` = #{query.userId}</if>
+			<if test="query.deleted != null " > and `deleted` = #{query.deleted}</if>
+			<if test="query.productId != null " > and `product_id` = #{query.productId}</if>
+			<if test="query.productIds != null " >
 				and `product_id` in
-				<foreach collection="productIds" item="item" separator="," open="(" close=")">
+				<foreach collection="query.productIds" item="item" separator="," open="(" close=")">
 					#{item}
 				</foreach>
 			</if>
