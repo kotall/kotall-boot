@@ -435,7 +435,7 @@ public class WxOrderController {
                     throw new RuntimeException("下单的商品货品数量大于库存量");
                 }
                 product.setNumber(remainNumber);
-                if(productService.update(product)){
+                if(!productService.update(product)){
                     throw new Exception("更新数据失败");
                 }
             }
