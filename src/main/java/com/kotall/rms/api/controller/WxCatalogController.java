@@ -39,8 +39,8 @@ public class WxCatalogController {
      * @return 分类栏目
      * 成功则
      * {
-     * errno: 0,
-     * errmsg: '成功',
+     * code: 0,
+     * msg: '成功',
      * data:
      * {
      * categoryList: xxx,
@@ -48,7 +48,7 @@ public class WxCatalogController {
      * currentSubCategory: xxx
      * }
      * }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("index")
     public Object index(Integer id,
@@ -92,11 +92,10 @@ public class WxCatalogController {
             return Result.ok().put("data", HomeCacheManager.getCacheData(HomeCacheManager.CATALOG));
         }
 
-
         // 所有一级分类目录
         List<LiteMallCategoryEntity> l1CatList = categoryService.queryL1(appConfig.getStoreId());
 
-        //所有子分类列表
+        // 所有子分类列表
         Map<Integer, List<LiteMallCategoryEntity>> allList = new HashMap<>();
         List<LiteMallCategoryEntity> sub;
         for (LiteMallCategoryEntity category : l1CatList) {

@@ -35,7 +35,7 @@ public class WxUserController {
      *      msg: '成功',
      *      data: xxx
      *  }
-     *   失败则 { errno: XXX, errmsg: XXX }
+     *   失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("index")
     public Object list(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig) {

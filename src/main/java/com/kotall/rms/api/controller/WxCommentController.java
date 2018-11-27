@@ -89,7 +89,7 @@ public class WxCommentController {
      *      msg: '成功',
      *      data: xxx
      *  }
-     *   失败则 { errno: XXX, errmsg: XXX }
+     *   失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("post")
     public Object post(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody LiteMallCommentEntity comment) {
@@ -146,8 +146,8 @@ public class WxCommentController {
      * @return 评论列表
      *   成功则
      *  {
-     *      errno: 0,
-     *      errmsg: '成功',
+     *      code: 0,
+     *      msg: '成功',
      *      data:
      *          {
      *              data: xxx,
@@ -155,7 +155,7 @@ public class WxCommentController {
      *              currentPage: xxx
      *          }
      *  }
-     *   失败则 { errno: XXX, errmsg: XXX }
+     *   失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("list")
     public Object list(@NotNull Byte type,

@@ -39,8 +39,8 @@ public class WxSearchController {
      * @return 搜索页面信息
      * 成功则
      * {
-     * errno: 0,
-     * errmsg: '成功',
+     * code: 0,
+     * msg: '成功',
      * data:
      * {
      * defaultKeyword: xxx,
@@ -48,7 +48,7 @@ public class WxSearchController {
      * hotKeywordList: xxx
      * }
      * }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("index")
     public Object index(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig) {
@@ -81,8 +81,8 @@ public class WxSearchController {
      * @return 合适的关键字
      * 成功则
      * {
-     * errno: 0,
-     * errmsg: '成功',
+     * code: 0,
+     * msg: '成功',
      * data: xxx
      * }
      * 失败则 { code: XXX, msg: XXX }

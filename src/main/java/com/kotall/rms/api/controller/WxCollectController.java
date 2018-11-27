@@ -44,19 +44,18 @@ public class WxCollectController {
      * @return 用户收藏列表
      *   成功则
      *  {
-     *      errno: 0,
-     *      errmsg: '成功',
+     *      code: 0,
+     *      msg: '成功',
      *      data:
      *          {
      *              collectList: xxx,
      *              totalPages: xxx
      *          }
      *  }
-     *   失败则 { errno: XXX, errmsg: XXX }
+     *   失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("list")
     public Object list(@LoginUser Integer userId,
-                       @AppConfig LiteMallAppEntity appConfig,
                        @NotNull Byte type,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer size) {
@@ -65,28 +64,28 @@ public class WxCollectController {
         }
 
         Map<String, Object> params = new HashMap<>();
-        params.put("storeId", appConfig.getStoreId());
         params.put("userId", userId);
         params.put("type", type);
-        params.put("userId", userId);
         params.put("pageNumber", page);
         params.put("pageSize", size);
-        Page<LiteMallCollectEntity> pages = collectService.queryByType(params);
+        
+        Page<LiteMallCollectEntity> pages = collectService.queryByPage(params);
 
         List<Object> collects = new ArrayList<>(pages.getRows().size());
         for(LiteMallCollectEntity collect : pages.getRows()){
-            Map<String, Object> c = new HashMap<>();
-            c.put("id", collect.getId());
-            c.put("type", collect.getType());
-            c.put("valueId", collect.getValueId());
+            Map<String, Object> content = new HashMap<>();
+            if (0 == type) {
+                LiteMallGoodsEntity goods = goodsService.getById(collect.getValueId());
+                content.put("id", collect.getId());
+                content.put("type", collect.getType());
+                content.put("valueId", collect.getValueId());
 
-            LiteMallGoodsEntity goods = goodsService.getById(collect.getValueId());
-            c.put("name", goods.getName());
-            c.put("brief", goods.getBrief());
-            c.put("picUrl", goods.getPicUrl());
-            c.put("retailPrice", goods.getRetailPrice());
-
-            collects.add(c);
+                content.put("name", goods.getName());
+                content.put("brief", goods.getBrief());
+                content.put("picUrl", goods.getPicUrl());
+                content.put("retailPrice", goods.getRetailPrice());
+                collects.add(content);
+            }
         }
 
         Map<String, Object> result = new HashMap<>();
@@ -113,7 +112,7 @@ public class WxCollectController {
      *   失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("addordelete")
-    public Object addordelete(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody String body) {
+    public Object addOrDelete(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig, @RequestBody String body) {
         if(userId == null){
             return Result.unLogin();
         }

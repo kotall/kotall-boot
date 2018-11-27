@@ -32,8 +32,8 @@ public class WxRegionController {
      * @return 区域数据
      *   成功则
      *  {
-     *      errno: 0,
-     *      errmsg: '成功',
+     *      code: 0,
+     *      msg: '成功',
      *      data: xxx
      *  }
      *   失败则 { code: XXX, msg: XXX }
