@@ -2,7 +2,6 @@ package com.kotall.rms.core.service.litemall.impl;
 
 import com.kotall.rms.common.entity.litemall.LiteMallTopicEntity;
 import com.kotall.rms.common.utils.Page;
-import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.annotation.StoreFilter;
 import com.kotall.rms.core.manager.litemall.LiteMallTopicManager;
 import com.kotall.rms.core.service.BaseServiceImpl;
@@ -28,7 +27,6 @@ public class LiteMallTopicServiceImpl extends BaseServiceImpl<LiteMallTopicManag
 	@Autowired
 	private LiteMallTopicManager liteMallTopicManager;
 
-
 	@StoreFilter
 	@Override
 	public Page<LiteMallTopicEntity> queryTopicByPage(Map<String, Object> params) {
@@ -38,10 +36,7 @@ public class LiteMallTopicServiceImpl extends BaseServiceImpl<LiteMallTopicManag
 	@Override
 	public List<LiteMallTopicEntity> queryByList(Map<String, Object> params) {
 		params.put("deleted", 0);
-		Query query = new Query(params);
-		Page<LiteMallTopicEntity> page = new Page<>(query);
-		liteMallTopicManager.queryByPage(page, query);
-		return page.getRows();
+		return super.queryByList(params);
 	}
 
 	@Override
@@ -53,7 +48,7 @@ public class LiteMallTopicServiceImpl extends BaseServiceImpl<LiteMallTopicManag
            params = new HashMap<>();
            params.put("pageNumber", pageNumber);
            params.put("pageSize", pageSize);
-           return this.queryByList(params);
+           return super.queryByPage(params).getRows();
 		}
 
 		LiteMallTopicEntity topic = list.get(0);

@@ -1,5 +1,6 @@
 package com.kotall.rms.api.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.kotall.rms.api.annotation.AppConfig;
 import com.kotall.rms.common.entity.litemall.LiteMallAppEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity;
@@ -79,7 +80,7 @@ public class WxTopicController {
      * msg: '成功',
      * data: xxx
      * }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("detail")
     public Object detail(@NotNull Integer id) {
@@ -87,8 +88,9 @@ public class WxTopicController {
         LiteMallTopicEntity topic = topicService.getById(id);
         data.put("topic", topic);
         List<LiteMallGoodsEntity> goods = new ArrayList<>();
-        for (String goodsId : topic.getGoods().split(",")) {
-            LiteMallGoodsEntity good = goodsService.getById(Integer.parseInt(goodsId));
+        List<Integer> goodsIds = JSONObject.parseArray(topic.getGoods(), Integer.class);
+        for (Integer goodsId : goodsIds) {
+            LiteMallGoodsEntity good = goodsService.getById(goodsId);
             if (null != good)
                 goods.add(good);
         }
