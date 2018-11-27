@@ -28,17 +28,15 @@ public class LiteMallCartServiceImpl extends BaseServiceImpl<LiteMallCartManager
 	private LiteMallCartManager liteMallCartManager;
 
 	@Override
-	public List<LiteMallCartEntity> queryByUserId(Integer storeId, Integer userId) {
+	public List<LiteMallCartEntity> queryByUserId(Integer userId) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("storeId", storeId);
 		params.put("userId", userId);
 		return this.queryByList(params);
 	}
 
 	@Override
-	public LiteMallCartEntity queryExist(Integer storeId, Integer goodsId, Integer productId, Integer userId) {
+	public LiteMallCartEntity queryExist(Integer userId, Integer goodsId, Integer productId) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("storeId", storeId);
 		params.put("userId", userId);
 		params.put("goodsId", goodsId);
 		params.put("productId", productId);

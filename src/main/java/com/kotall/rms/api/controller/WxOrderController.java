@@ -203,15 +203,15 @@ public class WxOrderController {
      * @return 订单操作结果
      * 成功则
      * {
-     * errno: 0,
-     * errmsg: '成功',
+     * code: 0,
+     * msg: '成功',
      * data:
      * {
      * orderInfo: xxx ,
      * orderGoods: xxx
      * }
      * }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("detail")
     public Object detail(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig,@NotNull Integer orderId) {
@@ -227,7 +227,7 @@ public class WxOrderController {
         if (!order.getUserId().equals(userId)) {
             return Result.error(403, "不是当前用户的订单");
         }
-        Map<String, Object> orderVo = new HashMap<String, Object>();
+        Map<String, Object> orderVo = new HashMap<>();
         orderVo.put("id", order.getId());
         orderVo.put("orderSn", order.getOrderSn());
         orderVo.put("addTime", order.getAddTime());

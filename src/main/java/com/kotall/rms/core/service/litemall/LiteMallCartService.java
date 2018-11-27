@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface LiteMallCartService extends BaseService<LiteMallCartEntity> {
 
-    List<LiteMallCartEntity> queryByUserId(Integer storeId, Integer userId);
+    List<LiteMallCartEntity> queryByUserId(Integer userId);
 
-    LiteMallCartEntity queryExist(Integer storeId, Integer goodsId, Integer productId, Integer userId);
+    LiteMallCartEntity queryExist(Integer userId, Integer goodsId, Integer productId);
 
     List<LiteMallCartEntity> queryByUserIdAndChecked(Integer userId);
 

@@ -14,10 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/wx/cart")
@@ -59,7 +56,7 @@ public class WxCartController {
             return Result.unLogin();
         }
 
-        List<LiteMallCartEntity> cartList = cartService.queryByUserId(appConfig.getStoreId(), userId);
+        List<LiteMallCartEntity> cartList = cartService.queryByUserId(userId);
         Integer goodsCount = 0;
         BigDecimal goodsAmount = new BigDecimal(0.00);
         Integer checkedGoodsCount = 0;
@@ -125,7 +122,7 @@ public class WxCartController {
 
         LiteMallGoodsProductEntity product = productService.getById(productId);
         // 判断购物车中是否存在此规格商品
-        LiteMallCartEntity existCart = cartService.queryExist(appConfig.getStoreId(), goodsId, productId, userId);
+        LiteMallCartEntity existCart = cartService.queryExist(userId, goodsId, productId);
         if (existCart == null) {
             // 取得规格的信息,判断规格库存
             if (product == null || number > product.getNumber()) {
@@ -198,7 +195,7 @@ public class WxCartController {
 
         LiteMallGoodsProductEntity product = productService.getById(productId);
         // 判断购物车中是否存在此规格商品
-        LiteMallCartEntity existCart = cartService.queryExist(appConfig.getStoreId(), goodsId, productId, userId);
+        LiteMallCartEntity existCart = cartService.queryExist(userId, goodsId, productId);
         if (existCart == null) {
             //取得规格的信息,判断规格库存
             if (product == null || number > product.getNumber()) {
@@ -378,11 +375,11 @@ public class WxCartController {
     @GetMapping("goodscount")
     public Object goodscount(@LoginUser Integer userId, @AppConfig LiteMallAppEntity appConfig) {
         if (userId == null) {
-            return Result.error(0, "错误");
+            return Result.ok().put("data", Collections.emptyList());
         }
 
         int goodsCount = 0;
-        List<LiteMallCartEntity> cartList = cartService.queryByUserId(appConfig.getStoreId(), userId);
+        List<LiteMallCartEntity> cartList = cartService.queryByUserId(userId);
         for (LiteMallCartEntity cart : cartList) {
             goodsCount += cart.getNumber();
         }
