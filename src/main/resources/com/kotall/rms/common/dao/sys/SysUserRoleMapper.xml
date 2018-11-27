@@ -58,7 +58,7 @@
 		FROM
 			sys_user_role
 		WHERE
-			user_id = #{value}
+			user_id = #{value} group by role_id
 	</select>
 
 </mapper>
