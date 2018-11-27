@@ -113,12 +113,7 @@ public class WxTopicController {
      */
     @GetMapping("related")
     public Object related(@NotNull Integer id) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("id", id);
-        params.put("deleted", 0);
-        params.put("pageNumber", 1);
-        params.put("pageSize", 4);
-        List<LiteMallTopicEntity> topicRelatedList = topicService.queryRelatedList(params);
+        List<LiteMallTopicEntity> topicRelatedList = topicService.queryRelatedTopicList(id);
         return Result.ok().put("data", topicRelatedList);
     }
 }

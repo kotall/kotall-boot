@@ -20,8 +20,9 @@ public interface LiteMallTopicService extends BaseService<LiteMallTopicEntity> {
 
     /**
      * 查询相关主题
-     * @param params
+     *
+     * @param topicId
      * @return
      */
-    List<LiteMallTopicEntity> queryRelatedList(Map<String, Object> params);
+    List<LiteMallTopicEntity> queryRelatedTopicList(Integer topicId);
 }

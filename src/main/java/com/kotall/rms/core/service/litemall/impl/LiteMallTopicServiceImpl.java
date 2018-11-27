@@ -6,10 +6,11 @@ import com.kotall.rms.core.annotation.StoreFilter;
 import com.kotall.rms.core.manager.litemall.LiteMallTopicManager;
 import com.kotall.rms.core.service.BaseServiceImpl;
 import com.kotall.rms.core.service.litemall.LiteMallTopicService;
-import org.apache.shiro.util.CollectionUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,34 +36,31 @@ public class LiteMallTopicServiceImpl extends BaseServiceImpl<LiteMallTopicManag
 
 	@Override
 	public List<LiteMallTopicEntity> queryByList(Map<String, Object> params) {
-		params.put("deleted", 0);
+		params.put("deleted", false);
 		return super.queryByList(params);
 	}
 
 	@Override
-	public List<LiteMallTopicEntity> queryRelatedList(Map<String, Object> params) {
-		List<LiteMallTopicEntity> list = this.queryByList(params);
-		Integer pageNumber = (Integer)params.get("pageNumber");
-		Integer pageSize = (Integer)params.get("pageSize");
-		if (list.size() == 0) {
-           params = new HashMap<>();
-           params.put("pageNumber", pageNumber);
-           params.put("pageSize", pageSize);
-           return super.queryByPage(params).getRows();
-		}
+	public List<LiteMallTopicEntity> queryRelatedTopicList(Integer topicId) {
+		List<LiteMallTopicEntity> relatedTopicList;
 
-		LiteMallTopicEntity topic = list.get(0);
-		params = new HashMap<>();
-		params.put("deleted", 0);
-		params.put("idNotEqual", topic.getId());
-		list = this.queryByList(params);
-		if (!CollectionUtils.isEmpty(list)) {
-			return list;
+		Map<String, Object> params = new HashMap<>();
+		int pageNumber = 1, pageSize = 4;
+		LiteMallTopicEntity mainTopic = this.getById(topicId);
+		if (null != mainTopic && !mainTopic.getDeleted()) {
+			params = new HashMap<>();
+			params.put("deleted", false);
+			params.put("idNotEqual", mainTopic.getId());
+			params.put("pageNumber", pageNumber);
+			params.put("pageSize", pageSize);
+			relatedTopicList = super.queryByPage(params).getRows();
 		}
-
-		params = new HashMap<>();
-		params.put("pageNumber", pageNumber);
-		params.put("pageSize", pageSize);
-		return this.queryByList(params);
+		else {
+			params.put("pageNumber", pageNumber);
+			params.put("pageSize", pageSize);
+			params.put("deleted", false);
+			relatedTopicList = super.queryByPage(params).getRows();
+		}
+		return relatedTopicList;
 	}
 }
