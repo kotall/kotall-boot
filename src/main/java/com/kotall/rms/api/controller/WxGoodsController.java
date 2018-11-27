@@ -170,6 +170,7 @@ public class WxGoodsController {
             LiteMallFootprintEntity footprint = new LiteMallFootprintEntity();
             footprint.setUserId(userId);
             footprint.setGoodsId(id);
+            footprint.setStoreId(appConfig.getStoreId());
             footprintService.save(footprint);
         }
 

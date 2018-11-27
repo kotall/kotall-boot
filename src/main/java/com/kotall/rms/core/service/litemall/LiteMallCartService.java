@@ -25,4 +25,20 @@ public interface LiteMallCartService extends BaseService<LiteMallCartEntity> {
     void delete(List<Integer> productIds, Integer userId);
 
     void clearGoods(Integer userId);
+
+    /**
+     * 添加购物车功能
+     * @param isFastAddCart
+     *       是否是直接添加
+     * @param cart
+     *       购物车条目
+     */
+    void saveOrUpdateCart(Boolean isFastAddCart, LiteMallCartEntity cart);
+
+    /**
+     * 统计购物车商品数量
+     * @param userId
+     * @return
+     */
+    Integer countGoodsInCart(Integer userId);
 }

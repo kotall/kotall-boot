@@ -1,5 +1,7 @@
 package com.kotall.rms.common.entity.litemall;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,6 +15,7 @@ import java.util.Date;
  * @email kotall@admin.com
  * @date 2018年11月19日 下午3:03:30
  */
+@Data
 public class LiteMallGoodsEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -65,7 +68,7 @@ public class LiteMallGoodsEntity implements Serializable {
 	/**
 	 * 是否上架
 	 */
-	private Integer isOnSale;
+	private Boolean isOnSale;
 	
 	/**
 	 * 
@@ -126,186 +129,5 @@ public class LiteMallGoodsEntity implements Serializable {
 	 * 逻辑删除
 	 */
 	private Integer deleted;
-	
 
-	public LiteMallGoodsEntity() {
-		super();
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
-	}
-	
-	public Integer getStoreId() {
-		return storeId;
-	}
-	
-	public void setGoodsSn(String goodsSn) {
-		this.goodsSn = goodsSn;
-	}
-	
-	public String getGoodsSn() {
-		return goodsSn;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
-	}
-	
-	public Integer getCategoryId() {
-		return categoryId;
-	}
-	
-	public void setBrandId(Integer brandId) {
-		this.brandId = brandId;
-	}
-	
-	public Integer getBrandId() {
-		return brandId;
-	}
-	
-	public void setGallery(String gallery) {
-		this.gallery = gallery;
-	}
-	
-	public String getGallery() {
-		return gallery;
-	}
-	
-	public void setKeywords(String keywords) {
-		this.keywords = keywords;
-	}
-	
-	public String getKeywords() {
-		return keywords;
-	}
-	
-	public void setBrief(String brief) {
-		this.brief = brief;
-	}
-	
-	public String getBrief() {
-		return brief;
-	}
-	
-	public void setIsOnSale(Integer isOnSale) {
-		this.isOnSale = isOnSale;
-	}
-	
-	public Integer getIsOnSale() {
-		return isOnSale;
-	}
-	
-	public void setSortOrder(Integer sortOrder) {
-		this.sortOrder = sortOrder;
-	}
-	
-	public Integer getSortOrder() {
-		return sortOrder;
-	}
-	
-	public void setPicUrl(String picUrl) {
-		this.picUrl = picUrl;
-	}
-	
-	public String getPicUrl() {
-		return picUrl;
-	}
-	
-	public void setShareUrl(String shareUrl) {
-		this.shareUrl = shareUrl;
-	}
-	
-	public String getShareUrl() {
-		return shareUrl;
-	}
-	
-	public void setIsNew(Integer isNew) {
-		this.isNew = isNew;
-	}
-	
-	public Integer getIsNew() {
-		return isNew;
-	}
-	
-	public void setIsHot(Integer isHot) {
-		this.isHot = isHot;
-	}
-	
-	public Integer getIsHot() {
-		return isHot;
-	}
-	
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
-	
-	public String getUnit() {
-		return unit;
-	}
-	
-	public void setCounterPrice(BigDecimal counterPrice) {
-		this.counterPrice = counterPrice;
-	}
-	
-	public BigDecimal getCounterPrice() {
-		return counterPrice;
-	}
-	
-	public void setRetailPrice(BigDecimal retailPrice) {
-		this.retailPrice = retailPrice;
-	}
-	
-	public BigDecimal getRetailPrice() {
-		return retailPrice;
-	}
-	
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
-	
-	public String getDetail() {
-		return detail;
-	}
-	
-	public void setAddTime(Date addTime) {
-		this.addTime = addTime;
-	}
-	
-	public Date getAddTime() {
-		return addTime;
-	}
-	
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-	
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	
-	public void setDeleted(Integer deleted) {
-		this.deleted = deleted;
-	}
-	
-	public Integer getDeleted() {
-		return deleted;
-	}
-	
 }

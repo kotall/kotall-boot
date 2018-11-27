@@ -27,13 +27,13 @@ public class RmsException extends RuntimeException {
 		this.msg = msg;
 	}
 	
-	public RmsException(String msg, int code) {
+	public RmsException(int code, String msg) {
 		super(msg);
 		this.msg = msg;
 		this.code = code;
 	}
 	
-	public RmsException(String msg, int code, Throwable e) {
+	public RmsException(int code, String msg, Throwable e) {
 		super(msg, e);
 		this.msg = msg;
 		this.code = code;
