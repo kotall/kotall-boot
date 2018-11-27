@@ -138,7 +138,7 @@ reload = function () {
 
 dialogOpen = function(opt){
 	var defaults = {
-		id : 'layerForm',
+		id : 'layui-layer-iframe',
 		title : '',
 		width: '',
 		height: '',
@@ -167,12 +167,13 @@ dialogOpen = function(opt){
 		area : [option.width, option.height],
 		content : content,
 		btn: option.btn,
-		success: function(){
-			option.success(option.id);
-		},
-		yes: function(){
-			option.yes(option.id);
-		}
+        success: function(index,layero){
+            option.success(option.id+""+layero);
+        },
+        yes: function(index,layero){
+            var win = $(layero).find("iframe")[0].id;
+            option.yes(win);
+        }
     });
 }
 
