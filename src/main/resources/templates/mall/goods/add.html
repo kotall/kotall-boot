@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="include/header_css::header('商品基本信息表')"></head>
+<style>
+	.layui-upload-img {
+		width: 92px;
+		height: 92px;
+		margin: 0 10px 10px 0;
+	}
+</style>
 <body>
 	<div id="dpLTE" class="container-fluid" v-cloak>
 		<table class="form" id="form">
@@ -23,25 +30,87 @@
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">商品所属类目ID<font face="宋体">*</font></td>
+	            <td class="formTitle">商品所属分类<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="商品所属类目ID" v-model="liteMallGoods.categoryId" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
+
 			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
+				<td class="formTitle">专柜价格<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="专柜价格" v-model="liteMallGoods.counterPrice" isvalid="yes" checkexpession="NotNull">
+				</td>
+			</tr>
+			<tr>
+				<td class="formTitle">零售价格<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="零售价格" v-model="liteMallGoods.retailPrice" isvalid="yes" checkexpession="NotNull">
+				</td>
+			</tr>
+
+			<tr>
+				<td class="formTitle">是否新品<font face="宋体">*</font></td>
+				<td class="formValue">
+					<label class="radio-inline">
+						<input type="radio" name="type" value="0" v-model="liteMallGoods.isNew" /> 是
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="type" value="1" v-model="liteMallGoods.isNew" /> 否
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td class="formTitle">是否热卖<font face="宋体">*</font></td>
+				<td class="formValue">
+					<label class="radio-inline">
+						<input type="radio" name="type" value="0" v-model="liteMallGoods.isHot" /> 是
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="type" value="1" v-model="liteMallGoods.isHot" /> 否
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td class="formTitle">是否在售<font face="宋体">*</font></td>
+				<td class="formValue">
+					<label class="radio-inline">
+						<input type="radio" name="type" value="0" v-model="liteMallGoods.isOnSale" /> 是
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="type" value="1" v-model="liteMallGoods.isOnSale" /> 否
+					</label>
+				</td>
+			</tr>
+
+			<tr>
+	            <td class="formTitle">所属品牌商<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="" v-model="liteMallGoods.brandId" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">商品宣传图片列表，采用JSON数组格式<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="商品宣传图片列表，采用JSON数组格式" v-model="liteMallGoods.gallery" isvalid="yes" checkexpession="NotNull">
-	            </td>
+				<input id="iconUrl" type="hidden" v-model="liteMallGoods.picUrl" >
+				<td class="formTitle" style=" vertical-align:top; padding-top:15px">商品图片<font face="宋体">*</font></td>
+				<td class="formValue">
+					<div class="layui-upload-list"  id="test1">
+						<img class="layui-upload-img" id="demo1">
+						<p id="demoText"></p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<input id="gallery" type="hidden" v-model="liteMallGoods.gallery" >
+				<td class="formTitle" style=" vertical-align:top; padding-top:15px">宣传画廊<font face="宋体">*</font></td>
+				<td class="formValue">
+					<div class="layui-upload-list"  id="test2">
+						<img class="layui-upload-img" id="demo2">
+						<p id="demoText2"></p>
+					</div>
+				</td>
         	</tr>
 			<tr>
-	            <td class="formTitle">商品关键字，采用逗号间隔<font face="宋体">*</font></td>
+	            <td class="formTitle">商品关键字<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="商品关键字，采用逗号间隔" v-model="liteMallGoods.keywords" isvalid="yes" checkexpession="NotNull">
 	            </td>
@@ -53,65 +122,27 @@
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">是否上架<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="是否上架" v-model="liteMallGoods.isOnSale" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="liteMallGoods.sortOrder" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">商品页面商品图片<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="商品页面商品图片" v-model="liteMallGoods.picUrl" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
+				<td class="formTitle">商品详细介绍<font face="宋体">*</font></td>
+				<td class="formValue">
+					<div class="row">
+						<div class="col-md-13" id="editor"  v-model="liteMallGoods.detail"></div>
+					</div>
+				</td>
+			</tr>
+
+			<!--<tr>
 	            <td class="formTitle">商品分享朋友圈图片<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="商品分享朋友圈图片" v-model="liteMallGoods.shareUrl" isvalid="yes" checkexpession="NotNull">
 	            </td>
-        	</tr>
+        	</tr>-->
 			<tr>
-	            <td class="formTitle">是否新品首发，如果设置则可以在新品首发页面展示<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="是否新品首发，如果设置则可以在新品首发页面展示" v-model="liteMallGoods.isNew" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">是否人气推荐，如果设置则可以在人气推荐页面展示<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="是否人气推荐，如果设置则可以在人气推荐页面展示" v-model="liteMallGoods.isHot" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">商品单位，例如件、盒<font face="宋体">*</font></td>
+	            <td class="formTitle">商品单位<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="商品单位，例如件、盒" v-model="liteMallGoods.unit" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
-			<tr>
-	            <td class="formTitle">专柜价格<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="专柜价格" v-model="liteMallGoods.counterPrice" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">零售价格<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="零售价格" v-model="liteMallGoods.retailPrice" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">商品详细介绍，是富文本格式<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="商品详细介绍，是富文本格式" v-model="liteMallGoods.detail" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
+
 			<tr>
 	            <td class="formTitle">创建时间<font face="宋体">*</font></td>
 	            <td class="formValue">
@@ -122,12 +153,6 @@
 	            <td class="formTitle">更新时间<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="更新时间" v-model="liteMallGoods.updateTime" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">逻辑删除<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="逻辑删除" v-model="liteMallGoods.deleted" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 		</table>

@@ -27,23 +27,22 @@ function getGrid() {
 			{field : "goodsSn", title : "商品编号", width : "100px"}, 
 			{field : "name", title : "商品名称", width : "100px"}, 
 			{field : "categoryId", title : "商品所属类目ID", width : "100px"}, 
-			{field : "brandId", title : "", width : "100px"}, 
-			{field : "gallery", title : "商品宣传图片列表，采用JSON数组格式", width : "100px"}, 
-			{field : "keywords", title : "商品关键字，采用逗号间隔", width : "100px"}, 
+			{field : "brandId", title : "所属品牌商", width : "100px"},
+			/*{field : "gallery", title : "商品宣传图片列表，采用JSON数组格式", width : "100px"}, */
+			{field : "keywords", title : "商品关键字", width : "100px"},
 			{field : "brief", title : "商品简介", width : "100px"}, 
-			{field : "isOnSale", title : "是否上架", width : "100px"}, 
-			{field : "sortOrder", title : "", width : "100px"}, 
+			{field : "isOnSale", title : "是否上架", width : "100px"},
 			{field : "picUrl", title : "商品页面商品图片", width : "100px"}, 
 			{field : "shareUrl", title : "商品分享朋友圈图片", width : "100px"}, 
-			{field : "isNew", title : "是否新品首发，如果设置则可以在新品首发页面展示", width : "100px"}, 
-			{field : "isHot", title : "是否人气推荐，如果设置则可以在人气推荐页面展示", width : "100px"}, 
-			{field : "unit", title : "商品单位，例如件、盒", width : "100px"}, 
+			{field : "isNew", title : "是否新品首发", width : "100px"},
+			{field : "isHot", title : "是否人气推荐", width : "100px"},
+			{field : "unit", title : "商品单位", width : "100px"},
 			{field : "counterPrice", title : "专柜价格", width : "100px"}, 
 			{field : "retailPrice", title : "零售价格", width : "100px"}, 
-			{field : "detail", title : "商品详细介绍，是富文本格式", width : "100px"}, 
+			{field : "detail", title : "商品详细介绍", width : "100px"}/*,
 			{field : "addTime", title : "创建时间", width : "100px"}, 
-			{field : "updateTime", title : "更新时间", width : "100px"}, 
-			{field : "deleted", title : "逻辑删除", width : "100px"}
+			{field : "updateTime", title : "更新时间", width : "100px"},
+			{field : "deleted", title : "逻辑删除", width : "100px"}*/
 		]
 	})
 }
@@ -63,10 +62,14 @@ var vm = new Vue({
 				url: 'mall/goods/add.html?_' + $.now(),
 				width: '420px',
 				height: '350px',
+                maxmin: true,
+				isFull:true,
+                scroll : true,
 				yes : function(iframeId) {
 					top.frames[iframeId].vm.acceptClick();
 				},
 			});
+
 		},
 		edit: function() {
 			var ck = $('#dataGrid').bootstrapTable('getSelections');
@@ -76,6 +79,9 @@ var vm = new Vue({
 					url: 'mall/goods/edit.html?_' + $.now(),
 					width: '420px',
 					height: '350px',
+                    maxmin: true,
+                    isFull:true,
+                    scroll : true,
 					success: function(iframeId){
 						top.frames[iframeId].vm.liteMallGoods.id = ck[0].id;
 						top.frames[iframeId].vm.setForm();

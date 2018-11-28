@@ -155,26 +155,33 @@ dialogOpen = function(opt){
 	}else{
 		content = [option.url, 'no']
 	}
-	top.layer.open({
-	  	type : 2,
-	  	id : option.id,
-		title : option.title,
-		closeBtn : 1,
-		anim: -1,
-		isOutAnim: false,
-		shadeClose : false,
-		shade : 0.3,
-		area : [option.width, option.height],
-		content : content,
-		btn: option.btn,
-        success: function(index,layero){
-            option.success(option.id+""+layero);
-        },
-        yes: function(index,layero){
-            var win = $(layero).find("iframe")[0].id;
-            option.yes(win);
-        }
-    });
+		top.layer.open({
+            type : 2,
+            id : option.id,
+            title : option.title,
+            scroll: option.scroll,
+            closeBtn : 1,
+            anim: -1,
+            isOutAnim: false,
+            shadeClose : false,
+            shade : 0.3,
+            area : [option.width, option.height],
+            content : content,
+            btn: option.btn,
+			maxmin:false,
+            success: function(index,layero){
+            	if(option.isFull){
+                    top.layer.full(top.layer.index);
+                }
+                option.success(option.id+""+layero);
+            },
+            yes: function(index,layero){
+                var win = $(layero).find("iframe")[0].id;
+                option.yes(win);
+            }
+        });
+
+
 }
 
 dialogContent = function(opt){
@@ -367,4 +374,49 @@ $.currentIframe = function () {
 		return $(window.parent.document).contents().find('#main')[0].contentWindow;
     }
     return $(window.parent.document).contents().find('#'+tabiframeId())[0].contentWindow;//多层tab页嵌套
+}
+
+
+
+/**
+ * 富文本编辑器工具类
+ * @type {{init: editor.init}}
+ */
+editorUtils = {
+    init: function(opt) {
+        var defaults = {
+            element: '#editor',
+            change: function(){}
+        };
+        var option = $.extend({}, defaults, opt);
+        var editor = new window.wangEditor(option.element);
+        editor.customConfig.uploadImgServer = '/editor/upload';
+        editor.customConfig.onchange= function(html) {
+            option.change(html);
+        };
+        editor.customConfig.customAlert = function(info) {
+            dialogAlert(info, 'error');
+        };
+        editor.create();
+        return editor;
+    },
+    set: function($editor, content) {
+        $editor.txt.html(content);
+    },
+    get: function($editor) {
+        return $editor.txt.html();
+    },
+    text: function($editor) {
+        return $editor.txt.text();
+    },
+    append: function($editor, content) {
+        $editor.txt.append(content)
+    },
+    clear: function($editor) {
+        $editor.txt.clear()
+    },
+    hasContents: function ($editor) {
+        var content = this.get($editor);
+        return isNotNullOrEmpty(this.get($editor)) && "<p><br></p>" !== content;
+    }
 }
