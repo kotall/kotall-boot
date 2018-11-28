@@ -119,8 +119,8 @@ public class WxOrderController {
      * @return 订单操作结果
      * 成功则
      * {
-     * errno: 0,
-     * errmsg: '成功',
+     * code: 0,
+     * msg: '成功',
      * data:
      * {
      * data: xxx ,
@@ -159,12 +159,7 @@ public class WxOrderController {
             orderVo.put("orderStatusText", OrderUtil.orderStatusText(order));
             orderVo.put("handleOption", OrderUtil.build(order));
 
-            params = new HashMap<>();
-            //params.put("storeId", storeId);
-            params.put("orderId", order.getId());
-            params.put("orderStatus", orderStatus);
-            params.put("deleted", 0);
-            LiteMallGrouponEntity groupon = grouponService.queryByOrderId(params);
+            LiteMallGrouponEntity groupon = grouponService.queryByOrderId(order.getId());
             if (groupon != null) {
                 orderVo.put("isGroupin", true);
             } else {
@@ -612,7 +607,7 @@ public class WxOrderController {
 
             result = wxPayService.createOrder(orderRequest);
 
-            //缓存prepayID用于后续模版通知
+            // 缓存prepayID用于后续模版通知
             String prepayId = result.getPackageValue();
             prepayId = prepayId.replace("prepay_id=", "");
             LiteMallUserFormidEntity userFormid = new LiteMallUserFormidEntity();
@@ -659,7 +654,7 @@ public class WxOrderController {
         try {
             xmlResult = IOUtils.toString(request.getInputStream(), request.getCharacterEncoding());
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("微信支付结果通知解析异常", e);
             return WxPayNotifyResponse.fail(e.getMessage());
         }
 
@@ -667,7 +662,7 @@ public class WxOrderController {
         try {
             result = wxPayService.parseOrderNotifyResult(xmlResult);
         } catch (WxPayException e) {
-            e.printStackTrace();
+            log.error("微信支付结果通知解析异常", e);
             return WxPayNotifyResponse.fail(e.getMessage());
         }
 
@@ -678,10 +673,7 @@ public class WxOrderController {
 
         // 分转化成元
         String totalFee = BaseWxPayResult.fenToYuan(result.getTotalFee());
-        Map<String, Object> params = new HashMap<>();
-        params.put("storeId", appConfig.getStoreId());
-        params.put("orderSn", orderSn);
-        LiteMallOrderEntity order = orderService.findOrderBySn(params);
+        LiteMallOrderEntity order = orderService.findOrderBySn(orderSn);
         if (order == null) {
             return WxPayNotifyResponse.fail("订单不存在 sn=" + orderSn);
         }
@@ -699,15 +691,12 @@ public class WxOrderController {
         order.setPayId(payId);
         order.setPayTime(new Date());
         order.setOrderStatus(new Integer(OrderUtil.STATUS_PAY));
-        if (orderService.update(order)) {
+        if (!orderService.update(order)) {
             // 这里可能存在这样一个问题，用户支付和系统自动取消订单发生在同时
             // 如果数据库首先因为系统自动取消订单而更新了订单状态；
             // 此时用户支付完成回调这里也要更新数据库，而由于乐观锁机制这里的更新会失败
             // 因此，这里会重新读取数据库检查状态是否是订单自动取消，如果是则更新成支付状态。
-            params = new HashMap<>();
-            //params.put("storeId", storeId);
-            params.put("orderSn", orderSn);
-            order = orderService.findOrderBySn(params);
+            order = orderService.findOrderBySn(orderSn);
             boolean updated = false;
             if(OrderUtil.isAutoCancelStatus(order)){
                 order.setPayId(payId);
@@ -723,10 +712,7 @@ public class WxOrderController {
         }
 
         //  支付成功，有团购信息，更新团购信息
-        params = new HashMap<>();
-        params.put("storeId", appConfig.getStoreId());
-        params.put("orderId", order.getId());
-        LiteMallGrouponEntity groupon = grouponService.queryByOrderId(params);
+        LiteMallGrouponEntity groupon = grouponService.queryByOrderId(order.getId());
         if (groupon != null) {
             LiteMallGrouponRulesEntity grouponRules = grouponRulesService.getById(groupon.getRulesId());
 

@@ -98,7 +98,9 @@ public class LiteMallOrderServiceImpl extends BaseServiceImpl<LiteMallOrderManag
 	}
 
 	@Override
-	public LiteMallOrderEntity findOrderBySn(Map<String, Object> params) {
+	public LiteMallOrderEntity findOrderBySn(String orderSn) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("orderSn", orderSn);
 		List<LiteMallOrderEntity> list = this.queryByList(params);
 		return CollectionUtils.isEmpty(list) ? null : list.get(0);
 	}

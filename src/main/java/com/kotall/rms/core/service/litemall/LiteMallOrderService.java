@@ -21,6 +21,11 @@ public interface LiteMallOrderService extends BaseService<LiteMallOrderEntity> {
 
     String generateOrderSn(Integer userId);
 
-    LiteMallOrderEntity findOrderBySn(Map<String, Object> params);
+    /**
+     * 根据订单编号查找订单
+     * @param orderSn
+     * @return
+     */
+    LiteMallOrderEntity findOrderBySn(String orderSn);
 
 }

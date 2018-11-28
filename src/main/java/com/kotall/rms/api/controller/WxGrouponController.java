@@ -270,7 +270,7 @@ public class WxGrouponController {
             params.put("grouponId", 0);
             params.put("deleted", 0);
             params.put("payed", 1);
-            int joinerCount = grouponService.countGroupon(params);
+            int joinerCount = grouponService.countGroupOn(params);
             grouponVo.put("joinerCount", joinerCount + 1);
 
             //填充订单信息

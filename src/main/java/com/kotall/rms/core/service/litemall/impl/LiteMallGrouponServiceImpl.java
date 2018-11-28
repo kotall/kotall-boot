@@ -11,6 +11,7 @@ import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,13 +51,16 @@ public class LiteMallGrouponServiceImpl extends BaseServiceImpl<LiteMallGrouponM
 	}
 
 	@Override
-	public int countGroupon(Map<String, Object> params) {
+	public int countGroupOn(Map<String, Object> params) {
 		Query query = new Query(params);
 		return this.liteMallGrouponManager.countGroupOn(query);
 	}
 
 	@Override
-	public LiteMallGrouponEntity queryByOrderId(Map<String, Object> params) {
+	public LiteMallGrouponEntity queryByOrderId(Integer orderId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("orderId", orderId);
+		params.put("deleted", false);
 		List<LiteMallGrouponEntity> list = this.queryByList(params);
 
 		return CollectionUtils.isEmpty(list) ? null : list.get(0);

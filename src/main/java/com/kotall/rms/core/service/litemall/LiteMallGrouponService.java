@@ -24,7 +24,12 @@ public interface LiteMallGrouponService extends BaseService<LiteMallGrouponEntit
 
     List<LiteMallGrouponEntity> queryMyJoinGroupon(Map<String, Object> params);
 
-    int countGroupon(Map<String, Object> params);
+    int countGroupOn(Map<String, Object> params);
 
-    LiteMallGrouponEntity queryByOrderId(Map<String, Object> params);
+    /**
+     * 根据订单ID查询该笔订单对应的团购记录
+     * @param orderId
+     * @return
+     */
+    LiteMallGrouponEntity queryByOrderId(Integer orderId);
 }
