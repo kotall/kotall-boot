@@ -123,7 +123,7 @@ public class OrderUtil {
             return null;
         }
 
-        List<Short> status = new ArrayList<Short>(2);
+        List<Short> status = new ArrayList<>(2);
 
         if (showType.equals(1)) {
             // 待付款订单
