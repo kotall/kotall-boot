@@ -148,7 +148,7 @@ public class LiteMallOrderEntity implements Serializable {
 	/**
 	 * 逻辑删除
 	 */
-	private Integer deleted;
+	private Boolean deleted;
 
 	/**
 	 * 店铺ID

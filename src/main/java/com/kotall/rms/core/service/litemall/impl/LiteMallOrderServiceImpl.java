@@ -106,7 +106,7 @@ public class LiteMallOrderServiceImpl extends BaseServiceImpl<LiteMallOrderManag
 	@Override
 	public boolean deleteById(Integer orderId) {
 		LiteMallOrderEntity orderEntity = new LiteMallOrderEntity();
-		orderEntity.setDeleted(1);
+		orderEntity.setDeleted(true);
 		orderEntity.setId(orderId);
 		return super.update(orderEntity);
 	}

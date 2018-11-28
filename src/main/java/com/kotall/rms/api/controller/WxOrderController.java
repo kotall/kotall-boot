@@ -144,7 +144,9 @@ public class WxOrderController {
         params.put("storeId", appConfig.getStoreId());
         params.put("userId", userId);
         params.put("orderStatus", orderStatus);
-        params.put("deleted", 0);
+        params.put("deleted", false);
+        params.put("pageNumber", page);
+        params.put("pageSize", size);
 
         Page<LiteMallOrderEntity> pages = orderService.queryByPage(params);
 
