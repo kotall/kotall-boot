@@ -481,8 +481,8 @@ public class WxOrderController {
      * @param userId 用户ID
      * @param body   订单信息，{ orderId：xxx }
      * @return 订单操作结果
-     * 成功则 { errno: 0, errmsg: '成功' }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 成功则 { errno: 0, msg: '成功' }
+     * 失败则 { errno: XXX, msg: XXX }
      */
     @PostMapping("cancel")
     public Object cancel(@LoginUser Integer userId,
