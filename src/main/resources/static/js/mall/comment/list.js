@@ -23,12 +23,12 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
-			{field : "valueId", title : "如果type=0，则是商品评论；如果是type=1，则是专题评论。", width : "100px"}, 
-			{field : "type", title : "评论类型，如果type=0，则是商品评论；如果是type=1，则是专题评论；如果type=3，则是订单商品评论。", width : "100px"}, 
+			{field : "valueId", title : "评论内容", width : "100px"},
+			{field : "type", title : "评论类型", width : "100px"},
 			{field : "content", title : "评论内容", width : "100px"}, 
 			{field : "userId", title : "用户表的用户ID", width : "100px"}, 
 			{field : "hasPicture", title : "是否含有图片", width : "100px"}, 
-			{field : "picUrls", title : "图片地址列表，采用JSON数组格式", width : "100px"}, 
+			{field : "picUrls", title : "图片地址列表", width : "100px"},
 			{field : "star", title : "评分， 1-5", width : "100px"}, 
 			{field : "addTime", title : "创建时间", width : "100px"}
 		]

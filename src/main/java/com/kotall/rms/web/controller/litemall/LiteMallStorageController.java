@@ -67,6 +67,7 @@ public class LiteMallStorageController extends AbstractController {
 		storageInfo.setType(file.getContentType());
 		storageInfo.setKey(null);
 		storageInfo.setUrl(url);
+		storageInfo.setStoreId(1);
 		liteMallStorageService.save(storageInfo);
 
 		Map<String, Object> data = new HashMap<>();

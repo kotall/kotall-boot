@@ -24,8 +24,8 @@ function getGrid() {
 		columns: [
 			{checkbox: true},
 			{field : "orderId", title : "关联的订单ID", width : "100px"}, 
-			{field : "grouponId", title : "参与的团购ID，仅当user_type不是1", width : "100px"}, 
-			{field : "rulesId", title : "团购规则ID，关联litemall_groupon_rules表ID字段", width : "100px"}, 
+			{field : "grouponId", title : "参与的团购ID", width : "100px"},
+			{field : "rulesId", title : "团购规则ID", width : "100px"},
 			{field : "userId", title : "用户ID", width : "100px"}, 
 			{field : "creatorUserId", title : "创建者ID", width : "100px"}, 
 			{field : "shareUrl", title : "团购分享图片地址", width : "100px"},
