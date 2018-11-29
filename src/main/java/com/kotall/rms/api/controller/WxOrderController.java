@@ -557,8 +557,8 @@ public class WxOrderController {
      * @param userId 用户ID
      * @param body   订单信息，{ orderId：xxx }
      * @return 订单操作结果
-     * 成功则 { errno: 0, errmsg: '模拟付款支付成功' }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 成功则 { code: 0, msg: '模拟付款支付成功' }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("prepay")
     public Object prepay(@LoginUser Integer userId,
@@ -756,8 +756,8 @@ public class WxOrderController {
      * @param userId 用户ID
      * @param body   订单信息，{ orderId：xxx }
      * @return 订单操作结果
-     * 成功则 { errno: 0, errmsg: '成功' }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 成功则 { code: 0, msg: '成功' }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("refund")
     public Object refund(@LoginUser Integer userId,
@@ -805,8 +805,8 @@ public class WxOrderController {
      * @param userId 用户ID
      * @param body   订单信息，{ orderId：xxx }
      * @return 订单操作结果
-     * 成功则 { errno: 0, errmsg: '成功' }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 成功则 { code: 0, msg: '成功' }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("confirm")
     public Object confirm(@LoginUser Integer userId,
@@ -932,8 +932,8 @@ public class WxOrderController {
      * @param userId 用户ID
      * @param body   订单信息，{ orderId：xxx }
      * @return 订单操作结果
-     * 成功则 { errno: 0, errmsg: '成功' }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 成功则 { code: 0, msg: '成功' }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @PostMapping("comment")
     public Object comment(@LoginUser Integer userId, @RequestBody String body) {

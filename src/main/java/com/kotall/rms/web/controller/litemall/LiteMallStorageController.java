@@ -2,6 +2,7 @@ package com.kotall.rms.web.controller.litemall;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import com.kotall.rms.common.integration.storage.StorageService;
 import com.kotall.rms.common.utils.FileKit;
@@ -65,9 +66,9 @@ public class LiteMallStorageController extends AbstractController {
 		storageInfo.setName(originalFilename);
 		storageInfo.setSize((int) file.getSize());
 		storageInfo.setType(file.getContentType());
-		storageInfo.setKey(null);
+		storageInfo.setKey(UUID.randomUUID().toString());
 		storageInfo.setUrl(url);
-		storageInfo.setStoreId(1);
+		storageInfo.setStoreId(1); // TODO
 		liteMallStorageService.save(storageInfo);
 
 		Map<String, Object> data = new HashMap<>();
