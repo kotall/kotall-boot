@@ -391,13 +391,13 @@ editorUtils = {
         var option = $.extend({}, defaults, opt);
         var editor = new window.wangEditor(option.element);
         editor.customConfig.uploadImgServer = '../../litemall/storage/create';
-        editor.customConfig.withCredentials = true
+        editor.customConfig.uploadFileName = 'file'
         editor.customConfig.onchange= function(html) {
             option.change(html);
         };
         editor.customConfig.uploadImgHeaders = {
-            'Accept': 'text/x-json',
-            'token':''
+            'Accept': 'application/json',
+            "token": token
         }
 
         editor.customConfig.customAlert = function(info) {
