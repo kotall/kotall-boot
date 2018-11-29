@@ -60,8 +60,8 @@ var vm = new Vue({
 			dialogOpen({
 				title: '新增商品基本信息表',
 				url: 'mall/goods/add.html?_' + $.now(),
-				width: '420px',
-				height: '350px',
+				width: '1020px',
+				height: '750px',
                 maxmin: true,
 				isFull:true,
                 scroll : true,

@@ -81,7 +81,7 @@
 		)
 	</insert>
 
-	<insert id="add">
+	<insert id="insert">
 		INSERT INTO lite_mall_storage (
 		`store_id`,
 		`key`,

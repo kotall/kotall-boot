@@ -168,7 +168,7 @@ dialogOpen = function(opt){
             area : [option.width, option.height],
             content : content,
             btn: option.btn,
-			maxmin:false,
+			maxmin:option.maxmin,
             success: function(index,layero){
             	if(option.isFull){
                     top.layer.full(top.layer.index);
@@ -390,11 +390,18 @@ editorUtils = {
         };
         var option = $.extend({}, defaults, opt);
         var editor = new window.wangEditor(option.element);
-        editor.customConfig.uploadImgServer = '/editor/upload';
+        editor.customConfig.uploadImgServer = '../../litemall/storage/create';
+        editor.customConfig.withCredentials = true
         editor.customConfig.onchange= function(html) {
             option.change(html);
         };
+        editor.customConfig.uploadImgHeaders = {
+            'Accept': 'text/x-json',
+            'token':''
+        }
+
         editor.customConfig.customAlert = function(info) {
+            debugger
             dialogAlert(info, 'error');
         };
         editor.create();

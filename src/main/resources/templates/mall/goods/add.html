@@ -35,7 +35,12 @@
 					<input type="text" class="form-control" placeholder="商品所属类目ID" v-model="liteMallGoods.categoryId" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
-
+			<tr>
+				<td class="formTitle">商品单位<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="商品单位，例如件、盒" v-model="liteMallGoods.unit" isvalid="yes" checkexpession="NotNull">
+				</td>
+			</tr>
 			<tr>
 				<td class="formTitle">专柜价格<font face="宋体">*</font></td>
 				<td class="formValue">
@@ -53,10 +58,10 @@
 				<td class="formTitle">是否新品<font face="宋体">*</font></td>
 				<td class="formValue">
 					<label class="radio-inline">
-						<input type="radio" name="type" value="0" v-model="liteMallGoods.isNew" /> 是
+						<input type="radio" name="liteMallGoods.isNew" value="0" v-model="liteMallGoods.isNew" /> 是
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="type" value="1" v-model="liteMallGoods.isNew" /> 否
+						<input type="radio" name="liteMallGoods.isNew" value="1" v-model="liteMallGoods.isNew" /> 否
 					</label>
 				</td>
 			</tr>
@@ -64,10 +69,10 @@
 				<td class="formTitle">是否热卖<font face="宋体">*</font></td>
 				<td class="formValue">
 					<label class="radio-inline">
-						<input type="radio" name="type" value="0" v-model="liteMallGoods.isHot" /> 是
+						<input type="radio" name="liteMallGoods.isHot" value="0" v-model="liteMallGoods.isHot" /> 是
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="type" value="1" v-model="liteMallGoods.isHot" /> 否
+						<input type="radio" name="liteMallGoods.isHot" value="1" v-model="liteMallGoods.isHot" /> 否
 					</label>
 				</td>
 			</tr>
@@ -75,10 +80,10 @@
 				<td class="formTitle">是否在售<font face="宋体">*</font></td>
 				<td class="formValue">
 					<label class="radio-inline">
-						<input type="radio" name="type" value="0" v-model="liteMallGoods.isOnSale" /> 是
+						<input type="radio" name="liteMallGoods.isOnSale" value="0" v-model="liteMallGoods.isOnSale" /> 是
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="type" value="1" v-model="liteMallGoods.isOnSale" /> 否
+						<input type="radio" name="liteMallGoods.isOnSale" value="1" v-model="liteMallGoods.isOnSale" /> 否
 					</label>
 				</td>
 			</tr>
@@ -136,25 +141,9 @@
 					<input type="text" class="form-control" placeholder="商品分享朋友圈图片" v-model="liteMallGoods.shareUrl" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>-->
-			<tr>
-	            <td class="formTitle">商品单位<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="商品单位，例如件、盒" v-model="liteMallGoods.unit" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
 
-			<tr>
-	            <td class="formTitle">创建时间<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="创建时间" v-model="liteMallGoods.addTime" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">更新时间<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="更新时间" v-model="liteMallGoods.updateTime" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
+
+
 		</table>
 	</div>
 	<div th:include="include/footer_js::footer"></div>

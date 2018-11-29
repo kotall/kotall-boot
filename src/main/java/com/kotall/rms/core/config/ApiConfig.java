@@ -7,6 +7,8 @@ import com.kotall.rms.api.annotation.support.AppConfigHandlerMethodArgumentResol
 import com.kotall.rms.api.annotation.support.LoginUserHandlerMethodArgumentResolver;
 import com.kotall.rms.core.service.litemall.LiteMallAppService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -29,10 +31,10 @@ public class ApiConfig implements WebMvcConfigurer {
     }
     /**
      * 利用fastjson替换掉jackson,且解决中文乱码问题
-     * @param  converters
+     *
      */
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+    @Bean
+    public HttpMessageConverters fastJsonHttpMessageConverters(){
         // 1.构建了一个HttpMessageConverter  FastJson   消息转换器
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
         // 2.定义一个配置，设置编码方式，和格式化的形式
@@ -46,7 +48,8 @@ public class ApiConfig implements WebMvcConfigurer {
 
         // 5.将fastJsonConfig加到消息转换器中
         fastConverter.setFastJsonConfig(fastJsonConfig);
-        converters.add(fastConverter);
+        return new HttpMessageConverters(fastConverter);
     }
+
 
 }

@@ -5,7 +5,9 @@ var vm = new Vue({
 	el:'#dpLTE',
 	data: {
 		liteMallGoods: {
-			id: 0
+			id: 0,
+            picUrl:'',
+            gallery:''
 		},
         htmlResult: '',
         textResult: ''
@@ -56,7 +58,7 @@ layui.use('upload', function(){
     //普通图片上传
     var uploadInst = upload.render({
         elem: '#test1'
-        ,url: '../..//litemall/storage/create'
+        ,url: '../../litemall/storage/create'
         ,before: function(obj){
             //预读本地文件示例，不支持ie8
             obj.preview(function(index, file, result){
