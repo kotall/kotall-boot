@@ -24,11 +24,11 @@ var vm = new Vue({
                     editor = editorUtils.init({
                         change: function (html) {
                             debugger
-							html = html.replace(/\"/g,"\\'");
+							html = $.base64.encode(html);
                             vm.liteMallGoods.detail=html;
                         }
                     });
-                    editor.txt.html(vm.liteMallGoods.detail)
+                    editor.txt.html($.base64.decode(vm.liteMallGoods.detail));
 		    	}
 			});
 		},

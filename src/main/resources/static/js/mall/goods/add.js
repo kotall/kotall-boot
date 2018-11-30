@@ -52,7 +52,7 @@ layui.use('upload', function(){
             }
             debugger
             var url = res.rows.url;
-            vm.liteMallCategory.iconUrl=url;
+            vm.liteMallGoods.picUrl=url;
             //上传成功
         }
         ,error: function(){
@@ -83,7 +83,7 @@ layui.use('upload', function(){
                 return layer.msg('上传失败');
             }
             var url = res.rows.url;
-            vm.liteMallCategory.picUrl=url;
+            vm.liteMallGoods.gallery=url;
             //上传成功
         }
         ,error: function(){
@@ -99,7 +99,7 @@ layui.use('upload', function(){
 
 var editor = editorUtils.init({
     change: function (html) {
-        html = html.replace(/\"/g,"\\'");
+        $.base64.encode(html);
         vm.liteMallGoods.detail=html;
     }
 });

@@ -39,10 +39,15 @@ function getGrid() {
 			{field : "unit", title : "商品单位", width : "100px"},
 			{field : "counterPrice", title : "专柜价格", width : "100px"}, 
 			{field : "retailPrice", title : "零售价格", width : "100px"}, 
-			{field : "detail", title : "商品详细介绍", width : "100px"}/*,
-			{field : "addTime", title : "创建时间", width : "100px"}, 
-			{field : "updateTime", title : "更新时间", width : "100px"},
-			{field : "deleted", title : "逻辑删除", width : "100px"}*/
+			{field : "detail", title : "商品详细介绍", width : "100px",
+				formatter : function(value, row, index) {
+				debugger
+					return $.base64.decode(value);
+				}
+			},
+            /*,{field : "addTime", title : "创建时间", width : "100px"},
+            {field : "updateTime", title : "更新时间", width : "100px"},
+            {field : "deleted", title : "逻辑删除", width : "100px"}*/
 		]
 	})
 }

@@ -391,7 +391,7 @@ editorUtils = {
         var option = $.extend({}, defaults, opt);
         var editor = new window.wangEditor(option.element);
         editor.customConfig.uploadImgServer = '../../litemall/storage/create';
-        editor.customConfig.uploadFileName = 'file'
+        editor.customConfig.uploadFileName = 'file';
         editor.customConfig.onchange= function(html) {
             option.change(html);
         };
