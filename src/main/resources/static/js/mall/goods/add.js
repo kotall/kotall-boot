@@ -73,7 +73,8 @@ layui.use('upload', function(){
         ,before: function(obj){
             //预读本地文件示例，不支持ie8
             obj.preview(function(index, file, result){
-                $('#demo2').attr('src', result); //图片链接（base64）
+                $('#demo2').before('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                //$('#demo2').attr('src', result); //图片链接（base64）
             });
         }
         ,done: function(res){
@@ -83,7 +84,9 @@ layui.use('upload', function(){
                 return layer.msg('上传失败');
             }
             var url = res.rows.url;
-            vm.liteMallGoods.gallery=url;
+            var gallery = vm.liteMallGoods.gallery;
+            gallery = gallery +";"+ url;
+            vm.liteMallGoods.gallery=gallery;
             //上传成功
         }
         ,error: function(){

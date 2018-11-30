@@ -99,7 +99,7 @@
 			<td class="formTitle" style=" vertical-align:top; padding-top:15px">商品图片<font face="宋体">*</font></td>
 			<td class="formValue">
 				<div class="layui-upload-list"  id="test1">
-					<img class="layui-upload-img" id="demo1">
+					<img :src="liteMallGoods.picUrl" class="layui-upload-img" id="demo1">
 					<p id="demoText"></p>
 				</div>
 			</td>
@@ -109,6 +109,7 @@
 			<td class="formTitle" style=" vertical-align:top; padding-top:15px">宣传画廊<font face="宋体">*</font></td>
 			<td class="formValue">
 				<div class="layui-upload-list"  id="test2">
+					<img v-for="opt in gallerys" :src="opt" class="layui-upload-img">
 					<img class="layui-upload-img" id="demo2">
 					<p id="demoText2"></p>
 				</div>
