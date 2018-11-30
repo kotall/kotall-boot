@@ -1,12 +1,17 @@
+var editor ;
+
 /**
  * 编辑-商品基本信息表js
  */
 var vm = new Vue({
 	el:'#dpLTE',
 	data: {
-		liteMallGoods: {
-			id: 0
-		}
+        liteMallGoods: {
+            id: 0,
+            picUrl:'',
+            gallery:'',
+            detail:''
+        },
 	},
 	methods : {
 		setForm: function() {
@@ -14,7 +19,16 @@ var vm = new Vue({
 				url: '../../litemall/goods/info?_' + $.now(),
 		    	param: vm.liteMallGoods.id,
 		    	success: function(data) {
+					debugger
 		    		vm.liteMallGoods = data;
+                    editor = editorUtils.init({
+                        change: function (html) {
+                            debugger
+							html = html.replace(/\"/g,"\\'");
+                            vm.liteMallGoods.detail=html;
+                        }
+                    });
+                    editor.txt.html(vm.liteMallGoods.detail)
 		    	}
 			});
 		},
@@ -32,3 +46,9 @@ var vm = new Vue({
 		}
 	}
 })
+
+
+
+
+
+

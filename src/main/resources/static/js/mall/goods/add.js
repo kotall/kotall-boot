@@ -7,7 +7,8 @@ var vm = new Vue({
 		liteMallGoods: {
 			id: 0,
             picUrl:'',
-            gallery:''
+            gallery:'',
+            detail:''
 		},
         htmlResult: '',
         textResult: ''
@@ -24,29 +25,7 @@ var vm = new Vue({
 		    		$.currentIframe().vm.load();
 		    	}
 		    });
-		},
-        setContent: function () {
-            editorUtils.set(editor, '<p>用js设置的内容</p>');
-        },
-        getContent: function () {
-            this.htmlResult = editorUtils.get(editor);
-        },
-        appendContent: function () {
-            editorUtils.append(editor, '<p>用js追加的内容</p>');
-        },
-        getText: function () {
-            this.textResult = editorUtils.text(editor);
-        },
-        clearContent: function () {
-            editorUtils.clear(editor);
-        },
-        checkEmpty: function () {
-            if (editorUtils.hasContents(editor)) {
-                dialogToastr('内容不为空');
-            } else {
-                dialogToastr('内容为空');
-            }
-        }
+		}
 	}
 });
 
@@ -120,8 +99,7 @@ layui.use('upload', function(){
 
 var editor = editorUtils.init({
     change: function (html) {
-        debugger
-        vm.getContent();
-        vm.getText();
+        html = html.replace(/\"/g,"\\'");
+        vm.liteMallGoods.detail=html;
     }
 });
