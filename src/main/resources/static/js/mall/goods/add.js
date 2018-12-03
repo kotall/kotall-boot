@@ -11,7 +11,8 @@ var vm = new Vue({
             detail:''
 		},
         htmlResult: '',
-        textResult: ''
+        textResult: '',
+        categoryDatas:[]
 	},
 	methods : {
 		acceptClick: function() {
@@ -25,8 +26,17 @@ var vm = new Vue({
 		    		$.currentIframe().vm.load();
 		    	}
 		    });
-		}
-	}
+		},
+        getCategory:function () {
+            var _self = this;
+            $.ajax("../../litemall/category/getParentCategory",{}).then(function(response){
+                _self.categoryDatas = response.rows;
+            });
+        }
+	},
+    created:function () {
+        this.getCategory();
+    }
 });
 
 
@@ -36,7 +46,7 @@ layui.use('upload', function(){
 
     //普通图片上传
     var uploadInst = upload.render({
-        elem: '#test1'
+        elem: '#demo1'
         ,url: '../../litemall/storage/create'
         ,before: function(obj){
             //预读本地文件示例，不支持ie8
@@ -68,7 +78,7 @@ layui.use('upload', function(){
 
     //普通图片上传
     var uploadInst2 = upload.render({
-        elem: '#test2'
+        elem: '#demo2'
         ,url: '../../litemall/storage/create'
         ,before: function(obj){
             //预读本地文件示例，不支持ie8
@@ -106,3 +116,13 @@ var editor = editorUtils.init({
         vm.liteMallGoods.detail=html;
     }
 });
+$("#select2-id").select2({
+    placeholder: "请选择商品类目",
+    allowClear: true
+}).on('change', function (e) {
+    debugger
+    vm.liteMallGoods.categoryId=$("#select2-id").val();
+});
+
+
+

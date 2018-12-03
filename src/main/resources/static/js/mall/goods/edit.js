@@ -10,7 +10,8 @@ var vm = new Vue({
             id: 0,
             picUrl:'',
             gallery:'',
-            detail:''
+            detail:'',
+            categoryId:''
         },
         gallerys:[]
 	},

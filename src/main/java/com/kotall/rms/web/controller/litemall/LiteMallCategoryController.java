@@ -95,5 +95,15 @@ public class LiteMallCategoryController extends AbstractController {
 		boolean count = liteMallCategoryService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
+
+	/**
+	 * 根据id查询详情
+	 * @return
+	 */
+	@RequestMapping("/getParentCategory")
+	public Result getParentCategory(Map<String, Object> params) {
+		List<LiteMallCategoryEntity> liteMallCategory = liteMallCategoryService.getParentCategory(params);
+		return ResultKit.msg(liteMallCategory);
+	}
 	
 }

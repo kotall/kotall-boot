@@ -109,6 +109,32 @@
 		WHERE
 			pid = 0
 	</select>
+
+	<select id="getParentCategory" resultType="com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`name`,
+			`keywords`,
+			`desc`,
+			`pid`,
+			`icon_url`,
+			`pic_url`,
+			`level`,
+			`sort_order`,
+			`add_time`,
+			`update_time`,
+			`deleted`
+		FROM
+			lite_mall_category
+		<where>
+			pid = 0
+			<if test="storeId != null and storeId != ''">
+				store_id = #{storeId}
+			</if>
+		</where>
+
+	</select>
 	
 	<update id="update">
 		UPDATE lite_mall_category

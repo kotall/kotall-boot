@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 类目表
@@ -30,5 +31,10 @@ public class LiteMallCategoryManagerImpl extends BaseManagerImpl<LiteMallCategor
 	@Override
 	public List<LiteMallCategoryEntity> getSecondCategory() {
 		return liteMallCategoryMapper.getSecondCategory();
+	}
+
+	@Override
+	public List<LiteMallCategoryEntity> getParentCategory(Map<String, Object> params) {
+		return liteMallCategoryMapper.getParentCategory(params);
 	}
 }

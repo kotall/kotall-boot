@@ -32,6 +32,11 @@ public class LiteMallCategoryServiceImpl extends BaseServiceImpl<LiteMallCategor
 	}
 
 	@Override
+	public List<LiteMallCategoryEntity> getParentCategory(Map<String, Object> params) {
+		return liteMallCategoryManager.getParentCategory(params);
+	}
+
+	@Override
 	public List<LiteMallCategoryEntity> queryChannel(Map<String, Object> params) {
 		params.put("level", "L1");
 		params.put("deleted", 0);

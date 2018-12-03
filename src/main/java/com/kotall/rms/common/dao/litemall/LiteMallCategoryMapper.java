@@ -6,6 +6,7 @@ import com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity;
 import com.kotall.rms.common.dao.BaseMapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 类目表
@@ -20,4 +21,6 @@ public interface LiteMallCategoryMapper extends BaseMapper<LiteMallCategoryEntit
     List<LiteMallCategoryEntity> listByPid(Integer pid);
 
     List<LiteMallCategoryEntity> getSecondCategory();
+
+    List<LiteMallCategoryEntity> getParentCategory(Map<String, Object> params);
 }

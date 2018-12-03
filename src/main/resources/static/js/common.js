@@ -468,3 +468,70 @@ editorUtils = {
         return isNotNullOrEmpty(this.get($editor)) && "<p><br></p>" !== content;
     }
 }
+
+
+/**
+ * 初始化select2选择器
+ * @param placeholder
+ * @returns {*|void}
+ */
+$.fn.selectInitEx = function(placeholder, search) {
+    var opt = {
+        placeholder: placeholder,
+        theme: "bootstrap",
+        language: "zh-CN"
+    }
+    if (search === false) {
+        opt.minimumResultsForSearch = 'Infinity';
+    }
+    return $(this).select2(opt);
+}
+
+/**
+ * 根据ajax地址初始化select2选择器
+ * @param opt
+ * @returns {*}
+ */
+$.fn.selectBindEx = function(opt) {
+    var $select = $(this);
+    var defaults = {
+        url: '',
+        async: true,
+        text: 'name',
+        value: 'id',
+        placeholder: '请选择...',
+        selected: '',
+        allowClear: false,
+        theme: "bootstrap",
+        language: "zh-CN",
+        change: function(){}
+    }
+    if (opt.search === false) {
+        opt.minimumResultsForSearch = 'Infinity';
+    }
+    var option = $.extend({}, defaults, opt);
+    var selectControl = null;
+    $.ajax({
+        type: 'get',
+        async: option.async,
+        contentType : 'application/json',
+        url: option.url,
+        data: null,
+        success: function(r) {
+            if ($select.hasClass("select2-hidden-accessible")) {
+                $select.empty();
+                $select.select2('destroy');
+            }
+            selectControl = $select.select2(option);
+            $.each(r, function(idx, item){
+                selectControl.append("<option value='"+item[option.value]+"'>"+item[option.text]+"</option>");
+            })
+            $select.val(option.selected);
+            $select.on('change', function() {
+                option.change($select.val());
+            });
+        },
+        dataType: 'json'
+    });
+    return selectControl;
+}

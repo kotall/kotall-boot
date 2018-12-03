@@ -41,4 +41,6 @@ public interface LiteMallCategoryService extends BaseService<LiteMallCategoryEnt
     List<LiteMallCategoryEntity> queryL1(Integer storeId);
 
     List<LiteMallCategoryEntity> queryL2ByIds(Map<String, Object> params);
+
+    List<LiteMallCategoryEntity> getParentCategory(Map<String, Object> params);
 }

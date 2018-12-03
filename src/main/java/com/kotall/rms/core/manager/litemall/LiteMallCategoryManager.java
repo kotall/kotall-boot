@@ -4,6 +4,7 @@ import com.kotall.rms.common.entity.litemall.LiteMallCategoryEntity;
 import com.kotall.rms.core.manager.BaseManager;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 类目表
@@ -17,4 +18,6 @@ public interface LiteMallCategoryManager extends BaseManager<LiteMallCategoryEnt
     List<LiteMallCategoryEntity> queryByPid(Integer pid);
 
     List<LiteMallCategoryEntity> getSecondCategory();
+
+    List<LiteMallCategoryEntity> getParentCategory(Map<String, Object> params);
 }

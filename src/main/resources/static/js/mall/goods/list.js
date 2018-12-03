@@ -31,9 +31,18 @@ function getGrid() {
 			/*{field : "gallery", title : "商品宣传图片列表，采用JSON数组格式", width : "100px"}, */
 			{field : "keywords", title : "商品关键字", width : "100px"},
 			{field : "brief", title : "商品简介", width : "100px"}, 
-			{field : "isOnSale", title : "是否上架", width : "100px"},
-			{field : "picUrl", title : "商品页面商品图片", width : "100px"}, 
-			{field : "shareUrl", title : "商品分享朋友圈图片", width : "100px"}, 
+			{field : "isOnSale", title : "是否上架", width : "100px",
+                formatter : function(value, row, index) {
+                    if (value === true){
+                    	return '是'
+					}
+                    return '否';
+                }},
+			{field : "picUrl", title : "商品图片", width : "100px",
+                formatter : function(value, row, index) {
+                    return '<img  src="'+value+'" class="img-rounded" width="80px">';
+                }},
+			/*{field : "shareUrl", title : "商品分享朋友圈图片", width : "100px"}, */
 			{field : "isNew", title : "是否新品首发", width : "100px"},
 			{field : "isHot", title : "是否人气推荐", width : "100px"},
 			{field : "unit", title : "商品单位", width : "100px"},
@@ -41,7 +50,6 @@ function getGrid() {
 			{field : "retailPrice", title : "零售价格", width : "100px"}, 
 			{field : "detail", title : "商品详细介绍", width : "100px",
 				formatter : function(value, row, index) {
-				debugger
 					return $.base64.decode(value);
 				}
 			},

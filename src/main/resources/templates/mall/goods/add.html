@@ -32,7 +32,10 @@
 			<tr>
 	            <td class="formTitle">商品所属分类<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="商品所属类目ID" v-model="liteMallGoods.categoryId" isvalid="yes" checkexpession="NotNull">
+					<select v-model="liteMallGoods.categoryId" class="form-control" style = "width:200px;" id="select2-id" isvalid="yes" checkexpession="NotNull">
+						<option value="">请选择商品所属分类</option>
+						<option v-for="opt in categoryDatas" :value="opt.id">{{opt.name}}</option>
+					</select>
 	            </td>
         	</tr>
 			<tr>
