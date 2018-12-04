@@ -13,7 +13,8 @@ var vm = new Vue({
             detail:'',
             categoryId:''
         },
-        gallerys:[]
+        gallerys:[],
+        categoryDatas:[]
 	},
 	methods : {
 		setForm: function() {
@@ -23,7 +24,9 @@ var vm = new Vue({
 		    	success: function(data) {
 					debugger
 		    		vm.liteMallGoods = data;
+                    $('#select2-id').val(vm.liteMallGoods.categoryId).trigger("change");
                     var gallery = vm.liteMallGoods.gallery;
+                    var isOnSale = vm.liteMallGoods.isOnSale;
                     vm.gallerys = gallery.split(";");
                     editor = editorUtils.init({
                         change: function (html) {
@@ -47,8 +50,17 @@ var vm = new Vue({
 		    		$.currentIframe().vm.load();
 		    	}
 		    });
-		}
-	}
+		},
+        getCategory:function () {
+            var _self = this;
+            $.ajax("../../litemall/category/getParentCategory",{}).then(function(response){
+                _self.categoryDatas = response.rows;
+            });
+        }
+	},
+    created:function () {
+        this.getCategory();
+    }
 })
 
 
@@ -124,3 +136,10 @@ layui.use('upload', function(){
 });
 
 
+$("#select2-id").select2({
+    placeholder: "请选择商品类目",
+    allowClear: true
+}).on('change', function (e) {
+    debugger
+    vm.liteMallGoods.categoryId=$("#select2-id").val();
+});

@@ -10,8 +10,6 @@ var vm = new Vue({
             gallery:'',
             detail:''
 		},
-        htmlResult: '',
-        textResult: '',
         categoryDatas:[]
 	},
 	methods : {
