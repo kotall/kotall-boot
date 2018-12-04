@@ -46,9 +46,9 @@ public class WxConfig {
 
 
     @Bean
-    public WxPayService wxPayService(WxPayConfig payConfig) {
+    public WxPayService wxPayService() {
         WxPayService wxPayService = new WxPayServiceImpl();
-        wxPayService.setConfig(payConfig);
+        wxPayService.setConfig(wxPayConfig());
         return wxPayService;
     }
 }
