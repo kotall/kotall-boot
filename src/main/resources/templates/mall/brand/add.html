@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="include/header_css::header('品牌商表')"></head>
+<style>
+	.layui-upload-img {
+		width: 92px;
+		height: 92px;
+		margin: 0 10px 10px 0;
+	}
+	.avatar-uploader-icon {
+		font-size: 28px;
+		color: #8c939d;
+		width: 120px;
+		height: 120px;
+		line-height: 120px;
+		text-align: center;
+	}
+</style>
 <body>
 	<div id="dpLTE" class="container-fluid" v-cloak>
 		<table class="form" id="form">
@@ -17,39 +32,26 @@
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">品牌商页的品牌商图片<font face="宋体">*</font></td>
+	            <td class="formTitle">品牌商图片<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="品牌商页的品牌商图片" v-model="liteMallBrand.picUrl" isvalid="yes" checkexpession="NotNull">
+					<!--<input type="text" class="form-control" placeholder="品牌商页的品牌商图片" v-model="liteMallBrand.picUrl" isvalid="yes" checkexpession="NotNull">-->
+					<div class="layui-upload-list el-upload el-upload--picture-card">
+						<img class="layui-upload-img" id="brandPicUrl">
+						<!--<i class="el-icon-plus avatar-uploader-icon" id="brandPicUrl"></i>-->
+						<p id="uploadResult"></p>
+					</div>
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle"><font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="liteMallBrand.sortOrder" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">品牌商的商品低价，仅用于页面展示<font face="宋体">*</font></td>
+	            <td class="formTitle">低价<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="品牌商的商品低价，仅用于页面展示" v-model="liteMallBrand.floorPrice" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">创建时间<font face="宋体">*</font></td>
+	            <td class="formTitle">显示顺序<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="创建时间" v-model="liteMallBrand.addTime" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">更新时间<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="更新时间" v-model="liteMallBrand.updateTime" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">逻辑删除<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="逻辑删除" v-model="liteMallBrand.deleted" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="" v-model="liteMallBrand.sortOrder" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 		</table>

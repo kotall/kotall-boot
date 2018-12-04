@@ -1,3 +1,4 @@
+
 /**
  * 品牌商表js
  */
@@ -23,15 +24,21 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
-			{field : "name", title : "品牌商名称", width : "100px"}, 
-			{field : "desc", title : "品牌商简介", width : "100px"}, 
-			{field : "picUrl", title : "品牌商页的品牌商图片", width : "100px"}, 
-			{field : "sortOrder", title : "", width : "100px"}, 
-			{field : "floorPrice", title : "品牌商的商品低价，仅用于页面展示", width : "100px"}, 
-			{field : "addTime", title : "创建时间", width : "100px"}, 
-			{field : "updateTime", title : "更新时间", width : "100px"}, 
-			{field : "deleted", title : "逻辑删除", width : "100px"}
-		]
+			{field : "storeName", title : "店铺", width : "200px"},
+			{field : "name", title : "品牌商名称", width : "200px"},
+			{field : "picUrl", title : "品牌商图片", width : "100px",
+                formatter : function(value, row, index) {
+                    return '<img  src="'+value+'" class="img-rounded" width="80px">';
+                }},
+            {field : "desc", title : "品牌商简介", width : "200px",
+				formatter : function (value, row, index) {
+            	    var str = value;
+					return "<span title=" + str + ">" + cutStr(value, 20) + "</span>";
+                }
+			},
+			{field : "floorPrice", title : "低价", width : "20px"},
+			{field : "addTime", title : "创建时间", width : "100px"}
+			]
 	})
 }
 
@@ -48,8 +55,8 @@ var vm = new Vue({
 			dialogOpen({
 				title: '新增品牌商表',
 				url: 'mall/brand/add.html?_' + $.now(),
-				width: '420px',
-				height: '350px',
+				width: '600px',
+				height: '520px',
 				yes : function(iframeId) {
 					top.frames[iframeId].vm.acceptClick();
 				},
@@ -90,3 +97,26 @@ var vm = new Vue({
 		}
 	}
 })
+
+/**
+ * 字符串截取
+ * @param str
+ * @param len
+ * @returns {*}
+ */
+cutStr = function (str, len) {
+    var strLen = 0;
+    var s = "";
+    for (var i = 0; i < str.length; i++) {
+        if (str.charCodeAt(i) > 128) {
+            strLen += 2;
+        } else {
+            strLen++;
+        }
+        s += str.charAt(i);
+        if (strLen >= len) {
+            return s+"...";
+        }
+    }
+    return s;
+}

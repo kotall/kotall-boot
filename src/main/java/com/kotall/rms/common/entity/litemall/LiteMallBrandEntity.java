@@ -63,6 +63,16 @@ public class LiteMallBrandEntity implements Serializable {
 	/**
 	 * 逻辑删除
 	 */
-	private Long deleted;
+	private Boolean deleted;
+
+	/**
+	 * 店铺ID
+	 */
+	private Integer storeId;
+
+	/**
+	 * 店铺名称
+	 */
+	private String storeName;
 
 }
