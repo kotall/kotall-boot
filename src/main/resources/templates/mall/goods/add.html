@@ -145,11 +145,9 @@
 					<input type="text" class="form-control" placeholder="商品分享朋友圈图片" v-model="liteMallGoods.shareUrl" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>-->
-
-
-
 		</table>
 	</div>
+	<div class="layui-layer-btn layui-layer-btn-"><a class="layui-layer-btn0" onclick="vm.acceptClick()">确定</a><a class="layui-layer-btn1" onclick="history.go(-1)">取消</a></div>
 	<div th:include="include/footer_js::footer"></div>
 	<script th:src="@{/js/mall/goods/add.js}"></script>
 </body>

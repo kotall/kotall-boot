@@ -3,28 +3,161 @@
 <head th:include="include/header_css::header('商品基本信息表')"></head>
 <body>
 <div id="dpLTE" class="container-fluid" v-cloak>
-	<div class="row">
-		<div class="col-md-4 form-inline pull-left">
-			<div class="form-group">
-		    	<input v-model="keyword" @keyup.enter="load" type="text" class="form-control" placeholder="请输入查询关键字" style="width: 220px;" />
+	<div v-show="showList">
+		<div class="row">
+			<div class="col-md-4 form-inline pull-left">
+				<div class="form-group">
+					<input v-model="keyword" @keyup.enter="load" type="text" class="form-control" placeholder="请输入查询关键字" style="width: 220px;" />
+				</div>
+				<div class="form-group">
+					<a class="btn btn-primary" @click="load"><i class="fa fa-search"></i>&nbsp;查询</a>
+				</div>
 			</div>
-			<div class="form-group">
-			    <a class="btn btn-primary" @click="load"><i class="fa fa-search"></i>&nbsp;查询</a>
+			<div class="col-md-8">
+				<div class="btn-toolbar pull-right">
+					<div class="btn-group">
+						<a v-if="hasPermission('litemall:goods:list')" class="btn btn-default" onclick="reload();"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
+						<a v-if="hasPermission('litemall:goods:save')" class="btn btn-default" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+						<!--<a v-if="hasPermission('litemall:goods:edit')" class="btn btn-default" @click="edit"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
+						<a v-if="hasPermission('litemall:goods:remove')" class="btn btn-default" @click="remove"><i class="fa fa-trash-o"></i>&nbsp;删除</a>-->
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="col-md-8">
-			<div class="btn-toolbar pull-right">
-				<div class="btn-group">
-		            <a v-if="hasPermission('litemall:goods:list')" class="btn btn-default" onclick="reload();"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
-		            <a v-if="hasPermission('litemall:goods:save')" class="btn btn-default" @click="save"><i class="fa fa-plus"></i>&nbsp;新增</a>
-		            <!--<a v-if="hasPermission('litemall:goods:edit')" class="btn btn-default" @click="edit"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
-		            <a v-if="hasPermission('litemall:goods:remove')" class="btn btn-default" @click="remove"><i class="fa fa-trash-o"></i>&nbsp;删除</a>-->
-		        </div>
-	        </div>
+
+		<div class="row">
+			<table id="dataGrid"></table>
 		</div>
 	</div>
-	<div class="row">
-		<table id="dataGrid"></table>
+
+	<div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal" id="form">
+			<div class="form-group">
+				<div class="col-sm-1 control-label">店铺ID</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="liteMallGoods.storeId" placeholder="店铺ID" isvalid="yes" checkexpession="NotNull"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-1 control-label">商品编号</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="liteMallGoods.goodsSn" placeholder="商品编号" isvalid="yes" checkexpession="NotNull"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-1 control-label">商品名称</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="商品名称" v-model="liteMallGoods.name" isvalid="yes" checkexpession="NotNull">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-1 control-label">商品所属分类</div>
+				<div class="col-sm-10">
+					<select v-model="liteMallGoods.categoryId" class="form-control" style = "width:200px;" id="select2-id" isvalid="yes" checkexpession="NotNull">
+						<option value="">请选择商品所属分类</option>
+						<option v-for="opt in categoryDatas" :value="opt.id">{{opt.name}}</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-1 control-label">商品单位</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="商品单位，例如件、盒" v-model="liteMallGoods.unit" isvalid="yes" checkexpession="NotNull">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-1 control-label">专柜价格</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="专柜价格" v-model="liteMallGoods.counterPrice" isvalid="yes" checkexpession="NotNull">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-1 control-label">零售价格</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="零售价格" v-model="liteMallGoods.retailPrice" isvalid="yes" checkexpession="NotNull">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-1 control-label">是否新品</div>
+				<label class="radio-inline">
+					<input type="radio" name="liteMallGoods.isNew" value="0" v-model="liteMallGoods.isNew"/> 是
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="liteMallGoods.isNew" value="1" v-model="liteMallGoods.isNew"/> 否
+				</label>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-1 control-label">是否热卖</div>
+				<label class="radio-inline">
+					<input type="radio" name="liteMallGoods.isHot" value="0" v-model="liteMallGoods.isHot"/> 是
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="liteMallGoods.isHot" value="1" v-model="liteMallGoods.isHot"/> 否
+				</label>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-1 control-label">是否上架</div>
+				<label class="radio-inline">
+					<input type="radio" name="liteMallGoods.isOnSale" :value="true" v-model="liteMallGoods.isOnSale"/> 是
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="liteMallGoods.isOnSale" :value="false" v-model="liteMallGoods.isOnSale"/> 否
+				</label>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-1 control-label">所属品牌商</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="" v-model="liteMallGoods.brandId" isvalid="yes" checkexpession="NotNull">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<input id="iconUrl" type="hidden" v-model="liteMallGoods.picUrl" >
+				<div class="col-sm-1 control-label">商品图片</div>
+				<div class="col-sm-10">
+					<img :src="liteMallGoods.picUrl" class="layui-upload-img" id="demo1">
+					<p id="demoText"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<input id="gallery" type="hidden" v-model="liteMallGoods.gallery" >
+				<div class="col-sm-1 control-label">宣传画廊</div>
+				<div class="col-sm-10">
+					<div class="layui-upload-list"  id="test2">
+						<img v-for="opt in gallerys" :src="opt" class="layui-upload-img">
+						<img class="layui-upload-img" id="demo2">
+						<p id="demoText2"></p>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-1 control-label">商品关键字</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="商品关键字，采用逗号间隔" v-model="liteMallGoods.keywords" isvalid="yes" checkexpession="NotNull">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<input  type="hidden"  v-model="liteMallGoods.detail" />
+				<div class="col-sm-1 control-label">商品详细介绍</div>
+				<div class="col-sm-10">
+					<div class="row">
+						<div class="col-md-13" id="editor"></div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div>
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="load" value="返回"/>
+			</div>
+		</form>
 	</div>
 </div>
 <div th:include="include/footer_js::footer"></div>

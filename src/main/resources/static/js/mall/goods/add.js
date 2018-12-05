@@ -17,11 +17,12 @@ var vm = new Vue({
 			if (!$('#form').Validform()) {
 		        return false;
 		    }
+		    debugger
 		    $.SaveForm({
 		    	url: '../../litemall/goods/save?_' + $.now(),
 		    	param: vm.liteMallGoods,
 		    	success: function(data) {
-		    		$.currentIframe().vm.load();
+		    		history.go(-1);
 		    	}
 		    });
 		},
@@ -93,7 +94,11 @@ layui.use('upload', function(){
             }
             var url = res.rows.url;
             var gallery = vm.liteMallGoods.gallery;
-            gallery = gallery +";"+ url;
+            if(gallery != ''){
+                gallery = gallery.concat(url,';');
+            }else{
+                gallery = url;
+            }
             vm.liteMallGoods.gallery=gallery;
             //上传成功
         }
@@ -110,7 +115,8 @@ layui.use('upload', function(){
 
 var editor = editorUtils.init({
     change: function (html) {
-        $.base64.encode(html);
+        debugger
+        html = $.base64.encode(html);
         vm.liteMallGoods.detail=html;
     }
 });
