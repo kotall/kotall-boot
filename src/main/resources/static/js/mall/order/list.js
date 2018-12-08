@@ -23,28 +23,26 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
+			{field : "orderSn", title : "订单编号", width : "100px"},
 			{field : "userId", title : "用户ID", width : "100px"},
-			{field : "orderSn", title : "订单编号", width : "100px"}, 
-			{field : "orderStatus", title : "订单状态", width : "100px"}, 
-			{field : "consignee", title : "收货人名称", width : "100px"}, 
-			{field : "mobile", title : "收货人手机号", width : "100px"}, 
-			{field : "address", title : "收货具体地址", width : "100px"}, 
-			{field : "message", title : "用户订单留言", width : "100px"}, 
-			{field : "goodsPrice", title : "商品总费用", width : "100px"}, 
-			{field : "freightPrice", title : "配送费用", width : "100px"}, 
-			{field : "couponPrice", title : "优惠券减免", width : "100px"}, 
-			{field : "integralPrice", title : "用户积分减免", width : "100px"}, 
-			{field : "grouponPrice", title : "团购优惠价减免", width : "100px"}, 
-			{field : "orderPrice", title : "订单费用", width : "100px"},
-			{field : "actualPrice", title : "实付费用", width : "100px"},
-			{field : "payId", title : "微信付款编号", width : "100px"}, 
-			{field : "payTime", title : "微信付款时间", width : "100px"}, 
-			{field : "shipSn", title : "发货编号", width : "100px"}, 
-			{field : "shipChannel", title : "发货快递公司", width : "100px"}, 
-			{field : "shipTime", title : "发货开始时间", width : "100px"}, 
-			{field : "confirmTime", title : "用户确认收货时间", width : "100px"}, 
-			{field : "comments", title : "待评价订单商品数量", width : "100px"}, 
-			{field : "endTime", title : "订单关闭时间", width : "100px"}
+			{field : "orderStatus", title : "订单状态", width : "100px"},
+			{field : "orderPrice", title : "订单金额", width : "100px"},
+			{field : "actualPrice", title : "支付金额", width : "100px"},
+			{field : "payTime", title : "付款时间", width : "100px"},
+			{field : "shipSn", title : "物流单号", width : "100px"},
+			{field : "shipChannel", title : "物流渠道", width : "100px"},
+			{field : "opt", title : "操作", width : "200px",
+                formatter : function(value, row, index) {
+                    var _html = '';
+                    if (hasPermission('litemall:order:edit')) {
+                        _html += '<a href="javascript:;" onclick="vm.edit(\''+row.id+'\')" title="编辑"><i class="fa fa-pencil"></i>&nbsp;&nbsp;</a>';
+                    }
+                    if (hasPermission('litemall:order:remove')) {
+                        _html += '<a href="javascript:;" onclick="vm.remove(\''+row.id+'\')" title="删除"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;</a>';
+                    }
+                    return _html;
+			    }
+			}
 		]
 	})
 }
