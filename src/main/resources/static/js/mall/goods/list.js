@@ -5,6 +5,7 @@
 $(function () {
 	initialPage();
 	getGrid();
+    getGrid2();
 });
 
 function initialPage() {
@@ -83,12 +84,51 @@ function getGrid() {
 	})
 }
 
+
+function getGrid2() {
+    $('#dataGrid2').bootstrapTableEx({
+        url: '../../litemall/goods/list?_' + $.now(),
+        height: 350,
+        pagination:false,
+        dataField: "",
+        queryParams: function(params){
+            params.name = vm.keyword;
+            return params;
+        },
+        columns: [
+            {checkbox: true},
+            {field : "specification", title : "规格名", width : "100px"},
+            {field : "value", title : "规格值", width : "100px"},
+            {field : "picUrl", title : "规格图片", width : "100px",
+                formatter : function(value, row, index) {
+                    return '<img  src="'+value+'" class="img-rounded" width="80px" height="60px">';
+            }},
+            {field : "id", title : "操作", width : "100px",
+                formatter : function(value, row, index) {
+                    var _html = '';
+                    if (hasPermission('litemall:goods:edit')) {
+                        _html += '<a href="javascript:;" onclick="vm.specificationEdit(\''+index+'\')" title="编辑"><i class="fa fa-pencil"></i></a>\t';
+                    }
+                    if (hasPermission('litemall:goods:remove')) {
+                        _html += '<a href="javascript:;" onclick="vm.remove(\''+row.id+'\')" title="删除"><i class="fa fa-trash-o"></i></a>\t';
+                    }
+                    return _html;				}
+            }
+        ]
+    })
+}
+
+
+
 var vm = new Vue({
 	el:'#dpLTE',
 	data: {
 		keyword: null,
         showList: true,
         title:'',
+        title2:'',
+        title3:'',
+        title4:'',
         gallerys:[],
         categoryDatas:[],
         liteMallGoods: {
@@ -97,20 +137,30 @@ var vm = new Vue({
             gallery:'',
             detail:'',
             categoryId:''
+        },
+        liteMallGoodsSpecification:{
+            specification:'1',
+            value:'2',
+            picUrl:''
         }
+
 	},
 	methods : {
 		load: function() {
 			vm.showList=true;
 			vm.liteMallGoods = {};
 			vm.gallerys = {};
+            $('.add').remove();
 			//vm.categoryDatas = [];
             editorUtils.clear(editor);
 			$('#dataGrid').bootstrapTable('refresh');
 		},
         add: function(){
             vm.showList = false;
-            vm.title = "新增商品信息";
+            vm.title = "商品基本信息";
+            vm.title2 = "商品规格";
+            vm.title3 = "商品库存";
+            vm.title4 = "商品参数";
         },
 		edit: function(id) {
             vm.showList = false;
@@ -178,6 +228,26 @@ var vm = new Vue({
             $.ajax("../../litemall/category/getParentCategory",{}).then(function(response){
                 _self.categoryDatas = response.rows;
             });
+        },
+        specificationSubmit:function () {
+            debugger
+            vm.liteMallGoodsSpecification.specification = $("#specification").val();
+            vm.liteMallGoodsSpecification.value = $("#value").val();
+            vm.liteMallGoodsSpecification.picUrl = $("#picUrl2").val();
+            console.log(vm.liteMallGoodsSpecification.specification)
+            $("#myModal").modal('hide');
+            $('#dataGrid2').bootstrapTable('insertRow', {
+                index:$('#dataGrid2').bootstrapTable('getOptions').totalRows,
+                row:vm.liteMallGoodsSpecification
+            });
+        },
+        specificationEdit:function (index) {
+            var row = $("#dataGrid2").bootstrapTable('getData')[index];
+            debugger
+            $("#specification").val(row.specification);
+            $("#value").val(row.value);
+            $("#picUrl2").val(row.picUrl);
+            $("#myModal").modal('show');
         }
 	},
     created:function () {
@@ -230,7 +300,7 @@ layui.use('upload', function(){
         ,before: function(obj){
             //预读本地文件示例，不支持ie8
             obj.preview(function(index, file, result){
-                $('#demo2').before('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                $('#demo2').before('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img add">')
                 //$('#demo2').attr('src', result); //图片链接（base64）
             });
         }
@@ -242,8 +312,9 @@ layui.use('upload', function(){
             }
             var url = res.rows.url;
             var gallery = vm.liteMallGoods.gallery;
-            if(gallery != ''){
-                gallery = gallery.concat(url,';');
+            debugger
+            if(gallery != '' && gallery != null){
+                gallery = gallery.concat(';',url);
             }else{
                 gallery = url;
             }
@@ -253,6 +324,38 @@ layui.use('upload', function(){
         ,error: function(){
             //演示失败状态，并实现重传
             var demoText = $('#demoText2');
+            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+            demoText.find('.demo-reload').on('click', function(){
+                uploadInst.upload();
+            });
+        }
+    });
+
+
+    //普通图片上传
+    var uploadInst3 = upload.render({
+        elem: '#demo3'
+        ,url: '../../litemall/storage/create'
+        ,before: function(obj){
+            //预读本地文件示例，不支持ie8
+            obj.preview(function(index, file, result){
+                $('#demo3').attr('src', result); //图片链接（base64）
+            });
+        }
+        ,done: function(res){
+            var _self = this;
+            //如果上传失败
+            if(res.code > 0){
+                return layer.msg('上传失败');
+            }
+            debugger
+            var url = res.rows.url;
+            $("#picUrl2").val(url);
+            //上传成功
+        }
+        ,error: function(){
+            //演示失败状态，并实现重传
+            var demoText = $('#demoText3');
             demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
             demoText.find('.demo-reload').on('click', function(){
                 uploadInst.upload();
