@@ -110,7 +110,7 @@ function getGrid2() {
                         _html += '<a href="javascript:;" onclick="vm.specificationEdit(\''+index+'\')" title="编辑"><i class="fa fa-pencil"></i></a>\t';
                     }
                     if (hasPermission('litemall:goods:remove')) {
-                        _html += '<a href="javascript:;" onclick="vm.remove(\''+row.id+'\')" title="删除"><i class="fa fa-trash-o"></i></a>\t';
+                        _html += '<a href="javascript:;" onclick="vm.specificationDel(\''+row.specification+'\')" title="删除"><i class="fa fa-trash-o"></i></a>\t';
                     }
                     return _html;				}
             }
@@ -125,6 +125,8 @@ var vm = new Vue({
 	data: {
 		keyword: null,
         showList: true,
+        isAdd:true,
+        editIndex:null,
         title:'',
         title2:'',
         title3:'',
@@ -136,14 +138,13 @@ var vm = new Vue({
             picUrl:'',
             gallery:'',
             detail:'',
-            categoryId:''
-        },
-        liteMallGoodsSpecification:{
-            specification:'1',
-            value:'2',
-            picUrl:''
+            categoryId:'',
+            liteMallGoodsSpecification:{
+                specification:'1',
+                value:'2',
+                picUrl:''
+            }
         }
-
 	},
 	methods : {
 		load: function() {
@@ -190,6 +191,8 @@ var vm = new Vue({
             if (!$('#form').Validform()) {
                 return false;
             }
+            debugger
+            vm.liteMallGoods.liteMallGoodsSpecification = $('#dataGrid2').bootstrapTable('getData');
             var url = vm.liteMallGoods.id == null ? '../../litemall/goods/save?_' + $.now() : '../../litemall/goods/update?_' + $.now();
             debugger
             if(vm.liteMallGoods.id == null){
@@ -230,24 +233,40 @@ var vm = new Vue({
             });
         },
         specificationSubmit:function () {
-            debugger
-            vm.liteMallGoodsSpecification.specification = $("#specification").val();
-            vm.liteMallGoodsSpecification.value = $("#value").val();
-            vm.liteMallGoodsSpecification.picUrl = $("#picUrl2").val();
-            console.log(vm.liteMallGoodsSpecification.specification)
+            var datas = {
+                specification:$("#specification").val(),
+                value:$("#value").val(),
+                picUrl:$("#picUrl2").val()
+            }
             $("#myModal").modal('hide');
-            $('#dataGrid2').bootstrapTable('insertRow', {
-                index:$('#dataGrid2').bootstrapTable('getOptions').totalRows,
-                row:vm.liteMallGoodsSpecification
-            });
+            if(vm.isAdd){
+                $('#dataGrid2').bootstrapTable('insertRow', {
+                    index:$('#dataGrid2').bootstrapTable('getOptions').totalRows,
+                    row:datas
+                });
+            }else{
+                $('#dataGrid2').bootstrapTable('updateRow', {
+                    index:vm.editIndex,
+                    row:datas
+                });
+            }
         },
         specificationEdit:function (index) {
             var row = $("#dataGrid2").bootstrapTable('getData')[index];
-            debugger
             $("#specification").val(row.specification);
             $("#value").val(row.value);
             $("#picUrl2").val(row.picUrl);
+            $("#demo3").attr("src",row.picUrl);
+            vm.isAdd = false;
+            vm.editIndex = index;
             $("#myModal").modal('show');
+        },
+        specificationDel:function (specification) {
+            debugger
+            $('#dataGrid2').bootstrapTable('remove', {
+                field: "specification",
+                values: [specification]
+            });
         }
 	},
     created:function () {
@@ -256,7 +275,44 @@ var vm = new Vue({
 })
 
 
+/**
+ * 监听model隐藏事件
+ */
+$("body").on("hidden.bs.modal", function() {
+    vm.isAdd = true;
+    $("#specification").val(null);
+    $("#value").val(null);
+    $("#picUrl2").val(null);
+    $('#demo3').attr('src', ""); //图片链接（base64）
+});
 
+
+
+
+
+$("#select2-id").select2({
+    placeholder: "请选择商品类目",
+    allowClear: true
+}).on('change', function (e) {
+    debugger
+    vm.liteMallGoods.categoryId=$("#select2-id").val();
+});
+
+/**
+ * 富文本编辑器初始化
+ */
+editor = editorUtils.init({
+    change: function (html) {
+        debugger
+        html = $.base64.encode(html);
+        vm.liteMallGoods.detail=html;
+    }
+});
+
+
+/**
+ * 图片上传
+ */
 layui.use('upload', function(){
     var $ = layui.jquery
         ,upload = layui.upload;
@@ -293,7 +349,9 @@ layui.use('upload', function(){
     });
 
 
-    //普通图片上传
+
+
+    //宣传画廊上传
     var uploadInst2 = upload.render({
         elem: '#demo2'
         ,url: '../../litemall/storage/create'
@@ -332,7 +390,7 @@ layui.use('upload', function(){
     });
 
 
-    //普通图片上传
+    //规格图片上传
     var uploadInst3 = upload.render({
         elem: '#demo3'
         ,url: '../../litemall/storage/create'
@@ -362,20 +420,4 @@ layui.use('upload', function(){
             });
         }
     });
-});
-
-$("#select2-id").select2({
-    placeholder: "请选择商品类目",
-    allowClear: true
-}).on('change', function (e) {
-    debugger
-    vm.liteMallGoods.categoryId=$("#select2-id").val();
-});
-
-editor = editorUtils.init({
-    change: function (html) {
-        debugger
-        html = $.base64.encode(html);
-        vm.liteMallGoods.detail=html;
-    }
 });
