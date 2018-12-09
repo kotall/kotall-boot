@@ -23,7 +23,7 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
-			{field : "appId", title : "appID", width : "100px"}, 
+			{field : "sid", title : "sid", width : "100px"},
 			{field : "storeId", title : "店铺ID", width : "100px"}, 
 			{field : "version", title : "版本", width : "100px"}, 
 			{field : "createdTime", title : "创建时间", width : "100px"}

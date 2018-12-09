@@ -674,7 +674,7 @@ CREATE TABLE `lite_mall_user_formid` (
 
 CREATE TABLE `lite_mall_app`(
     id INT NOT NULL AUTO_INCREMENT  COMMENT '主键' ,
-    app_id VARCHAR(32)    COMMENT 'appID' ,
+    sid VARCHAR(32)    COMMENT 'sid, 小程序端唯一ID' ,
     store_id VARCHAR(32)    COMMENT '店铺ID' ,
     version VARCHAR(32)    COMMENT '版本' ,
     CREATED_TIME DATETIME    COMMENT '创建时间' ,

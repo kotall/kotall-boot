@@ -27,7 +27,7 @@ public class LiteMallAppEntity implements Serializable {
 	/**
 	 * appID
 	 */
-	private String appId;
+	private String sid;
 	
 	/**
 	 * 店铺ID

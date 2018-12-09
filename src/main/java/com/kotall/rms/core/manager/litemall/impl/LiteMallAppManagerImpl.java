@@ -22,6 +22,6 @@ public class LiteMallAppManagerImpl extends BaseManagerImpl<LiteMallAppMapper, L
 	
 	@Override
 	public LiteMallAppEntity getByAppId(String appId) {
-		return this.liteMallAppMapper.getObjectByAppId(appId);
+		return this.liteMallAppMapper.getObjectBySid(appId);
 	}
 }

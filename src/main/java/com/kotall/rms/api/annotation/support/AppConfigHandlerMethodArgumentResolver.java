@@ -12,7 +12,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 public class AppConfigHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
-    public static final String APP_ID_KEY = "appId";
+    public static final String SID = "sid";
 
     private LiteMallAppService appService;
 
@@ -30,7 +30,7 @@ public class AppConfigHandlerMethodArgumentResolver implements HandlerMethodArgu
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer container,
                                   NativeWebRequest request, WebDataBinderFactory factory) throws Exception {
 
-        String appId = request.getParameter(APP_ID_KEY);
+        String appId = request.getParameter(SID);
         if(appId == null || appId.isEmpty()){
             return null;
         }

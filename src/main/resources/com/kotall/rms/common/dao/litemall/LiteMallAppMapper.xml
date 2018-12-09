@@ -6,7 +6,7 @@
 	<select id="list" resultType="com.kotall.rms.common.entity.litemall.LiteMallAppEntity">
 		SELECT
 			`id`, 
-			`app_id`, 
+			`sid`,
 			`store_id`, 
 			`version`, 
 			`CREATED_TIME`, 
@@ -19,14 +19,14 @@
 	
 	<insert id="insert">
 		INSERT INTO lite_mall_app (
-			`app_id`, 
+			`sid`,
 			`store_id`, 
 			`version`, 
 			`CREATED_TIME`, 
 			`UPDATED_TIME`
 		)
 		VALUES (
-			#{appId}, 
+			#{sid},
 			#{storeId}, 
 			#{version}, 
 			#{createdTime}, 
@@ -37,7 +37,7 @@
 	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallAppEntity">
 		SELECT
 			`id`, 
-			`app_id`, 
+			`sid`,
 			`store_id`, 
 			`version`, 
 			`CREATED_TIME`, 
@@ -51,7 +51,7 @@
 	<update id="update">
 		UPDATE lite_mall_app
 	 	<set>
-			<if test="appId != null">`app_id` = #{appId}, </if>
+			<if test="sid != null">`app_id` = #{sid}, </if>
 			<if test="storeId != null">`store_id` = #{storeId}, </if>
 			<if test="version != null">`version` = #{version}, </if>
 			<if test="createdTime != null">`CREATED_TIME` = #{createdTime}, </if>
@@ -72,10 +72,10 @@
 		</foreach>
 	</delete>
 
-	<select id="getObjectByAppId" resultType="com.kotall.rms.common.entity.litemall.LiteMallAppEntity">
+	<select id="getObjectBySid" resultType="com.kotall.rms.common.entity.litemall.LiteMallAppEntity">
 		SELECT
 			`id`,
-			`app_id`,
+			`sid`,
 			`store_id`,
 			`version`,
 			`CREATED_TIME`,
@@ -83,7 +83,7 @@
 		FROM
 			lite_mall_app
 		WHERE
-			app_id = #{appId}
+		sid = #{sid}
 	</select>
 
 </mapper>
