@@ -3,6 +3,8 @@ package com.kotall.rms.core.service.litemall;
 import com.kotall.rms.common.entity.litemall.LiteMallGoodsSpecificationEntity;
 import com.kotall.rms.core.service.BaseService;
 
+import java.util.List;
+
 /**
  * 商品规格表
  *
@@ -12,4 +14,5 @@ import com.kotall.rms.core.service.BaseService;
  */
 public interface LiteMallGoodsSpecificationService extends BaseService<LiteMallGoodsSpecificationEntity>{
 
+    List<LiteMallGoodsSpecificationEntity> getByGoodsId(String goodsId);
 }

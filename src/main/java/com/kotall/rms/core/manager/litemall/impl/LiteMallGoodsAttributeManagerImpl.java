@@ -26,4 +26,9 @@ public class LiteMallGoodsAttributeManagerImpl extends BaseManagerImpl<LiteMallG
 	public void insertBatch(List<LiteMallGoodsAttributeEntity> liteMallGoodsAttributes) {
 		liteMallGoodsAttributeMapper.insertBatch(liteMallGoodsAttributes);
 	}
+
+	@Override
+	public List<LiteMallGoodsAttributeEntity> getByGoodsId(String goodsId) {
+		return liteMallGoodsAttributeMapper.getByGoodsId(goodsId);
+	}
 }

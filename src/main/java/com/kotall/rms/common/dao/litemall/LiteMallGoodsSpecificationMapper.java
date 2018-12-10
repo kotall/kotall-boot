@@ -18,4 +18,6 @@ import java.util.List;
 public interface LiteMallGoodsSpecificationMapper extends BaseMapper<LiteMallGoodsSpecificationEntity> {
 
     void insertBatch(List<LiteMallGoodsSpecificationEntity> liteMallGoodsSpecifications);
+
+    List<LiteMallGoodsSpecificationEntity> getByGoodsId(String goodsId);
 }

@@ -26,4 +26,9 @@ public class LiteMallGoodsProductManagerImpl extends BaseManagerImpl<LiteMallGoo
 	public void insertBatch(List<LiteMallGoodsProductEntity> liteMallGoodsProducts) {
 		liteMallGoodsProductMapper.insertBatch(liteMallGoodsProducts);
 	}
+
+	@Override
+	public List<LiteMallGoodsProductEntity> getByGoodsId(String goodsId) {
+		return liteMallGoodsProductMapper.getByGoodsId(goodsId);
+	}
 }

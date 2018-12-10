@@ -16,4 +16,6 @@ import java.util.Map;
 public interface LiteMallGoodsAttributeService extends BaseService<LiteMallGoodsAttributeEntity> {
 
     List<LiteMallGoodsAttributeEntity> queryByGoodsId(Map<String, Object> params);
+
+    List<LiteMallGoodsAttributeEntity> getByGoodsId(String goodsId);
 }

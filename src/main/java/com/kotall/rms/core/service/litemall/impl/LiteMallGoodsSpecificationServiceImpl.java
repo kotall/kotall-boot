@@ -7,6 +7,8 @@ import com.kotall.rms.core.service.litemall.LiteMallGoodsSpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 商品规格表
  *
@@ -20,4 +22,8 @@ public class LiteMallGoodsSpecificationServiceImpl extends BaseServiceImpl<LiteM
 	@Autowired
 	private LiteMallGoodsSpecificationManager liteMallGoodsSpecificationManager;
 
+	@Override
+	public List<LiteMallGoodsSpecificationEntity> getByGoodsId(String goodsId) {
+		return liteMallGoodsSpecificationManager.getByGoodsId(goodsId);
+	}
 }

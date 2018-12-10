@@ -92,26 +92,37 @@ public class LiteMallGoodsServiceImpl extends BaseServiceImpl<LiteMallGoodsManag
 	@Transactional
 	public boolean save(LiteMallGoodsEntity liteMallGoods) {
 	   boolean count = liteMallGoodsManager.saveLiteMallGoods(liteMallGoods);
-	   List<LiteMallGoodsSpecificationEntity>	liteMallGoodsSpecifications = liteMallGoods.getLiteMallGoodsSpecification();
-       for(LiteMallGoodsSpecificationEntity bean : liteMallGoodsSpecifications){
-		   bean.setStoreId(liteMallGoods.getStoreId());
-		   bean.setGoodsId(liteMallGoods.getId());
-	   }
-	   List<LiteMallGoodsProductEntity>	liteMallGoodsProducts = liteMallGoods.getLiteMallGoodsProduct();
-       for(LiteMallGoodsProductEntity bean : liteMallGoodsProducts){
-		   bean.setStoreId(liteMallGoods.getStoreId());
-		   bean.setGoodsId(liteMallGoods.getId());
-	   }
-	   List<LiteMallGoodsAttributeEntity>	liteMallGoodsAttributes = liteMallGoods.getLiteMallGoodsAttribute();
-       for(LiteMallGoodsAttributeEntity bean : liteMallGoodsAttributes){
-		   bean.setStoreId(liteMallGoods.getStoreId());
-		   bean.setGoodsId(liteMallGoods.getId());
-	   }
-	   liteMallGoodsSpecificationManager.insertBatch(liteMallGoodsSpecifications);
-	   liteMallGoodsProductManager.insertBatch(liteMallGoodsProducts);
-	   liteMallGoodsAttributeManager.insertBatch(liteMallGoodsAttributes);
+		addGoodsSpeciProAttr(liteMallGoods);
+		return count;
+	}
 
+	@Override
+	@Transactional
+	public boolean update(LiteMallGoodsEntity liteMallGoods){
+		boolean count = liteMallGoodsManager.update(liteMallGoods);
+		liteMallGoodsManager.unionDelete(liteMallGoods);
+		addGoodsSpeciProAttr(liteMallGoods);
 		return true;
+	}
+	private void addGoodsSpeciProAttr(LiteMallGoodsEntity liteMallGoods) {
+		List<LiteMallGoodsSpecificationEntity> liteMallGoodsSpecifications = liteMallGoods.getLiteMallGoodsSpecification();
+		for(LiteMallGoodsSpecificationEntity bean : liteMallGoodsSpecifications){
+			bean.setStoreId(liteMallGoods.getStoreId());
+			bean.setGoodsId(liteMallGoods.getId());
+		}
+		List<LiteMallGoodsProductEntity>	liteMallGoodsProducts = liteMallGoods.getLiteMallGoodsProduct();
+		for(LiteMallGoodsProductEntity bean : liteMallGoodsProducts){
+			bean.setStoreId(liteMallGoods.getStoreId());
+			bean.setGoodsId(liteMallGoods.getId());
+		}
+		List<LiteMallGoodsAttributeEntity>	liteMallGoodsAttributes = liteMallGoods.getLiteMallGoodsAttribute();
+		for(LiteMallGoodsAttributeEntity bean : liteMallGoodsAttributes){
+			bean.setStoreId(liteMallGoods.getStoreId());
+			bean.setGoodsId(liteMallGoods.getId());
+		}
+		liteMallGoodsSpecificationManager.insertBatch(liteMallGoodsSpecifications);
+		liteMallGoodsProductManager.insertBatch(liteMallGoodsProducts);
+		liteMallGoodsAttributeManager.insertBatch(liteMallGoodsAttributes);
 	}
 
 }

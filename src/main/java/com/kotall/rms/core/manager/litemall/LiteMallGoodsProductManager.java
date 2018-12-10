@@ -1,6 +1,7 @@
 package com.kotall.rms.core.manager.litemall;
 
 import com.kotall.rms.common.entity.litemall.LiteMallGoodsProductEntity;
+import com.kotall.rms.common.entity.litemall.LiteMallGoodsSpecificationEntity;
 import com.kotall.rms.core.manager.BaseManager;
 
 import java.util.List;
@@ -14,4 +15,6 @@ import java.util.List;
  */
 public interface LiteMallGoodsProductManager extends BaseManager<LiteMallGoodsProductEntity> {
     void insertBatch(List<LiteMallGoodsProductEntity> liteMallGoodsProducts);
+
+    List<LiteMallGoodsProductEntity> getByGoodsId(String goodsId);
 }

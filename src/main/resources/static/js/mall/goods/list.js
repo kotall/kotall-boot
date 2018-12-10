@@ -5,9 +5,6 @@
 $(function () {
 	initialPage();
 	getGrid();
-    getGrid2();
-    getGrid3();
-    getGrid4();
 });
 
 function initialPage() {
@@ -89,12 +86,12 @@ function getGrid() {
 /**
  * 商品规格列表
  */
-function getGrid2() {
+function getGrid2(id) {
     $('#dataGrid2').bootstrapTableEx({
-        url: '../../litemall/goods/list?_' + $.now(),
+        url: '../../litemall/specification/getByGoodsId?_' + $.now()+'&goodsId=' + id,
         height: $(window).height - 200,
         pagination:false,
-        dataField: "",
+        dataField: "rows",
         queryParams: function(params){
             params.name = vm.keyword;
             return params;
@@ -125,19 +122,19 @@ function getGrid2() {
 /**
  * 商品库存
  */
-function getGrid3() {
+function getGrid3(id) {
     $('#dataGrid3').bootstrapTableEx({
-        url: '../../litemall/goods/list?_' + $.now(),
+        url: '../../litemall/goodsproduct/getByGoodsId?_' + $.now()+'&goodsId=' + id,
         height: $(window).height - 200,
         pagination:false,
-        dataField: "",
+        dataField: "rows",
         queryParams: function(params){
             params.name = vm.keyword;
             return params;
         },
         columns: [
             {checkbox: true},
-            {field : "specification", title : "规格名", width : "100px"},
+            {field : "specifications", title : "规格名", width : "100px"},
             {field : "price", title : "货品售价", width : "100px"},
             {field : "number", title : "货品数量", width : "100px"},
             /*{field : "picUrl", title : "货品图片", width : "100px",
@@ -160,12 +157,12 @@ function getGrid3() {
 /**
  * 商品参数
  */
-function getGrid4() {
+function getGrid4(id) {
     $('#dataGrid4').bootstrapTableEx({
-        url: '../../litemall/goods/list?_' + $.now(),
+        url: '../../litemall/attribute/getByGoodsId?_' + $.now()+'&goodsId=' + id,
         height: $(window).height - 200,
         pagination:false,
-        dataField: "",
+        dataField: "rows",
         queryParams: function(params){
             params.name = vm.keyword;
             return params;
@@ -230,15 +227,21 @@ var vm = new Vue({
 			//vm.categoryDatas = [];
             editorUtils.clear(editor);
 			$('#dataGrid').bootstrapTable('refresh');
-            $("#dataGrid2").bootstrapTable('removeAll');
-            $("#dataGrid3").bootstrapTable('removeAll');
-            $("#dataGrid4").bootstrapTable('removeAll');
+            $("#dataGrid2").bootstrapTable('destroy');
+            $("#dataGrid3").bootstrapTable('destroy');
+            $("#dataGrid4").bootstrapTable('destroy');
 
 		},
         add: function(){
             vm.showList = false;
+            getGrid2();
+            getGrid3();
+            getGrid4();
         },
 		edit: function(id) {
+            getGrid2(id)
+            getGrid3(id)
+            getGrid4(id)
             vm.showList = false;
             vm.getCategory();
             $.SetForm({
@@ -292,7 +295,7 @@ var vm = new Vue({
                 });
                 $('#dataGrid3').bootstrapTable('insertRow', {
                     index:$('#dataGrid3').bootstrapTable('getOptions').totalRows,
-                    row:{specification:$("#specification").val()}
+                    row:{specifications:$("#specification").val()}
                 });
             }else{
                 $('#dataGrid2').bootstrapTable('updateRow', {
@@ -322,7 +325,7 @@ var vm = new Vue({
                 values: [specification]
             });
             $('#dataGrid3').bootstrapTable('remove', {
-                field: "specification",
+                field: "specifications",
                 values: [specification]
             });
         },

@@ -15,4 +15,6 @@ import java.util.List;
 public interface LiteMallGoodsAttributeManager extends BaseManager<LiteMallGoodsAttributeEntity> {
 
     void insertBatch(List<LiteMallGoodsAttributeEntity> liteMallGoodsAttributes);
+
+    List<LiteMallGoodsAttributeEntity> getByGoodsId(String goodsId);
 }

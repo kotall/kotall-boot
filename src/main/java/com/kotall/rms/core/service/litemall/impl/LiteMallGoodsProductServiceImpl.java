@@ -1,6 +1,7 @@
 package com.kotall.rms.core.service.litemall.impl;
 
 import com.kotall.rms.common.entity.litemall.LiteMallGoodsProductEntity;
+import com.kotall.rms.common.entity.litemall.LiteMallGoodsSpecificationEntity;
 import com.kotall.rms.core.manager.litemall.LiteMallGoodsProductManager;
 import com.kotall.rms.core.service.BaseServiceImpl;
 import com.kotall.rms.core.service.litemall.LiteMallGoodsProductService;
@@ -26,6 +27,11 @@ public class LiteMallGoodsProductServiceImpl extends BaseServiceImpl<LiteMallGoo
 	@Override
 	public List<LiteMallGoodsProductEntity> queryByGoodsId(Map<String, Object> params) {
 		return this.queryByList(params);
+	}
+
+	@Override
+	public List<LiteMallGoodsProductEntity> getByGoodsId(String goodsId) {
+		return liteMallGoodsProductManager.getByGoodsId( goodsId);
 	}
 
 }

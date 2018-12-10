@@ -20,4 +20,6 @@ public interface LiteMallGoodsManager extends BaseManager<LiteMallGoodsEntity> {
 	List<Integer> queryCategoryIds(Query query);
 
     boolean saveLiteMallGoods(LiteMallGoodsEntity liteMallGoodsEntity);
+
+    void unionDelete(LiteMallGoodsEntity liteMallGoods);
 }

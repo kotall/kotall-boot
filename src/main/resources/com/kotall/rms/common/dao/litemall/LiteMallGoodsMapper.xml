@@ -213,6 +213,16 @@
 			#{id}
 		</foreach>
 	</delete>
+	<delete id="unionDelete">
+		DELETE s.*,p.*,a.*
+		FROM
+		lite_mall_goods_specification s,
+		lite_mall_goods_product p,
+		lite_mall_goods_attribute a
+		WHERE
+		s.goods_id = p.goods_id
+		AND p.goods_id = a.goods_id and s.goods_id = #{id}
+	</delete>
 
 	<select id="countTotal" resultType="int">
 		SELECT

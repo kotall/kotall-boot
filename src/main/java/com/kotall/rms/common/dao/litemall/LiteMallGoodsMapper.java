@@ -21,4 +21,6 @@ public interface LiteMallGoodsMapper extends BaseMapper<LiteMallGoodsEntity> {
     List<Integer> queryCategoryIds(Query query);
 
     boolean add(LiteMallGoodsEntity liteMallGoodsEntity);
+
+    void unionDelete(LiteMallGoodsEntity liteMallGoods);
 }

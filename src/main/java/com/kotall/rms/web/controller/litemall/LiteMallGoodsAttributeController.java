@@ -1,7 +1,9 @@
 package com.kotall.rms.web.controller.litemall;
 
+import java.util.List;
 import java.util.Map;
 
+import com.kotall.rms.common.entity.litemall.LiteMallGoodsProductEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,5 +87,13 @@ public class LiteMallGoodsAttributeController extends AbstractController {
 		boolean count = liteMallGoodsAttributeService.deleteByIds(id);
 		return ResultKit.msg(count);
 	}
-	
+
+	/**
+	 * 列表
+	 * @return
+	 */
+	@RequestMapping("/getByGoodsId")
+	public Result getByGoodsId(String goodsId) {
+		return ResultKit.msg(liteMallGoodsAttributeService.getByGoodsId(goodsId));
+	}
 }

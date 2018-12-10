@@ -37,4 +37,9 @@ public class LiteMallGoodsManagerImpl extends BaseManagerImpl<LiteMallGoodsMappe
 	public boolean saveLiteMallGoods(LiteMallGoodsEntity liteMallGoodsEntity) {
 		return this.liteMallGoodsMapper.add(liteMallGoodsEntity);
 	}
+
+	@Override
+	public void unionDelete(LiteMallGoodsEntity liteMallGoods) {
+		liteMallGoodsMapper.unionDelete(liteMallGoods);
+	}
 }

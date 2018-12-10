@@ -28,4 +28,9 @@ public class LiteMallGoodsAttributeServiceImpl extends BaseServiceImpl<LiteMallG
 	public List<LiteMallGoodsAttributeEntity> queryByGoodsId(Map<String, Object> params) {
 		return super.queryByList(params);
 	}
+
+	@Override
+	public List<LiteMallGoodsAttributeEntity> getByGoodsId(String goodsId) {
+		return liteMallGoodsAttributeManager.getByGoodsId(goodsId);
+	}
 }

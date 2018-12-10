@@ -62,15 +62,15 @@
 		`deleted`
 		)
 		VALUES
-		<foreach item="data" collection="list" open="(" separator="," close=")">
-		#{data.storeId},
+		<foreach item="data" collection="list"  separator="," >
+		(#{data.storeId},
 		#{data.goodsId},
 		#{data.specification},
 		#{data.value},
 		#{data.picUrl},
 		#{data.addTime},
 		#{data.updateTime},
-		#{data.deleted}
+		#{data.deleted})
 		</foreach>
 	</insert>
 	
@@ -89,6 +89,23 @@
 			lite_mall_goods_specification
 		WHERE
 			id = #{id}
+	</select>
+
+	<select id="getByGoodsId" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsSpecificationEntity">
+		SELECT
+			`id`,
+			`store_id`,
+			`goods_id`,
+			`specification`,
+			`value`,
+			`pic_url`,
+			`add_time`,
+			`update_time`,
+			`deleted`
+		FROM
+			lite_mall_goods_specification
+		WHERE
+			goods_id = #{goodsId}
 	</select>
 	
 	<update id="update">
