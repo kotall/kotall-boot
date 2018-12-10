@@ -673,11 +673,20 @@ CREATE TABLE `lite_mall_user_formid` (
 
 
 CREATE TABLE `lite_mall_app`(
-    id INT NOT NULL AUTO_INCREMENT  COMMENT '主键' ,
-    sid VARCHAR(32)    COMMENT 'sid, 小程序端唯一ID' ,
-    store_id VARCHAR(32)    COMMENT '店铺ID' ,
-    version VARCHAR(32)    COMMENT '版本' ,
-    CREATED_TIME DATETIME    COMMENT '创建时间' ,
-    UPDATED_TIME DATETIME    COMMENT '更新时间' ,
-    PRIMARY KEY (id)
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `sid` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'sid 小程序端唯一ID',
+  `store_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '店铺ID',
+  `version` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '版本',
+  `trade_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '微信支付类型',
+  `app_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '微信小程序ID',
+  `sub_app_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '微信子小程序ID',
+  `mch_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '微信商户号',
+  `sub_mch_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '微信子商户号',
+  `mch_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '微信商户秘钥',
+  `sign_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '微信加密类型',
+  `key_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '微信证书路径',
+  `notify_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '微信交易结果通知地址',
+  `CREATED_TIME` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `UPDATED_TIME` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT = 'app配置表';

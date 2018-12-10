@@ -38,7 +38,54 @@ public class LiteMallAppEntity implements Serializable {
 	 * 版本
 	 */
 	private String version;
-	
+
+	/**
+	 * 微信交易类型
+	 */
+	private String tradeType;
+
+
+	/**
+	 * 微信小程序appId
+	 */
+	private String appId;
+
+	/**
+	 * 微信小程序子appId
+	 */
+	private String subAppId;
+
+
+	/**
+	 * 微信商户号
+	 */
+	private String mchId;
+
+	/**
+	 * 微信子商户号
+	 */
+	private String subMchId;
+
+	/**
+	 * 微信商户秘钥
+	 */
+	private String mchKey;
+
+	/**
+	 * 微信签名类型
+	 */
+	private String signType;
+
+	/**
+	 * 微信证书路径
+	 */
+	private String keyPath;
+
+	/**
+	 * 微信支付结果通知地址
+	 */
+	private String notifyUrl;
+
 	/**
 	 * 创建时间
 	 */

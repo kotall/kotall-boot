@@ -9,7 +9,16 @@
 			`sid`,
 			`store_id`, 
 			`version`, 
-			`CREATED_TIME`, 
+			`trade_type`,
+			`app_id`,
+			`sub_app_id`,
+		    `mch_id`,
+		    `sub_mch_id`,
+		    `mch_key`,
+		    `sign_type`,
+		    `key_path`,
+		    `notify_url`,
+			`CREATED_TIME`,
 			`UPDATED_TIME`
 		FROM
 			lite_mall_app
@@ -21,7 +30,16 @@
 		INSERT INTO lite_mall_app (
 			`sid`,
 			`store_id`, 
-			`version`, 
+			`version`,
+			`trade_type`,
+			`app_id`,
+			`sub_app_id`,
+			`mch_id`,
+			`sub_mch_id`,
+			`mch_key`,
+			`sign_type`,
+			`key_path`,
+			`notify_url`,
 			`CREATED_TIME`, 
 			`UPDATED_TIME`
 		)
@@ -29,7 +47,16 @@
 			#{sid},
 			#{storeId}, 
 			#{version}, 
-			#{createdTime}, 
+			#{tradeType},
+			#{appId},
+			#{subAppId},
+			#{mchId},
+			#{subMchId},
+			#{mchKey},
+			#{signType},
+			#{keyPath},
+			#{notifyUrl},
+			#{createdTime},
 			#{updatedTime}
 		)
 	</insert>
@@ -39,7 +66,16 @@
 			`id`, 
 			`sid`,
 			`store_id`, 
-			`version`, 
+			`version`,
+			`trade_type`,
+			`app_id`,
+			`sub_app_id`,
+			`mch_id`,
+			`sub_mch_id`,
+			`mch_key`,
+			`sign_type`,
+			`key_path`,
+			`notify_url`,
 			`CREATED_TIME`, 
 			`UPDATED_TIME`
 		FROM
@@ -54,6 +90,15 @@
 			<if test="sid != null">`app_id` = #{sid}, </if>
 			<if test="storeId != null">`store_id` = #{storeId}, </if>
 			<if test="version != null">`version` = #{version}, </if>
+			<if test="tradeType != null">`trade_type` = #{tradeType}, </if>
+			<if test="appId != null">`app_id` = #{appId}, </if>
+			<if test="subAppId != null">`sub_app_id` = #{subAppId}, </if>
+			<if test="mchId != null">`mch_id` = #{mchId}, </if>
+			<if test="subMchId != null">`sub_mch_id` = #{subMchId}, </if>
+			<if test="mchKey != null">`mch_key` = #{mchKey}, </if>
+			<if test="signType != null">`sign_type` = #{signType}, </if>
+			<if test="keyPath != null">`key_path` = #{keyPath}, </if>
+			<if test="notifyUrl != null">`notify_url` = #{notifyUrl}, </if>
 			<if test="createdTime != null">`CREATED_TIME` = #{createdTime}, </if>
 			<if test="updatedTime != null">`UPDATED_TIME` = #{updatedTime}</if>
 		</set>
@@ -78,6 +123,15 @@
 			`sid`,
 			`store_id`,
 			`version`,
+			`trade_type`,
+			`app_id`,
+			`sub_app_id`,
+			`mch_id`,
+			`sub_mch_id`,
+			`mch_key`,
+			`sign_type`,
+			`key_path`,
+			`notify_url`,
 			`CREATED_TIME`,
 			`UPDATED_TIME`
 		FROM

@@ -26,6 +26,15 @@ function getGrid() {
 			{field : "sid", title : "sid", width : "100px"},
 			{field : "storeId", title : "店铺ID", width : "100px"}, 
 			{field : "version", title : "版本", width : "100px"}, 
+			{field : "tradeType", title : "微信支付类型", width : "100px"},
+			{field : "appId", title : "微信小程序appId", width : "100px"},
+			{field : "subAppId", title : "微信小程序子appId", width : "100px"},
+			{field : "mchId", title : "微信商户号", width : "100px"},
+			{field : "subMchId", title : "微信子商户号", width : "100px"},
+			{field : "mchKey", title : "微信商户秘钥", width : "100px"},
+			{field : "signType", title : "微信签名类型", width : "100px"},
+			{field : "keyPath", title : "微信证书路径", width : "100px"},
+			{field : "notifyUrl", title : "微信支付结果通知地址", width : "100px"},
 			{field : "createdTime", title : "创建时间", width : "100px"}
 		]
 	})
