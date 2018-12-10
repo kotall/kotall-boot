@@ -35,10 +35,10 @@ public class WxConfig {
     @Bean
     public WxPayConfig wxPayConfig() {
         WxPayConfig payConfig = new WxPayConfig();
-        payConfig.setAppId(properties.getAppId());
-        payConfig.setMchId(properties.getMchId());
-        payConfig.setMchKey(properties.getMchKey());
-        payConfig.setNotifyUrl(properties.getNotifyUrl());
+//        payConfig.setAppId(properties.getAppId());
+//        payConfig.setMchId(properties.getMchId());
+//        payConfig.setMchKey(properties.getMchKey());
+//        payConfig.setNotifyUrl(properties.getNotifyUrl());
         payConfig.setTradeType("JSAPI");
         payConfig.setSignType("MD5");
         return payConfig;

@@ -13,6 +13,7 @@ import com.kotall.rms.api.annotation.LoginUser;
 import com.kotall.rms.common.entity.litemall.*;
 import com.kotall.rms.common.integration.express.ExpressService;
 import com.kotall.rms.common.integration.express.dao.ExpressInfo;
+import com.kotall.rms.common.integration.wx.WxPayKit;
 import com.kotall.rms.common.utils.*;
 import com.kotall.rms.core.service.litemall.*;
 import com.kotall.rms.core.service.sys.SysAreaService;
@@ -595,6 +596,7 @@ public class WxOrderController {
         WxPayMpOrderResult result;
         try {
             WxPayUnifiedOrderRequest orderRequest = new WxPayUnifiedOrderRequest();
+            WxPayKit.buildWxPayConfig(orderRequest, appConfig);
             orderRequest.setOutTradeNo(order.getOrderSn());
             orderRequest.setOpenid(openid);
             orderRequest.setBody("订单：" + order.getOrderSn());
