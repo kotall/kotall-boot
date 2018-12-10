@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import com.kotall.rms.common.entity.litemall.LiteMallGoodsProductEntity;
 import com.kotall.rms.common.dao.BaseMapper;
 
+import java.util.List;
+
 /**
  * 商品货品表
  *
@@ -14,5 +16,6 @@ import com.kotall.rms.common.dao.BaseMapper;
  */
 @Mapper
 public interface LiteMallGoodsProductMapper extends BaseMapper<LiteMallGoodsProductEntity> {
-	
+
+    void insertBatch(List<LiteMallGoodsProductEntity> liteMallGoodsProducts);
 }

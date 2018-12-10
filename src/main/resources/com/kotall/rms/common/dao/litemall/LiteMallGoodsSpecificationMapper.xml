@@ -29,25 +29,49 @@
 	
 	<insert id="insert">
 		INSERT INTO lite_mall_goods_specification (
-			`store_id`, 
-			`goods_id`, 
-			`specification`, 
-			`value`, 
-			`pic_url`, 
-			`add_time`, 
-			`update_time`, 
+			`store_id`,
+			`goods_id`,
+			`specification`,
+			`value`,
+			`pic_url`,
+			`add_time`,
+			`update_time`,
 			`deleted`
 		)
 		VALUES (
-			#{storeId}, 
-			#{goodsId}, 
-			#{specification}, 
-			#{value}, 
-			#{picUrl}, 
-			#{addTime}, 
-			#{updateTime}, 
+			#{storeId},
+			#{goodsId},
+			#{specification},
+			#{value},
+			#{picUrl},
+			#{addTime},
+			#{updateTime},
 			#{deleted}
 		)
+	</insert>
+
+	<insert id="insertBatch">
+		INSERT INTO lite_mall_goods_specification (
+		`store_id`,
+		`goods_id`,
+		`specification`,
+		`value`,
+		`pic_url`,
+		`add_time`,
+		`update_time`,
+		`deleted`
+		)
+		VALUES
+		<foreach item="data" collection="list" open="(" separator="," close=")">
+		#{data.storeId},
+		#{data.goodsId},
+		#{data.specification},
+		#{data.value},
+		#{data.picUrl},
+		#{data.addTime},
+		#{data.updateTime},
+		#{data.deleted}
+		</foreach>
 	</insert>
 	
 	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsSpecificationEntity">

@@ -94,6 +94,55 @@
 			#{deleted}
 		)
 	</insert>
+
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO lite_mall_goods (
+		`store_id`,
+		`goods_sn`,
+		`name`,
+		`category_id`,
+		`brand_id`,
+		`gallery`,
+		`keywords`,
+		`brief`,
+		`is_on_sale`,
+		`sort_order`,
+		`pic_url`,
+		`share_url`,
+		`is_new`,
+		`is_hot`,
+		`unit`,
+		`counter_price`,
+		`retail_price`,
+		`detail`,
+		`add_time`,
+		`update_time`,
+		`deleted`
+		)
+		VALUES (
+		#{storeId},
+		#{goodsSn},
+		#{name},
+		#{categoryId},
+		#{brandId},
+		#{gallery},
+		#{keywords},
+		#{brief},
+		#{isOnSale},
+		#{sortOrder},
+		#{picUrl},
+		#{shareUrl},
+		#{isNew},
+		#{isHot},
+		#{unit},
+		#{counterPrice},
+		#{retailPrice},
+		#{detail},
+		#{addTime},
+		#{updateTime},
+		#{deleted}
+		)
+	</insert>
 	
 	<select id="getById" resultType="com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity">
 		SELECT

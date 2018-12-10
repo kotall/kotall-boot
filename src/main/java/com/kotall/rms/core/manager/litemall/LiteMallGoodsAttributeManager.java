@@ -3,6 +3,8 @@ package com.kotall.rms.core.manager.litemall;
 import com.kotall.rms.common.entity.litemall.LiteMallGoodsAttributeEntity;
 import com.kotall.rms.core.manager.BaseManager;
 
+import java.util.List;
+
 /**
  * 商品参数表
  *
@@ -12,4 +14,5 @@ import com.kotall.rms.core.manager.BaseManager;
  */
 public interface LiteMallGoodsAttributeManager extends BaseManager<LiteMallGoodsAttributeEntity> {
 
+    void insertBatch(List<LiteMallGoodsAttributeEntity> liteMallGoodsAttributes);
 }

@@ -7,6 +7,8 @@ import com.kotall.rms.core.manager.litemall.LiteMallGoodsAttributeManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * 商品参数表
  *
@@ -20,4 +22,8 @@ public class LiteMallGoodsAttributeManagerImpl extends BaseManagerImpl<LiteMallG
 	@Autowired
 	private LiteMallGoodsAttributeMapper liteMallGoodsAttributeMapper;
 
+	@Override
+	public void insertBatch(List<LiteMallGoodsAttributeEntity> liteMallGoodsAttributes) {
+		liteMallGoodsAttributeMapper.insertBatch(liteMallGoodsAttributes);
+	}
 }

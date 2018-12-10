@@ -7,6 +7,8 @@ import com.kotall.rms.core.manager.litemall.LiteMallGoodsSpecificationManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * 商品规格表
  *
@@ -19,5 +21,9 @@ public class LiteMallGoodsSpecificationManagerImpl extends BaseManagerImpl<LiteM
 
 	@Autowired
 	private LiteMallGoodsSpecificationMapper liteMallGoodsSpecificationMapper;
-	
+
+	@Override
+	public void insertBatch(List<LiteMallGoodsSpecificationEntity> liteMallGoodsSpecifications) {
+		liteMallGoodsSpecificationMapper.insertBatch(liteMallGoodsSpecifications);
+	}
 }

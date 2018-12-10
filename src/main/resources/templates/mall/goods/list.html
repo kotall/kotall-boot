@@ -32,7 +32,7 @@
 	</div>
 
 	<div v-show="!showList" class="panel panel-default">
-		<div class="panel-heading">{{title}}</div>
+		<div class="panel-heading">商品基本信息</div>
 		<form class="form-horizontal" id="form">
 			<div class="form-group">
 				<div class="col-sm-1 control-label">店铺ID</div>
@@ -153,15 +153,10 @@
 					<input type="text" class="form-control" placeholder="商品关键字，采用逗号间隔" v-model="liteMallGoods.keywords" isvalid="yes" checkexpession="NotNull">
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="col-sm-2 control-label"></div>
-				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
-				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="load" value="返回"/>
-			</div>
 		</form>
 	</div>
 	<div v-show="!showList" class="panel panel-default" style="margin-top: 15px;">
-		<div class="panel-heading">{{title2}}</div>
+		<div class="panel-heading">商品规格</div>
 		<div class="col-md-12" style="margin-top:10px;margin-bottom: 10px">
 			<div class="btn-toolbar pull-right">
 				<div class="btn-group">
@@ -173,9 +168,37 @@
 			<table id="dataGrid2"></table>
 		</div>
 	</div>
+	<div v-show="!showList" class="panel panel-default" style="margin-top: 15px;">
+		<div class="panel-heading">商品库存</div>
+		<div class="row">
+			<table id="dataGrid3"></table>
+		</div>
+	</div>
+	<div v-show="!showList" class="panel panel-default" style="margin-top: 15px;">
+		<div class="panel-heading">商品参数</div>
+		<div class="col-md-12" style="margin-top:10px;margin-bottom: 10px">
+			<div class="btn-toolbar pull-right">
+				<div class="btn-group">
+					<a v-if="hasPermission('litemall:goods:save')" class="btn btn-default" data-toggle="modal" href="#attributeModal"><i class="fa fa-plus"></i>&nbsp;新增</a>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<table id="dataGrid4"></table>
+		</div>
+	</div>
+	<div v-show="!showList" class="panel panel-default">
+		<form class="form-horizontal">
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div>
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="load" value="返回"/>
+			</div>
+		</form>
+	</div>
 </div>
 
-<!-- 模态框（Modal） -->
+<!-- 规格设置 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -216,6 +239,91 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 				</button>
 				<button type="button" id="add" class="btn btn-primary" onclick="vm.specificationSubmit()">
+					提交
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<!-- 库存 模态框（Modal） -->
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="productModalLabel">
+					规格设置
+				</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">规格名</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="specification3"   placeholder="规格名" isvalid="yes" checkexpession="NotNull">
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="col-sm-3 control-label">货品售价</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="price"  placeholder="货品售价">
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="col-sm-3 control-label">货品数量</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="number"  placeholder="货品数量">
+						</div>
+					</div>
+
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" onclick="vm.productSubmit()">
+					提交
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<!-- 商品参数 模态框（Modal） -->
+<div class="modal fade" id="attributeModal" tabindex="-1" role="dialog" aria-labelledby="attributeModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="attributeModalLabel">
+					规格设置
+				</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">商品参数名称</label>
+						<div class="col-sm-9">
+							<input type="text"  class="form-control" id="attribute"   placeholder="商品参数名称" isvalid="yes" checkexpession="NotNull">
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="col-sm-3 control-label">商品参数值</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="value4"  placeholder="商品参数值">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" onclick="vm.attributeSubmit()">
 					提交
 				</button>
 			</div>

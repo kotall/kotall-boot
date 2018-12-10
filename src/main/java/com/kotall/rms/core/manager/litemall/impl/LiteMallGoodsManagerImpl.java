@@ -32,4 +32,9 @@ public class LiteMallGoodsManagerImpl extends BaseManagerImpl<LiteMallGoodsMappe
 	public List<Integer> queryCategoryIds(Query query) {
 		return this.liteMallGoodsMapper.queryCategoryIds(query);
 	}
+
+	@Override
+	public boolean saveLiteMallGoods(LiteMallGoodsEntity liteMallGoodsEntity) {
+		return this.liteMallGoodsMapper.add(liteMallGoodsEntity);
+	}
 }

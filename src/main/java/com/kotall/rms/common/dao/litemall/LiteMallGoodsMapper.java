@@ -19,4 +19,6 @@ import java.util.List;
 public interface LiteMallGoodsMapper extends BaseMapper<LiteMallGoodsEntity> {
 
     List<Integer> queryCategoryIds(Query query);
+
+    boolean add(LiteMallGoodsEntity liteMallGoodsEntity);
 }

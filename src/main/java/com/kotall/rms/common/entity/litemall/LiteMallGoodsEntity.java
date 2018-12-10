@@ -131,5 +131,7 @@ public class LiteMallGoodsEntity implements Serializable {
 	private Integer deleted;
 
 	private List<LiteMallGoodsSpecificationEntity> liteMallGoodsSpecification;
+	private List<LiteMallGoodsProductEntity> LiteMallGoodsProduct;
+	private List<LiteMallGoodsAttributeEntity> LiteMallGoodsAttribute;
 
 }

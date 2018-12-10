@@ -1,14 +1,23 @@
 package com.kotall.rms.core.service.litemall.impl;
 
+import com.kotall.rms.common.entity.litemall.LiteMallGoodsAttributeEntity;
 import com.kotall.rms.common.entity.litemall.LiteMallGoodsEntity;
+import com.kotall.rms.common.entity.litemall.LiteMallGoodsProductEntity;
+import com.kotall.rms.common.entity.litemall.LiteMallGoodsSpecificationEntity;
 import com.kotall.rms.common.utils.Page;
 import com.kotall.rms.common.utils.Query;
 import com.kotall.rms.core.annotation.StoreFilter;
+import com.kotall.rms.core.manager.litemall.LiteMallGoodsAttributeManager;
 import com.kotall.rms.core.manager.litemall.LiteMallGoodsManager;
+import com.kotall.rms.core.manager.litemall.LiteMallGoodsProductManager;
+import com.kotall.rms.core.manager.litemall.LiteMallGoodsSpecificationManager;
 import com.kotall.rms.core.service.BaseServiceImpl;
+import com.kotall.rms.core.service.litemall.LiteMallGoodsAttributeService;
+import com.kotall.rms.core.service.litemall.LiteMallGoodsProductService;
 import com.kotall.rms.core.service.litemall.LiteMallGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -25,6 +34,12 @@ public class LiteMallGoodsServiceImpl extends BaseServiceImpl<LiteMallGoodsManag
 
 	@Autowired
 	private LiteMallGoodsManager liteMallGoodsManager;
+	@Autowired
+	private LiteMallGoodsSpecificationManager liteMallGoodsSpecificationManager;
+	@Autowired
+	private LiteMallGoodsProductManager liteMallGoodsProductManager;
+	@Autowired
+	private LiteMallGoodsAttributeManager liteMallGoodsAttributeManager;
 
 	@StoreFilter
 	@Override
@@ -73,4 +88,30 @@ public class LiteMallGoodsServiceImpl extends BaseServiceImpl<LiteMallGoodsManag
 		Query query = new Query(params);
 		return this.liteMallGoodsManager.queryCategoryIds(query);
 	}
+	@Override
+	@Transactional
+	public boolean save(LiteMallGoodsEntity liteMallGoods) {
+	   boolean count = liteMallGoodsManager.saveLiteMallGoods(liteMallGoods);
+	   List<LiteMallGoodsSpecificationEntity>	liteMallGoodsSpecifications = liteMallGoods.getLiteMallGoodsSpecification();
+       for(LiteMallGoodsSpecificationEntity bean : liteMallGoodsSpecifications){
+		   bean.setStoreId(liteMallGoods.getStoreId());
+		   bean.setGoodsId(liteMallGoods.getId());
+	   }
+	   List<LiteMallGoodsProductEntity>	liteMallGoodsProducts = liteMallGoods.getLiteMallGoodsProduct();
+       for(LiteMallGoodsProductEntity bean : liteMallGoodsProducts){
+		   bean.setStoreId(liteMallGoods.getStoreId());
+		   bean.setGoodsId(liteMallGoods.getId());
+	   }
+	   List<LiteMallGoodsAttributeEntity>	liteMallGoodsAttributes = liteMallGoods.getLiteMallGoodsAttribute();
+       for(LiteMallGoodsAttributeEntity bean : liteMallGoodsAttributes){
+		   bean.setStoreId(liteMallGoods.getStoreId());
+		   bean.setGoodsId(liteMallGoods.getId());
+	   }
+	   liteMallGoodsSpecificationManager.insertBatch(liteMallGoodsSpecifications);
+	   liteMallGoodsProductManager.insertBatch(liteMallGoodsProducts);
+	   liteMallGoodsAttributeManager.insertBatch(liteMallGoodsAttributes);
+
+		return true;
+	}
+
 }

@@ -18,4 +18,6 @@ public interface LiteMallGoodsManager extends BaseManager<LiteMallGoodsEntity> {
     Integer countOnSale(Query query);
 
 	List<Integer> queryCategoryIds(Query query);
+
+    boolean saveLiteMallGoods(LiteMallGoodsEntity liteMallGoodsEntity);
 }

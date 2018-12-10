@@ -6,6 +6,8 @@ $(function () {
 	initialPage();
 	getGrid();
     getGrid2();
+    getGrid3();
+    getGrid4();
 });
 
 function initialPage() {
@@ -84,11 +86,13 @@ function getGrid() {
 	})
 }
 
-
+/**
+ * 商品规格列表
+ */
 function getGrid2() {
     $('#dataGrid2').bootstrapTableEx({
         url: '../../litemall/goods/list?_' + $.now(),
-        height: 350,
+        height: $(window).height - 200,
         pagination:false,
         dataField: "",
         queryParams: function(params){
@@ -118,7 +122,72 @@ function getGrid2() {
     })
 }
 
+/**
+ * 商品库存
+ */
+function getGrid3() {
+    $('#dataGrid3').bootstrapTableEx({
+        url: '../../litemall/goods/list?_' + $.now(),
+        height: $(window).height - 200,
+        pagination:false,
+        dataField: "",
+        queryParams: function(params){
+            params.name = vm.keyword;
+            return params;
+        },
+        columns: [
+            {checkbox: true},
+            {field : "specification", title : "规格名", width : "100px"},
+            {field : "price", title : "货品售价", width : "100px"},
+            {field : "number", title : "货品数量", width : "100px"},
+            /*{field : "picUrl", title : "货品图片", width : "100px",
+                formatter : function(value, row, index) {
+                    return '<img  src="'+value+'" class="img-rounded" width="80px" height="60px">';
+                }},*/
+            {field : "id", title : "操作", width : "100px",
+                formatter : function(value, row, index) {
+                    var _html = '';
+                    if (hasPermission('litemall:goods:edit')) {
+                        _html += '<a href="javascript:;" onclick="vm.productEdit(\''+index+'\')" title="设置"><i class="fa fa-pencil"></i></a>\t';
+                    }
 
+                    return _html;				}
+            }
+        ]
+    })
+}
+
+/**
+ * 商品参数
+ */
+function getGrid4() {
+    $('#dataGrid4').bootstrapTableEx({
+        url: '../../litemall/goods/list?_' + $.now(),
+        height: $(window).height - 200,
+        pagination:false,
+        dataField: "",
+        queryParams: function(params){
+            params.name = vm.keyword;
+            return params;
+        },
+        columns: [
+            {checkbox: true},
+            {field : "attribute", title : "商品参数名称", width : "100px"},
+            {field : "value", title : "商品参数值", width : "100px"},
+            {field : "id", title : "操作", width : "100px",
+                formatter : function(value, row, index) {
+                    var _html = '';
+                    if (hasPermission('litemall:goods:edit')) {
+                        _html += '<a href="javascript:;" onclick="vm.attributeEdit(\''+index+'\')" title="编辑"><i class="fa fa-pencil"></i></a>\t';
+                    }
+                    if (hasPermission('litemall:goods:remove')) {
+                        _html += '<a href="javascript:;" onclick="vm.attributeDel(\''+row.attribute+'\')" title="删除"><i class="fa fa-trash-o"></i></a>\t';
+                    }
+                    return _html;			}
+            }
+        ]
+    })
+}
 
 var vm = new Vue({
 	el:'#dpLTE',
@@ -128,9 +197,6 @@ var vm = new Vue({
         isAdd:true,
         editIndex:null,
         title:'',
-        title2:'',
-        title3:'',
-        title4:'',
         gallerys:[],
         categoryDatas:[],
         liteMallGoods: {
@@ -143,6 +209,15 @@ var vm = new Vue({
                 specification:'1',
                 value:'2',
                 picUrl:''
+            },
+            liteMallGoodsProduct:{
+                specification:'',
+                price:'',
+                number:''
+            },
+            liteMallGoodsAttribute:{
+                attribute:'',
+                value:''
             }
         }
 	},
@@ -155,17 +230,16 @@ var vm = new Vue({
 			//vm.categoryDatas = [];
             editorUtils.clear(editor);
 			$('#dataGrid').bootstrapTable('refresh');
+            $("#dataGrid2").bootstrapTable('removeAll');
+            $("#dataGrid3").bootstrapTable('removeAll');
+            $("#dataGrid4").bootstrapTable('removeAll');
+
 		},
         add: function(){
             vm.showList = false;
-            vm.title = "商品基本信息";
-            vm.title2 = "商品规格";
-            vm.title3 = "商品库存";
-            vm.title4 = "商品参数";
         },
 		edit: function(id) {
             vm.showList = false;
-            vm.title = "修改商品信息";
             vm.getCategory();
             $.SetForm({
                 url: '../../litemall/goods/info?_' + $.now(),
@@ -187,34 +261,6 @@ var vm = new Vue({
                 }
             });
 		},
-		saveOrUpdate: function () {
-            if (!$('#form').Validform()) {
-                return false;
-            }
-            debugger
-            vm.liteMallGoods.liteMallGoodsSpecification = $('#dataGrid2').bootstrapTable('getData');
-            var url = vm.liteMallGoods.id == null ? '../../litemall/goods/save?_' + $.now() : '../../litemall/goods/update?_' + $.now();
-            debugger
-            if(vm.liteMallGoods.id == null){
-                $.SaveForm({
-                    url: url,
-                    param: vm.liteMallGoods,
-                    success: function(data) {
-                        $.currentIframe().vm.load();
-                    }
-                });
-			}else{
-                $.ConfirmForm({
-                    url: url,
-                    param: vm.liteMallGoods,
-                    success: function(data) {
-                        $.currentIframe().vm.load();
-                    }
-                });
-			}
-
-
-        },
         remove: function(menuId) {
             var ids = [];
                 ids.push(menuId);
@@ -244,10 +290,18 @@ var vm = new Vue({
                     index:$('#dataGrid2').bootstrapTable('getOptions').totalRows,
                     row:datas
                 });
+                $('#dataGrid3').bootstrapTable('insertRow', {
+                    index:$('#dataGrid3').bootstrapTable('getOptions').totalRows,
+                    row:{specification:$("#specification").val()}
+                });
             }else{
                 $('#dataGrid2').bootstrapTable('updateRow', {
                     index:vm.editIndex,
                     row:datas
+                });
+                $('#dataGrid3').bootstrapTable('updateRow', {
+                    index:vm.editIndex,
+                    row:{specification:$("#specification").val()}
                 });
             }
         },
@@ -267,6 +321,94 @@ var vm = new Vue({
                 field: "specification",
                 values: [specification]
             });
+            $('#dataGrid3').bootstrapTable('remove', {
+                field: "specification",
+                values: [specification]
+            });
+        },
+        productEdit:function (index) {
+            var row = $("#dataGrid3").bootstrapTable('getData')[index];
+            vm.editIndex = index;
+            $("#specification3").val(row.specification);
+            $("#price").val(row.price);
+            $("#number").val(row.number);
+            $("#productModal").modal('show');
+        },
+        productSubmit:function () {
+            debugger
+            var datas = {
+                specifications:$("#specification3").val(),
+                price:$("#price").val(),
+                number:$("#number").val()
+            }
+            $("#productModal").modal('hide');
+            $('#dataGrid3').bootstrapTable('updateRow', {
+                index:vm.editIndex,
+                row:datas
+            });
+        },
+        attributeSubmit:function () {
+            var datas = {
+                attribute:$("#attribute").val(),
+                value:$("#value4").val()
+            }
+            $("#attributeModal").modal('hide');
+            if(vm.isAdd){
+                $('#dataGrid4').bootstrapTable('insertRow', {
+                    index:$('#dataGrid2').bootstrapTable('getOptions').totalRows,
+                    row:datas
+                });
+            }else{
+                $('#dataGrid4').bootstrapTable('updateRow', {
+                    index:vm.editIndex,
+                    row:datas
+                });
+            }
+        },
+        attributeEdit:function (index) {
+            var row = $("#dataGrid4").bootstrapTable('getData')[index];
+            vm.editIndex = index;
+            vm.isAdd = false;
+            $("#attribute").val(row.attribute);
+            $("#attribute").attr({"readonly":"readonly"});
+            $("#value4").val(row.value);
+            $("#attributeModal").modal('show');
+        },
+        attributeDel:function (attribute) {
+            $('#dataGrid4').bootstrapTable('remove', {
+                field: "attribute",
+                values: [attribute]
+            });
+        },
+        saveOrUpdate: function () {
+            if (!$('#form').Validform()) {
+                return false;
+            }
+            debugger
+            vm.liteMallGoods.liteMallGoodsSpecification = $('#dataGrid2').bootstrapTable('getData');
+            vm.liteMallGoods.liteMallGoodsProduct = $('#dataGrid3').bootstrapTable('getData');
+            vm.liteMallGoods.liteMallGoodsAttribute = $('#dataGrid4').bootstrapTable('getData');
+            var url = vm.liteMallGoods.id == null ? '../../litemall/goods/save?_' + $.now() : '../../litemall/goods/update?_' + $.now();
+            debugger
+            if(vm.liteMallGoods.id == null){
+                $.SaveForm({
+                    url: url,
+                    param: vm.liteMallGoods,
+                    success: function(data) {
+                        $.currentIframe().vm.load();
+                    }
+                });
+            }else{
+                $.ConfirmForm({
+                    url: url,
+                    param: vm.liteMallGoods,
+                    success: function(data) {
+                        $.currentIframe().vm.load();
+                    }
+                });
+            }
+
+
         }
 	},
     created:function () {
@@ -283,7 +425,10 @@ $("body").on("hidden.bs.modal", function() {
     $("#specification").val(null);
     $("#value").val(null);
     $("#picUrl2").val(null);
-    $('#demo3').attr('src', ""); //图片链接（base64）
+    $('#demo3').attr('src', "");
+
+    $("#value4").val(null);
+    $("#attribute").val(null);
 });
 
 
