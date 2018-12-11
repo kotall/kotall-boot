@@ -25,7 +25,16 @@ function getGrid() {
 			{checkbox: true},
 			{field : "userId", title : "用户ID", width : "100px"},
 			{field : "valueId", title : "商品ID或专题ID", width : "100px"},
-			{field : "type", title : "收藏类型", width : "100px"},
+			{field : "type", title : "收藏类型", width : "100px",
+                formatter: function (value, index) {
+                    if(value === 0){
+                        return '<span class="label label-success">商品</span>';
+                    }
+                    if(value === 1){
+                        return '<span class="label label-info">专题</span>';
+                    }
+                }
+			},
 			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})

@@ -11,7 +11,13 @@
 	            </td>
 				<td class="formTitle">是否启动<font face="宋体">*</font></td>
 				<td class="formValue">
-					<input type="text" class="form-control" placeholder="是否启动" v-model="liteMallAd.enabled" isvalid="yes" checkexpession="NotNull">
+					<!--<input type="text" class="form-control" placeholder="是否启动" v-model="liteMallAd.enabled" isvalid="yes" checkexpession="NotNull">-->
+					<label class="radio-inline">
+						<input type="radio" name="liteMallAd.enabled" value="0" v-model="liteMallAd.enabled" /> 停用
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="liteMallAd.enabled" value="1" v-model="liteMallAd.enabled" /> 启用
+					</label>
 				</td>
         	</tr>
 			<tr>
@@ -19,7 +25,7 @@
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="所广告的商品页面或者活动页面链接地址" v-model="liteMallAd.link" isvalid="yes" checkexpession="NotNull">
 	            </td>
-				<td class="formTitle">广告位置：1则是首页<font face="宋体">*</font></td>
+				<td class="formTitle">广告位置<font face="宋体">*</font></td>
 				<td class="formValue">
 					<input type="text" class="form-control" placeholder="广告位置：1则是首页" v-model="liteMallAd.position" isvalid="yes" checkexpession="NotNull">
 				</td>

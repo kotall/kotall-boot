@@ -65,6 +65,7 @@ public class LiteMallGrouponRulesEntity implements Serializable {
 	/**
 	 * 团购过期时间
 	 */
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date expireTime;
 	
 	/**
