@@ -105,8 +105,8 @@
 			#{shipTime}, 
 			#{confirmTime}, 
 			#{comments}, 
-			#{endTime}, 
-			#{addTime}, 
+			#{endTime},
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

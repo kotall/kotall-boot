@@ -28,7 +28,11 @@ function getGrid() {
 			{field : "rulesId", title : "团购规则ID", width : "100px"},
 			{field : "userId", title : "用户ID", width : "100px"}, 
 			{field : "creatorUserId", title : "创建者ID", width : "100px"}, 
-			{field : "shareUrl", title : "团购分享图片地址", width : "100px"},
+			{field : "shareUrl", title : "团购分享图片地址", width : "100px",
+                formatter : function(value, row, index) {
+                    return '<img  src="'+value+'" class="img-rounded" width="80px" height="60px">';
+                }
+			},
 			{field : "payed", title : "是否已经支付", width : "100px"},
             {field : "addTime", title : "创建时间", width : "120px"}
         ]

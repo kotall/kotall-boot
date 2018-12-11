@@ -34,7 +34,7 @@
 			#{storeId},
 			#{userId},
 			#{goodsId},
-			#{addTime}, 
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

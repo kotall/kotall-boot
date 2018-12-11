@@ -44,8 +44,8 @@
 			#{desc},
 			#{picUrl}, 
 			#{sortOrder}, 
-			#{floorPrice}, 
-			#{addTime}, 
+			#{floorPrice},
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

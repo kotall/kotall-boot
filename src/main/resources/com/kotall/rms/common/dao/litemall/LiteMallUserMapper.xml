@@ -70,8 +70,8 @@
 			#{mobile}, 
 			#{avatar}, 
 			#{weixinOpenid}, 
-			#{status}, 
-			#{addTime}, 
+			#{status},
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

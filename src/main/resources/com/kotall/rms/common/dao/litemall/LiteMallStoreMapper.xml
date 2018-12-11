@@ -63,8 +63,8 @@
 			#{locationY}, 
 			#{userId}, 
 			#{contactMan}, 
-			#{contactPhone}, 
-			#{createTime}, 
+			#{contactPhone},
+			NOW(),
 			#{updateTime}
 		)
 	</insert>

@@ -46,8 +46,8 @@
 			#{goodsName},
 			#{picUrl}, 
 			#{discount}, 
-			#{discountMember}, 
-			#{addTime}, 
+			#{discountMember},
+			NOW(),
 			#{updateTime}, 
 			#{expireTime}, 
 			#{deleted}

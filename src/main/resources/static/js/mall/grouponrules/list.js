@@ -25,7 +25,11 @@ function getGrid() {
 			{checkbox: true},
 			{field : "goodsId", title : "商品表的商品ID", width : "100px"}, 
 			{field : "goodsName", title : "商品名称", width : "100px"}, 
-			{field : "picUrl", title : "商品图片或者商品货品图片", width : "100px"}, 
+			{field : "picUrl", title : "商品图片或者商品货品图片", width : "100px",
+                formatter : function(value, row, index) {
+                    return '<img  src="'+value+'" class="img-rounded" width="80px" height="60px">';
+                }
+			},
 			{field : "discount", title : "优惠金额", width : "100px"}, 
 			{field : "discountMember", title : "达到优惠条件的人数", width : "100px"}, 
 			{field : "expireTime", title : "团购过期时间", width : "100px"},

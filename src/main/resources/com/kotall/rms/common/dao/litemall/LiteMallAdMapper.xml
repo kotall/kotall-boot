@@ -51,8 +51,8 @@
 			#{content}, 
 			#{startTime}, 
 			#{endTime}, 
-			#{enabled}, 
-			#{addTime}, 
+			#{enabled},
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

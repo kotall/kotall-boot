@@ -61,8 +61,8 @@
 			#{price}, 
 			#{specifications}, 
 			#{picUrl}, 
-			#{comment}, 
-			#{addTime}, 
+			#{comment},
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

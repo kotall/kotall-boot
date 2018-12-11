@@ -46,8 +46,8 @@
 			#{isprepay}, 
 			#{useamount}, 
 			#{expireTime}, 
-			#{openid}, 
-			#{addTime}, 
+			#{openid},
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

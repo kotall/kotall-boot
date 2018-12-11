@@ -45,8 +45,8 @@
 			#{specifications}, 
 			#{price}, 
 			#{number}, 
-			#{url}, 
-			#{addTime}, 
+			#{url},
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

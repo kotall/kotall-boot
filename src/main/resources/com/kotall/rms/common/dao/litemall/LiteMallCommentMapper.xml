@@ -54,8 +54,8 @@
 			#{userId}, 
 			#{hasPicture}, 
 			#{picUrls}, 
-			#{star}, 
-			#{addTime}, 
+			#{star},
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

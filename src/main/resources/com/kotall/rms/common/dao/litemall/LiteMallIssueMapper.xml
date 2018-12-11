@@ -36,7 +36,7 @@
 			#{storeId},
 			#{question},
 			#{answer},
-			#{addTime}, 
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

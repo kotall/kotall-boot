@@ -88,8 +88,8 @@
 			#{unit}, 
 			#{counterPrice}, 
 			#{retailPrice}, 
-			#{detail}, 
-			#{addTime}, 
+			#{detail},
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

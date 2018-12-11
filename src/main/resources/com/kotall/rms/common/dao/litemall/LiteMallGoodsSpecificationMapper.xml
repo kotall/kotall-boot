@@ -44,7 +44,7 @@
 			#{specification},
 			#{value},
 			#{picUrl},
-			#{addTime},
+			NOW(),
 			#{updateTime},
 			#{deleted}
 		)
@@ -68,7 +68,7 @@
 		#{data.specification},
 		#{data.value},
 		#{data.picUrl},
-		#{data.addTime},
+		NOW(),
 		#{data.updateTime},
 		#{data.deleted})
 		</foreach>

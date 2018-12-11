@@ -42,8 +42,8 @@
 			#{url},
 			#{isHot}, 
 			#{isDefault}, 
-			#{sortOrder}, 
-			#{addTime}, 
+			#{sortOrder},
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

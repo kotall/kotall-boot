@@ -54,8 +54,8 @@
 			#{number}, 
 			#{specifications}, 
 			#{checked}, 
-			#{picUrl}, 
-			#{addTime}, 
+			#{picUrl},
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

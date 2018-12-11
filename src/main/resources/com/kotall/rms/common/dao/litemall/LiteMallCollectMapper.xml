@@ -40,8 +40,8 @@
 			#{storeId},
 			#{userId},
 			#{valueId},
-			#{type}, 
-			#{addTime}, 
+			#{type},
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

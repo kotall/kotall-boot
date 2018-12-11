@@ -43,8 +43,8 @@
 			#{storeId},
 			#{userId},
 			#{keyword},
-			#{from}, 
-			#{addTime}, 
+			#{from},
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

@@ -60,7 +60,7 @@
 			#{address}, 
 			#{mobile}, 
 			#{isDefault}, 
-			#{addTime}, 
+			NOW(),
 			#{updateTime}, 
 			#{deleted}
 		)

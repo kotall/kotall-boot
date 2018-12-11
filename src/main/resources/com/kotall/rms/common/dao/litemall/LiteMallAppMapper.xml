@@ -56,7 +56,7 @@
 			#{signType},
 			#{keyPath},
 			#{notifyUrl},
-			#{createdTime},
+			NOW(),
 			#{updatedTime}
 		)
 	</insert>

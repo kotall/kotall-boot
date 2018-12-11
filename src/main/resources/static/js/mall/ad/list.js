@@ -25,7 +25,11 @@ function getGrid() {
 			{checkbox: true},
 			{field : "name", title : "广告标题", width : "100px"}, 
 			{field : "link", title : "广岛链接地址", width : "100px"},
-			{field : "url", title : "广告宣传图片", width : "100px"}, 
+			{field : "url", title : "广告宣传图片", width : "100px",
+                formatter : function(value, row, index) {
+                    return '<img  src="'+value+'" class="img-rounded" width="80px" height="60px">';
+                }
+			},
 			{field : "position", title : "广告位置", width : "100px"},
 			{field : "content", title : "活动内容", width : "100px"}, 
 			{field : "startTime", title : "广告开始时间", width : "100px"}, 
@@ -49,8 +53,8 @@ var vm = new Vue({
 			dialogOpen({
 				title: '新增广告表',
 				url: 'mall/ad/add.html?_' + $.now(),
-				width: '420px',
-				height: '350px',
+				width: '600px',
+				height: '520px',
 				yes : function(iframeId) {
 					top.frames[iframeId].vm.acceptClick();
 				},
@@ -62,8 +66,8 @@ var vm = new Vue({
 				dialogOpen({
 					title: '编辑广告表',
 					url: 'mall/ad/edit.html?_' + $.now(),
-					width: '420px',
-					height: '350px',
+					width: '600px',
+					height: '520px',
 					success: function(iframeId){
 						top.frames[iframeId].vm.liteMallAd.id = ck[0].id;
 						top.frames[iframeId].vm.setForm();
