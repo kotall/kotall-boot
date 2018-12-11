@@ -33,7 +33,14 @@ function getGrid() {
                     return '<img  src="'+value+'" class="img-rounded" width="80px" height="60px">';
                 }
 			},
-			{field : "payed", title : "是否已经支付", width : "100px"},
+			{field : "payed", title : "是否已经支付", width : "100px",
+				formatter: function (value, index) {
+                    if (value == 0){
+                        return '<span class="label label-default">未支付</span>';
+                    }
+                    return '<span class="label label-info">已支付</span>';
+                }
+			},
             {field : "addTime", title : "创建时间", width : "120px"}
         ]
 	})
