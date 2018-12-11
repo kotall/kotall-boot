@@ -31,7 +31,7 @@ function getGrid() {
 			{field : "picUrl", title : "专题图片", width : "100px"}, 
 			{field : "sortOrder", title : "排序", width : "100px"}, 
 			{field : "goods", title : "专题相关商品，采用JSON数组格式", width : "100px"}, 
-			{field : "addTime", title : "创建时间", width : "100px"}
+			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})
 }

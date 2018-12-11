@@ -45,7 +45,7 @@ function getGrid() {
 
                 }},
 			{field : "sortOrder", title : "排序", width : "100px"}, 
-			{field : "addTime", title : "创建时间", width : "100px"}
+			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})
 }

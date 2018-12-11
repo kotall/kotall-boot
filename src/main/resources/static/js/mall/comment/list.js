@@ -30,7 +30,7 @@ function getGrid() {
 			{field : "hasPicture", title : "是否含有图片", width : "100px"}, 
 			{field : "picUrls", title : "图片地址列表", width : "100px"},
 			{field : "star", title : "评分， 1-5", width : "100px"}, 
-			{field : "addTime", title : "创建时间", width : "100px"}
+			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})
 }

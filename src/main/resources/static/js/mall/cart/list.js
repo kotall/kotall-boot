@@ -34,7 +34,7 @@ function getGrid() {
 			{field : "specifications", title : "商品规格值列表，采用JSON数组格式", width : "100px"}, 
 			{field : "checked", title : "购物车中商品是否选择状态", width : "100px"}, 
 			{field : "picUrl", title : "商品图片或者商品货品图片", width : "100px"}, 
-			{field : "addTime", title : "创建时间", width : "100px"}
+			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})
 }

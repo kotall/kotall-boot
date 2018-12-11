@@ -29,7 +29,7 @@ function getGrid() {
 			{field : "userLevel", title : "用户等级", width : "100px"},
 			{field : "nickname", title : "用户昵称或网络名称", width : "100px"}, 
 			{field : "status", title : "用户状态", width : "100px"},
-			{field : "addTime", title : "创建时间", width : "100px"}
+			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})
 }

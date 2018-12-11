@@ -30,7 +30,7 @@ function getGrid() {
 			{field : "creatorUserId", title : "创建者ID", width : "100px"}, 
 			{field : "shareUrl", title : "团购分享图片地址", width : "100px"},
 			{field : "payed", title : "是否已经支付", width : "100px"},
-            {field : "addTime", title : "创建时间", width : "100px"}
+            {field : "addTime", title : "创建时间", width : "120px"}
         ]
 	})
 }

@@ -31,7 +31,7 @@ function getGrid() {
 			{field : "startTime", title : "广告开始时间", width : "100px"}, 
 			{field : "endTime", title : "广告结束时间", width : "100px"}, 
 			{field : "enabled", title : "是否启动", width : "100px"}, 
-			{field : "addTime", title : "创建时间", width : "100px"}
+			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})
 }

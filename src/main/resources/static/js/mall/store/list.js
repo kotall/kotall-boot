@@ -42,7 +42,7 @@ function getGrid() {
 			{field : "userId", title : "店主ID", width : "100px"}, 
 			{field : "contactMan", title : "联系人", width : "100px"}, 
 			{field : "contactPhone", title : "联系电话", width : "100px"},
-			{field : "createTime", title : "创建时间", width : "100px"}		]
+			{field : "createTime", title : "创建时间", width : "120px"}		]
 	})
 }
 

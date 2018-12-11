@@ -35,7 +35,7 @@ function getGrid() {
 			{field : "signType", title : "微信签名类型", width : "100px"},
 			{field : "keyPath", title : "微信证书路径", width : "100px"},
 			{field : "notifyUrl", title : "微信支付结果通知地址", width : "100px"},
-			{field : "createdTime", title : "创建时间", width : "100px"}
+			{field : "createdTime", title : "创建时间", width : "120px"}
 		]
 	})
 }

@@ -32,8 +32,8 @@ function getGrid() {
 			{field : "price", title : "商品货品的售价", width : "100px"}, 
 			{field : "specifications", title : "商品货品的规格列表", width : "100px"}, 
 			{field : "picUrl", title : "商品货品图片或者商品图片", width : "100px"}, 
-			{field : "comment", title : "订单商品评论，如果是-1，则超期不能评价；如果是0，则可以评价；如果其他值，则是comment表里面的评论ID。", width : "100px"}, 
-			{field : "addTime", title : "创建时间", width : "100px"}
+			{field : "comment", title : "订单商品评论", width : "100px"},
+			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})
 }

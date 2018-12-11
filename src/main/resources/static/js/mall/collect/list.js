@@ -26,7 +26,7 @@ function getGrid() {
 			{field : "userId", title : "用户ID", width : "100px"},
 			{field : "valueId", title : "商品ID或专题ID", width : "100px"},
 			{field : "type", title : "收藏类型", width : "100px"},
-			{field : "addTime", title : "创建时间", width : "100px"}
+			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})
 }

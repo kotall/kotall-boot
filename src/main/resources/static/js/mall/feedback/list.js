@@ -32,8 +32,7 @@ function getGrid() {
 			{field : "hasPicture", title : "是否含有图片", width : "100px"}, 
 			{field : "picUrls", title : "图片地址列表，采用JSON数组格式", width : "100px"}, 
 			{field : "addTime", title : "创建时间", width : "100px"}, 
-			{field : "updateTime", title : "更新时间", width : "100px"}, 
-			{field : "deleted", title : "逻辑删除", width : "100px"}
+			{field : "updateTime", title : "更新时间", width : "120px"}
 		]
 	})
 }

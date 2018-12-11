@@ -1,5 +1,6 @@
 package com.kotall.rms.common.entity.litemall;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -62,6 +63,7 @@ public class LiteMallCommentEntity implements Serializable {
 	/**
 	 * 创建时间
 	 */
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date addTime;
 	
 	/**

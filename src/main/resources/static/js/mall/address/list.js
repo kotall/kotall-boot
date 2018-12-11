@@ -28,7 +28,7 @@ function getGrid() {
 			{field : "mobile", title : "手机号码", width : "100px"},
 			{field : "address", title : "具体收货地址", width : "100px"},
 			{field : "isDefault", title : "是否默认地址", width : "100px"},
-			{field : "addTime", title : "创建时间", width : "100px"}
+			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})
 }

@@ -28,7 +28,7 @@ function getGrid() {
 			{field : "isHot", title : "是否是热门关键字", width : "100px"}, 
 			{field : "isDefault", title : "是否是默认关键字", width : "100px"}, 
 			{field : "sortOrder", title : "排序", width : "100px"}, 
-			{field : "addTime", title : "创建时间", width : "100px"}
+			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})
 }

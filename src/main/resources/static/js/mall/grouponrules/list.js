@@ -29,7 +29,7 @@ function getGrid() {
 			{field : "discount", title : "优惠金额", width : "100px"}, 
 			{field : "discountMember", title : "达到优惠条件的人数", width : "100px"}, 
 			{field : "expireTime", title : "团购过期时间", width : "100px"},
-			{field : "addTime", title : "创建时间", width : "100px"}
+			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})
 }

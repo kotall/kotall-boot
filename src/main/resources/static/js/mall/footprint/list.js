@@ -25,7 +25,7 @@ function getGrid() {
 			{checkbox: true},
 			{field : "userId", title : "用户ID", width : "100px"},
 			{field : "goodsId", title : "浏览商品ID", width : "100px"}, 
-			{field : "addTime", title : "创建时间", width : "100px"}
+			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})
 }

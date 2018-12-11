@@ -37,7 +37,7 @@ function getGrid() {
                 }
 			},
 			{field : "floorPrice", title : "低价", width : "20px"},
-			{field : "addTime", title : "创建时间", width : "100px"}
+			{field : "addTime", title : "创建时间", width : "120px"}
 			]
 	})
 }
