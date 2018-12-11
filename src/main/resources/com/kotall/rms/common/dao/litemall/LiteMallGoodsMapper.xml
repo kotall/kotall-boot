@@ -204,11 +204,18 @@
 	</update>
 	
 	<delete id="batchDelete">
-		DELETE
+		DELETE g.*,s.*,p.*,a.*
 		FROM
-			lite_mall_goods
+			lite_mall_goods g,
+			lite_mall_goods_specification s,
+			lite_mall_goods_product p,
+			lite_mall_goods_attribute a
 		WHERE
-			id IN
+			g.id = s.goods_id
+		    AND s.goods_id = p.goods_id
+			AND p.goods_id = a.goods_id
+		    and
+			g.id IN
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

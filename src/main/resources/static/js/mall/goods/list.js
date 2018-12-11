@@ -332,7 +332,7 @@ var vm = new Vue({
         productEdit:function (index) {
             var row = $("#dataGrid3").bootstrapTable('getData')[index];
             vm.editIndex = index;
-            $("#specification3").val(row.specification);
+            $("#specification3").val(row.specifications);
             $("#price").val(row.price);
             $("#number").val(row.number);
             $("#productModal").modal('show');

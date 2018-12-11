@@ -82,8 +82,8 @@ public class LiteMallGoodsController extends AbstractController {
 	@SysLog("删除商品基本信息表")
 	@RequestMapping("/remove")
 	public Result batchRemove(@RequestBody Integer[] id) {
-		boolean count = liteMallGoodsService.deleteByIds(id);
-		return ResultKit.msg(count);
+		liteMallGoodsService.deleteByIds(id);
+		return ResultKit.msg(true);
 	}
 	
 }

@@ -102,7 +102,7 @@ public class LiteMallGoodsServiceImpl extends BaseServiceImpl<LiteMallGoodsManag
 		boolean count = liteMallGoodsManager.update(liteMallGoods);
 		liteMallGoodsManager.unionDelete(liteMallGoods);
 		addGoodsSpeciProAttr(liteMallGoods);
-		return true;
+		return count;
 	}
 	private void addGoodsSpeciProAttr(LiteMallGoodsEntity liteMallGoods) {
 		List<LiteMallGoodsSpecificationEntity> liteMallGoodsSpecifications = liteMallGoods.getLiteMallGoodsSpecification();
