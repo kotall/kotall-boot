@@ -25,13 +25,20 @@ function getGrid() {
 			{checkbox: true},
 			{field : "userName", title : "店主姓名", width : "100px"},
 			{field : "name", title : "店铺名称", width : "100px"},
-			{field : "status", title : "店铺状态", width : "100px"},
+			{field : "status", title : "店铺状态", width : "100px",
+				formatter: function (value, row, index) {
+                    if (value === 0){
+                        return '<span class="label label-success">已关闭</span>';
+                    }
+                    return '<span class="label label-warning">营业中</span>';
+                }
+			},
 			{field : "type", title : "店铺类型", width : "100px"}, 
 			{field : "mainBuz", title : "主营业务", width : "100px"}, 
 			{field : "brand", title : "店铺招牌", width : "100px"}, 
 			{field : "address", title : "店铺地址", width : "100px"}, 
-			{field : "locationX", title : "店铺位置X", width : "100px"}, 
-			{field : "locationY", title : "店铺位置Y", width : "100px"}, 
+			/*{field : "locationX", title : "店铺位置X", width : "100px"},
+			{field : "locationY", title : "店铺位置Y", width : "100px"}, */
 			{field : "userId", title : "店主ID", width : "100px"}, 
 			{field : "contactMan", title : "联系人", width : "100px"}, 
 			{field : "contactPhone", title : "联系电话", width : "100px"},
@@ -52,8 +59,8 @@ var vm = new Vue({
 			dialogOpen({
 				title: '新增店铺表 ',
 				url: 'mall/store/add.html?_' + $.now(),
-				width: '600px',
-				height: '420px',
+				width: '700px',
+				height: '520px',
 				yes : function(iframeId) {
 					top.frames[iframeId].vm.acceptClick();
 				},
@@ -65,8 +72,8 @@ var vm = new Vue({
 				dialogOpen({
 					title: '编辑店铺表 ',
 					url: 'mall/store/edit.html?_' + $.now(),
-					width: '600px',
-					height: '420px',
+					width: '700px',
+					height: '520px',
 					success: function(iframeId){
 						top.frames[iframeId].vm.liteMallStore.id = ck[0].id;
 						top.frames[iframeId].vm.setForm();
