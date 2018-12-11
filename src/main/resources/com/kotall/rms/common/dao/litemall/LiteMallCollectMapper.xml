@@ -7,6 +7,7 @@
 		SELECT
 			`id`, 
 			`store_id`,
+		    (select s.name from lite_mall_store s where s.id= store_id) as `storeName`,
 			`user_id`,
 			`value_id`, 
 			`type`, 

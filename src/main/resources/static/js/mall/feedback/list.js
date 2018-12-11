@@ -23,15 +23,30 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
-			{field : "userId", title : "用户表的用户ID", width : "100px"}, 
+            {field : "storeName", title : "店铺名称", width : "120px"},
+			{field : "userId", title : "用户ID", width : "100px"},
 			{field : "username", title : "用户名称", width : "100px"}, 
 			{field : "mobile", title : "手机号", width : "100px"}, 
 			{field : "feedType", title : "反馈类型", width : "100px"}, 
 			{field : "content", title : "反馈内容", width : "100px"}, 
-			{field : "status", title : "状态", width : "100px"}, 
-			{field : "hasPicture", title : "是否含有图片", width : "100px"}, 
+			{field : "status", title : "状态", width : "100px",
+                formatter: function (value, index) {
+                    if (value == 0){
+                        return '<span class="label label-warning">未解决</span>';
+                    }
+                    return '<span class="label label-info">已解决</span>';
+                }
+			},
+			{field : "hasPicture", title : "是否含有图片", width : "100px",
+				formatter: function (value, index) {
+                    if (value){
+                        return '<span class="label label-success">是</span>';
+                    }
+                    return '<span class="label label-default">否</span>';
+                }
+			}, 
 			{field : "picUrls", title : "图片地址列表，采用JSON数组格式", width : "100px"}, 
-			{field : "addTime", title : "创建时间", width : "100px"}, 
+			{field : "addTime", title : "创建时间", width : "120px"},
 			{field : "updateTime", title : "更新时间", width : "120px"}
 		]
 	})

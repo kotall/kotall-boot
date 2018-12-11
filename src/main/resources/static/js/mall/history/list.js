@@ -23,6 +23,7 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
+            {field : "storeName", title : "店铺名称", width : "120px"},
 			{field : "userId", title : "用户ID", width : "100px"},
 			{field : "keyword", title : "搜索关键字", width : "100px"}, 
 			{field : "from", title : "搜索来源", width : "100px"},

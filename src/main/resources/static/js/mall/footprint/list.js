@@ -23,6 +23,7 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
+            {field : "storeName", title : "店铺名称", width : "120px"},
 			{field : "userId", title : "用户ID", width : "100px"},
 			{field : "goodsId", title : "浏览商品ID", width : "100px"}, 
 			{field : "addTime", title : "创建时间", width : "120px"}

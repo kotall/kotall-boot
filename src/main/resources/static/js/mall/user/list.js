@@ -23,12 +23,46 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
-			{field : "username", title : "用户名称", width : "100px"}, 
-			{field : "gender", title : "性别", width : "100px"},
+			{field : "storeName", title : "店铺名称", width : "120px"},
+			{field : "username", title : "用户名称", width : "100px"},
+			{field : "gender", title : "性别", width : "100px",
+				formatter: function (value, index) {
+                    if (value === 1){
+                        return '<span class="label label-success">男</span>';
+                    }
+                    return '<span class="label label-info">女</span>';
+                }
+			},
 			{field : "birthday", title : "生日", width : "100px"}, 
-			{field : "userLevel", title : "用户等级", width : "100px"},
+			{field : "userLevel", title : "用户等级", width : "100px",
+                formatter: function (value, index) {
+                    if (value === 0){
+                        return '<span class="label label-default">普通用户</span>';
+                    } else if (value === 1) {
+                        return '<span class="label label-info">VIP用户</span>';
+                    } else if (value == 2) {
+                        return '<span class="label label-success">高级VIP用户</span>';
+                    }
+                }
+			},
 			{field : "nickname", title : "用户昵称或网络名称", width : "100px"}, 
-			{field : "status", title : "用户状态", width : "100px"},
+			{field : "status", title : "用户状态", width : "100px",
+                formatter: function (value, index) {
+                    // if(value === 0){
+                    //     return '<i class="fa fa-toggle-off"></i>';
+                    // }
+                    // if(value === 1){
+                    //     return '<i class="fa fa-toggle-on"></i>';
+                    // }
+                    if (value === 0){
+                        return '<span class="label label-success">可用</span>';
+                    } else if (value === 1) {
+                        return '<span class="label label-warning">禁用</span>';
+					} else if (value == 2) {
+                        return '<span class="label label-danger">注销</span>';
+					}
+                }
+			},
 			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})

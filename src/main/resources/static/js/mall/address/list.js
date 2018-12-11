@@ -23,11 +23,19 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
+            {field : "storeName", title : "店铺名称", width : "120px"},
 			{field : "name", title : "收货人名称", width : "100px"}, 
-			{field : "userId", title : "ID", width : "100px"},
+			{field : "userId", title : "用户ID", width : "100px"},
 			{field : "mobile", title : "手机号码", width : "100px"},
 			{field : "address", title : "具体收货地址", width : "100px"},
-			{field : "isDefault", title : "是否默认地址", width : "100px"},
+			{field : "isDefault", title : "是否默认地址", width : "100px",
+				formatter: function (value, index) {
+                    if (value){
+                        return '<span class="label label-success">是</span>';
+                    }
+                    return '<span class="label label-default">否</span>';
+                }
+			},
 			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})

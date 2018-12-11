@@ -105,4 +105,9 @@ public class LiteMallUserEntity implements Serializable {
 	 * 店铺ID
 	 */
 	private Integer storeId;
+
+	/**
+	 * 店铺名称
+	 */
+	private String storeName;
 }
