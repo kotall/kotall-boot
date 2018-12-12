@@ -23,10 +23,25 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
-			{field : "keyword", title : "关键字", width : "100px"}, 
-			{field : "url", title : "关键字的跳转链接", width : "100px"}, 
-			{field : "isHot", title : "是否是热门关键字", width : "100px"}, 
-			{field : "isDefault", title : "是否是默认关键字", width : "100px"}, 
+			{field : "storeName", title : "店铺名称", width : "100px"},
+			{field : "keyword", title : "关键字", width : "100px"},
+			{field : "url", title : "关键字的跳转链接", width : "100px"},
+			{field : "isHot", title : "是否是热门关键字", width : "100px",
+                formatter: function (value, row, index) {
+                    if (value === 1){
+                        return '<span class="label label-success">是</span>';
+                    }
+                    return '<span class="label label-warning">否</span>';
+                }
+			},
+			{field : "isDefault", title : "是否是默认关键字", width : "100px",
+                formatter: function (value, row, index) {
+                    if (value === 1){
+                        return '<span class="label label-success">是</span>';
+                    }
+                    return '<span class="label label-warning">否</span>';
+                }
+			},
 			{field : "sortOrder", title : "排序", width : "100px"}, 
 			{field : "addTime", title : "创建时间", width : "120px"}
 		]
