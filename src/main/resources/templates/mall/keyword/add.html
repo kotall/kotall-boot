@@ -5,6 +5,15 @@
 	<div id="dpLTE" class="container-fluid" v-cloak>
 		<table class="form" id="form">
 			<tr>
+	            <td class="formTitle">店铺<font face="宋体">*</font></td>
+	            <td class="formValue">
+					<select v-model="liteMallKeyword.storeId" class="form-control"  style = "width:200px;" isvalid="yes" checkexpession="NotNull">
+						<option value="">请选择</option>
+						<option v-for="store in storeList" :value="store.id">{{store.name}}</option>
+					</select>
+	            </td>
+        	</tr>
+			<tr>
 	            <td class="formTitle">关键字<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="关键字" v-model="liteMallKeyword.keyword" isvalid="yes" checkexpession="NotNull">
