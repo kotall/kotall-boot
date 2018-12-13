@@ -7,8 +7,7 @@ var vm = new Vue({
 		liteMallStore: {
 			id: 0,
             brand: null
-		},
-        storeList:[]
+		}
 	},
 	methods : {
 		acceptClick: function() {
@@ -22,23 +21,8 @@ var vm = new Vue({
 		    		$.currentIframe().vm.load();
 		    	}
 		    });
-		},
-        getStoreList: function () {
-            var _self = this;
-            $.ajax({
-                'url': "../../litemall/store/list?_" + $.now(),
-                'type': 'POST',
-                'contentType': 'application/json',
-                'data': JSON.stringify({'pageNumber': 1, 'pageSize' : 10}),
-                'dataType': 'json'
-            }).then(function(res){
-                _self.storeList = res.rows;
-            });
-        }
-	},
-    created: function () {
-        this.getStoreList();
-    }
+		}
+	}
 });
 
 

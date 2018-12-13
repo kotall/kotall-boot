@@ -20,6 +20,10 @@
 	<div id="dpLTE" class="container-fluid" v-cloak>
 		<table class="form" id="form">
 			<tr>
+				<td class="formTitle">店铺名称<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="店铺名称" v-model="liteMallStore.name" isvalid="yes" checkexpession="NotNull">
+				</td>
 				<td class="formTitle">店铺状态<font face="宋体">*</font></td>
 				<td class="formValue">
 					<!--<input type="text" class="form-control" placeholder="店铺状态 0:关闭1:运营中 2:暂停营业" v-model="liteMallStore.status" isvalid="yes" checkexpession="NotNull">-->
@@ -29,13 +33,6 @@
 					<label class="radio-inline">
 						<input type="radio" name="liteMallStore.status" value="1" v-model="liteMallStore.status" /> 营业中
 					</label>
-				</td>
-				<td class="formTitle">店铺<font face="宋体">*</font></td>
-				<td class="formValue">
-					<select v-model="liteMallStore.storeId" class="form-control"  style = "width:200px;" isvalid="yes" checkexpession="NotNull">
-						<option value="">请选择</option>
-						<option v-for="store in storeList" :value="store.id">{{store.name}}</option>
-					</select>
 				</td>
         	</tr>
 			<tr>
