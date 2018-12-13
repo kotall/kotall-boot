@@ -11,21 +11,33 @@
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">关键字的跳转链接<font face="宋体">*</font></td>
+	            <td class="formTitle">跳转链接<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="关键字的跳转链接" v-model="liteMallKeyword.url" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">是否是热门关键字<font face="宋体">*</font></td>
+	            <td class="formTitle">是否热门<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="是否是热门关键字" v-model="liteMallKeyword.isHot" isvalid="yes" checkexpession="NotNull">
+					<!--<input type="text" class="form-control" placeholder="是否是热门关键字" v-model="liteMallKeyword.isHot" isvalid="yes" checkexpession="NotNull">-->
+					<label class="radio-inline">
+						<input type="radio" name="liteMallKeyword.isHot" value="1" v-model="liteMallKeyword.isHot" /> 是
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="liteMallKeyword.isHot" value="0" v-model="liteMallKeyword.isHot" /> 否
+					</label>
 	            </td>
         	</tr>
 			<tr>
-	            <td class="formTitle">是否是默认关键字<font face="宋体">*</font></td>
+	            <td class="formTitle">是否默认<font face="宋体">*</font></td>
 	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="是否是默认关键字" v-model="liteMallKeyword.isDefault" isvalid="yes" checkexpession="NotNull">
+					<!--<input type="text" class="form-control" placeholder="是否是默认关键字" v-model="liteMallKeyword.isDefault" isvalid="yes" checkexpession="NotNull">-->
+					<label class="radio-inline">
+						<input type="radio" name="liteMallKeyword.isDefault" value="1" v-model="liteMallKeyword.isDefault" /> 是
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="liteMallKeyword.isDefault" value="0" v-model="liteMallKeyword.isDefault" /> 否
+					</label>
 	            </td>
         	</tr>
 			<tr>
