@@ -63,7 +63,7 @@ public class LiteMallAdEntity implements Serializable {
 	/**
 	 * 是否启动
 	 */
-	private Integer enabled;
+	private Boolean enabled;
 	
 	/**
 	 * 创建时间
@@ -79,7 +79,7 @@ public class LiteMallAdEntity implements Serializable {
 	/**
 	 * 逻辑删除
 	 */
-	private Integer deleted;
+	private Boolean deleted;
 
 	/**
 	 * 店铺ID

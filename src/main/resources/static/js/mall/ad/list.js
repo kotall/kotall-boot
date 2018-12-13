@@ -31,16 +31,25 @@ function getGrid() {
                     return '<img  src="'+value+'" class="img-rounded" width="80px" height="60px">';
                 }
 			},
-			{field : "position", title : "广告位置", width : "100px"},
+			{field : "position", title : "广告位置", width : "100px",
+				formatter: function (value, row, index) {
+                    if(value === 1){
+                        return '首页';
+                    }
+                    else {
+                    	return value;
+					}
+                }
+			},
 			{field : "content", title : "活动内容", width : "100px"}, 
 			{field : "startTime", title : "广告开始时间", width : "100px"}, 
 			{field : "endTime", title : "广告结束时间", width : "100px"}, 
 			{field : "enabled", title : "是否启动", width : "100px",
                 formatter: function (value, row, index) {
-                    if(value === 0){
+                    if(value === false){
                         return '<i class="fa fa-toggle-off"></i>';
                     }
-                    if(value === 1){
+                    if(value === true){
                         return '<i class="fa fa-toggle-on"></i>';
                     }
                 }

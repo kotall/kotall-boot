@@ -27,8 +27,8 @@ public class LiteMallAdServiceImpl extends BaseServiceImpl<LiteMallAdManager, Li
 	@Override
 	public List<LiteMallAdEntity> queryIndex(Map<String, Object> params) {
 		params.put("position", 1);
-		params.put("deleted", 0);
-		params.put("enabled", 1);
+		params.put("deleted", false);
+		params.put("enabled", true);
 		Query query = new Query(params);
 		return this.liteMallAdManager.queryByList(query);
 	}

@@ -69,7 +69,7 @@ public class WxHomeController {
      * floorGoodsList: xxx
      * }
      * }
-     * 失败则 { errno: XXX, errmsg: XXX }
+     * 失败则 { code: XXX, msg: XXX }
      */
     @GetMapping("/index")
     public Object index(@AppConfig LiteMallAppEntity appConfig) {

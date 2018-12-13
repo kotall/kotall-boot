@@ -22,10 +22,13 @@
 		FROM
 			lite_mall_ad
 		<where>
+			<if test="position != null"> and `position` = ${position}</if>
+			<if test="enabled != null"> and `enabled` = ${enabled}</if>
+			<if test="deleted != null"> and `deleted` = ${deleted}</if>
 			<if test="sql_filter != null and sql_filter.trim() !='' "> and ${sql_filter} </if>
 		</where>
 		ORDER BY
-			id DESC
+			add_time DESC
 	</select>
 	
 	<insert id="insert">
