@@ -6,7 +6,8 @@ var vm = new Vue({
 	data: {
 		liteMallStore: {
 			id: 0,
-            brand: null
+            brand: null,
+            status:'1'
 		}
 	},
 	methods : {

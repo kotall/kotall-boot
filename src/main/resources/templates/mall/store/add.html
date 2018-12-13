@@ -28,11 +28,12 @@
 				<td class="formValue">
 					<!--<input type="text" class="form-control" placeholder="店铺状态 0:关闭1:运营中 2:暂停营业" v-model="liteMallStore.status" isvalid="yes" checkexpession="NotNull">-->
 					<label class="radio-inline">
-						<input type="radio" name="liteMallStore.status" value="0" v-model="liteMallStore.status" /> 已关闭
+						<input type="radio" name="liteMallStore.status" :value="1"  v-model="liteMallStore.status"/> 营业中
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="liteMallStore.status" value="1" v-model="liteMallStore.status" /> 营业中
+						<input type="radio" name="liteMallStore.status" :value="0" v-model="liteMallStore.status" /> 已关闭
 					</label>
+
 				</td>
         	</tr>
 			<tr>

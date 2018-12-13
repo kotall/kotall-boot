@@ -120,9 +120,18 @@ public class LiteMallGoodsServiceImpl extends BaseServiceImpl<LiteMallGoodsManag
 			bean.setStoreId(liteMallGoods.getStoreId());
 			bean.setGoodsId(liteMallGoods.getId());
 		}
-		liteMallGoodsSpecificationManager.insertBatch(liteMallGoodsSpecifications);
-		liteMallGoodsProductManager.insertBatch(liteMallGoodsProducts);
-		liteMallGoodsAttributeManager.insertBatch(liteMallGoodsAttributes);
+		if(liteMallGoodsSpecifications != null && !liteMallGoodsSpecifications.isEmpty()){
+
+			liteMallGoodsSpecificationManager.insertBatch(liteMallGoodsSpecifications);
+		}
+		if(liteMallGoodsProducts != null && !liteMallGoodsProducts.isEmpty()){
+
+			liteMallGoodsProductManager.insertBatch(liteMallGoodsProducts);
+		}
+		if(liteMallGoodsAttributes != null && !liteMallGoodsAttributes.isEmpty()){
+
+			liteMallGoodsAttributeManager.insertBatch(liteMallGoodsAttributes);
+		}
 	}
 
 }
