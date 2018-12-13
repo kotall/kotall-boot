@@ -35,7 +35,11 @@ function getGrid() {
 			},
 			{field : "type", title : "店铺类型", width : "100px"}, 
 			{field : "mainBuz", title : "主营业务", width : "100px"}, 
-			{field : "brand", title : "店铺招牌", width : "100px"}, 
+			{field : "brand", title : "店铺招牌", width : "100px",
+                formatter : function(value, row, index) {
+                    return '<img  src="'+value+'" class="img-rounded" width="80px">';
+                }
+			},
 			{field : "address", title : "店铺地址", width : "100px"}, 
 			/*{field : "locationX", title : "店铺位置X", width : "100px"},
 			{field : "locationY", title : "店铺位置Y", width : "100px"}, */

@@ -29,7 +29,8 @@ function getGrid() {
 			{field : "picUrl", title : "品牌商图片", width : "100px",
                 formatter : function(value, row, index) {
                     return '<img  src="'+value+'" class="img-rounded" width="80px">';
-                }},
+                }
+			},
             {field : "desc", title : "品牌商简介", width : "200px",
 				formatter : function (value, row, index) {
             	    var str = value;
