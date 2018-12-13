@@ -23,8 +23,9 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
-			{field : "question", title : "问题标题", width : "100px"}, 
-			{field : "answer", title : "问题答案", width : "100px"}, 
+			{field : "storeName", title : "店铺名称", width : "120px"},
+			{field : "question", title : "问题标题", width : "100px"},
+			{field : "answer", title : "问题答案", width : "300px"},
 			{field : "addTime", title : "创建时间", width : "120px"}
 		]
 	})
