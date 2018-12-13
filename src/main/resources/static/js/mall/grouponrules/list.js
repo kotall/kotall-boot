@@ -52,8 +52,8 @@ var vm = new Vue({
 			dialogOpen({
 				title: '新增',
 				url: 'mall/grouponrules/add.html?_' + $.now(),
-				width: '420px',
-				height: '350px',
+				width: '700px',
+				height: '620px',
 				yes : function(iframeId) {
 					top.frames[iframeId].vm.acceptClick();
 				},
@@ -65,8 +65,8 @@ var vm = new Vue({
 				dialogOpen({
 					title: '编辑',
 					url: 'mall/grouponrules/edit.html?_' + $.now(),
-					width: '420px',
-					height: '350px',
+					width: '700px',
+					height: '620px',
 					success: function(iframeId){
 						top.frames[iframeId].vm.liteMallGrouponRules.id = ck[0].id;
 						top.frames[iframeId].vm.setForm();
