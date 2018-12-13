@@ -71,7 +71,7 @@
 					<!--<input type="text" class="form-control" placeholder="店铺招牌" v-model="liteMallStore.brand" isvalid="yes" checkexpession="NotNull">-->
 					<input id="iconUrl" type="hidden" v-model="liteMallStore.brand" >
 					<div class="layui-upload-list el-upload el-upload--picture-card">
-						<img class="layui-upload-img" id="brandPicUrl">
+						<img :src="liteMallStore.brand" class="layui-upload-img" id="brandPicUrl">
 						<!--<i class="el-icon-plus avatar-uploader-icon" id="brandPicUrl"></i>-->
 						<p id="uploadResult"></p>
 					</div>
