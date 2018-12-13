@@ -5,8 +5,10 @@ var vm = new Vue({
 	el:'#dpLTE',
 	data: {
 		liteMallBrand: {
-			id: 0
-		}
+			id: 0,
+            picUrl: null
+		},
+        storeList:[]
 	},
 	methods : {
 		acceptClick: function() {
@@ -20,8 +22,23 @@ var vm = new Vue({
 		    		$.currentIframe().vm.load();
 		    	}
 		    });
-		}
-	}
+		},
+        getStoreList: function () {
+            var _self = this;
+            $.ajax({
+                'url': "../../litemall/store/list?_" + $.now(),
+                'type': 'POST',
+                'contentType': 'application/json',
+                'data': JSON.stringify({'pageNumber': 1, 'pageSize' : 10}),
+                'dataType': 'json'
+            }).then(function(res){
+                _self.storeList = res.rows;
+            });
+        }
+	},
+    created: function () {
+        this.getStoreList();
+    }
 })
 
 
@@ -46,7 +63,7 @@ layui.use('upload', function(){
             }
             debugger
             var url = res.rows.url;
-            vm.liteMallGoods.picUrl=url;
+            vm.liteMallBrand.picUrl=url;
             // 上传成功
         },
 		error: function(){

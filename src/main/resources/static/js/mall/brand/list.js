@@ -55,8 +55,8 @@ var vm = new Vue({
 			dialogOpen({
 				title: '新增品牌商表',
 				url: 'mall/brand/add.html?_' + $.now(),
-				width: '600px',
-				height: '520px',
+				width: '500px',
+				height: '620px',
 				yes : function(iframeId) {
 					top.frames[iframeId].vm.acceptClick();
 				},
@@ -68,8 +68,8 @@ var vm = new Vue({
 				dialogOpen({
 					title: '编辑品牌商表',
 					url: 'mall/brand/edit.html?_' + $.now(),
-					width: '600px',
-					height: '520px',
+					width: '500px',
+					height: '620px',
 					success: function(iframeId){
 						top.frames[iframeId].vm.liteMallBrand.id = ck[0].id;
 						top.frames[iframeId].vm.setForm();

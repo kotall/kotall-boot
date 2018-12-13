@@ -12,36 +12,46 @@
 	<div id="dpLTE" class="container-fluid" v-cloak>
 		<table class="form" id="form">
 			<tr>
-	            <td class="formTitle">品牌商名称<font face="宋体">*</font></td>
-	            <td class="formValue">
+				<td class="formTitle">店铺<font face="宋体">*</font></td>
+				<td class="formValue">
+					<select v-model="liteMallBrand.storeId" class="form-control"  style = "width:200px;" isvalid="yes" checkexpession="NotNull">
+						<option value="">请选择</option>
+						<option v-for="store in storeList" :value="store.id">{{store.name}}</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="formTitle">品牌商名称<font face="宋体">*</font></td>
+				<td class="formValue">
 					<input type="text" class="form-control" placeholder="品牌商名称" v-model="liteMallBrand.name" isvalid="yes" checkexpession="NotNull">
-	            </td>
+				</td>
+			</tr>
+			<tr>
+				<td class="formTitle">底价<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="品牌商的商品底价，仅用于页面展示" v-model="liteMallBrand.floorPrice" isvalid="yes" checkexpession="NotNull">
+				</td>
         	</tr>
 			<tr>
-	            <td class="formTitle">品牌商简介<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="品牌商简介" v-model="liteMallBrand.desc" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
+				<td class="formTitle">显示顺序<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="" v-model="liteMallBrand.sortOrder" isvalid="yes" checkexpession="NotNull">
+				</td>
+			</tr>
 			<tr>
-	            <td class="formTitle">品牌商图片<font face="宋体">*</font></td>
-	            <td class="formValue">
+				<td class="formTitle">品牌商图片<font face="宋体">*</font></td>
+				<td class="formValue">
 					<!--<input type="text" class="form-control" placeholder="品牌商页的品牌商图片" v-model="liteMallBrand.picUrl" isvalid="yes" checkexpession="NotNull">-->
+					<input id="iconUrl" type="hidden" v-model="liteMallBrand.picUrl" >
 					<div class="layui-upload-list el-upload el-upload--picture-card">
 						<img class="layui-upload-img" :src="liteMallBrand.picUrl" id="brandPicUrl">
 					</div>
-	            </td>
-        	</tr>
+				</td>
+			</tr>
 			<tr>
-	            <td class="formTitle">低价<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="品牌商的商品低价，仅用于页面展示" v-model="liteMallBrand.floorPrice" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-				<td class="formTitle">排序<font face="宋体">*</font></td>
+				<td class="formTitle">品牌商简介<font face="宋体">*</font></td>
 				<td class="formValue">
-					<input type="text" class="form-control" placeholder="" v-model="liteMallBrand.sortOrder" isvalid="yes" checkexpession="NotNull">
+					<textarea type="text" class="form-control" placeholder="品牌商简介" v-model="liteMallBrand.desc" rows="4"></textarea>
 				</td>
 			</tr>
 		</table>
