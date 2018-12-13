@@ -86,4 +86,9 @@ public class LiteMallAdEntity implements Serializable {
 	 */
 	private Integer storeId;
 
+	/**
+	 * 店铺名称
+	 */
+	private String storeName;
+
 }

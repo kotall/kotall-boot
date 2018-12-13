@@ -5,6 +5,19 @@
 	<div id="dpLTE" class="container-fluid" v-cloak>
 		<table class="form" id="form">
 			<tr>
+				<td class="formTitle">广告位置<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="广告位置：1则是首页" v-model="liteMallAd.position" isvalid="yes" checkexpession="NotNull">
+				</td>
+				<td class="formTitle">店铺<font face="宋体">*</font></td>
+				<td class="formValue">
+					<select v-model="liteMallAd.storeId" class="form-control"  style = "width:200px;" isvalid="yes" checkexpession="NotNull">
+						<option value="">请选择</option>
+						<option v-for="store in storeList" :value="store.id">{{store.name}}</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
 	            <td class="formTitle">广告标题<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="广告标题" v-model="liteMallAd.name" isvalid="yes" checkexpession="NotNull">
@@ -21,16 +34,6 @@
 				</td>
         	</tr>
 			<tr>
-	            <td class="formTitle">广告链接地址<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="所广告的商品页面或者活动页面链接地址" v-model="liteMallAd.link" isvalid="yes" checkexpession="NotNull">
-	            </td>
-				<td class="formTitle">广告位置<font face="宋体">*</font></td>
-				<td class="formValue">
-					<input type="text" class="form-control" placeholder="广告位置：1则是首页" v-model="liteMallAd.position" isvalid="yes" checkexpession="NotNull">
-				</td>
-        	</tr>
-			<tr>
 	            <td class="formTitle">广告开始时间<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="广告开始时间" v-model="liteMallAd.startTime" isvalid="yes" checkexpession="NotNull">
@@ -41,15 +44,27 @@
 				</td>
         	</tr>
 			<tr>
+				<td class="formTitle">广告链接地址<font face="宋体">*</font></td>
+				<td class="formValue" colspan="3">
+					<input type="text" class="form-control" placeholder="所广告的商品页面或者活动页面链接地址" v-model="liteMallAd.link" isvalid="yes" checkexpession="NotNull">
+				</td>
+			</tr>
+			<tr>
 				<td class="formTitle">广告宣传图片<font face="宋体">*</font></td>
 				<td class="formValue">
-					<input type="text" class="form-control" placeholder="广告宣传图片" v-model="liteMallAd.url" isvalid="yes" checkexpession="NotNull">
+					<!--<input type="text" class="form-control" placeholder="广告宣传图片" v-model="liteMallAd.url" isvalid="yes" checkexpession="NotNull">-->
+					<input id="iconUrl" type="hidden" v-model="liteMallAd.url" >
+					<div class="layui-upload-list el-upload el-upload--picture-card">
+						<img class="layui-upload-img" id="brandPicUrl">
+						<!--<i class="el-icon-plus avatar-uploader-icon" id="brandPicUrl"></i>-->
+						<p id="uploadResult"></p>
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td class="formTitle">活动内容<font face="宋体">*</font></td>
-				<td class="formValue">
-					<input type="text" class="form-control" placeholder="活动内容" v-model="liteMallAd.content" isvalid="yes" checkexpession="NotNull">
+				<td class="formValue" colspan="3">
+					<textarea class="form-control" placeholder="活动内容" v-model="liteMallAd.content" rows="3"></textarea>
 				</td>
 			</tr>
 		</table>
