@@ -86,4 +86,9 @@ public class LiteMallTopicEntity implements Serializable {
 	 * 店铺ID
 	 */
 	private Long storeId;
+
+	/**
+	 * 店铺名称
+	 */
+	private String storeName;
 }

@@ -23,8 +23,9 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
-			{field : "title", title : "专题标题", width : "100px"}, 
-			{field : "subtitle", title : "专题子标题", width : "100px"}, 
+			{field : "storeName", title : "店铺", width : "120px"},
+			{field : "title", title : "专题标题", width : "100px"},
+			{field : "subtitle", title : "专题子标题", width : "100px"},
 			{field : "content", title : "专题内容，富文本格式", width : "100px"}, 
 			{field : "price", title : "专题相关商品最低价", width : "100px"}, 
 			{field : "readCount", title : "专题阅读量", width : "100px"}, 

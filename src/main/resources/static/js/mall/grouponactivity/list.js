@@ -23,7 +23,8 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
-			{field : "orderId", title : "关联的订单ID", width : "100px"}, 
+			{field : "storeName", title : "店铺", width : "120px"},
+			{field : "orderId", title : "关联的订单ID", width : "100px"},
 			{field : "grouponId", title : "参与的团购ID", width : "100px"},
 			{field : "rulesId", title : "团购规则ID", width : "100px"},
 			{field : "userId", title : "用户ID", width : "100px"}, 

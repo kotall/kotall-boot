@@ -23,8 +23,9 @@ function getGrid() {
 		},
 		columns: [
 			{checkbox: true},
-			{field : "goodsId", title : "商品表的商品ID", width : "100px"}, 
-			{field : "goodsName", title : "商品名称", width : "100px"}, 
+			{field : "storeName", title : "店铺", width : "120px"},
+			{field : "goodsId", title : "商品表的商品ID", width : "100px"},
+			{field : "goodsName", title : "商品名称", width : "100px"},
 			{field : "picUrl", title : "商品图片或者商品货品图片", width : "100px",
                 formatter : function(value, row, index) {
                     return '<img  src="'+value+'" class="img-rounded" width="80px" height="60px">';
