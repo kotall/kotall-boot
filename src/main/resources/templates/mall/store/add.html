@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="include/header_css::header('店铺表 ')"></head>
+<style>
+	.layui-upload-img {
+		width: 92px;
+		height: 92px;
+		margin: 0 10px 10px 0;
+	}
+	.avatar-uploader-icon {
+		font-size: 28px;
+		color: #8c939d;
+		width: 120px;
+		height: 120px;
+		line-height: 120px;
+		text-align: center;
+	}
+</style>
 <body>
 	<div id="dpLTE" class="container-fluid" v-cloak>
 		<table class="form" id="form">
 			<tr>
-	            <td class="formTitle">店铺名称<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="店铺名称" v-model="liteMallStore.name" isvalid="yes" checkexpession="NotNull">
-	            </td>
 				<td class="formTitle">店铺状态<font face="宋体">*</font></td>
 				<td class="formValue">
 					<!--<input type="text" class="form-control" placeholder="店铺状态 0:关闭1:运营中 2:暂停营业" v-model="liteMallStore.status" isvalid="yes" checkexpession="NotNull">-->
@@ -18,6 +29,13 @@
 					<label class="radio-inline">
 						<input type="radio" name="liteMallStore.status" value="1" v-model="liteMallStore.status" /> 营业中
 					</label>
+				</td>
+				<td class="formTitle">店铺<font face="宋体">*</font></td>
+				<td class="formValue">
+					<select v-model="liteMallStore.storeId" class="form-control"  style = "width:200px;" isvalid="yes" checkexpession="NotNull">
+						<option value="">请选择</option>
+						<option v-for="store in storeList" :value="store.id">{{store.name}}</option>
+					</select>
 				</td>
         	</tr>
 			<tr>
@@ -51,15 +69,21 @@
 				</td>
         	</tr>
 			<tr>
-				<td class="formTitle">店铺地址<font face="宋体">*</font></td>
+				<td class="formTitle">店铺招牌<font face="宋体">*</font></td>
 				<td class="formValue" colspan="3">
-					<input type="text" class="form-control" placeholder="店铺地址" v-model="liteMallStore.address" isvalid="yes" checkexpession="NotNull">
+					<!--<input type="text" class="form-control" placeholder="店铺招牌" v-model="liteMallStore.brand" isvalid="yes" checkexpession="NotNull">-->
+					<input id="iconUrl" type="hidden" v-model="liteMallStore.brand" >
+					<div class="layui-upload-list el-upload el-upload--picture-card">
+						<img class="layui-upload-img" id="brandPicUrl">
+						<!--<i class="el-icon-plus avatar-uploader-icon" id="brandPicUrl"></i>-->
+						<p id="uploadResult"></p>
+					</div>
 				</td>
 			</tr>
 			<tr>
-				<td class="formTitle">店铺招牌<font face="宋体">*</font></td>
+				<td class="formTitle">店铺地址<font face="宋体">*</font></td>
 				<td class="formValue" colspan="3">
-					<input type="text" class="form-control" placeholder="店铺招牌" v-model="liteMallStore.brand" isvalid="yes" checkexpession="NotNull">
+					<textarea type="text" class="form-control" placeholder="店铺地址" v-model="liteMallStore.address" rows="3"></textarea>
 				</td>
 			</tr>
 		</table>

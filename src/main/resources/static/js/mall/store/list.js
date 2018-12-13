@@ -60,7 +60,7 @@ var vm = new Vue({
 				title: '新增店铺表 ',
 				url: 'mall/store/add.html?_' + $.now(),
 				width: '700px',
-				height: '520px',
+				height: '620px',
 				yes : function(iframeId) {
 					top.frames[iframeId].vm.acceptClick();
 				},
@@ -73,7 +73,7 @@ var vm = new Vue({
 					title: '编辑店铺表 ',
 					url: 'mall/store/edit.html?_' + $.now(),
 					width: '700px',
-					height: '520px',
+					height: '620px',
 					success: function(iframeId){
 						top.frames[iframeId].vm.liteMallStore.id = ck[0].id;
 						top.frames[iframeId].vm.setForm();
