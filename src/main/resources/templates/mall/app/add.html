@@ -5,36 +5,34 @@
 	<div id="dpLTE" class="container-fluid" v-cloak>
 		<table class="form" id="form">
 			<tr>
-	            <td class="formTitle">appID<font face="宋体">*</font></td>
+	            <td class="formTitle">店铺客户端ID<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="sid" v-model="liteMallApp.sid" isvalid="yes" checkexpession="NotNull">
 	            </td>
+				<td class="formTitle">店铺<font face="宋体">*</font></td>
+				<td class="formValue">
+					<!--<input type="text" class="form-control" placeholder="店铺名称" v-model="liteMallApp.storeId" isvalid="yes" checkexpession="NotNull">-->
+					<select v-model="liteMallApp.storeId" class="form-control"  style = "width:200px;" isvalid="yes" checkexpession="NotNull">
+						<option value="">请选择</option>
+						<option v-for="store in storeList" :value="store.id">{{store.name}}</option>
+					</select>
+				</td>
         	</tr>
 			<tr>
-	            <td class="formTitle">店铺ID<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="店铺ID" v-model="liteMallApp.storeId" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">版本<font face="宋体">*</font></td>
+	            <td class="formTitle">客户端版本号<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="版本" v-model="liteMallApp.version" isvalid="yes" checkexpession="NotNull">
 	            </td>
-        	</tr>
-			<tr>
 				<td class="formTitle">微信支付类型<font face="宋体">*</font></td>
 				<td class="formValue">
-					<input type="text" class="form-control" placeholder="微信支付类型" v-model="liteMallApp.tradeType" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="微信支付类型:JSAPI" v-model="liteMallApp.tradeType" isvalid="yes" checkexpession="NotNull">
 				</td>
-			</tr>
+        	</tr>
 			<tr>
 				<td class="formTitle">微信小程序ID<font face="宋体">*</font></td>
 				<td class="formValue">
 					<input type="text" class="form-control" placeholder="微信小程序ID" v-model="liteMallApp.appId" isvalid="yes" checkexpession="NotNull">
 				</td>
-			</tr>
-			<tr>
 				<td class="formTitle">微信子小程序ID<font face="宋体">*</font></td>
 				<td class="formValue">
 					<input type="text" class="form-control" placeholder="微信子小程序ID" v-model="liteMallApp.subAppId" isvalid="yes" checkexpession="NotNull">
@@ -45,8 +43,6 @@
 				<td class="formValue">
 					<input type="text" class="form-control" placeholder="微信商户号" v-model="liteMallApp.mchId" isvalid="yes" checkexpession="NotNull">
 				</td>
-			</tr>
-			<tr>
 				<td class="formTitle">微信子商户号<font face="宋体">*</font></td>
 				<td class="formValue">
 					<input type="text" class="form-control" placeholder="微信子商户号" v-model="liteMallApp.subMchId" isvalid="yes" checkexpession="NotNull">
@@ -57,22 +53,20 @@
 				<td class="formValue">
 					<input type="text" class="form-control" placeholder="微信商户秘钥" v-model="liteMallApp.mchKey" isvalid="yes" checkexpession="NotNull">
 				</td>
-			</tr>
-			<tr>
 				<td class="formTitle">微信加密类型<font face="宋体">*</font></td>
 				<td class="formValue">
-					<input type="text" class="form-control" placeholder="微信加密类型" v-model="liteMallApp.signType" isvalid="yes" checkexpession="NotNull">
+					<input type="text" class="form-control" placeholder="微信加密类型,MD5" v-model="liteMallApp.signType" isvalid="yes" checkexpession="NotNull">
 				</td>
 			</tr>
 			<tr>
 				<td class="formTitle">微信证书路径<font face="宋体">*</font></td>
-				<td class="formValue">
+				<td class="formValue" colspan="3">
 					<input type="text" class="form-control" placeholder="微信证书路径" v-model="liteMallApp.keyPath" isvalid="yes" checkexpession="NotNull">
 				</td>
 			</tr>
 			<tr>
-				<td class="formTitle">微信交易结果通知地址<font face="宋体">*</font></td>
-				<td class="formValue">
+				<td class="formTitle">交易结果通知地址<font face="宋体">*</font></td>
+				<td class="formValue" colspan="3">
 					<input type="text" class="form-control" placeholder="微信交易结果通知地址" v-model="liteMallApp.notifyUrl" isvalid="yes" checkexpession="NotNull">
 				</td>
 			</tr>
