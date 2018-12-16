@@ -1,5 +1,5 @@
 
-INSERT INTO `lite_mall_app`(`id`, `app_id`, `store_id`, `version`, `CREATED_TIME`, `UPDATED_TIME`) VALUES (1, 'WXSTORE201811190001', '1', 'v1.0.0', NULL, NULL);
+INSERT INTO `lite_mall_app`(`id`, `sid`, `store_id`, `version`, `CREATED_TIME`, `UPDATED_TIME`) VALUES (1, 'WXSTORE201811190001', '1', 'v1.0.0', NULL, NULL);
 
 INSERT INTO `lite_mall_address`(`id`, `store_id`, `name`, `user_id`, `province_id`, `city_id`, `area_id`, `address`, `mobile`, `is_default`, `add_time`, `update_time`, `deleted`) VALUES (1, 1, '王小贝', 2, 9, 105, 1099, '泗泾镇古浪路', '15001906953', 0, '2018-11-11 21:04:24', '2018-11-11 21:04:24', 0);
 
