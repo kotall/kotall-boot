@@ -8,7 +8,7 @@ CREATE TABLE `lite_mall_store`(
     `status` VARCHAR(32)   DEFAULT 1 COMMENT '店铺状态 0:关闭1:运营中 2:暂停营业' ,
     `type` INT  DEFAULT NULL  COMMENT '店铺类型' ,
     `main_buz` VARCHAR(128) DEFAULT NULL   COMMENT '主营业务' ,
-    `brand` VARCHAR(32)   DEFAULT NULL COMMENT '店铺招牌' ,
+    `brand` VARCHAR(255)   DEFAULT NULL COMMENT '店铺招牌' ,
     `address` VARCHAR(32)  DEFAULT NULL  COMMENT '店铺地址' ,
     `location_x` VARCHAR(32) DEFAULT NULL   COMMENT '店铺位置X' ,
     `location_y` VARCHAR(32) DEFAULT NULL   COMMENT '店铺位置Y' ,
