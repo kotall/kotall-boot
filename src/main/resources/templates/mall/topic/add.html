@@ -5,34 +5,35 @@
 	<div id="dpLTE" class="container-fluid" v-cloak>
 		<table class="form" id="form">
 			<tr>
+				<td class="formTitle">店铺<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="店铺" v-model="liteMallTopic.storeName" isvalid="yes" checkexpession="NotNull">
+				</td>
+				<td class="formTitle">排序<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="排序" v-model="liteMallTopic.sortOrder" isvalid="yes" checkexpession="NotNull">
+				</td>
+			</tr>
+			<tr>
 	            <td class="formTitle">专题标题<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="专题标题" v-model="liteMallTopic.title" isvalid="yes" checkexpession="NotNull">
 	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">专题子标题<font face="宋体">*</font></td>
-	            <td class="formValue">
+				<td class="formTitle">专题子标题<font face="宋体">*</font></td>
+				<td class="formValue">
 					<input type="text" class="form-control" placeholder="专题子标题" v-model="liteMallTopic.subtitle" isvalid="yes" checkexpession="NotNull">
-	            </td>
+				</td>
         	</tr>
+
 			<tr>
-	            <td class="formTitle">专题内容，富文本格式<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="专题内容，富文本格式" v-model="liteMallTopic.content" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">专题相关商品最低价<font face="宋体">*</font></td>
+	            <td class="formTitle">商品低价<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="专题相关商品最低价" v-model="liteMallTopic.price" isvalid="yes" checkexpession="NotNull">
 	            </td>
-        	</tr>
-			<tr>
-	            <td class="formTitle">专题阅读量<font face="宋体">*</font></td>
-	            <td class="formValue">
+				<td class="formTitle">专题阅读量<font face="宋体">*</font></td>
+				<td class="formValue">
 					<input type="text" class="form-control" placeholder="专题阅读量" v-model="liteMallTopic.readCount" isvalid="yes" checkexpession="NotNull">
-	            </td>
+				</td>
         	</tr>
 			<tr>
 	            <td class="formTitle">专题图片<font face="宋体">*</font></td>
@@ -40,18 +41,18 @@
 					<input type="text" class="form-control" placeholder="专题图片" v-model="liteMallTopic.picUrl" isvalid="yes" checkexpession="NotNull">
 	            </td>
         	</tr>
-			<tr>
-	            <td class="formTitle">排序<font face="宋体">*</font></td>
-	            <td class="formValue">
-					<input type="text" class="form-control" placeholder="排序" v-model="liteMallTopic.sortOrder" isvalid="yes" checkexpession="NotNull">
-	            </td>
-        	</tr>
-			<tr>
+			<!--<tr>
 	            <td class="formTitle">专题相关商品，采用JSON数组格式<font face="宋体">*</font></td>
 	            <td class="formValue">
 					<input type="text" class="form-control" placeholder="专题相关商品，采用JSON数组格式" v-model="liteMallTopic.goods" isvalid="yes" checkexpession="NotNull">
 	            </td>
-        	</tr>
+        	</tr>-->
+			<tr>
+				<td class="formTitle">专题内容<font face="宋体">*</font></td>
+				<td class="formValue">
+					<input type="text" class="form-control" placeholder="专题内容，富文本格式" v-model="liteMallTopic.content" isvalid="yes" checkexpession="NotNull">
+				</td>
+			</tr>
 		</table>
 	</div>
 	<div th:include="include/footer_js::footer"></div>
