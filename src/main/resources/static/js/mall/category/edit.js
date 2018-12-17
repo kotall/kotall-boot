@@ -11,7 +11,8 @@ var vm = new Vue({
             iconUrl:'',
             picUrl:''
         },
-        categoryDatas:[]
+        categoryDatas:[],
+        storeList:[]
 	},
 	methods : {
 		setForm: function() {
@@ -35,6 +36,18 @@ var vm = new Vue({
 		    	}
 		    });
 		},
+        getStoreList: function () {
+            var _self = this;
+            $.ajax({
+                'url': "../../litemall/store/list?_" + $.now(),
+                'type': 'POST',
+                'contentType': 'application/json',
+                'data': JSON.stringify({'pageNumber': 1, 'pageSize' : 10}),
+                'dataType': 'json'
+            }).then(function(res){
+                _self.storeList = res.rows;
+            });
+        },
         getCategory:function () {
             var _self = this;
             $.ajax("../../litemall/category/getSecondCategory").then(function(response){
@@ -56,6 +69,7 @@ var vm = new Vue({
 	},
     created: function () {
         this.getCategory();
+        this.getStoreList();
     }
 });
 
