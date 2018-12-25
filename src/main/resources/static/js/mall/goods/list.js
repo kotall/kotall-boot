@@ -194,7 +194,7 @@ var vm = new Vue({
         isAdd:true,
         editIndex:null,
         title:'',
-        gallerys:[],
+        gallerys:["","","","",""],
         categoryDatas:[],
         storeList:[],
         liteMallGoods: {
@@ -223,8 +223,9 @@ var vm = new Vue({
 		load: function() {
 			vm.showList=true;
 			vm.liteMallGoods = {};
-			vm.gallerys = {};
+			vm.gallerys = [];
             $('.add').remove();
+            reload();
 			//vm.categoryDatas = [];
             editorUtils.clear(editor);
 			$('#dataGrid').bootstrapTable('refresh');
@@ -253,7 +254,10 @@ var vm = new Vue({
                     vm.liteMallGoods = data;
                     $('#select2-id').val(vm.liteMallGoods.categoryId).trigger("change");
                     var gallery = vm.liteMallGoods.gallery;
-                    vm.gallerys = gallery.split(";");
+                    var _gallery = gallery.split(";");
+                    for(i=0;i<_gallery.length;i++){
+                        vm.gallerys[i]=_gallery[i];
+                    }
                     editor = editorUtils.init({
                         change: function (html) {
                             debugger
@@ -448,10 +452,6 @@ $("body").on("hidden.bs.modal", function() {
     $("#attribute").val(null);
 });
 
-
-
-
-
 $("#select2-id").select2({
     placeholder: "请选择商品类目",
     allowClear: true
@@ -471,87 +471,12 @@ editor = editorUtils.init({
     }
 });
 
-
 /**
  * 图片上传
  */
 layui.use('upload', function(){
     var $ = layui.jquery
         ,upload = layui.upload;
-
-    //普通图片上传
-    var uploadInst = upload.render({
-        elem: '#demo1'
-        ,url: '../../litemall/storage/create'
-        ,before: function(obj){
-            //预读本地文件示例，不支持ie8
-            obj.preview(function(index, file, result){
-                $('#demo1').attr('src', result); //图片链接（base64）
-            });
-        }
-        ,done: function(res){
-            var _self = this;
-            //如果上传失败
-            if(res.code > 0){
-                return layer.msg('上传失败');
-            }
-            debugger
-            var url = res.rows.url;
-            vm.liteMallGoods.picUrl=url;
-            //上传成功
-        }
-        ,error: function(){
-            //演示失败状态，并实现重传
-            var demoText = $('#demoText');
-            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-            demoText.find('.demo-reload').on('click', function(){
-                uploadInst.upload();
-            });
-        }
-    });
-
-
-
-
-    //宣传画廊上传
-    var uploadInst2 = upload.render({
-        elem: '#demo2'
-        ,url: '../../litemall/storage/create'
-        ,before: function(obj){
-            //预读本地文件示例，不支持ie8
-            obj.preview(function(index, file, result){
-                $('#demo2').before('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img add">')
-                //$('#demo2').attr('src', result); //图片链接（base64）
-            });
-        }
-        ,done: function(res){
-            var _self = this;
-            //如果上传失败
-            if(res.code > 0){
-                return layer.msg('上传失败');
-            }
-            var url = res.rows.url;
-            var gallery = vm.liteMallGoods.gallery;
-            debugger
-            if(gallery != '' && gallery != null){
-                gallery = gallery.concat(';',url);
-            }else{
-                gallery = url;
-            }
-            vm.liteMallGoods.gallery=gallery;
-            //上传成功
-        }
-        ,error: function(){
-            //演示失败状态，并实现重传
-            var demoText = $('#demoText2');
-            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-            demoText.find('.demo-reload').on('click', function(){
-                uploadInst.upload();
-            });
-        }
-    });
-
-
     //规格图片上传
     var uploadInst3 = upload.render({
         elem: '#demo3'
@@ -583,3 +508,32 @@ layui.use('upload', function(){
         }
     });
 });
+
+
+function picUrlDeleteImgOption(obj) {
+    ImageUpload.deleteImg(obj);
+    vm.liteMallGoods.picUrl="";
+}
+
+function picUrlChangeOption(obj) {
+    var url = ImageUpload.change(obj);
+    debugger
+    vm.liteMallGoods.picUrl=url;
+}
+
+
+function galleryDeleteImgOption(obj,index) {
+    ImageUpload.deleteImg(obj);
+    vm.gallerys[index]="";
+}
+
+function galleryChangeOption(obj,index) {
+    var url = ImageUpload.change(obj);
+    vm.gallerys[index]=url;
+    vm.liteMallGoods.gallery=vm.gallerys.join(";");
+}
+
+
+
+
+

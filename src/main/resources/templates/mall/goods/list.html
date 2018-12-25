@@ -33,7 +33,7 @@
 
 	<div v-show="!showList" class="panel panel-default">
 		<div class="panel-heading">商品基本信息</div>
-		<form class="form-horizontal" id="form">
+		<form class="form-horizontal" id="form" enctype="multipart/form-data">
 			<div class="form-group">
 				<div class="col-sm-1 control-label">店铺</div>
 				<div class="col-sm-10">
@@ -134,22 +134,30 @@
 				<input id="iconUrl" type="hidden" v-model="liteMallGoods.picUrl" >
 				<div class="col-sm-1 control-label">商品图片</div>
 				<div class="col-sm-10">
-					<img :src="liteMallGoods.picUrl" class="layui-upload-img" id="demo1">
-					<p id="demoText"></p>
+					<div class="item">
+						<img v-show="liteMallGoods.picUrl == ''" class="icon addImg" @click="ImageUpload.clickImg($event);" src="https://kotallmall.oss-cn-hangzhou.aliyuncs.com/aliyun/20181223/ee9072413f1d4331a3d8ec4cf35e950c.png" />
+						<input name="file" type="file" class="upload_input" @change="picUrlChangeOption($event)"/>
+						<div class="preBlock">
+							<img class="preview" alt="" name="pic" width="150" height="150" :src="liteMallGoods.picUrl" />
+						</div>
+						<img v-show="liteMallGoods.picUrl != ''" class="delete" @click="picUrlDeleteImgOption($event)" src="https://kotallmall.oss-cn-hangzhou.aliyuncs.com/aliyun/20181223/8b4c84fcdf334376940908e1eba81f0e.png"/>
+					</div>
 				</div>
 			</div>
 			<div class="form-group">
 				<input id="gallery" type="hidden" v-model="liteMallGoods.gallery" >
 				<div class="col-sm-1 control-label">宣传画廊</div>
 				<div class="col-sm-10">
-					<div class="layui-upload-list"  id="test2">
-						<img v-for="opt in gallerys" :src="opt" class="layui-upload-img">
-						<img class="layui-upload-img" id="demo2">
-						<p id="demoText2"></p>
+					<div class="item" v-for="opt in 5">
+						<img v-show="gallerys[opt-1] == ''" class="icon addImg" @click="ImageUpload.clickImg($event,opt-1);" src="https://kotallmall.oss-cn-hangzhou.aliyuncs.com/aliyun/20181223/ee9072413f1d4331a3d8ec4cf35e950c.png" />
+						<input name="file" type="file" class="upload_input" @change="galleryChangeOption($event,opt-1)"/>
+						<div class="preBlock">
+							<img class="preview" alt="" name="pic" width="150" height="150" :src="gallerys[opt-1]" />
+						</div>
+						<img v-show="gallerys[opt-1] != ''" class="delete" @click="galleryDeleteImgOption($event,opt-1)" src="https://kotallmall.oss-cn-hangzhou.aliyuncs.com/aliyun/20181223/8b4c84fcdf334376940908e1eba81f0e.png"/>
 					</div>
 				</div>
 			</div>
-
 			<div class="form-group">
 				<div class="col-sm-1 control-label">商品关键字</div>
 				<div class="col-sm-10">
